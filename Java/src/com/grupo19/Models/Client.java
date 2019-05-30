@@ -1,4 +1,5 @@
-package com.grupo19.Models;
+package com.grupo19;
+
 import com.grupo19.Interfaces.IClient;
 
 public class Client implements IClient {
@@ -28,9 +29,10 @@ public class Client implements IClient {
         if(this == o)return true;
         if(o == null || this.getClass() != o.getClass())return false;
         Client p = (Client) o;
-        return (this.codigo.equals(p));
+        return (this.codigo.equals(p.getCodigo()));
 
     }
 
+   
 
 }
