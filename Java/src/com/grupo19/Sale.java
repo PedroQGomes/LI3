@@ -3,6 +3,7 @@ package com.grupo19;
 import java.util.InputMismatchException;
 
 public class Sale implements  ISale{
+
     private String codProd, codClient, saleType;
     private int month,filial,units;
     private double price;
@@ -15,6 +16,47 @@ public class Sale implements  ISale{
         codClient = _codClient;
         month = _month;
         filial = _filial;
+    }
+
+    public Sale(Sale s){
+        this.codProd = s.getCodProd();
+        this.codClient = s.getCodClient();
+        this.filial = s.getFilial();
+        this.month = s.getMonth();
+        this.price = s.getPrice();
+        this.units = s.getUnits();
+    }
+
+    public Sale clone(){
+        return new Sale(this);
+    }
+
+    public String getCodProd() {
+        return codProd;
+    }
+
+    public String getCodClient() {
+        return codClient;
+    }
+
+    public String getSaleType() {
+        return saleType;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getFilial() {
+        return filial;
+    }
+
+    public int getUnits() {
+        return units;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public static ISale readLineToSale(String line) {
