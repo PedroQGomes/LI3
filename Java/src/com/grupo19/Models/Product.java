@@ -1,5 +1,7 @@
 package com.grupo19;
 
+import com.grupo19.Interfaces.IProduct;
+
 public class Product implements IProduct {
     private String codigo;
 
@@ -28,6 +30,6 @@ public class Product implements IProduct {
         if(this == o)return true;
         if(o == null || this.getClass() != o.getClass())return false;
         Product p = (Product) o;
-        return (this.codigo.equals(p));
+        return (this.codigo.equals(p.getCodigo()));
     }
 }
