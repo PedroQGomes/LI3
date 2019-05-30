@@ -1,4 +1,4 @@
-package com.grupo19;
+package com.grupo19.Models;
 
 import com.grupo19.Interfaces.IProduct;
 
@@ -20,6 +20,11 @@ public class Product implements IProduct {
 
     public String getCodigo(){
         return this.codigo;
+    }
+
+
+    public boolean isValid ( ) {
+        return false;
     }
 
     public Product clone(){

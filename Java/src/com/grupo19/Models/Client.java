@@ -31,6 +31,11 @@ public class Client implements IClient {
         return this.codigo;
     }
 
+
+    public boolean isValid ( ) {
+        return false;
+    }
+
     public Client clone(){
         return new Client(this);
     }

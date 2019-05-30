@@ -1,6 +1,11 @@
 package com.grupo19;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import static java.lang.System.out;
 import static java.lang.System.in;
@@ -119,5 +124,19 @@ public class Input {
         }
         //input.close();
         return s;
+    }
+
+    public static List<String> lerLinhasWithBuff (String fichtxt) {
+        List<String> linhas = new ArrayList<>();
+        BufferedReader inFile;
+        String linha;
+        try {
+            inFile = new BufferedReader((new FileReader(fichtxt)));
+            while((linha = inFile.readLine()) != null) linhas.add(linha);
+        } catch(IOException exc) {
+            out.println(exc);
+
+        }
+        return linhas;
     }
 }
