@@ -20,9 +20,8 @@ public class Client implements IClient {
     public Client(Client a){
         this.codigo = a.getCodigo();
         filialBought = new int[a.filialBought.length];
-        for(int i : a.filialBought){
-            filialBought[i] = a.filialBought[i];
-        }
+        System.arraycopy(a.filialBought,0,this.filialBought,0,a.filialBought.length);
+
     }
 
 
@@ -40,7 +39,7 @@ public class Client implements IClient {
         return new Client(this);
     }
 
-    public boolean equals(Object o){
+    public boolean equals(Object o){ //TODO: EQUALS para o filialBought
         if(this == o)return true;
         if(o == null || this.getClass() != o.getClass())return false;
         Client p = (Client) o;

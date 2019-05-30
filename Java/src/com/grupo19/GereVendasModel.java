@@ -3,7 +3,6 @@ package com.grupo19;
 import com.grupo19.Interfaces.*;
 import com.grupo19.Models.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GereVendasModel implements IGereVendasModel {
@@ -17,10 +16,7 @@ public class GereVendasModel implements IGereVendasModel {
         catProd = new CatProd();
         catClient = new CatClient();
         facturacao = new Facturacao();
-        filiais = new IFilial[NUM_FILIAIS];
-        for(IFilial f : filiais) {
-            f = new Filial();
-        }
+        filiais = new Filial[NUM_FILIAIS];
     }
 
     public void loadData ( ) { //TODO : LER DO FICHEIRO CONFIG
