@@ -2,24 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6e13127-6f5a-4e05-96fc-de694bc0c8ff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IProduct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/grupo19/Interfaces/ISale.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ComparatorClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Models/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/IClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/IClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/IProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/IProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/ISale.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/GereVendasAppMVC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Models/Sale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Models/Sale.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Models/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Sale.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Vendas_1M.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/grupo19/CatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/CatClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/grupo19/ComparatorClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/ComparatorClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Models/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Models/Client.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,10 +19,46 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/grupo19/Interfaces/ISale.java">
+        <entry file="file://$PROJECT_DIR$/src/com/grupo19/Interfaces/IClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/grupo19/CatClient.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+              <folding>
+                <element signature="e#189#190#0" expanded="true" />
+                <element signature="e#258#259#0" expanded="true" />
+                <element signature="e#296#297#0" expanded="true" />
+                <element signature="e#340#341#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/grupo19/Crono.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/grupo19/ComparatorClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -68,6 +92,10 @@
         <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasController.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasModel.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasView.java" />
+        <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/IClient.java" />
+        <option value="$PROJECT_DIR$/src/com/grupo19/Models/Client.java" />
+        <option value="$PROJECT_DIR$/src/com/grupo19/ComparatorClient.java" />
+        <option value="$PROJECT_DIR$/src/com/grupo19/CatClient.java" />
       </list>
     </option>
   </component>
@@ -99,13 +127,6 @@
               <item name="Java" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="grupo19" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Java" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="grupo19" type="462c0819:PsiDirectoryNode" />
-              <item name="Interfaces" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -202,7 +223,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4649000" />
+    <option name="totallyTimeSpent" value="6217000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -261,24 +282,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Product.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
           <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Interfaces/IClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -300,13 +307,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Crono.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
     </entry>
@@ -362,6 +362,50 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Crono.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/ComparatorClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/CatClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#189#190#0" expanded="true" />
+            <element signature="e#258#259#0" expanded="true" />
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#340#341#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Interfaces/IClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>

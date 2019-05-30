@@ -1,5 +1,5 @@
-import com.grupo19.Client;
-import com.grupo19.IClient;
+
+import com.grupo19.Interfaces.IClient;
 
 import java.util.Comparator;
 import java.util.concurrent.ConcurrentLinkedDeque;
