@@ -3,6 +3,9 @@ package com.grupo19.Models;
 import com.grupo19.GereVendasModel;
 import com.grupo19.Interfaces.IProduct;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Product implements IProduct {
     private String codigo;
     private int[] filialBought;
@@ -28,9 +31,15 @@ public class Product implements IProduct {
     }
 
 
-    public boolean isValid ( ) {
-        return false;
+    public boolean isValid () {
+        Pattern pattern = Pattern.compile("^[A-Z]{2}[1-9][0-9]{3}$");
+        Matcher matcher = pattern.matcher(this.getCodigo());
+        return matcher.matches();
     }
+
+    public void updateProductBought (int filial,int qnt) {
+        filialBought[filial] += qnt;
+     }
 
     public Product clone(){
         return new Product(this);
@@ -41,5 +50,11 @@ public class Product implements IProduct {
         if(o == null || this.getClass() != o.getClass())return false;
         Product p = (Product) o;
         return (this.codigo.equals(p.getCodigo()));
+    }
+
+    @Override
+    public String toString ( ) {
+        StringBuilder sb = new StringBuilder(this.getCodigo());
+        return sb.toString();
     }
 }

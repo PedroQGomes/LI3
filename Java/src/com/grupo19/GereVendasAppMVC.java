@@ -14,5 +14,6 @@ public class GereVendasAppMVC {
     controller.setModel(model);
     controller.setView(view);
     controller.init();
+    System.exit(0);
     }
 }

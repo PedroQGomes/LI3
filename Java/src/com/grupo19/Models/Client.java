@@ -3,9 +3,15 @@ package com.grupo19.Models;
 import com.grupo19.GereVendasModel;
 import com.grupo19.Interfaces.IClient;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Client implements IClient {
     private String codigo;
     private int[] filialBought;
+
+
+
 
     public Client(){
         this.codigo = "";
@@ -24,15 +30,19 @@ public class Client implements IClient {
 
     }
 
-
+    public void updateClientBought (int filial) {
+        filialBought[filial] = 1;
+    }
 
     public String getCodigo(){
         return this.codigo;
     }
 
 
-    public boolean isValid ( ) {
-        return false;
+    public boolean isValid () {
+        Pattern pattern = Pattern.compile("^[A-Z][1-9][0-9]{3}$");
+        Matcher matcher = pattern.matcher(this.getCodigo());
+        return matcher.matches();
     }
 
     public Client clone(){
