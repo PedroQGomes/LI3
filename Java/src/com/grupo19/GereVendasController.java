@@ -20,8 +20,9 @@ public class GereVendasController implements IGereVendasController {
 
 
     public void init ( ) {
-        while(true) {
+        //System.out.println(model.getCatProd());
+       /* while(true) {
             view.show();
-        }
+        }  */
     }
 }

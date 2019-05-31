@@ -1,10 +1,13 @@
 package com.grupo19.Interfaces;
 
-import com.grupo19.Models.Client;
-import java.util.Set;
+import java.util.List;
 
 public interface ICatClient {
-    void addClient(Client a);
-    Set<IClient> getSetClient();
-    
+    void add(IClient client);
+    boolean contains(String codClient);
+    void updateClientBought(IClient client , int filial);
+    List<IClient> clientsNeverBought();
+    List<IClient> clientsMostBought(int n);
+    List<IClient> listOfClientsThatStartWithLetter(char l);
+    List<IClient> listOfClientsThatBoughtInAllFilials();
 }

@@ -3,22 +3,51 @@ package com.grupo19.Models;
 import com.grupo19.Interfaces.ICatClient;
 import com.grupo19.Interfaces.IClient;
 
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CatClient implements ICatClient {
-    private Set<IClient> catalogo;
+    private Map<String,IClient> mapOfClients;
 
     public CatClient() {
-        this.catalogo = new TreeSet<IClient>(new ComparatorClient());
+        mapOfClients = new HashMap<>();
+    }
+    public void add (IClient product) {
+        mapOfClients.put(product.getCodigo(),product);
     }
 
-    public void addClient(Client a){
-        this.catalogo.add(a.clone());
+
+    public boolean contains (String codClient) {
+        return mapOfClients.containsKey(codClient);
     }
 
-    public Set<IClient> getSetClient(){
-        return this.catalogo.stream().map(IClient::clone).collect(Collectors.toSet());
+
+    public void updateClientBought (IClient client, int filial) {
+        IClient clt = mapOfClients.get(client.getCodigo());
+        clt.updateClientBought(filial);
+    }
+
+    public List<IClient> clientsNeverBought ( ) {
+        return null;
+    }
+
+    public List<IClient> clientsMostBought (int n) {
+        return null;
+    }
+
+    public List<IClient> listOfClientsThatStartWithLetter (char l) {
+        return null;
+    }
+
+    public List<IClient> listOfClientsThatBoughtInAllFilials ( ) {
+        return null;
+    }
+
+    public String toString ( ) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Arrays.asList(mapOfClients));
+        return sb.toString();
     }
 }

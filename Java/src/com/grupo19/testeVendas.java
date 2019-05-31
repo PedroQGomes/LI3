@@ -1,4 +1,6 @@
 package com.grupo19;
+import com.grupo19.Models.Product;
+
 import static java.lang.System.out;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,15 +12,27 @@ import java.util.List;
 
 public class testeVendas {
     public static void main(String[] args) {
-        List<String> lines;
+        Product product = new Product("AB1034");
+        Product product1 = new Product("ABB103");
+        Product product2 = new Product("A11034");
+        Product product3 = new Product("A01034");
+        Product product4 = new Product("ABBBBB");
+        Product product5 = new Product("121034");
+        out.println(product.isValid());
+        out.println(product1.isValid());
+        out.println(product2.isValid());
+        out.println(product3.isValid());
+        out.println(product4.isValid());
+        out.println(product5.isValid());
+       /* List<String> lines;
         Crono.start();
-        lines = lerLinhasWithBuff("Vendas_5M.txt");
+        lines = lerLinhasWithBuff("Vendas_1M.txt");
         out.println(Crono.stop());
         out.println(lines.size());
         out.println("SEGUNDO TESTE:");
         Crono.start();
-        lerAllLines("Vendas_5M.txt");
-        out.println(Crono.stop());
+        lerAllLines("Vendas_1M.txt");
+        out.println(Crono.stop()); */
     }
     public static List<String> lerLinhasWithBuff (String fichtxt) {
         List<String> linhas = new ArrayList<>();
