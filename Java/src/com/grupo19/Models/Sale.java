@@ -4,12 +4,7 @@ import com.grupo19.Interfaces.ISale;
 
 import java.util.InputMismatchException;
 
-<<<<<<< HEAD:Java/src/com/grupo19/Sale.java
-public class Sale implements  ISale{
-
-=======
 public class Sale implements ISale {
->>>>>>> a47a23592a7fd8a39072d305d648637a65e03a3c:Java/src/com/grupo19/Models/Sale.java
     private String codProd, codClient, saleType;
     private int month,filial,units;
     private double price;

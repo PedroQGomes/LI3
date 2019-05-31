@@ -1,4 +1,4 @@
-package com.grupo19;
+package com.grupo19.Models;
 
 import com.grupo19.Interfaces.IProduct;
 
