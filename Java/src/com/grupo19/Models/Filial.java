@@ -1,7 +1,8 @@
 package com.grupo19.Models;
 
-import com.grupo19.Interfaces.ISale;
+import com.grupo19.Interfaces.IClient;
 import com.grupo19.Interfaces.IFilial;
+import com.grupo19.Interfaces.ISale;
 
 import java.util.ArrayList;
 import java.util.HashMap;
