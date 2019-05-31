@@ -11,6 +11,7 @@ public class CatProd implements ICatProd {
     public CatProd() {
         mapOfProds = new HashMap<>();
     }
+
     public void add (IProduct product) {
         mapOfProds.put(product.getCodigo(),product);
     }

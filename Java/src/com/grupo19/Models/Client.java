@@ -53,7 +53,7 @@ public class Client implements IClient {
         if(this == o)return true;
         if(o == null || this.getClass() != o.getClass())return false;
         Client p = (Client) o;
-        return (this.codigo.equals(p.getCodigo()));
+        return (this.codigo.equals(p.getCodigo()) %% this.filialBought);
 
     }
 
