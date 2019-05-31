@@ -1,6 +1,7 @@
 package com.grupo19.Interfaces;
 
 public interface IGereVendasModel {
-    public void loadData();
-    public ICatProd getCatProd();
+    void loadData();
+    ICatProd getCatProd();
+    ICatClient getCatClient();
 }

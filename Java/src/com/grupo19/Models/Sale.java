@@ -91,4 +91,8 @@ public class Sale implements ISale {
                 sale.getSaleType().equals(this.getSaleType()) &&
                 sale.getUnits() == this.getUnits());
     }
+
+    public ISale clone ( ) { //TODO : FAZER CLONE
+        return null;
+    }
 }

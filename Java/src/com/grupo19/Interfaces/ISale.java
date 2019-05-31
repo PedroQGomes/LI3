@@ -9,4 +9,5 @@ public interface ISale {
     int getUnits();
     double getPrice();
     boolean isValid(ICatProd iCatProd , ICatClient iCatClient);
+    ISale clone();
 }
