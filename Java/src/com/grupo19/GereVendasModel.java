@@ -29,7 +29,7 @@ public class GereVendasModel implements IGereVendasModel {
         for(String l : vendas) {
             ISale tmp = processSale(l);
             if(tmp != null)
-            numVendasValidas++;
+            numVendasValidas++; //TODO: Aumentar numBought CATPROD CAT CLIENT
 
         }
     }
