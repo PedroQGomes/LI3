@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Filial implements IFilial {
 
@@ -28,10 +29,21 @@ public class Filial implements IFilial {
         return null;
     }
 
-    // esta mal feita
+    // idk se está bem
     public Map<String,List<List<ISale>>> getFilial(){
         Map<String,List<List<ISale>>> tmp = new HashMap<>();
-        return new HashMap<>();
+        for(Map.Entry<String,List<List<ISale>>> mapa : this.filial.entrySet()){
+            tmp.put(mapa.getKey(),cloneOfLists(mapa.getValue()));
+        }
+        return tmp;
+    }
+
+    private List<List<ISale>> cloneOfLists(List<List<ISale>> init){
+        List<List<ISale>> res = new ArrayList<>();
+        for(int i = 0; i <12; i++) {
+            res.add(i,init.get(i).stream().map(ISale::clone).collect(Collectors.toList()));
+        }
+        return res;
     }
 
     public void add(ISale a){
