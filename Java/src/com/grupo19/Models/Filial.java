@@ -47,4 +47,19 @@ public class Filial implements IFilial {
         saleArr.add(a.clone());
 
     }
+
+    // da o numero de sales de um cliente num certo mes
+    public int getNumberOfSalesPerClientPerMonth(IClient client , int month) {
+        return this.filial.get(client.getCodigo()).get(month).size();
+    }
+
+    // da o numero de vendas de um cliente num ano
+    public int getNumberOfSalesPerClientPerYear(IClient client){
+        int sum = 0;
+        for(int i = 0; i<12; i++){
+            sum += this.filial.get(client.getCodigo()).get(i).size();
+        }
+        return sum;
+    }
+
 }
