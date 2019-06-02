@@ -21,25 +21,6 @@ public class Sale implements ISale {
         return client;
     }
 
-    public String getSaleType ( ) {
-        return saleType;
-    }
-
-    public int getMonth ( ) {
-        return month;
-    }
-
-    public int getFilial ( ) {
-        return filial;
-    }
-
-    public int getUnits ( ) {
-        return units;
-    }
-
-    public double getPrice ( ) {
-        return price;
-    }
 
     public boolean isValid(ICatProd iCatProd , ICatClient iCatClient) {
         return (iCatProd.contains(getProduct()) &&
@@ -62,24 +43,22 @@ public class Sale implements ISale {
     }
 
     public Sale(Sale s){
-        this.codProd = s.getCodProd();
-        this.codClient = s.getCodClient();
+        this.prod = s.getCodProd();
+        this.client = s.getCodClient();
         this.filial = s.getFilial();
         this.month = s.getMonth();
         this.price = s.getPrice();
         this.units = s.getUnits();
+        this.saleType = s.getSaleType();
     }
 
-    public Sale clone(){
-        return new Sale(this);
-    }
 
     public String getCodProd() {
-        return codProd;
+        return prod;
     }
 
     public String getCodClient() {
-        return codClient;
+        return client;
     }
 
     public String getSaleType() {
@@ -134,6 +113,6 @@ public class Sale implements ISale {
     }
 
     public ISale clone ( ) { //TODO : FAZER CLONE
-        return null;
+       return  new Sale(this);
     }
 }

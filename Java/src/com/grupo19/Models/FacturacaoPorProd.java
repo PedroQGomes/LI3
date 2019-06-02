@@ -1,9 +1,13 @@
 package com.grupo19.Models;
 
-import com.grupo19.Interfaces.IFacturacao;
 import com.grupo19.Interfaces.IFacturacaoPorProd;
+import com.grupo19.Interfaces.ISale;
 
-public class FacturacaoPorProd implements IFacturacao, IFacturacaoPorProd, serializable {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     /**
      *
@@ -13,12 +17,21 @@ public class FacturacaoPorProd implements IFacturacao, IFacturacaoPorProd, seria
     private List<ISale> salesList;
 
     /**
+     * Devolve o total das sales do prod (qnt*preco)
+     * @return
+     */
+    public double totalSaleProd ( ) {
+        return 0;
+    }
+
+    /**
      *
      * construtor por omissao
      *
      */
     public FacturacaoPorProd(){
-        this.salesList=getSalesList();
+
+        this.salesList= new ArrayList<>();
     }
 
     /**
@@ -27,7 +40,7 @@ public class FacturacaoPorProd implements IFacturacao, IFacturacaoPorProd, seria
      *
      */
     public FacturacaoPorProd(IFacturacaoPorProd fact){
-        this.fact=getSalesList();
+        this.salesList=getSalesList();
     }
 
     /**
@@ -36,7 +49,7 @@ public class FacturacaoPorProd implements IFacturacao, IFacturacaoPorProd, seria
      *
      */
     public  FacturacaoPorProd(List<Sale> list){
-        this.salesList=list;
+        this.salesList=new ArrayList<>(list);
     }
 
     /**
@@ -46,12 +59,7 @@ public class FacturacaoPorProd implements IFacturacao, IFacturacaoPorProd, seria
      * @return  list de sales
      */
     public List<ISale> getSalesList(){
-        ArrayList novo = new ArrayList<ISale> (this.salesList.size());
-        for ( ISale s : this.salesList )
-        {
-            novo.add(s.clone());
-        }
-        return novo;
+        return  new ArrayList<> (this.salesList);
     }
 
 
@@ -64,11 +72,7 @@ public class FacturacaoPorProd implements IFacturacao, IFacturacaoPorProd, seria
      */
 
     public void setSalesList(List<ISale> salesAll){
-        this.salesList= new ArrayList<List> (salesAll.size());
-        for ( ISale s: salesAll)
-        {
-            salesList.add(s.clone());
-        }
+        this.salesList = new ArrayList<> (salesAll);
     }
 
     /**
@@ -78,7 +82,7 @@ public class FacturacaoPorProd implements IFacturacao, IFacturacaoPorProd, seria
      * @return clone da IFacturacao
      */
     public IFacturacaoPorProd clone(){
-        return new IFacturacaoPorProd(f: this);
+        return new FacturacaoPorProd(this);
     }
 
     /**
@@ -88,7 +92,7 @@ public class FacturacaoPorProd implements IFacturacao, IFacturacaoPorProd, seria
      * @param ISale a inserir
      *
      */
-    void List<ISale> addSale(ISale s){
+    public void  addSale(ISale s){
         salesList.add(s.clone());
     }
 
@@ -97,10 +101,10 @@ public class FacturacaoPorProd implements IFacturacao, IFacturacaoPorProd, seria
      *
      * remove uma ISale da list, passada como parametro
      *
-     * @param Isale a inserir
+     * @param ISale a inserir
      *
      */
-    void list<ISale> removesale(ISale s){
+    public void  removeSale(ISale s){
         salesList.remove(s);
     }
 

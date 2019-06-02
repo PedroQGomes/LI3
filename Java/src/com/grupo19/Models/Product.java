@@ -3,27 +3,38 @@ package com.grupo19.Models;
 import com.grupo19.GereVendasModel;
 import com.grupo19.Interfaces.IProduct;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Product implements IProduct {
     private String codigo;
-    private int[] filialBought;
-
+    private int[] boughtPerFilial;
+    private boolean[] boughtOnFilial;
     public Product(){
         this.codigo= "";
-        filialBought = new int[GereVendasModel.getNumFiliais()];
+        boughtPerFilial = new int[GereVendasModel.getNumFiliais()];
+        boughtOnFilial = new boolean[GereVendasModel.getNumFiliais()];
+    }
+
+
+    public char firstLetter ( ) {
+        return codigo.charAt(0);
     }
 
     public Product(String a){
         this.codigo= a;
-        filialBought = new int[GereVendasModel.getNumFiliais()];
+        boughtPerFilial = new int[GereVendasModel.getNumFiliais()];
+        boughtOnFilial = new boolean[GereVendasModel.getNumFiliais()];
     }
 
     public Product(Product x){
         this.codigo = x.getCodigo();
-        filialBought = new int[x.filialBought.length];
-        System.arraycopy(x.filialBought,0,this.filialBought,0,x.filialBought.length);
+        boughtPerFilial = new int[x.boughtPerFilial.length];
+        boughtOnFilial = new boolean[x.boughtOnFilial.length];
+        System.arraycopy(x.boughtPerFilial,0,this.boughtPerFilial,0,x.boughtPerFilial.length);
+        System.arraycopy(x.boughtOnFilial,0,this.boughtOnFilial,0,x.boughtOnFilial.length);
+
     }
 
     public String getCodigo(){
@@ -38,23 +49,20 @@ public class Product implements IProduct {
     }
 
     public void updateProductBought (int filial,int qnt) {
-        filialBought[filial] += qnt;
+        boughtOnFilial[filial] = true;
+        boughtPerFilial[filial] += qnt;
      }
 
     public Product clone(){
         return new Product(this);
     }
 
-    public boolean equals(Object o){ //TODO: EQUALS para o filialBought
+    public boolean equals(Object o){
         if(this == o)return true;
         if(o == null || this.getClass() != o.getClass())return false;
         Product p = (Product) o;
-        return (this.codigo.equals(p.getCodigo()));
+        return (this.codigo.equals(p.getCodigo()) && Arrays.equals(p.boughtOnFilial,this.boughtOnFilial) && Arrays.equals(p.boughtPerFilial,this.boughtPerFilial));
     }
 
-    @Override
-    public String toString ( ) {
-        StringBuilder sb = new StringBuilder(this.getCodigo());
-        return sb.toString();
-    }
+
 }

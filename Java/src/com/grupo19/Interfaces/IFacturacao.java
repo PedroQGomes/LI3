@@ -1,5 +1,8 @@
 package com.grupo19.Interfaces;
 
+import java.util.List;
+import java.util.Map;
+
 public interface IFacturacao {
 
     void add(ISale sale);
@@ -11,10 +14,10 @@ public interface IFacturacao {
    // Map<int,List<Sale>> totalFactMensal();
     //boolean contains(Facturacao fact,);
    // Map<int,List<Sale> > factPorMesClient(Client client);
-    public double valorTotalFactMensal(int month);
+    double valorTotalFactMensal(int month);
+    List<Map<String,IFacturacaoPorProd>> getArrayOfSales();
     //double valorTotalProdMensal(int month);
-    public int totalSalesPerProductPerMonth(int month, IProduct prod);
-    public Map<Int,String> topProdPerClient( IClient c);
+    int totalSalesPerProductPerMonth(int month, IProduct prod);
 }
 
 

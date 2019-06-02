@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CatClient implements ICatClient {
-    private Map<String,IClient> mapOfClients;
+    private Map<String,IClient> mapOfClients; //TODO : ORGANIZAR POR LETRA
 
     public CatClient() {
         mapOfClients = new HashMap<>();
@@ -45,9 +45,4 @@ public class CatClient implements ICatClient {
         return null;
     }
 
-    public String toString ( ) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Arrays.asList(mapOfClients));
-        return sb.toString();
-    }
 }

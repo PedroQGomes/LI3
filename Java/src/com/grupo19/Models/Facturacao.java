@@ -1,60 +1,55 @@
 package com.grupo19.Models;
 
 import com.grupo19.Interfaces.IFacturacao;
+import com.grupo19.Interfaces.IFacturacaoPorProd;
+import com.grupo19.Interfaces.IProduct;
+import com.grupo19.Interfaces.ISale;
+
+import java.io.Serializable;
+import java.util.*;
 
 
-public class Facturacao implements IFacturacao, serializable {
+public class Facturacao implements IFacturacao, Serializable {
+
+
+    private List<Map<String, IFacturacaoPorProd>> arrayOfSales;
+
 
     /**
-     *
-     * list de maps de Isales
-     *
+     * Construtor por omissão
      */
-    private list<Map<String,IFacturacaoPorProd>> arrayOfSales;
-
-
-
-    /**
-     *
-     * construtor por omissao
-     *
-     * */
     public Facturacao(){
-        this.arrayOfSales=getArrayOfSales();
-
-    }
-
-    /**
-     *
-     * construtor de cópia
-     *
-     */
-    public Facturacao(Facturacao umaFacturacao){
-        this.arrayOfSales=umaFacturacao.getarrayOfSales();
-    }
-
-    /**
-     *
-     * construtor parametrizado
-     *
-     */
-    public  Facturacao(list<Map<String,FacturacaoPorProd>> arrayS){
-        this.arrayOfSales=arrayS;
-    }
-
-
-
-    /**
-     *
-     * getter da list de Isales
-     *
-     */
-    public List<Map<String,FacturacaoPorProd>> getArrayOfSales(){
-        ArrayList novo = new ArrayList<Map<String,FacturacaoPorProd>> (this.arrayOfSales.size());
-        for(Map mp:arrayOfSales){
-            novo.add(mp.clone());
+        this.arrayOfSales= new ArrayList<>();
+        for(int i = 0; i<12 ; i++){
+            Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
+            arrayOfSales.add(tmp);
         }
-        return novo;
+
+    }
+
+    /**
+     * Construtor de cópia
+     * @param umaFacturacao
+     */
+    public Facturacao(IFacturacao umaFacturacao){
+        this.arrayOfSales=umaFacturacao.getArrayOfSales();
+    }
+
+    /**
+     * Construtor parametrizado
+     * @param arrayS
+     */
+    public  Facturacao(List<Map<String,IFacturacaoPorProd>> arrayS){
+        this.arrayOfSales=new ArrayList<>(arrayS);
+    }
+
+
+    /**
+     * Getter da lista de Sales
+     * @return
+     */
+    public List<Map<String,IFacturacaoPorProd>> getArrayOfSales(){
+        return new ArrayList<>(this.arrayOfSales);
     }
 
     /**
@@ -63,42 +58,55 @@ public class Facturacao implements IFacturacao, serializable {
      * @param List de Maps
      *
     */
-    @param list de sales com precos N e P
-    public void setSArrayOfSales(List<Map<String,FacturacaoPorProd>> salesAll){
-        this.arrayOfSales= new ArrayList<Map<String,FacturacaoPorProd>> (salesAll.size());
-        for(Map mp:arrayOfSales){
-            novo.add(mp.clone());
-        }
+    public void setSArrayOfSales(List<Map<String,IFacturacaoPorProd>> salesAll){
+        this.arrayOfSales= new ArrayList<>(salesAll);
     }
 
 
     /**
-     *
-     * método clone
-     *
+     * Equals
+     * @param obj
+     * @return
      */
-    public boolean equals(Object obj){
+    public boolean equals(Object obj){ // TODO: ESTE EQUALS , MELHORAR
         if(obj == this) {
             return true;
         }
         if(obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        IFacturacao fact=(IFacturacao) obj;
+        Facturacao fact=(Facturacao) obj;
         return fact.getArrayOfSales().equals(arrayOfSales);
     }
 
-    /**
+
+    public void add (ISale sale) {
+
+    }
+
+    public IFacturacao clone ( ) {
+        return null;
+    }
+
+    public double valorTotalFactMensal (int month) {
+        return 0;
+    }
+
+    public int totalSalesPerProductPerMonth (int month, IProduct prod) {
+        return 0;
+    }
+
+    /** Não é necessario
      * adicionar um map na posicao do month
      *
      * @param Map a inserir
      * @param month para identifcar o index do map
      *
-     */
+
     public void addMap(Map<String,IFacturacaoPorProd> mapToADD, int month){
         arrayOfSales.remove(month-1);
-        arrayOfSales.set(month-1,mapToADD.clone());
-    }
+        arrayOfSales.set(month-1,mapToADD);
+    } */
 
 
 

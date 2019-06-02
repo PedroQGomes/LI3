@@ -124,7 +124,7 @@ Sales initSales(catProd catProd, catClient catClient) {
     int flag = 1;
     char str[TAM_STR_SALES];
     FILE* fp;
-    fp = fopen(VENDASPATH,"r");
+    fp = fopen(VENDASVALPATH,"r");
     if( fp == NULL){
         fp = fopen(VENDASPATH,"r");
         flag = 0;
