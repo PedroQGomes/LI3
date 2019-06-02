@@ -11,7 +11,12 @@ import java.util.*;
 
 public class Facturacao implements IFacturacao, Serializable {
 
-
+    /**
+     *
+     * string é codProd
+     * IFacturacaoPorProd é uma list de sales de um produto num mes
+     *
+     * */
     private List<Map<String, IFacturacaoPorProd>> arrayOfSales;
 
 
@@ -40,7 +45,7 @@ public class Facturacao implements IFacturacao, Serializable {
      * @param arrayS
      */
     public  Facturacao(List<Map<String,IFacturacaoPorProd>> arrayS){
-        this.arrayOfSales=new ArrayList<>(arrayS);
+        setSArrayOfSales(arrayS);
     }
 
 
@@ -60,6 +65,7 @@ public class Facturacao implements IFacturacao, Serializable {
     */
     public void setSArrayOfSales(List<Map<String,IFacturacaoPorProd>> salesAll){
         this.arrayOfSales= new ArrayList<>(salesAll);
+
     }
 
 
@@ -76,7 +82,7 @@ public class Facturacao implements IFacturacao, Serializable {
             return false;
         }
         Facturacao fact=(Facturacao) obj;
-        return fact.getArrayOfSales().equals(arrayOfSales);
+        //return fact.getArrayOfSales().equals(arrayOfSales);
     }
 
 
@@ -85,7 +91,7 @@ public class Facturacao implements IFacturacao, Serializable {
     }
 
     public IFacturacao clone ( ) {
-        return null;
+        return new 
     }
 
     public double valorTotalFactMensal (int month) {
@@ -95,19 +101,6 @@ public class Facturacao implements IFacturacao, Serializable {
     public int totalSalesPerProductPerMonth (int month, IProduct prod) {
         return 0;
     }
-
-    /** Não é necessario
-     * adicionar um map na posicao do month
-     *
-     * @param Map a inserir
-     * @param month para identifcar o index do map
-     *
-
-    public void addMap(Map<String,IFacturacaoPorProd> mapToADD, int month){
-        arrayOfSales.remove(month-1);
-        arrayOfSales.set(month-1,mapToADD);
-    } */
-
 
 
 }

@@ -11,7 +11,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     /**
      *
-     * list de sales
+     * list de sales de um produto
      *
      */
     private List<ISale> salesList;
@@ -21,7 +21,11 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      * @return
      */
     public double totalSaleProd ( ) {
-        return 0;
+        double total=0;
+        for(ISale s; salesList){
+            total+=s.getUnits() * s.getPrice();
+        }
+        return  total;
     }
 
     /**
@@ -49,17 +53,26 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      *
      */
     public  FacturacaoPorProd(List<Sale> list){
-        this.salesList=new ArrayList<>(list);
+       setList(list);
+
     }
+
 
     /**
      *
      * getter da list de sales
      *
      * @return  list de sales
+     *
      */
+
     public List<ISale> getSalesList(){
         return  new ArrayList<> (this.salesList);
+        List<String> res = new ArrayList<>();
+        for(ISale s: salesList) {
+            res.add(s);
+        }
+        return res;
     }
 
 
@@ -73,6 +86,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     public void setSalesList(List<ISale> salesAll){
         this.salesList = new ArrayList<> (salesAll);
+        salesAll.forEach(s -> {this.salesList.add(s);})
     }
 
     /**
@@ -106,6 +120,27 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      */
     public void  removeSale(ISale s){
         salesList.remove(s);
+    }
+
+
+
+    /**
+     *
+     * metodo equals
+     *
+     * */
+    public boolean equals(Object obj{
+        if(obj == this) {
+            return true;
+        }
+        if(obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Facturacao fact=(IFacturacao) obj;
+        for(ISale s: fact){
+            if(!salesList.contains(s)) return false;
+        }
+        return true;
     }
 
 }
