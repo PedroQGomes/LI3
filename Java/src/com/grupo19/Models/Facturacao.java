@@ -3,7 +3,7 @@ package com.grupo19.Models;
 import com.grupo19.Interfaces.IFacturacao;
 
 
-public class Facturacao implements IFacturacao {
+public class Facturacao implements IFacturacao, serializable {
 
     /** colecao que associa mes(int) a uma list de sales com preco P */
     private Map<int,List<Sale>> fatMensalP;
@@ -16,10 +16,6 @@ public class Facturacao implements IFacturacao {
 
     /** list de sales com preco N*/
     private List<Sale> salesListN;
-    
-
-
-
 
 
 
@@ -129,4 +125,31 @@ public class Facturacao implements IFacturacao {
         return fact.getFactMensalP().equals(fatMensalP) && fact.getFatMensalN().equals(fatMensalN)
                 && fact.getSalesListP().equals(salesListP) && fact.getSalesListN().equals(salesListN);
     }
+
+
+
+
+
+    /**  vendas de um determinado produto de um mes*/
+    public int totalSalesPerProductPerMonth(int month, Product prod){
+        int total=0;
+        list<Sale> lstP=new ArrayList<Sale>(fatMensalP.get(month));
+        list<Sale> lstN=new ArrayList<Sale>(fatMensalN.get(month));
+        total=lstP.stream().filter(s->s.getProduct().equals(prod)).sum();
+        total+=lstN.stream().filter(s->s.getProduct().equals(prod)).sum();
+        return  total;
+    }
+
+    /** valor total mensal*/
+    public double valorTotalFactMensal(int month){
+        int total=0;
+        list<Sale> lstP=new ArrayList<Sale>(fatMensalP.get(month));
+        list<Sale> lstN=new ArrayList<Sale>(fatMensalN.get(month));
+        total=lstP.stream().map(Sale::getPrice * Sale::getUnits).sum();
+        total=lstN.stream().map(Sale::getPrice * Sale::getUnits).sum();
+        return total;
+    }
+    /** top produtos mais comprados por um cliente por ordem decrescente */
+    public Map<Int,String> topProdPerClient( Client c);
+        for()
 }
