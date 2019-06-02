@@ -152,4 +152,11 @@ public class Facturacao implements IFacturacao, serializable {
     /** top produtos mais comprados por um cliente por ordem decrescente */
     public Map<Int,String> topProdPerClient( Client c);
         for()
+
+
+
+
+
+
+    private list<Map<String,FacturacaoPorProd>> arrayOfSales;
 }

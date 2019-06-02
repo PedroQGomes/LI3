@@ -13,8 +13,8 @@ public interface IFacturacao {
    // Map<int,List<Sale> > factPorMesClient(Client client);
     public double valorTotalFactMensal(int month);
     //double valorTotalProdMensal(int month);
-    public int totalSalesPerProductPerMonth(int month, Product prod);
-    public Map<Int,String> topProdPerClient( Client c);
+    public int totalSalesPerProductPerMonth(int month, IProduct prod);
+    public Map<Int,String> topProdPerClient( IClient c);
 }
 
 
