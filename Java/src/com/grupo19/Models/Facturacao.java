@@ -5,30 +5,50 @@ import com.grupo19.Interfaces.IFacturacao;
 
 public class Facturacao implements IFacturacao, serializable {
 
-    /** list de maps de Isales */
-    private list<Map<String,FacturacaoPorProd>> arrayOfSales;
+    /**
+     *
+     * list de maps de Isales
+     *
+     */
+    private list<Map<String,IFacturacaoPorProd>> arrayOfSales;
 
 
 
-    /** construtor por omissao */
+    /**
+     *
+     * construtor por omissao
+     *
+     * */
     public Facturacao(){
         this.arrayOfSales=getArrayOfSales();
 
     }
 
-    /** construtor de cópia */
+    /**
+     *
+     * construtor de cópia
+     *
+     */
     public Facturacao(Facturacao umaFacturacao){
         this.arrayOfSales=umaFacturacao.getarrayOfSales();
     }
 
-    /** construtor parametrizado */
+    /**
+     *
+     * construtor parametrizado
+     *
+     */
     public  Facturacao(list<Map<String,FacturacaoPorProd>> arrayS){
         this.arrayOfSales=arrayS;
     }
 
 
 
-    /** getter da list de Isales*/
+    /**
+     *
+     * getter da list de Isales
+     *
+     */
     public List<Map<String,FacturacaoPorProd>> getArrayOfSales(){
         ArrayList novo = new ArrayList<Map<String,FacturacaoPorProd>> (this.arrayOfSales.size());
         for(Map mp:arrayOfSales){
@@ -37,19 +57,26 @@ public class Facturacao implements IFacturacao, serializable {
         return novo;
     }
 
-    /** setter da list de sales P */
+    /**
+     *
+     * setter da list de ISales
+     * @param List de Maps
+     *
+    */
     @param list de sales com precos N e P
     public void setSArrayOfSales(List<Map<String,FacturacaoPorProd>> salesAll){
         this.arrayOfSales= new ArrayList<Map<String,FacturacaoPorProd>> (salesAll.size());
         for(Map mp:arrayOfSales){
             novo.add(mp.clone());
         }
-        return novo;
-
     }
 
-    
-    /** método clone */
+
+    /**
+     *
+     * método clone
+     *
+     */
     public boolean equals(Object obj){
         if(obj == this) {
             return true;
@@ -59,6 +86,18 @@ public class Facturacao implements IFacturacao, serializable {
         }
         IFacturacao fact=(IFacturacao) obj;
         return fact.getArrayOfSales().equals(arrayOfSales);
+    }
+
+    /**
+     * adicionar um map na posicao do month
+     *
+     * @param Map a inserir
+     * @param month para identifcar o index do map
+     *
+     */
+    public void addMap(Map<String,IFacturacaoPorProd> mapToADD, int month){
+        arrayOfSales.remove(month-1);
+        arrayOfSales.set(month-1,mapToADD.clone());
     }
 
 
