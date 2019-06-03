@@ -1,5 +1,5 @@
 package com.grupo19.Models;
-
+//package com.grupo19.Interfaces;
 import com.grupo19.Interfaces.IFacturacao;
 import com.grupo19.Interfaces.IFacturacaoPorProd;
 import com.grupo19.Interfaces.IProduct;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class Facturacao implements IFacturacao, IFacturacaoPorProd Serializable {
+public class Facturacao implements IFacturacao, IFacturacaoPorProd, Serializable {
 
     /**
      *
@@ -36,9 +36,9 @@ public class Facturacao implements IFacturacao, IFacturacaoPorProd Serializable 
      * Construtor de cópia
      * @param umaFacturacao
      */
-    public Facturacao(IFacturacao umaFacturacao){
+    public Facturacao(IFacturacao umaIFacturacao){
 
-        this.arrayOfSales=umaFacturacao.getArrayOfSales();
+        this.arrayOfSales=umaIFacturacao.getArrayOfSales();
     }
 
     /**
@@ -98,26 +98,81 @@ public class Facturacao implements IFacturacao, IFacturacaoPorProd Serializable 
         //return fact.getArrayOfSales().equals(arrayOfSales);
     }
 
-
+    /**
+     *
+     * adiciona uma ISale à facturacao
+     * @param Isale sale a adicionar
+     *
+     * */
     public void add (ISale sale) {
         int month=sale.getMonth() -1;
         String codprod=sale.getCodProd();
-        arrayOfSales.get(month).put(codprod,FacturacaoPorProd.add(sale)); // posso fazer isto?
+        IFacturacaoPorProd value = arrayOfSales.getValue();            // ˇˇˇˇˇˇˇˇˇˇˇˇˇˇ
+        arrayOfSales.get(month).put(codprod,value.add(sale.clone())); // posso fazer isto?
+        //arrayOfSales.get(month).put(codprod,IFacturacaoPorProd.add(sale));
 
     }
-
-    public IFacturacao clone ( ) {
-
-        return new (IFacturacao(this));
+    /**
+     *
+     * metodo de clone
+     *
+     */
+    public IFacturacao clone() {
+        List<Map<String, IFacturacaoPorProd>> nova = new ArrayList<>();
+            for(int i=0; i<12; i++) {
+                Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
+                tmp=arrayOfSales.get(month-1).clone();
+                nova.put(tmp);
+            }
+        return nova;
     }
+
+
+    /**
+     *
+     * Faturacao mensal total
+     * @param mes de consulta
+     * @return total faturado
+     *
+     * */
 
     public double valorTotalFactMensal (int month) {
-        
-        return 0;
+        double total=0;
+        Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
+        tmp=arrayOfSales.get(month-1).clone();
+        for(Map.Entry<String,IFacturacaoPorProd> tmp : treeMap.entrySet()) {
+            String key = tmp.getKey();
+            IFacturacaoPorProd arrayMonth = tmp.getValue();
+            for(Isale s: arrayMonth){
+                total+=s.getPrice() * s.getUnits();
+            }
+        }
+        return total;
     }
 
-    public int totalSalesPerProductPerMonth (int month, IProduct prod) {
-        return 0;
+
+    /**
+     *
+     * @param month inteiro que presenta mes de consulta
+     * @param IProduct produto a consultar
+     * @return retorna faturacao mensal de um prod(price*units)
+     *
+     */
+    public double totalSalesPerProductPerMonth (int month, IProduct prod) {
+
+        double totalMonth=0;
+        Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
+        tmp=arrayOfSales.get(month-1).clone();
+        for(Map.Entry<String,IFacturacaoPorProd> tmp : treeMap.entrySet()) {
+            String key = tmp.getKey();
+            String codProd= prod.getCodigo();
+            if(key.equals(codProd)){
+                for(Isale s: arrayMonth){
+                    totalMonth+=s.getPrice() * s.getUnits();
+                }
+            }
+        }
+        return  totalMonth;
     }
 
 
