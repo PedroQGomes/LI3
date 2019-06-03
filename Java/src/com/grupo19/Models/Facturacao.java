@@ -34,7 +34,7 @@ public class Facturacao implements IFacturacao, Serializable {
 
     /**
      * Construtor de cópia
-     * @param umaFacturacao
+     * @param  umaIFacturacao
      */
     public Facturacao(IFacturacao umaIFacturacao){
 
@@ -45,7 +45,7 @@ public class Facturacao implements IFacturacao, Serializable {
      * Construtor parametrizado
      * @param arrayS
      */
-    public  Facturacao(List<Map<String,IFacturacaoPorProd>> arrayS){
+    public  Facturacao (List<Map<String,IFacturacaoPorProd>> arrayS){
 
         setSArrayOfSales(arrayS);
     }
@@ -58,7 +58,7 @@ public class Facturacao implements IFacturacao, Serializable {
     public List<Map<String,IFacturacaoPorProd>> getArrayOfSales(){
         List<Map<String, IFacturacaoPorProd>> nova = new ArrayList<>();
         for(int i=0;i<12;i++){
-            Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
+            Map <String, IFacturacaoPorProd> tmp;
             tmp=arrayOfSales.get(i);
             nova.add(i,tmp);
         }
@@ -68,13 +68,13 @@ public class Facturacao implements IFacturacao, Serializable {
     /**
      *
      * setter da list de ISales
-     * @param List de Maps
+     * @param list de Maps
      *
     */
     public void setSArrayOfSales(List<Map<String,IFacturacaoPorProd>> salesAll){
         this.arrayOfSales= new ArrayList<>(salesAll);
         for(int i=0;i<12;i++){
-            Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
+            Map <String, IFacturacaoPorProd> tmp;
             tmp=salesAll.get(i);
             arrayOfSales.add(i,tmp);
         }
@@ -84,7 +84,7 @@ public class Facturacao implements IFacturacao, Serializable {
 
     /**
      * Equals
-     * @param obj
+     * @param object
      * @return
      */
     public boolean equals(Object obj){ // TODO: ESTE EQUALS , MELHORAR
@@ -136,7 +136,6 @@ public class Facturacao implements IFacturacao, Serializable {
         Map <String, IFacturacaoPorProd> tmp;
         tmp=arrayOfSales.get(month-1);
         for(Map.Entry<String,IFacturacaoPorProd> entry : tmp.entrySet()) {
-            String key = entry.getKey();
             IFacturacaoPorProd arrayMonth = entry.getValue();
             for(ISale s: arrayMonth.getSalesList()){
                 total+=s.getPrice() * s.getUnits();
@@ -170,5 +169,26 @@ public class Facturacao implements IFacturacao, Serializable {
         return  totalMonth;
     }
 
+    public List<int> totalUnitsPerProductPerMonth (String codProd) {
+
+        List<int> resultados = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            int total = 0;
+            Map<String, IFacturacaoPorProd> tmp;
+            tmp = arrayOfSales.get(i);
+            for (Map.Entry<String, IFacturacaoPorProd> entry : tmp.entrySet()) {
+                String key = entry.getKey();
+                if (key.equals(codProd)) {
+                    for (ISale s : entry.getValue().getSalesList()) {
+                        total++;
+                    }
+                }
+            }
+            resultados.add(i, total);
+        }
+        return resultados;
+    }
+
+    
 
 }
