@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class Facturacao implements IFacturacao, IFacturacaoPorProd, Serializable {
+public class Facturacao implements IFacturacao, Serializable {
 
     /**
      *
@@ -106,9 +106,9 @@ public class Facturacao implements IFacturacao, IFacturacaoPorProd, Serializable
      * */
     public void add (ISale sale) {
         int month=sale.getMonth() -1;
-        String codprod=sale.getCodProd();
-        IFacturacaoPorProd value = arrayOfSales.getValue();            // ˇˇˇˇˇˇˇˇˇˇˇˇˇˇ
-        arrayOfSales.get(month).put(codprod,value.add(sale.clone())); // posso fazer isto?
+        String codprod=sale.getProduct();
+        IFacturacaoPorProd value = arrayOfSales.get(month).get(codprod);            // ˇˇˇˇˇˇˇˇˇˇˇˇˇˇ
+        value.addSale(sale.clone());
         //arrayOfSales.get(month).put(codprod,IFacturacaoPorProd.add(sale));
 
     }

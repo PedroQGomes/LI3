@@ -51,6 +51,7 @@ public class GereVendasView implements IGereVendasView {
      * @param stringsList
      */
     public void addToStringBrowser (List<String> stringsList ) {
+        if(stringsList.size() == 0) return;
         stringBrowser.clear();
         stringBrowser.addAll(stringsList);
         stringBrowser.sort(String::compareTo); //TODO: SE FOR UMA ARVORE NAO DEVO PRECISAR DE INVOCAR ESTE METODO PARA DAR SORT
@@ -110,13 +111,19 @@ public class GereVendasView implements IGereVendasView {
 
     public int getChoice() {return this.choice;}
 
+    public void showLine (String line) {
+        System.out.println(line);
+        Input.lerString();
+    }
+
     public void navigate ( ) {
+        if(this.stringBrowser.size() == 0){
+            out.println("Não existem resultados");
+            return;
+        }
         while(this.getCurrentMenu() == Menu.STRINGBROWSER) {
             this.printStringsBrowser();
             switch (Input.lerInt()) {
-                case 0:
-                    this.menu = Menu.MAINMENU;
-                    break;
                 case 1:
                     if(page>0)
                     page--;
@@ -126,6 +133,7 @@ public class GereVendasView implements IGereVendasView {
                     page++;
                     break;
                 default:
+                    this.menu = Menu.MAINMENU;
                     break;
             }
         }

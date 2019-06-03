@@ -14,5 +14,6 @@ public interface IGereVendasView {
     int getChoice();
     boolean exit();
     Menu getCurrentMenu();
+    void showLine(String line);
     boolean choiceIsOutOfRange();
 }

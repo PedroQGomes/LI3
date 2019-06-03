@@ -16,7 +16,8 @@ public class GereVendasModel implements IGereVendasModel {
         catProd = new CatProd();
         catClient = new CatClient();
         facturacao = new Facturacao();
-        filiais = new Filial[NUM_FILIAIS];
+        filiais = new IFilial[NUM_FILIAIS];
+        for(int  i = 0 ; i<NUM_FILIAIS ; i++) filiais[i] = new Filial();
         numVendasValidas = 0;
     }
 
@@ -28,12 +29,21 @@ public class GereVendasModel implements IGereVendasModel {
         clientes.forEach(this::addToCatClientFromString);
         for(String l : vendas) {
             ISale tmp = processSale(l);
-            if(tmp != null)
-            numVendasValidas++; //TODO: Aumentar numBought CATPROD CAT CLIENT
-
+            if(tmp != null) {
+                this.getCatClient().updateClientBought(tmp.getClient(),tmp.getFilial());
+                this.getCatProd().updateProductBought(tmp.getProduct(),tmp.getFilial(),tmp.getUnits());
+                numVendasValidas++; //TODO: Aumentar numBought CATPROD CAT CLIENT
+                filiais[tmp.getFilial()-1].add(tmp);
+            }
         }
     }
 
+    public  List<IClient> listOfClientsThatBoughtInAllFilials() {
+        return getCatClient().listOfClientsThatBoughtInAllFilials();
+    }
+    public  List<IClient> listOfClientsThatDBoughtInAllFilials() {
+        return getCatClient().listOfClientsThatDBoughtInAllFilials();
+    }
 
     public ICatProd getCatProd ( ) {
         return catProd;
@@ -60,6 +70,14 @@ public class GereVendasModel implements IGereVendasModel {
         IClient tmp = new Client(l);
         if(!tmp.isValid()) return;
         this.catClient.add(tmp);
+    }
+
+    public List<IProduct> listOfProductsWithLetter(char letter) {
+        return this.getCatProd().listOfProductsThatStartWithLetter(letter);
+    }
+
+    public List<IProduct> productsNoOneBoughtModel() {
+        return this.getCatProd().productsNeverBought();
     }
 
 

@@ -34,7 +34,16 @@ public class Product implements IProduct {
         boughtOnFilial = new boolean[x.boughtOnFilial.length];
         System.arraycopy(x.boughtPerFilial,0,this.boughtPerFilial,0,x.boughtPerFilial.length);
         System.arraycopy(x.boughtOnFilial,0,this.boughtOnFilial,0,x.boughtOnFilial.length);
+    }
 
+
+    public boolean isProductEverBought ( ) {
+        boolean tmp = false;
+        for(boolean a : this.boughtOnFilial) {
+            if(tmp) break;
+            tmp = a;
+        }
+        return tmp;
     }
 
     public String getCodigo(){

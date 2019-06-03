@@ -4,6 +4,8 @@ import com.grupo19.Interfaces.ICatProd;
 import com.grupo19.Interfaces.IProduct;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CatProd implements ICatProd {
     private List<Map<String,IProduct>> mapOfProds;
@@ -30,13 +32,20 @@ public class CatProd implements ICatProd {
     }
 
 
-    public void updateProductBought (IProduct product, int filial, int qnt) {
-        IProduct prod = MapOfALetter(product.firstLetter()).get(product.getCodigo());
-        prod.updateProductBought(filial,qnt);
+    public void updateProductBought (String product, int filial, int qnt) {
+        IProduct prod = MapOfALetter(product.charAt(0)).get(product);
+        prod.updateProductBought(filial-1,qnt);
     }
 
     public List<IProduct> productsNeverBought ( ) {
-        return null;
+        List<IProduct> neverBought = new ArrayList<>();
+        for(Map<String,IProduct> map : this.mapOfProds) {
+           for(Map.Entry entry : map.entrySet()) {
+               IProduct prod = (IProduct) entry.getValue();
+               if(!prod.isProductEverBought()) neverBought.add(prod);
+           }
+        }
+        return neverBought;
     }
 
 

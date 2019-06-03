@@ -6,4 +6,5 @@ public interface IProduct {
     IProduct clone();
     char firstLetter();
     void updateProductBought(int filial, int qnt);
+    boolean isProductEverBought();
 }
