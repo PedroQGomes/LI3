@@ -18,11 +18,11 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     /**
      * Devolve o total das sales do prod (qnt*preco)
-     * @return
+     * @return total
      */
     public double totalSaleProd ( ) {
         double total=0;
-        for(ISale s; salesList){
+        for(ISale s: salesList){
             total+=s.getUnits() * s.getPrice();
         }
         return  total;
@@ -34,7 +34,6 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      *
      */
     public FacturacaoPorProd(){
-
         this.salesList= new ArrayList<>();
     }
 
@@ -43,8 +42,9 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      * construtor de cópia
      *
      */
-    public FacturacaoPorProd(IFacturacaoPorProd fact){
-        this.salesList=getSalesList();
+    private FacturacaoPorProd(IFacturacaoPorProd fact){
+
+        this.salesList=fact.getSalesList();
     }
 
     /**
@@ -52,9 +52,8 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      * construtor parametrizado
      *
      */
-    public  FacturacaoPorProd(List<Sale> list){
-       setList(list);
-
+    public  FacturacaoPorProd(List<ISale> list){
+       this.salesList = new ArrayList<>(list);
     }
 
 
@@ -68,11 +67,6 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     public List<ISale> getSalesList(){
         return  new ArrayList<> (this.salesList);
-        List<String> res = new ArrayList<>();
-        for(ISale s: salesList) {
-            res.add(s);
-        }
-        return res;
     }
 
 
@@ -86,7 +80,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     public void setSalesList(List<ISale> salesAll){
         this.salesList = new ArrayList<> (salesAll);
-        salesAll.forEach(s -> {this.salesList.add(s);})
+        salesAll.forEach(s -> {this.salesList.add(s);});
     }
 
     /**
@@ -130,15 +124,15 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      * metodo equals
      *
      * */
-    public boolean equals(Object obj{
+    public boolean equals(Object obj){
         if(obj == this) {
             return true;
         }
         if(obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        Facturacao fact=(IFacturacao) obj;
-        for(ISale s: fact){
+        IFacturacaoPorProd fact=(FacturacaoPorProd) obj;
+        for(ISale s: fact.getSalesList()){
             if(!salesList.contains(s)) return false;
         }
         return true;

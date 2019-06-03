@@ -16,17 +16,19 @@ public class Filial implements IFilial {
 
 
     public Filial(){
+
         this.filial = new HashMap<>();
+
     }
 
 
-    public Filial(Filial a){
+    public Filial(IFilial a){
         this.filial = a.getFilial();
     }
 
-    @Override
+
     public IFilial clone() {
-        return null;
+        return new Filial(this);
     }
 
     // idk se está bem
@@ -48,10 +50,11 @@ public class Filial implements IFilial {
 
     public void add(ISale a){
         if(!this.filial.containsKey(a.getClient())) {
-            List<ISale> s = new ArrayList<>();
-            s.add(a.clone());
             List<List<ISale>> lista = new ArrayList<>(12);
-            lista.add(a.getMonth(),s);
+            for(int i = 0; i<12;i++) {
+                List<ISale> s = new ArrayList<>();
+                lista.add(s);
+            }
             this.filial.put(a.getClient(),lista);
         }
         List<List<ISale>> monthArr = this.filial.get(a.getClient());

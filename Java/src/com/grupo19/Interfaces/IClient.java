@@ -5,4 +5,5 @@ public interface IClient {
     boolean isValid();
     void updateClientBought(int filial);
     IClient clone();
+    boolean hasClientEverBought ();
 }

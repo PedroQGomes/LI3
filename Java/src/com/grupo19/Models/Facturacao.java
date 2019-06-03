@@ -1,5 +1,5 @@
 package com.grupo19.Models;
-
+//package com.grupo19.Interfaces;
 import com.grupo19.Interfaces.IFacturacao;
 import com.grupo19.Interfaces.IFacturacaoPorProd;
 import com.grupo19.Interfaces.IProduct;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class Facturacao implements IFacturacao, IFacturacaoPorProd Serializable {
+public class Facturacao implements IFacturacao, Serializable {
 
     /**
      *
@@ -36,9 +36,9 @@ public class Facturacao implements IFacturacao, IFacturacaoPorProd Serializable 
      * Construtor de cópia
      * @param umaFacturacao
      */
-    public Facturacao(IFacturacao umaFacturacao){
+    public Facturacao(IFacturacao umaIFacturacao){
 
-        this.arrayOfSales=umaFacturacao.getArrayOfSales();
+        this.arrayOfSales=umaIFacturacao.getArrayOfSales();
     }
 
     /**
@@ -59,7 +59,7 @@ public class Facturacao implements IFacturacao, IFacturacaoPorProd Serializable 
         List<Map<String, IFacturacaoPorProd>> nova = new ArrayList<>();
         for(int i=0;i<12;i++){
             Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
-            tmp=arrayOfSales.get(i).clone();
+            tmp=arrayOfSales.get(i);
             nova.add(i,tmp);
         }
         return nova;
@@ -75,7 +75,7 @@ public class Facturacao implements IFacturacao, IFacturacaoPorProd Serializable 
         this.arrayOfSales= new ArrayList<>(salesAll);
         for(int i=0;i<12;i++){
             Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
-            tmp=salesAll.get(i).clone();
+            tmp=salesAll.get(i);
             arrayOfSales.add(i,tmp);
         }
 
@@ -95,29 +95,79 @@ public class Facturacao implements IFacturacao, IFacturacaoPorProd Serializable 
             return false;
         }
         Facturacao fact=(Facturacao) obj;
+        return false;
         //return fact.getArrayOfSales().equals(arrayOfSales);
     }
 
-
+    /**
+     *
+     * adiciona uma ISale à facturacao
+     * @param ISale sale a adicionar
+     *
+     * */
     public void add (ISale sale) {
         int month=sale.getMonth() -1;
-        String codprod=sale.getCodProd();
-        arrayOfSales.get(month).put(codprod,FacturacaoPorProd.add(sale)); // posso fazer isto?
+        String codprod=sale.getProduct();
+        IFacturacaoPorProd value = arrayOfSales.get(month).get(codprod);            // ˇˇˇˇˇˇˇˇˇˇˇˇˇˇ
+        value.addSale(sale.clone());
+        //arrayOfSales.get(month).put(codprod,IFacturacaoPorProd.add(sale));
 
     }
-
-    public IFacturacao clone ( ) {
-
-        return new (IFacturacao(this));
+    /**
+     *
+     * metodo de clone
+     *
+     */
+    public IFacturacao clone() {
+        return new Facturacao(this);
     }
+
+
+    /**
+     *
+     * Faturacao mensal total
+     * @param mes de consulta
+     * @return total faturado
+     *
+     * */
 
     public double valorTotalFactMensal (int month) {
-        
-        return 0;
+        double total=0;
+        Map <String, IFacturacaoPorProd> tmp;
+        tmp=arrayOfSales.get(month-1);
+        for(Map.Entry<String,IFacturacaoPorProd> entry : tmp.entrySet()) {
+            String key = entry.getKey();
+            IFacturacaoPorProd arrayMonth = entry.getValue();
+            for(ISale s: arrayMonth.getSalesList()){
+                total+=s.getPrice() * s.getUnits();
+            }
+        }
+        return total;
     }
 
-    public int totalSalesPerProductPerMonth (int month, IProduct prod) {
-        return 0;
+
+    /**
+     *
+     * @param month inteiro que presenta mes de consulta
+     * @param IProduct produto a consultar
+     * @return retorna faturacao mensal de um prod(price*units)
+     *
+     */
+    public double totalSalesPerProductPerMonth (int month, IProduct prod) {
+
+        double totalMonth=0;
+        Map <String, IFacturacaoPorProd> tmp;
+        tmp=arrayOfSales.get(month-1);
+        for(Map.Entry<String,IFacturacaoPorProd> entry : tmp.entrySet()) {
+            String key = entry.getKey();
+            String codProd= prod.getCodigo();
+            if(key.equals(codProd)){
+                for(ISale s: entry.getValue().getSalesList()){
+                    totalMonth+=s.getPrice() * s.getUnits();
+                }
+            }
+        }
+        return  totalMonth;
     }
 
 
