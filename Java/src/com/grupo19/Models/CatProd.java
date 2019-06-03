@@ -6,24 +6,32 @@ import com.grupo19.Interfaces.IProduct;
 import java.util.*;
 
 public class CatProd implements ICatProd {
-    private Map<String,IProduct> mapOfProds;
+    private List<Map<String,IProduct>> mapOfProds;
 
     public CatProd() {
-        mapOfProds = new HashMap<>();
+       mapOfProds = new ArrayList<>(26);
+       for(int i = 0; i<26; i++) {
+           Map<String,IProduct> tmp = new HashMap<>();
+           mapOfProds.add(tmp);
+       }
     }
 
-    public void add (IProduct product) {
-        mapOfProds.put(product.getCodigo(),product);
+    public void add (IProduct product)
+    {
+        MapOfALetter(product.firstLetter()).put(product.getCodigo(),product.clone());
     }
 
-
+    private Map<String,IProduct> MapOfALetter(char letter) {
+        int index = letter - 'A';
+        return mapOfProds.get(index);
+    }
     public boolean contains (String product) {
-        return mapOfProds.containsKey(product);
+        return MapOfALetter(product.charAt(0)).containsKey(product);
     }
 
 
     public void updateProductBought (IProduct product, int filial, int qnt) {
-        IProduct prod = mapOfProds.get(product.getCodigo());
+        IProduct prod = MapOfALetter(product.firstLetter()).get(product.getCodigo());
         prod.updateProductBought(filial,qnt);
     }
 
@@ -38,13 +46,6 @@ public class CatProd implements ICatProd {
 
 
     public List<IProduct> listOfProductsThatStartWithLetter (char l) {
-        return null;
-    }
-
-
-    public String toString ( ) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Arrays.asList(mapOfProds));
-        return sb.toString();
+        return new ArrayList<>(this.MapOfALetter(l).values());
     }
 }

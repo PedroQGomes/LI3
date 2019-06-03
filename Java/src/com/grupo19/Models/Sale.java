@@ -49,11 +49,9 @@ public class Sale implements ISale {
         this.month = s.getMonth();
         this.price = s.getPrice();
         this.units = s.getUnits();
+        this.saleType = s.getSaleType();
     }
 
-    public Sale clone(){
-        return new Sale(this);
-    }
 
     public String getCodProd() {
         return prod;
@@ -114,4 +112,7 @@ public class Sale implements ISale {
                 sale.getUnits() == this.getUnits());
     }
 
+    public ISale clone ( ) { //TODO : FAZER CLONE
+       return  new Sale(this);
+    }
 }

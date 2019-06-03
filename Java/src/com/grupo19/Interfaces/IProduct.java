@@ -4,5 +4,6 @@ public interface IProduct {
     String getCodigo();
     boolean isValid();
     IProduct clone();
+    char firstLetter();
     void updateProductBought(int filial, int qnt);
 }

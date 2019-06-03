@@ -1,37 +1,43 @@
 package com.grupo19.Models;
 
 import com.grupo19.GereVendasModel;
+import com.grupo19.GereVendasView;
 import com.grupo19.Interfaces.IClient;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Client implements IClient {
     private String codigo;
-    private int[] filialBought;
-
+    private int[] boughtPerFilial;
+    private boolean[] boughtOnFilial;
 
 
 
     public Client(){
         this.codigo = "";
-        filialBought = new int[GereVendasModel.getNumFiliais()];
+        boughtPerFilial = new int[GereVendasModel.getNumFiliais()];
+        boughtOnFilial = new boolean[GereVendasModel.getNumFiliais()];
     }
 
     public Client(String s){
         this.codigo = s;
-        filialBought = new int[GereVendasModel.getNumFiliais()];
+        boughtPerFilial = new int[GereVendasModel.getNumFiliais()];
+        boughtOnFilial = new boolean[GereVendasModel.getNumFiliais()];
     }
 
     public Client(Client a){
         this.codigo = a.getCodigo();
-        filialBought = new int[a.filialBought.length];
-        System.arraycopy(a.filialBought,0,this.filialBought,0,a.filialBought.length);
-
+        boughtPerFilial = new int[a.boughtPerFilial.length];
+        boughtOnFilial = new boolean[GereVendasModel.getNumFiliais()];
+        System.arraycopy(a.boughtPerFilial,0,this.boughtPerFilial,0,a.boughtPerFilial.length);
+        System.arraycopy(a.boughtOnFilial,0,this.boughtOnFilial,0,a.boughtOnFilial.length);
     }
 
     public void updateClientBought (int filial) {
-        filialBought[filial] = 1;
+        boughtOnFilial[filial] = true;
+        boughtPerFilial[filial] += 1;
     }
 
     public String getCodigo(){
@@ -49,11 +55,11 @@ public class Client implements IClient {
         return new Client(this);
     }
 
-    public boolean equals(Object o){ //TODO: EQUALS para o filialBought
+    public boolean equals(Object o){
         if(this == o)return true;
         if(o == null || this.getClass() != o.getClass())return false;
         Client p = (Client) o;
-        return (this.codigo.equals(p.getCodigo()));
+        return (this.codigo.equals(p.getCodigo()) && Arrays.equals(p.boughtOnFilial,this.boughtOnFilial) && Arrays.equals(p.boughtPerFilial,this.boughtPerFilial));
 
     }
 
