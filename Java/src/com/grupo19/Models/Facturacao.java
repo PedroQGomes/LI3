@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class Facturacao implements IFacturacao, Serializable {
+public class Facturacao implements IFacturacao, IFacturacaoPorProd Serializable {
 
     /**
      *
@@ -37,6 +37,7 @@ public class Facturacao implements IFacturacao, Serializable {
      * @param umaFacturacao
      */
     public Facturacao(IFacturacao umaFacturacao){
+
         this.arrayOfSales=umaFacturacao.getArrayOfSales();
     }
 
@@ -45,6 +46,7 @@ public class Facturacao implements IFacturacao, Serializable {
      * @param arrayS
      */
     public  Facturacao(List<Map<String,IFacturacaoPorProd>> arrayS){
+
         setSArrayOfSales(arrayS);
     }
 
@@ -54,7 +56,13 @@ public class Facturacao implements IFacturacao, Serializable {
      * @return
      */
     public List<Map<String,IFacturacaoPorProd>> getArrayOfSales(){
-        return new ArrayList<>(this.arrayOfSales);
+        List<Map<String, IFacturacaoPorProd>> nova = new ArrayList<>();
+        for(int i=0;i<12;i++){
+            Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
+            tmp=arrayOfSales.get(i).clone();
+            nova.add(i,tmp);
+        }
+        return nova;
     }
 
     /**
@@ -65,6 +73,11 @@ public class Facturacao implements IFacturacao, Serializable {
     */
     public void setSArrayOfSales(List<Map<String,IFacturacaoPorProd>> salesAll){
         this.arrayOfSales= new ArrayList<>(salesAll);
+        for(int i=0;i<12;i++){
+            Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
+            tmp=salesAll.get(i).clone();
+            arrayOfSales.add(i,tmp);
+        }
 
     }
 
@@ -87,14 +100,19 @@ public class Facturacao implements IFacturacao, Serializable {
 
 
     public void add (ISale sale) {
+        int month=sale.getMonth() -1;
+        String codprod=sale.getCodProd();
+        arrayOfSales.get(month).put(codprod,FacturacaoPorProd.add(sale)); // posso fazer isto?
 
     }
 
     public IFacturacao clone ( ) {
-        return new 
+
+        return new (IFacturacao(this));
     }
 
     public double valorTotalFactMensal (int month) {
+        
         return 0;
     }
 

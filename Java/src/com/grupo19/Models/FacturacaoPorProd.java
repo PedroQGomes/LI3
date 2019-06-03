@@ -107,6 +107,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      *
      */
     public void  addSale(ISale s){
+
         salesList.add(s.clone());
     }
 
