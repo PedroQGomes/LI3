@@ -34,7 +34,6 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      *
      */
     public FacturacaoPorProd(){
-
         this.salesList= new ArrayList<>();
     }
 
@@ -53,9 +52,8 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      * construtor parametrizado
      *
      */
-    public  FacturacaoPorProd(List<Sale> list){
-       setList(list);
-
+    public  FacturacaoPorProd(List<ISale> list){
+       this.salesList = new ArrayList<>(list);
     }
 
 
@@ -69,11 +67,6 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     public List<ISale> getSalesList(){
         return  new ArrayList<> (this.salesList);
-        List<String> res = new ArrayList<>();
-        for(ISale s: salesList) {
-            res.add(s);
-        }
-        return res;
     }
 
 
@@ -138,8 +131,8 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
         if(obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        Facturacao fact=(IFacturacao) obj;
-        for(ISale s: fact){
+        IFacturacaoPorProd fact=(FacturacaoPorProd) obj;
+        for(ISale s: fact.getSalesList()){
             if(!salesList.contains(s)) return false;
         }
         return true;

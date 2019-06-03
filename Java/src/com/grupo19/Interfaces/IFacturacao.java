@@ -17,7 +17,7 @@ public interface IFacturacao {
     double valorTotalFactMensal(int month);
     List<Map<String,IFacturacaoPorProd>> getArrayOfSales();
     //double valorTotalProdMensal(int month);
-    int totalSalesPerProductPerMonth(int month, IProduct prod);
+    double totalSalesPerProductPerMonth(int month, IProduct prod);
 }
 
 

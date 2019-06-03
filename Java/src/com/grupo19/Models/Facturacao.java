@@ -59,7 +59,7 @@ public class Facturacao implements IFacturacao, Serializable {
         List<Map<String, IFacturacaoPorProd>> nova = new ArrayList<>();
         for(int i=0;i<12;i++){
             Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
-            tmp=arrayOfSales.get(i).clone();
+            tmp=arrayOfSales.get(i);
             nova.add(i,tmp);
         }
         return nova;
@@ -75,7 +75,7 @@ public class Facturacao implements IFacturacao, Serializable {
         this.arrayOfSales= new ArrayList<>(salesAll);
         for(int i=0;i<12;i++){
             Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
-            tmp=salesAll.get(i).clone();
+            tmp=salesAll.get(i);
             arrayOfSales.add(i,tmp);
         }
 
@@ -95,13 +95,14 @@ public class Facturacao implements IFacturacao, Serializable {
             return false;
         }
         Facturacao fact=(Facturacao) obj;
+        return false;
         //return fact.getArrayOfSales().equals(arrayOfSales);
     }
 
     /**
      *
      * adiciona uma ISale à facturacao
-     * @param Isale sale a adicionar
+     * @param ISale sale a adicionar
      *
      * */
     public void add (ISale sale) {
@@ -118,13 +119,7 @@ public class Facturacao implements IFacturacao, Serializable {
      *
      */
     public IFacturacao clone() {
-        List<Map<String, IFacturacaoPorProd>> nova = new ArrayList<>();
-            for(int i=0; i<12; i++) {
-                Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
-                tmp=arrayOfSales.get(month-1).clone();
-                nova.put(tmp);
-            }
-        return nova;
+        return new Facturacao(this);
     }
 
 
@@ -138,12 +133,12 @@ public class Facturacao implements IFacturacao, Serializable {
 
     public double valorTotalFactMensal (int month) {
         double total=0;
-        Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
-        tmp=arrayOfSales.get(month-1).clone();
-        for(Map.Entry<String,IFacturacaoPorProd> tmp : treeMap.entrySet()) {
-            String key = tmp.getKey();
-            IFacturacaoPorProd arrayMonth = tmp.getValue();
-            for(Isale s: arrayMonth){
+        Map <String, IFacturacaoPorProd> tmp;
+        tmp=arrayOfSales.get(month-1);
+        for(Map.Entry<String,IFacturacaoPorProd> entry : tmp.entrySet()) {
+            String key = entry.getKey();
+            IFacturacaoPorProd arrayMonth = entry.getValue();
+            for(ISale s: arrayMonth.getSalesList()){
                 total+=s.getPrice() * s.getUnits();
             }
         }
@@ -161,13 +156,13 @@ public class Facturacao implements IFacturacao, Serializable {
     public double totalSalesPerProductPerMonth (int month, IProduct prod) {
 
         double totalMonth=0;
-        Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
-        tmp=arrayOfSales.get(month-1).clone();
-        for(Map.Entry<String,IFacturacaoPorProd> tmp : treeMap.entrySet()) {
-            String key = tmp.getKey();
+        Map <String, IFacturacaoPorProd> tmp;
+        tmp=arrayOfSales.get(month-1);
+        for(Map.Entry<String,IFacturacaoPorProd> entry : tmp.entrySet()) {
+            String key = entry.getKey();
             String codProd= prod.getCodigo();
             if(key.equals(codProd)){
-                for(Isale s: arrayMonth){
+                for(ISale s: entry.getValue().getSalesList()){
                     totalMonth+=s.getPrice() * s.getUnits();
                 }
             }
