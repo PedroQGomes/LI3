@@ -18,11 +18,11 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     /**
      * Devolve o total das sales do prod (qnt*preco)
-     * @return
+     * @return total
      */
     public double totalSaleProd ( ) {
         double total=0;
-        for(ISale s; salesList){
+        for(ISale s: salesList){
             total+=s.getUnits() * s.getPrice();
         }
         return  total;
@@ -43,8 +43,9 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      * construtor de cópia
      *
      */
-    public FacturacaoPorProd(IFacturacaoPorProd fact){
-        this.salesList=getSalesList();
+    private FacturacaoPorProd(IFacturacaoPorProd fact){
+
+        this.salesList=fact.getSalesList();
     }
 
     /**
@@ -86,7 +87,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     public void setSalesList(List<ISale> salesAll){
         this.salesList = new ArrayList<> (salesAll);
-        salesAll.forEach(s -> {this.salesList.add(s);})
+        salesAll.forEach(s -> {this.salesList.add(s);});
     }
 
     /**
@@ -130,7 +131,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      * metodo equals
      *
      * */
-    public boolean equals(Object obj{
+    public boolean equals(Object obj){
         if(obj == this) {
             return true;
         }
