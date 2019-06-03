@@ -50,7 +50,7 @@ public class Filial implements IFilial {
         if(!this.filial.containsKey(a.getClient())) {
             List<ISale> s = new ArrayList<>();
             s.add(a.clone());
-            List<List<ISale>> lista = new ArrayList<>(10);
+            List<List<ISale>> lista = new ArrayList<>(12);
             lista.add(a.getMonth(),s);
             this.filial.put(a.getClient(),lista);
         }
