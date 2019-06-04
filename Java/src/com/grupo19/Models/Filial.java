@@ -4,10 +4,7 @@ import com.grupo19.Interfaces.IClient;
 import com.grupo19.Interfaces.IFilial;
 import com.grupo19.Interfaces.ISale;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Filial implements IFilial {
@@ -76,5 +73,113 @@ public class Filial implements IFilial {
         }
         return sum;
     }
+
+    // faturacao total da filial
+    public double faturacaoTotal(){
+        double res = 0;
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+            for(int i = 0; i<12;i++) {
+                res += lista.getValue().get(i).stream().mapToDouble(l-> l.getPrice()).sum();
+            }
+        }
+        return res;
+    }
+
+
+    // faturacao total de um dado mes
+    public double faturacaoOfMonth(int x){
+        if(x > 12){return 0;}
+        double res = 0;
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+            res += lista.getValue().get(x-1).stream().mapToDouble(l-> l.getPrice()).sum();
+        }
+        return res;
+    }
+
+
+    // numero de clientes distintos que compraram num certo mes
+    public int numberOfClientsBoughtInMonth(int x){
+        if(x > 12){return 0;}
+        List<ISale> res = new ArrayList<>();
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+            for(ISale sale : lista.getValue().get(x)) {
+                if(firstSale(res,sale)){
+                    res.add(sale);
+                }
+            }
+
+        }
+        return res.size();
+    }
+
+    private boolean firstSale(List<ISale> lista, ISale sale){
+        for(ISale s : lista){
+            if(s.getClient().equals(sale.getClient())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // numero total de vendas num mes
+    public int totalNumbOfSalesInMonth(int x){
+        if(x > 12){return 0;}
+        int res = 0;
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+            res += lista.getValue().get(x).size();
+        }
+        return res;
+    }
+
+    // querie 3 interativa
+    // determinar qnts compras fez num mes um dado cliente
+    public int numOfClientsInAMonth(String cliente,int mes){
+        return this.filial.get(cliente).get(mes).size();
+    }
+
+    // querie 3 interativa
+    // retorna o numero de produtos distitnos comprados por um cliente num dado mes
+    public int numOfDifferentProductsOfClient(String cliente,int mes){
+        if(mes > 12){return 0;}
+        List<ISale> res = new ArrayList<>();
+        for (ISale sale : this.filial.get(cliente).get(mes)){
+            if(!productExists(res,sale)){
+                res.add(sale);
+            }
+        }
+        return res.size();
+    }
+
+
+    // metodo aussiliar
+    private boolean productExists(List<ISale> lista,ISale sale){
+        for(ISale a : lista){
+            if(a.getProduct().equals(sale.getProduct())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    //querie 3 interativa
+    // diz qnt gastou um cliente num dado mes
+    public double clientSpentInAMonth(String cliente,int mes){
+        return this.filial.get(cliente).get(mes).stream().mapToDouble(l->l.getPrice()).sum();
+    }
+
+
+    // querie 5 interativa
+    // lista de codigos dos produtos que comprou por ordem descrescente de quantidade
+    // e para qnts iguais por ordem alfabetica
+    /*
+    public List<String> getListOfProductsBoughtOfClient(String client) {
+        List<ISale> lista = new ArrayList<>();
+        this.filial.get(client)
+    }
+    */
+
+    
+
 
 }

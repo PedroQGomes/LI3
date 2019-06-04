@@ -5,19 +5,24 @@ import java.util.Map;
 
 public interface IFacturacao {
 
-    void add(ISale sale);
+    boolean equals(Object obj);
 
-    //Facturacao initFacturacao(list<Sale>);
+    void add (ISale sale);
+
     IFacturacao clone();
-    //Facturacao (Facturacao facturacao);
-   // Map<int,List<Sale>> totalProdMensal();
-   // Map<int,List<Sale>> totalFactMensal();
-    //boolean contains(Facturacao fact,);
-   // Map<int,List<Sale> > factPorMesClient(Client client);
-    double valorTotalFactMensal(int month);
-    List<Map<String,IFacturacaoPorProd>> getArrayOfSales();
-    //double valorTotalProdMensal(int month);
-    double totalSalesPerProductPerMonth(int month, IProduct prod);
+
+    double valorTotalFactMensal (int month);
+
+    double totalSalesPerProductPerMonth (int month, IProduct prod);
+
+    List<Integer> totalUnitsPerProductPerMonth (String codProd);
+
+    public List<Integer> numberOfClientsWhoBought(String codProd);
+
+    List<Double> totalSalesPerProduct ( String codProd);
+
+
+
 }
 
 
