@@ -102,7 +102,7 @@ public class Facturacao implements IFacturacao, Serializable {
     /**
      *
      * adiciona uma ISale à facturacao
-     * @param ISale sale a adicionar
+     * @param sale sale a adicionar
      *
      * */
     public void add (ISale sale) {
@@ -169,9 +169,9 @@ public class Facturacao implements IFacturacao, Serializable {
         return  totalMonth;
     }
 
-    public List<int> totalUnitsPerProductPerMonth (String codProd) {
+    public List<Integer> totalUnitsPerProductPerMonth (String codProd) {
 
-        List<int> resultados = new ArrayList<>();
+        List<Integer> resultados = new ArrayList<Integer>();
         for (int i = 0; i < 12; i++) {
             int total = 0;
             Map<String, IFacturacaoPorProd> tmp;
@@ -189,6 +189,47 @@ public class Facturacao implements IFacturacao, Serializable {
         return resultados;
     }
 
-    
+    public List<Integer> numberOfClientsWhoBought(String codProd) {
+        List<Integer> resultados = new ArrayList<Integer>();
+        List<String> clients = new ArrayList<String>();
+        for (int i = 0; i < 12; i++) {
+            int total = 0;
+            Map<String, IFacturacaoPorProd> tmp;
+            tmp = arrayOfSales.get(i);
+            for (Map.Entry<String, IFacturacaoPorProd> entry : tmp.entrySet()) {
+                String key = entry.getKey();
+                if (key.equals(codProd)) {
+                    for(ISale s: entry.getValue().getSalesList()){
+                        if(!clients.contains((s.getClient()))){
+                            total++;
+                            clients.add(s.getClient());
+                        }
+                    }
+                }
+            }
+           resultados.add(i,total);
+        }
+
+        return  resultados;
+    }
+
+    public List<Double> totalSalesPerProduct ( String codProd){
+        List<Double> res= new ArrayList<Double>();
+        for(int i=0;i<12;i++){
+            double totalMonth=0;
+            Map <String, IFacturacaoPorProd> tmp;
+            tmp=arrayOfSales.get(i);
+            for(Map.Entry<String,IFacturacaoPorProd> entry : tmp.entrySet()) {
+                String key = entry.getKey();
+                if(key.equals(codProd)){
+                    for(ISale s: entry.getValue().getSalesList()){
+                        totalMonth+=s.getPrice() * s.getUnits();
+                    }
+                }
+            }
+         res.add(i,totalMonth);
+        }
+        return  res;
+    }
 
 }
