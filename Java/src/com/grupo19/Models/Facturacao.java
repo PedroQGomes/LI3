@@ -225,26 +225,19 @@ public class Facturacao implements IFacturacao, Serializable {
 
     public List<Integer> numberOfClientsWhoBought(String codProd) { //TODO: MELHORAR QUERY USAR HASHSET
         List<Integer> resultados = new ArrayList<>();
-        List<String> clients = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            int total = 0;
-            Map<String, IFacturacaoPorProd> tmp;
-            tmp = arrayOfSales.get(i);
-            for (Map.Entry<String, IFacturacaoPorProd> entry : tmp.entrySet()) {
-                String key = entry.getKey();
-                if (key.equals(codProd)) {
-                    for(ISale s: entry.getValue().getSalesList()){
-                        if(!clients.contains((s.getClient()))){
-                            total++;
-                            clients.add(s.getClient());
-                        }
-                    }
-                }
-            }
-           resultados.add(i,total);
-        }
 
-        return  resultados;
+        for(int i=0;i<12;i++){
+            int total=0;
+            HashSet<String> clients = new HashSet<String>();
+            Map <String, IFacturacaoPorProd> tmp;
+            tmp=arrayOfSales.get(i);
+            for(ISale s: tmp.get(codProd).getSalesList()){
+                clients.add(s.getClient());
+            }
+            total=clients.size();
+            resultados.add(i,total);
+        }
+        return resultados;
     }
 
 
