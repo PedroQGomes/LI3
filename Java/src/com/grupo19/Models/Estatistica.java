@@ -87,10 +87,12 @@ public class Estatistica implements IEstatisticas {
         this.facturacaoTotal = facturacaoTotal;
     }
 
+    public int getProdNaoComprados() {
+        return this.getTotalProdNum()-this.getNumTotalProdutosComprados();
+    }
+
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        //sb
-        return super.toString();
+    public int getTotalClientNum() {
+        return this.numClientesTotal;
     }
 }

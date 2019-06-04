@@ -96,6 +96,7 @@ public class GereVendasController implements IGereVendasController {
     public void init ( ) {
         //String tmp = constructStringToInit();
         view.setTimeQueue(model.getTimeOfLoadData());
+        view.showInfoView(model.getFichVendas(),model.getEstatatistica());
         do {
             view.updateView();
             reactToInput(view.getChoice());

@@ -17,4 +17,6 @@ public interface IEstatisticas {
     double getFacturacaoTotal();
     void setFacturacaoTotal(double facturacaoTotal);
     String toString();
+    int getProdNaoComprados();
+    int getTotalClientNum();
 }

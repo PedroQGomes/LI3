@@ -36,6 +36,7 @@ public class GereVendasModel implements IGereVendasModel {
         estat.setNumProdutosTotal(produtos.size());
         estat.setNumClientesTotal(clientes.size());
         int numVendasValidas = 0;
+        int vendasZero = 0;
         for(String l : vendas) {
             ISale tmp = processSale(l);
             if(tmp != null) {
@@ -44,6 +45,7 @@ public class GereVendasModel implements IGereVendasModel {
                 numVendasValidas++;
                 filiais[tmp.getFilial()-1].add(tmp);
                 facturacao.add(tmp);
+                if(tmp.getPrice() == 0.0)  vendasZero++;
             }
         }
         timeOfLoadData = Crono.stop();
@@ -51,6 +53,7 @@ public class GereVendasModel implements IGereVendasModel {
         estat.setFacturacaoTotal(facturacao.facturacaoTotal());
         estat.setNumClientesNaoCompraram(catClient.clientsNeverBought().size());
         estat.setNumTotalProdutosComprados(estat.getTotalProdNum() - catProd.productsNeverBought().size());
+        estat.setNumTotalDeComprasValorNulo(vendasZero);
     }
 
     public  List<IClient> listOfClientsThatBoughtInAllFilials() {
@@ -72,7 +75,7 @@ public class GereVendasModel implements IGereVendasModel {
     ISale sale = Sale.readLineToSale(l);
     if(sale == null) return null;
     if(sale.isValid(getCatProd(),getCatClient()))
-    return sale;
+        return sale;
     else return null;
     }
 
