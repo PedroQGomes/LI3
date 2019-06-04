@@ -34,11 +34,11 @@ public class Facturacao implements IFacturacao, Serializable {
 
     /**
      * Construtor de cópia
-     * @param  umaIFacturacao
+     * @param  umaFacturacao
      */
-    public Facturacao(IFacturacao umaIFacturacao){
+    public Facturacao(Facturacao umaFacturacao){
 
-        this.arrayOfSales=umaIFacturacao.getArrayOfSales();
+        this.arrayOfSales=umaFacturacao.getArrayOfSales();
     }
 
     /**
@@ -53,7 +53,7 @@ public class Facturacao implements IFacturacao, Serializable {
 
     /**
      * Getter da lista de Sales
-     * @return
+     * @return nova list de sales
      */
     public List<Map<String,IFacturacaoPorProd>> getArrayOfSales(){
         List<Map<String, IFacturacaoPorProd>> nova = new ArrayList<>();
@@ -68,7 +68,7 @@ public class Facturacao implements IFacturacao, Serializable {
     /**
      *
      * setter da list de ISales
-     * @param list de Maps
+     * @param salesAll list de Maps
      *
     */
     public void setSArrayOfSales(List<Map<String,IFacturacaoPorProd>> salesAll){
@@ -84,7 +84,7 @@ public class Facturacao implements IFacturacao, Serializable {
 
     /**
      * Equals
-     * @param object
+     * @param obj
      * @return
      */
     public boolean equals(Object obj){ // TODO: ESTE EQUALS , MELHORAR
@@ -119,6 +119,7 @@ public class Facturacao implements IFacturacao, Serializable {
      *
      */
     public IFacturacao clone() {
+
         return new Facturacao(this);
     }
 
@@ -126,7 +127,7 @@ public class Facturacao implements IFacturacao, Serializable {
     /**
      *
      * Faturacao mensal total
-     * @param mes de consulta
+     * @param month de consulta
      * @return total faturado
      *
      * */
@@ -148,7 +149,7 @@ public class Facturacao implements IFacturacao, Serializable {
     /**
      *
      * @param month inteiro que presenta mes de consulta
-     * @param IProduct produto a consultar
+     * @param prod produto a consultar
      * @return retorna faturacao mensal de um prod(price*units)
      *
      */
@@ -169,6 +170,16 @@ public class Facturacao implements IFacturacao, Serializable {
         return  totalMonth;
     }
 
+
+
+
+    /**
+     *
+     * Calcula o numero de unidades vendidas de um dado produto, devolvendo numa list o total por mes
+     * @param codProd
+     * @return resultados
+     *
+     */
     public List<Integer> totalUnitsPerProductPerMonth (String codProd) {
 
         List<Integer> resultados = new ArrayList<Integer>();
@@ -188,6 +199,17 @@ public class Facturacao implements IFacturacao, Serializable {
         }
         return resultados;
     }
+
+
+
+    /**
+     *
+     * Calcula a list por mes, de clientes que compraram o produto passado como parametro
+     *
+     * @param codProd
+     * @return resultados
+     *
+     */
 
     public List<Integer> numberOfClientsWhoBought(String codProd) {
         List<Integer> resultados = new ArrayList<Integer>();
@@ -213,6 +235,15 @@ public class Facturacao implements IFacturacao, Serializable {
         return  resultados;
     }
 
+
+    /**
+     *
+     * valor total mensal, de um dado produto(price*units)
+     *
+     * @param codProd
+     * @return res
+     *
+     */
     public List<Double> totalSalesPerProduct ( String codProd){
         List<Double> res= new ArrayList<Double>();
         for(int i=0;i<12;i++){
@@ -231,5 +262,8 @@ public class Facturacao implements IFacturacao, Serializable {
         }
         return  res;
     }
+
+
+
 
 }
