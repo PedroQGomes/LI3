@@ -83,12 +83,19 @@ public class GereVendasView implements IGereVendasView {
     }
 
     public void updateView () {
-        if(this.menu == Menu.STRINGBROWSER) navigate();
-        showMenuAsList(menu);
-        choice = Input.lerInt();
-        if(choice >= menu.getMenuOptions().length) {
-        this.menu = Menu.MAINMENU;
+        switch(this.menu) {
+            case STRINGBROWSER:
+                navigate();
+                break;
+            default:
+                showMenuAsList(menu);
+                choice = Input.lerInt();
+                if(choice >= menu.getMenuOptions().length) {
+                    this.menu = Menu.MAINMENU;
+                }
+                break;
         }
+
     }
 
     private void showMenu(String[] menuOptions) {

@@ -13,6 +13,7 @@ public enum Menu {
             "Produtos mais vendidos em todo o ano, indicando o nº de clientes e de unidades vendidas, filial a filial",
             "Determinar quais os códigos de 3 produtos em que um dado cliente mais gastou dinheiro durante o ano"}),
     STRINGBROWSER;
+
     private String[] menuOptions;
     Menu() {
 

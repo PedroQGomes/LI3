@@ -1,5 +1,5 @@
 package com.grupo19.Models;
-//package com.grupo19.Interfaces;
+
 import com.grupo19.Interfaces.IFacturacao;
 import com.grupo19.Interfaces.IFacturacaoPorProd;
 import com.grupo19.Interfaces.IProduct;
