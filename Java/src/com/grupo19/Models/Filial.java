@@ -74,6 +74,7 @@ public class Filial implements IFilial {
         return sum;
     }
 
+    // queire estatica
     // faturacao total da filial
     public double faturacaoTotal(){
         double res = 0;
@@ -85,7 +86,7 @@ public class Filial implements IFilial {
         return res;
     }
 
-
+    // querie estatica
     // faturacao total de um dado mes
     public double faturacaoOfMonth(int x){
         if(x > 12){return 0;}
@@ -96,7 +97,7 @@ public class Filial implements IFilial {
         return res;
     }
 
-
+    // queire 2 interativa e tb queire estatica
     // numero de clientes distintos que compraram num certo mes
     public int numberOfClientsBoughtInMonth(int x){
         if(x > 12){return 0;}
@@ -112,15 +113,18 @@ public class Filial implements IFilial {
         return res.size();
     }
 
+    // metodo aussiliar
     private boolean firstSale(List<ISale> lista, ISale sale){
         for(ISale s : lista){
             if(s.getClient().equals(sale.getClient())){
+
                 return false;
             }
         }
         return true;
     }
 
+    // queries 2 interativa e tb querie estatica
     // numero total de vendas num mes
     public int totalNumbOfSalesInMonth(int x){
         if(x > 12){return 0;}
@@ -172,13 +176,34 @@ public class Filial implements IFilial {
     // querie 5 interativa
     // lista de codigos dos produtos que comprou por ordem descrescente de quantidade
     // e para qnts iguais por ordem alfabetica
-    /*
-    public List<String> getListOfProductsBoughtOfClient(String client) {
-        List<ISale> lista = new ArrayList<>();
-        this.filial.get(client)
-    }
-    */
 
+    public List<String> getListOfProductsBoughtOfClient(String client) {
+        Map<String,Integer> mapa = new HashMap<>();
+        List<String> lista;
+        for(int i = 0; i < 12; i++){
+            for(ISale sale :this.filial.get(client).get(i)){
+                if(!mapa.containsKey(sale.getProduct())){
+                    mapa.put(sale.getProduct(),1);
+                }else {
+                    int tmp = mapa.get(sale.getProduct());
+                    tmp++;
+                    mapa.put(sale.getProduct(),tmp);
+                }
+            }
+        }
+        lista = mapa.entrySet().stream().sorted((o1,o2)-> comparaEntrySets(o1,o2)).map(l-> l.getKey()).collect(Collectors.toList());
+        Collections.reverse(lista);
+        return lista;
+    }
+
+    // comparador das entrys
+    private int comparaEntrySets(Map.Entry<String,Integer> fst,Map.Entry<String,Integer> snd){
+        if(fst.getValue().equals(snd.getValue())){
+            return fst.getKey().compareTo(snd.getKey());
+        }
+        if(fst.getValue() > snd.getValue()) return 1;
+        return -1;
+    }
     
 
 
