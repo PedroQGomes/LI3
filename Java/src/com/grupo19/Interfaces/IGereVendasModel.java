@@ -6,6 +6,8 @@ public interface IGereVendasModel {
     void loadData();
     ICatProd getCatProd();
     String getFichVendas();
+    IEstatisticas getEstatatistica();
+    double getTimeOfLoadData();
     ICatClient getCatClient();
     List<IProduct> listOfProductsWithLetter(char letter);
     List<IProduct> productsNoOneBoughtModel();

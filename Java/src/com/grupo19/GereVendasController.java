@@ -94,7 +94,8 @@ public class GereVendasController implements IGereVendasController {
     }
 
     public void init ( ) {
-        String tmp = constructStringToInit();
+        //String tmp = constructStringToInit();
+        view.setTimeQueue(model.getTimeOfLoadData());
         do {
             view.updateView();
             reactToInput(view.getChoice());
@@ -102,11 +103,11 @@ public class GereVendasController implements IGereVendasController {
         while(!view.exit());
     }
 
-    private String constructStringToInit() {
+   /* private String constructStringToInit() {
         StringBuilder sb = new StringBuilder();
         sb.append("Ficheiro: ").append(model.getFichVendas()).append("\n");
         sb.append("Número total de registos de venda errados: ").append(model.getNumVendasInvalidas()).append("\n");
         sb.append("Número total de produtos: ").append().append("\n");
         sb.append("N")
-    }
+    } */
 }

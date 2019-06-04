@@ -11,6 +11,7 @@ public interface IFacturacao {
 
     IFacturacao clone();
 
+    double facturacaoTotal();
     double valorTotalFactMensal (int month);
 
     double totalSalesPerProductPerMonth (int month, IProduct prod);

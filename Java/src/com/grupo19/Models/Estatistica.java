@@ -1,5 +1,6 @@
 package com.grupo19.Models;
 
+
 import com.grupo19.Interfaces.IEstatisticas;
 
 public class Estatistica implements IEstatisticas {
@@ -12,7 +13,6 @@ public class Estatistica implements IEstatisticas {
     private int numClientesNaoCompraram;
     private int numTotalDeComprasValorNulo;
     private double facturacaoTotal;
-
 
     public int getNumProdutosTotal() {
         return numProdutosTotal;
@@ -31,7 +31,7 @@ public class Estatistica implements IEstatisticas {
         this.numClientesTotal = numClientesTotal;
     }
 
-    @Override
+
     public void setNumVendasTotal(int numVendasTotal) {
         this.numVendasTotal = numVendasTotal;
     }
@@ -40,19 +40,19 @@ public class Estatistica implements IEstatisticas {
         this.numVendasValidas = numVendasValidas;
     }
 
-    @Override
+
     public int getNumVendasValidas() {
-        return 0;
+        return this.numVendasValidas;
     }
 
-    @Override
+
     public int getNumVendasInvalidas() {
-        return 0;
+        return this.numVendasTotal-this.numVendasValidas;
     }
 
-    @Override
+
     public int getTotalProdNum() {
-        return 0;
+        return this.numProdutosTotal;
     }
 
     public int getNumTotalProdutosComprados() {
@@ -90,7 +90,7 @@ public class Estatistica implements IEstatisticas {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb
+        //sb
         return super.toString();
     }
 }

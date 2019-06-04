@@ -2,6 +2,7 @@ package com.grupo19;
 import static java.lang.System.out;
 import com.grupo19.Interfaces.IGereVendasView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class GereVendasView implements IGereVendasView {
     private int page;
     private int row;
     private int col;
+    private double timeQueue;
 
     /**
      * Define quantas linhas o navegador de strings vai ter
@@ -73,7 +75,10 @@ public class GereVendasView implements IGereVendasView {
      * Imprime sempre a informação que quisermos antes do menu
      */
     private void header() { //TODO: TEMPO DE CARREGAMENTO
-        System.out.println();
+        StringBuilder sb = new StringBuilder("Programa de Gestao de Vendas Realizado por Jose Santos, Pedro Queiros e Alexandre Costa             Tempo Decorrido:");
+        DecimalFormat df = new DecimalFormat("###.##");
+        sb.append(df.format(this.timeQueue)).append(" segundos");
+        out.println(sb.toString());
     }
 
 
@@ -83,6 +88,7 @@ public class GereVendasView implements IGereVendasView {
     }
 
     public void updateView () {
+        header();
         switch(this.menu) {
             case STRINGBROWSER:
                 navigate();
@@ -115,6 +121,11 @@ public class GereVendasView implements IGereVendasView {
         }
         out.print(sb.toString());
     }
+
+    public void setTimeQueue(double timeQueue) {
+        this.timeQueue = timeQueue;
+    }
+
 
     public int getChoice() {return this.choice;}
 

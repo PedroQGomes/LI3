@@ -13,6 +13,8 @@ public class GereVendasModel implements IGereVendasModel {
     private IFacturacao facturacao;
     private IFilial[] filiais;
     private IEstatisticas estat;
+    private transient double timeOfLoadData;
+
     public GereVendasModel() {
         catProd = new CatProd();
         catClient = new CatClient();
@@ -24,6 +26,7 @@ public class GereVendasModel implements IGereVendasModel {
     }
 
     public void loadData ( ) { //TODO : LER DO FICHEIRO CONFIG
+        Crono.start();
         List<String> produtos = Input.lerLinhasWithBuff("Produtos.txt");
         List<String> clientes = Input.lerLinhasWithBuff("Clientes.txt");
         List<String> vendas = Input.lerLinhasWithBuff(fichVendas);
@@ -40,9 +43,14 @@ public class GereVendasModel implements IGereVendasModel {
                 this.getCatProd().updateProductBought(tmp.getProduct(),tmp.getFilial(),tmp.getUnits());
                 numVendasValidas++;
                 filiais[tmp.getFilial()-1].add(tmp);
+                facturacao.add(tmp);
             }
         }
+        timeOfLoadData = Crono.stop();
         estat.setNumVendasValidas(numVendasValidas);
+        estat.setFacturacaoTotal(facturacao.facturacaoTotal());
+        estat.setNumClientesNaoCompraram(catClient.clientsNeverBought().size());
+        estat.setNumTotalProdutosComprados(estat.getTotalProdNum() - catProd.productsNeverBought().size());
     }
 
     public  List<IClient> listOfClientsThatBoughtInAllFilials() {
@@ -66,6 +74,10 @@ public class GereVendasModel implements IGereVendasModel {
     if(sale.isValid(getCatProd(),getCatClient()))
     return sale;
     else return null;
+    }
+
+    public double getTimeOfLoadData() {
+        return timeOfLoadData;
     }
 
     private void addToCatProdFromString(String l) {
@@ -96,7 +108,7 @@ public class GereVendasModel implements IGereVendasModel {
         return fichVendas;
     }
 
-    public IEstatisticas getNumVendasValidas() {
+    public IEstatisticas getEstatatistica() {
         return this.estat;
     }
 
