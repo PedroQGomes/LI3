@@ -115,6 +115,7 @@ public class Sale implements ISale {
     public ISale clone ( ) { //TODO : FAZER CLONE
        return  new Sale(this);
     }
+
 }
 
 
