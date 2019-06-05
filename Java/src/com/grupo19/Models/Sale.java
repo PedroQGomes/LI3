@@ -43,9 +43,9 @@ public class Sale implements ISale {
         filial = _filial;
     }
 
-    public Sale(Sale s){
-        this.prod = s.getCodProd();
-        this.client = s.getCodClient();
+    public Sale(ISale s){
+        this.prod = s.getProduct();
+        this.client = s.getClient();
         this.filial = s.getFilial();
         this.month = s.getMonth();
         this.price = s.getPrice();
@@ -54,13 +54,6 @@ public class Sale implements ISale {
     }
 
 
-    public String getCodProd() {
-        return prod;
-    }
-
-    public String getCodClient() {
-        return client;
-    }
 
     public String getSaleType() {
         return saleType;

@@ -10,18 +10,18 @@ import java.util.stream.Collectors;
 
 public class Filial implements IFilial {
 
-    private Map<String,List<List<ISale>>> filial;
+    private Map<String,List<List<ISale>>> filialData;
 
 
     public Filial(){
 
-        this.filial = new HashMap<>();
+        this.filialData = new HashMap<>();
 
     }
 
 
     public Filial(IFilial a){
-        this.filial = a.getFilial();
+        this.filialData = a.getFilialData();
     }
 
 
@@ -30,9 +30,9 @@ public class Filial implements IFilial {
     }
 
     // idk se está bem
-    public Map<String,List<List<ISale>>> getFilial(){
+    public Map<String,List<List<ISale>>> getFilialData(){
         Map<String,List<List<ISale>>> tmp = new HashMap<>();
-        for(Map.Entry<String,List<List<ISale>>> mapa : this.filial.entrySet()){
+        for(Map.Entry<String,List<List<ISale>>> mapa : this.filialData.entrySet()){
             tmp.put(mapa.getKey(),cloneOfLists(mapa.getValue()));
         }
         return tmp;
@@ -47,15 +47,15 @@ public class Filial implements IFilial {
     }
 
     public void add(ISale a){
-        if(!this.filial.containsKey(a.getClient())) {
+        if(!this.filialData.containsKey(a.getClient())) {
             List<List<ISale>> lista = new ArrayList<>(12);
             for(int i = 0; i<12;i++) {
                 List<ISale> s = new ArrayList<>();
                 lista.add(s);
             }
-            this.filial.put(a.getClient(),lista);
+            this.filialData.put(a.getClient(),lista);
         }
-        List<List<ISale>> monthArr = this.filial.get(a.getClient());
+        List<List<ISale>> monthArr = this.filialData.get(a.getClient());
         List<ISale> saleArr = monthArr.get(a.getMonth()-1);
         saleArr.add(a.clone());
 
@@ -63,23 +63,23 @@ public class Filial implements IFilial {
 
     // da o numero de sales de um cliente num certo mes
     public int getNumberOfSalesPerClientPerMonth(IClient client , int month) {
-        return this.filial.get(client.getCodigo()).get(month).size();
+        return this.filialData.get(client.getCodigo()).get(month).size();
     }
 
     // da o numero de vendas de um cliente num ano
     public int getNumberOfSalesPerClientPerYear(IClient client){
         int sum = 0;
         for(int i = 0; i<12; i++){
-            sum += this.filial.get(client.getCodigo()).get(i).size();
+            sum += this.filialData.get(client.getCodigo()).get(i).size();
         }
         return sum;
     }
 
     // queire estatica
-    // faturacao total da filial
+    // faturacao total da filialData
     public double faturacaoTotal(){
         double res = 0;
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
             for(int i = 0; i<12;i++) {
                 res += lista.getValue().get(i).stream().mapToDouble(l-> l.getPrice()).sum();
             }
@@ -92,7 +92,7 @@ public class Filial implements IFilial {
     public double faturacaoOfMonth(int x){
         if(x > 12){return 0;}
         double res = 0;
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
             res += lista.getValue().get(x-1).stream().mapToDouble(l-> l.getPrice()).sum();
         }
         return res;
@@ -103,7 +103,7 @@ public class Filial implements IFilial {
     public int numberOfClientsBoughtInMonth(int x){
         if(x > 12){return 0;}
         List<ISale> res = new ArrayList<>();
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
             for(ISale sale : lista.getValue().get(x)) {
                 if(firstSale(res,sale)){
                     res.add(sale);
@@ -130,7 +130,7 @@ public class Filial implements IFilial {
         if(x > 11 || x < 0){return null;}
         int res = 0;
         Set<String> client = new HashSet<>();
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
             List<ISale> tmp = lista.getValue().get(x);
             res += tmp.size();
             for(ISale sale: tmp ) {
@@ -143,7 +143,7 @@ public class Filial implements IFilial {
 
     public double totalFaturadoPerClientPerMonth(String client,int month) {
         double sum = 0.0;
-        List<ISale> tmp = this.filial.get(client).get(month);
+        List<ISale> tmp = this.filialData.get(client).get(month);
             for(ISale sale : tmp) {
                 sum = sale.totalPrice();
             }
@@ -154,7 +154,7 @@ public class Filial implements IFilial {
     // retorna o numero de produtos distitnos comprados por um cliente num dado mes
     public Tuple<Integer,Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente,int mes){
         if(mes > 11 || mes < 0){return null;}
-        List<ISale> tmp = this.filial.get(cliente).get(mes);
+        List<ISale> tmp = this.filialData.get(cliente).get(mes);
         Set<String> rep = new HashSet<>();
         for (ISale sale : tmp ){
             rep.add(sale.getProduct());
@@ -177,7 +177,7 @@ public class Filial implements IFilial {
     //querie 3 interativa
     // diz qnt gastou um cliente num dado mes
     public double clientSpentInAMonth(String cliente,int mes){
-        return this.filial.get(cliente).get(mes).stream().mapToDouble(l->l.getPrice()).sum();
+        return this.filialData.get(cliente).get(mes).stream().mapToDouble(l->l.getPrice()).sum();
     }
 
 
@@ -189,7 +189,7 @@ public class Filial implements IFilial {
         Map<String,Integer> mapa = new HashMap<>();
         List<String> lista;
         for(int i = 0; i < 12; i++){
-            for(ISale sale :this.filial.get(client).get(i)){
+            for(ISale sale :this.filialData.get(client).get(i)){
                 if(!mapa.containsKey(sale.getProduct())){
                     mapa.put(sale.getProduct(),1);
                 }else {
@@ -207,7 +207,7 @@ public class Filial implements IFilial {
     // determinar a lista de tres mairores compradores em termos de dinheiro faturado
     public List<String> getListOfClientsWhoMostBought(){
         Map<String,Double> mapa = new HashMap<>();
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
             for(int i = 0;i<12;i++){
                 for(ISale sale :lista.getValue().get(i)){
                     if(mapa.containsKey(sale.getClient())){
