@@ -8,6 +8,7 @@ public interface ISale {
     int getFilial();
     int getUnits();
     double getPrice();
+    double totalPrice();
     boolean isValid(ICatProd iCatProd , ICatClient iCatClient);
     ISale clone();
 }

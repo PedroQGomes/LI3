@@ -100,6 +100,11 @@ public class Sale implements ISale {
     }
 
     @Override
+    public double totalPrice() {
+        return this.price * this.units;
+    }
+
+    @Override
     public int hashCode() {
         return Arrays.hashCode( new Object[] { this.client ,this.filial,this.month,this.price,this.prod,this.saleType,this.units} );
     }

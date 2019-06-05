@@ -3,6 +3,7 @@ package com.grupo19.Models;
 import com.grupo19.Interfaces.IClient;
 import com.grupo19.Interfaces.IFilial;
 import com.grupo19.Interfaces.ISale;
+import com.grupo19.Tuple;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -97,6 +98,8 @@ public class Filial implements IFilial {
         return res;
     }
 
+<<<<<<< HEAD
+=======
     // queire 2 interativa e tb queire estatica
     // numero de clientes distintos que compraram num certo mes
     public int numberOfClientsBoughtInMonth(int x){
@@ -122,39 +125,48 @@ public class Filial implements IFilial {
         }
         return true;
     }
+>>>>>>> 8896ea9bb6ac4b399b42ea94d5020ba071d41321
 
     // queries 2 interativa e tb querie estatica
     // numero total de vendas num mes
-    public int totalNumbOfSalesInMonth(int x){
-        if(x > 12){return 0;}
+    public Tuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x){
+        if(x > 11 || x < 0){return null;}
         int res = 0;
+        Set<String> client = new HashSet<>();
         for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
-            res += lista.getValue().get(x).size();
+            List<ISale> tmp = lista.getValue().get(x);
+            res += tmp.size();
+            for(ISale sale: tmp ) {
+                client.add(sale.getClient());
+
+            }
         }
-        return res;
+        return new Tuple<>(res,client.size());
     }
 
-    // querie 3 interativa
-    // determinar qnts compras fez num mes um dado cliente
-    public int numOfClientsInAMonth(String cliente,int mes){
-        return this.filial.get(cliente).get(mes).size();
+    public double totalFaturadoPerClientPerMonth(String client,int month) {
+        double sum = 0.0;
+        List<ISale> tmp = this.filial.get(client).get(month);
+            for(ISale sale : tmp) {
+                sum = sale.totalPrice();
+            }
+        return sum;
     }
 
     // querie 3 interativa
     // retorna o numero de produtos distitnos comprados por um cliente num dado mes
-    public int numOfDifferentProductsOfClient(String cliente,int mes){
-        if(mes > 12){return 0;}
-        List<ISale> res = new ArrayList<>();
-        for (ISale sale : this.filial.get(cliente).get(mes)){
-            if(!productExists(res,sale)){
-                res.add(sale);
-            }
+    public Tuple<Integer,Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente,int mes){
+        if(mes > 11 || mes < 0){return null;}
+        List<ISale> tmp = this.filial.get(cliente).get(mes);
+        Set<String> rep = new HashSet<>();
+        for (ISale sale : tmp ){
+            rep.add(sale.getProduct());
         }
-        return res.size();
+        return new Tuple<>(tmp.size(),rep);
     }
 
 
-    // metodo aussiliar
+    // metodo auxiliar
     private boolean productExists(List<ISale> lista,ISale sale){
         for(ISale a : lista){
             if(a.getProduct().equals(sale.getProduct())){

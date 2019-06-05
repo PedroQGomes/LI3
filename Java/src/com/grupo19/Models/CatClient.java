@@ -15,8 +15,8 @@ public class CatClient implements ICatClient {
     public CatClient() {
         mapOfClients = new HashMap<>();
     }
-    public void add (IClient product) {
-        mapOfClients.put(product.getCodigo(),product);
+    public void add (IClient client) {
+        mapOfClients.put(client.getCodigo(),client);
     }
 
 

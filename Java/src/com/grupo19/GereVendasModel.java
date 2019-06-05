@@ -3,7 +3,10 @@ package com.grupo19;
 import com.grupo19.Interfaces.*;
 import com.grupo19.Models.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GereVendasModel implements IGereVendasModel {
@@ -146,6 +149,47 @@ public class GereVendasModel implements IGereVendasModel {
         return this.estat;
     }
 
+
+
+    /**
+     * Metodo para dar resposta a query 2
+     * @param x
+     * @return
+     */
+    @Override
+    public Tuple<Integer, Integer> totalNumbOfSalesInMonthAndClientsBought(int x, int filial) {
+        return this.getFiliais()[filial].totalNumbOfSalesInMonthAndClientsBought(x);
+    }
+
+    /**
+     * Query 3
+     * @param client
+     * @return
+     */
+    public List<Tuple<Integer,Integer>> totalPurchasesOfAClientPerYear(String client) {
+        if(!this.getCatClient().contains(client)) return null;
+        List<Tuple<Integer,Integer>> tmp = new ArrayList<>(12);
+        for(int month = 0 ; month < 12; month++) {
+            int total = 0;
+            Set<String> stringSet = new HashSet<>();
+            for(int i = 0; i<GereVendasModel.getNumFiliais(); i++) {
+            Tuple<Integer, Set<String>> setTuple = this.getFiliais()[i].numOfDifferentProductsOfClientAndNumOfSales(client,month);
+            stringSet.addAll(setTuple.getSecondElem());
+            total += setTuple.getFirstElem();
+            }
+            tmp.add(new Tuple<>(total,stringSet.size()));
+        }
+        return tmp;
+    }
+
+    public double totalFaturadoPClientPMonth(String client,int month) {
+        if(!this.getCatClient().contains(client)) return 0.0;
+        double tmp = 0.0;
+        for(int i = 0; i < GereVendasModel.getNumFiliais(); i++) {
+            tmp += this.getFiliais()[i].totalFaturadoPerClientPerMonth(client, month);
+        }
+        return tmp;
+    }
     public List<String> getListOfProductsBoughtOfClient(String a){
         Map<Integer,Map<String,Integer>> res = new HashMap<>();
         for(int i = 0; i< NUM_FILIAIS; i++) {
