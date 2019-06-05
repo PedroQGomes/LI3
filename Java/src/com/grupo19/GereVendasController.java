@@ -2,6 +2,7 @@ package com.grupo19;
 
 import com.grupo19.Interfaces.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,8 +57,39 @@ public class GereVendasController implements IGereVendasController {
         view.showLine(sb.toString());
     }
 
+    private void query2() {
+        int month = GereVendasView.getMonthFromInput() -1;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Para o mês ").append(month+1).append(" :").append("\n");
+        int totalSum = 0;
+        for(int i = 0; i<GereVendasModel.getNumFiliais() ; i++) {
+            Tuple<Integer,Integer> tmp = model.totalNumbOfSalesInMonthAndClientsBought(month,i);
+            if(tmp == null) continue;
+            totalSum += tmp.getFirstElem();
+            sb.append("Na Filial ").append(i+1).append(" foram feitas ").append(tmp.getFirstElem()).append(" vendas por ").append(tmp.getSecondElem()).append(" clientes diferentes").append("\n");
+        }
+        sb.append("Dá um total de ").append(totalSum).append(" vendas neste mês\n");
+        view.showLine(sb.toString());
 
+    }
 
+    private void query3() { //TODO : Round GASTOU
+        String client = GereVendasView.getUserInputString("Insira um código de cliente");
+        List<Tuple<Integer,Integer>> tmp = model.totalPurchasesOfAClientPerYear(client);
+        if(tmp == null) view.showLine("Cliente não existe");
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0 ; i < 12; i++) {
+            sb.append("Mês ")
+                    .append(i+1)
+                    .append(" :")
+                    .append("   Fez ").append(tmp.get(i).getFirstElem())
+                    .append(" compras de ")
+                    .append(tmp.get(i).getSecondElem())
+                    .append(" produtos diferentes e gastou ")
+                    .append(model.totalFaturadoPClientPMonth(client,i)).append("\n");
+        }
+        view.showLine(sb.toString());
+    }
 
     private void reactToInput(int choice) {
         switch (choice) {
@@ -65,8 +97,10 @@ public class GereVendasController implements IGereVendasController {
                 productsNoOneBought();
                 break;
             case 2:
+                query2();
                 break;
             case 3:
+                query3();
                 break;
             case 4:
                 break;

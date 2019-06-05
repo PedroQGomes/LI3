@@ -43,11 +43,34 @@ public class GereVendasView implements IGereVendasView {
     }
 
     /**
+     * Lê o input(String) do user
+     * @return
+     */
+    public static String getUserInputString(String s) {
+        out.print(s + " ");
+        return Input.lerString();
+    }
+
+    /**
      * Lê o input(int) do user
      * @return
      */
     public static int getUserInputInt() {
         return Input.lerInt();
+    }
+    /**
+     * Lê o input(int) do user
+     * @return
+     */
+    public static int getUserInputInt(String s) {
+        out.print(s + " ");
+        return Input.lerInt();
+    }
+
+    public static int getMonthFromInput() {
+        int month = getUserInputInt("Insira o mês:");
+        while(month < 1 || month > 12) month = getUserInputInt("Insira um mês válido:");
+        return month;
     }
 
     /**
