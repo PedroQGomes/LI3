@@ -72,14 +72,13 @@ public class GereVendasController implements IGereVendasController {
     private void reactToInput(int choice) {
         switch (choice) {
             case 1:
-                productsThatStartWithLetter();
+                productsNoOneBought();
                 break;
             case 2:
                 break;
             case 3:
                 break;
             case 4:
-                clientsThatBoughtInAllFilials();
                 break;
             case 5:
                 querie5();
@@ -94,8 +93,6 @@ public class GereVendasController implements IGereVendasController {
                 break;
             case 10:
                 break;
-            case 11:
-                break;
             default:
                 break;
 
@@ -103,7 +100,6 @@ public class GereVendasController implements IGereVendasController {
     }
 
     public void init ( ) {
-        //String tmp = constructStringToInit();
         view.setTimeQueue(model.getTimeOfLoadData());
         view.showInfoView(model.getFichVendas(),model.getEstatatistica());
         do {

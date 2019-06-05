@@ -6,7 +6,7 @@ import com.grupo19.Models.*;
 import java.util.List;
 
 public class GereVendasModel implements IGereVendasModel {
-    private static final int NUM_FILIAIS = 3;
+    private static int NUM_FILIAIS = 3;
     private String fichVendas;
     private ICatProd catProd;
     private ICatClient catClient;
@@ -25,35 +25,61 @@ public class GereVendasModel implements IGereVendasModel {
         estat = new Estatistica();
     }
 
-    public void loadData ( ) { //TODO : LER DO FICHEIRO CONFIG
+    public  static IGereVendasModel loadData ( ) {
+        IGereVendasModel model = new GereVendasModel();
         Crono.start();
-        List<String> produtos = Input.lerLinhasWithBuff("Produtos.txt");
-        List<String> clientes = Input.lerLinhasWithBuff("Clientes.txt");
-        List<String> vendas = Input.lerLinhasWithBuff(fichVendas);
-        produtos.forEach(this::addToCatProdFromString);
-        clientes.forEach(this::addToCatClientFromString);
-        estat.setNumVendasTotal(vendas.size());
-        estat.setNumProdutosTotal(produtos.size());
-        estat.setNumClientesTotal(clientes.size());
+        List<String> config = Input.lerLinhasWithBuff("config.txt");
+        if(config.isEmpty()) return null;
+        List<String> produtos = Input.lerLinhasWithBuff(config.get(0));
+        List<String> clientes = Input.lerLinhasWithBuff(config.get(1));
+        model.setFichVendas(config.get(2));
+        model.getEstatatistica().setNumProdutosTotal(produtos.size());
+        model.getEstatatistica().setNumClientesTotal(clientes.size());
+        try {
+            GereVendasModel.NUM_FILIAIS = Integer.parseInt(config.get(3));
+        } catch (NumberFormatException e) {
+            GereVendasModel.NUM_FILIAIS = 3;
+        }
+        produtos.forEach(p -> GereVendasModel.addToCatProdFromString(p,model));
+        clientes.forEach(c -> GereVendasModel.addToCatClientFromString(c,model));
+        loadVendas(model);
+        model.setTimeOfLoadData(Crono.stop());
+        return model;
+    }
+
+    public void setFichVendas(String fichVendas) {
+        this.fichVendas = fichVendas;
+    }
+
+
+    private static void loadVendas(IGereVendasModel model) {
         int numVendasValidas = 0;
         int vendasZero = 0;
+        List<String> vendas = Input.lerLinhasWithBuff(model.getFichVendas());
+        model.getEstatatistica().setNumVendasTotal(vendas.size());
         for(String l : vendas) {
-            ISale tmp = processSale(l);
+            ISale tmp = processSale(l,model);
             if(tmp != null) {
-                this.getCatClient().updateClientBought(tmp.getClient(),tmp.getFilial());
-                this.getCatProd().updateProductBought(tmp.getProduct(),tmp.getFilial(),tmp.getUnits());
+                model.getCatClient().updateClientBought(tmp.getClient(),tmp.getFilial());
+                model.getCatProd().updateProductBought(tmp.getProduct(),tmp.getFilial(),tmp.getUnits());
                 numVendasValidas++;
-                filiais[tmp.getFilial()-1].add(tmp);
-                facturacao.add(tmp);
+                model.getFiliais()[tmp.getFilial()-1].add(tmp);
+                model.getFacturacao().add(tmp);
                 if(tmp.getPrice() == 0.0)  vendasZero++;
             }
         }
-        timeOfLoadData = Crono.stop();
-        estat.setNumVendasValidas(numVendasValidas);
-        estat.setFacturacaoTotal(facturacao.facturacaoTotal());
-        estat.setNumClientesNaoCompraram(catClient.clientsNeverBought().size());
-        estat.setNumTotalProdutosComprados(estat.getTotalProdNum() - catProd.productsNeverBought().size());
-        estat.setNumTotalDeComprasValorNulo(vendasZero);
+        model.getEstatatistica().setNumVendasValidas(numVendasValidas);
+        model.getEstatatistica().setFacturacaoTotal(model.getFacturacao().facturacaoTotal());
+        model.getEstatatistica().setNumClientesNaoCompraram(model.getCatClient().clientsNeverBought().size());
+        model.getEstatatistica().setNumTotalProdutosComprados(model.getEstatatistica().getTotalProdNum() - model.getCatProd().productsNeverBought().size());
+        model.getEstatatistica().setNumTotalDeComprasValorNulo(vendasZero);
+    }
+
+    public IFilial[] getFiliais() {
+        return this.filiais;
+    }
+    public IFacturacao getFacturacao() {
+        return this.facturacao;
     }
 
     public  List<IClient> listOfClientsThatBoughtInAllFilials() {
@@ -71,10 +97,10 @@ public class GereVendasModel implements IGereVendasModel {
         return this.catClient;
     }
 
-    private ISale processSale(String l) {
+    private static ISale processSale(String l,IGereVendasModel model) {
     ISale sale = Sale.readLineToSale(l);
     if(sale == null) return null;
-    if(sale.isValid(getCatProd(),getCatClient()))
+    if(sale.isValid(model.getCatProd(),model.getCatClient()))
         return sale;
     else return null;
     }
@@ -83,15 +109,19 @@ public class GereVendasModel implements IGereVendasModel {
         return timeOfLoadData;
     }
 
-    private void addToCatProdFromString(String l) {
+    public void setTimeOfLoadData(double time) {
+        this.timeOfLoadData = time;
+    }
+
+    private static void addToCatProdFromString(String l,IGereVendasModel model) {
         IProduct tmp = new Product(l);
         if(!tmp.isValid()) return;
-        this.catProd.add(tmp);
+        model.getCatProd().add(tmp);
     }
-    private void addToCatClientFromString(String l) {
+    private static void addToCatClientFromString(String l,IGereVendasModel model) {
         IClient tmp = new Client(l);
         if(!tmp.isValid()) return;
-        this.catClient.add(tmp);
+        model.getCatClient().add(tmp);
     }
 
     public List<IProduct> listOfProductsWithLetter(char letter) {

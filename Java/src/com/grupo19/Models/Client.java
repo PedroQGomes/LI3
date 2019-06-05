@@ -58,6 +58,11 @@ public class Client implements IClient {
         return new Client(this);
     }
 
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode( new Object[] { this.boughtOnFilial ,this.codigo} );
+    }
+
     public boolean equals(Object o){
         if(this == o)return true;
         if(o == null || this.getClass() != o.getClass())return false;

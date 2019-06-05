@@ -7,7 +7,6 @@ import com.grupo19.Interfaces.IGereVendasView;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.UnaryOperator;
 
 public class GereVendasView implements IGereVendasView {
     private Menu menu;
@@ -96,7 +95,7 @@ public class GereVendasView implements IGereVendasView {
     /**
      * Imprime sempre a informação que quisermos antes do menu
      */
-    private void header() { //TODO: TEMPO DE CARREGAMENTO
+    private void header() {
         StringBuilder sb = new StringBuilder("Programa de Gestao de Vendas Realizado por Jose Santos, Pedro Queiros e Alexandre Costa             Tempo Decorrido:");
         DecimalFormat df = new DecimalFormat("###.##");
         sb.append(df.format(this.timeQueue)).append(" segundos\n");

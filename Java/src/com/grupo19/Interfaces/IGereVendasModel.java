@@ -3,8 +3,11 @@ package com.grupo19.Interfaces;
 import java.util.List;
 
 public interface IGereVendasModel {
-    void loadData();
     ICatProd getCatProd();
+    IFilial[] getFiliais();
+    IFacturacao getFacturacao();
+    void setFichVendas(String fichVendas);
+    void setTimeOfLoadData(double time);
     String getFichVendas();
     IEstatisticas getEstatatistica();
     double getTimeOfLoadData();
