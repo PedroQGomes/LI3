@@ -33,6 +33,7 @@ bluej.pkh
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+Java/.idea/workspace.xml
 
 # Gradle
 .idea/**/gradle.xml
