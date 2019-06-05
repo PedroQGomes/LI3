@@ -66,6 +66,11 @@ public class Product implements IProduct {
         return new Product(this);
     }
 
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode( new Object[] { this.boughtOnFilial ,this.codigo,this.boughtPerFilial} );
+    }
+
     public boolean equals(Object o){
         if(this == o)return true;
         if(o == null || this.getClass() != o.getClass())return false;

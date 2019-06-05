@@ -5,6 +5,7 @@ import com.grupo19.Interfaces.ICatClient;
 import com.grupo19.Interfaces.ICatProd;
 import com.grupo19.Interfaces.ISale;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 
 public class Sale implements ISale {
@@ -96,6 +97,11 @@ public class Sale implements ISale {
             filial = Integer.parseInt(campos[6]);
         } catch(InputMismatchException exc) { return null;}
         return new Sale(codProd,price,units,saleType,codClient,month,filial);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode( new Object[] { this.client ,this.filial,this.month,this.price,this.prod,this.saleType,this.units} );
     }
 
     @Override
