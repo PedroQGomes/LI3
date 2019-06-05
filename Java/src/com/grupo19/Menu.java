@@ -1,18 +1,18 @@
 package com.grupo19;
 
 public enum Menu {
-    MAINMENU(new String[] {"Produtos Começados por uma determinada Letra",
-            "Dado um mês e um código de produto, determinar e apresentar o número total de vendas e o total facturado com esse produto em tal mês",
-            "Lista ordenada dos produtos que ninguém comprou",
-            "Lista ordenada dos clientes que compraram em todas as filiais",
-            "Determinar o número de clientes registados que não realizaram compras bem como o número de produtos que ninguém comprou",
-            "Total de produtos comprados por um cliente(mês a mês)",
-            "Determinar o total de vendas e o total facturado num intervalo de meses",
-            "Determinar os códigos dos clientes que compraram um dado produto de uma dada filial",
-            "Determinar a lista de códigos de produtos que um dado cliente mais comprou por quantidade(ordem decrescente)",
-            "Produtos mais vendidos em todo o ano, indicando o nº de clientes e de unidades vendidas, filial a filial",
-            "Determinar quais os códigos de 3 produtos em que um dado cliente mais gastou dinheiro durante o ano"}),
+    MAINMENU(new String[] {"Lista ordenada alfabeticamente com os códigos dos produtos nunca comprados e o seu respectivo total",
+            "Dado um mês , determinar o número total global de vendas realizadas e o número total de clientes distintos que as fizeram.", // PARA CADA FILIAL
+            "Dado um código de cliente, determinar, para cada mês, quantas compras fez, quantos produtos distintos comprou e quanto gastou no total.",
+            "Dado o código de um produto existente, quantas vezes foi comprado, por quantos clientes diferentes e o total facturado.", // Mês a Mês
+            "Dado o código de um cliente determinar os produtos que mais comprou", //, ordenado por ordem decrescente de quantidade e, para quantidades iguais, por ordem alfabética dos códigos",
+            "Determinar X produtos mais vendidos em todo o ano ", // (em número de unidades vendidas) indicando o número total de distintos clientes que o compraram (X é um inteiro dado pelo utilizador)
+            "Determinar a lista dos três maiores compradores em termos de dinheiro facturado, por filial",
+            "Determinar os códigos dos X clientes que compraram mais produtos diferentes", // (não interessa a quantidade nem o valor)  , indicando quantos, sendo o critério de ordenação a ordem decrescente do número de produtos
+            "Dado o código de um produto que deve existir, determinar o conjunto dos X clientes que mais o compraram  ", // e, para cada um, qual o valor gasto (ordenação cf. 5);
+            "Determinar mês a mês, e para cada mês filial a filial, a facturação total com cada produto"}),
     STRINGBROWSER;
+
     private String[] menuOptions;
     Menu() {
 

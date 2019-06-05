@@ -3,6 +3,7 @@ package com.grupo19.Models;
 import com.grupo19.Interfaces.ICatClient;
 import com.grupo19.Interfaces.IClient;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,21 +31,28 @@ public class CatClient implements ICatClient {
     }
 
     public List<IClient> clientsNeverBought ( ) {
-        return null;
+        List<IClient> tmp = new ArrayList<>();
+        for(Map.Entry entry: mapOfClients.entrySet()) {
+            IClient tmpClient = (IClient) entry.getValue();
+            if(!tmpClient.hasClientEverBought()) tmp.add(tmpClient.clone());
+        }
+        return tmp;
     }
 
-    public List<IClient> clientsMostBought (int n) {
-        return null;
-    }
 
-    public List<IClient> listOfClientsThatStartWithLetter (char l) {
-        return null;
-    }
+    /**
+     * Lista de clientes que não compraram em todas as filiais
+     * @return
+     */
 
     public List<IClient> listOfClientsThatDBoughtInAllFilials ( ) {
         return this.mapOfClients.values().stream().filter(c->!c.hasClientEverBought()).collect(Collectors.toList());
     }
 
+    /**
+     * Lista de clientes que compraram em todas as filiais
+     * @return
+     */
     public List<IClient> listOfClientsThatBoughtInAllFilials ( ) {
         return this.mapOfClients.values().stream().filter(IClient::hasClientEverBought).collect(Collectors.toList());
     }

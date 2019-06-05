@@ -1,9 +1,13 @@
 package com.grupo19;
 import static java.lang.System.out;
+
+import com.grupo19.Interfaces.IEstatisticas;
 import com.grupo19.Interfaces.IGereVendasView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 public class GereVendasView implements IGereVendasView {
     private Menu menu;
@@ -13,6 +17,7 @@ public class GereVendasView implements IGereVendasView {
     private int page;
     private int row;
     private int col;
+    private double timeQueue;
 
     /**
      * Define quantas linhas o navegador de strings vai ter
@@ -57,6 +62,25 @@ public class GereVendasView implements IGereVendasView {
         stringBrowser.sort(String::compareTo); //TODO: SE FOR UMA ARVORE NAO DEVO PRECISAR DE INVOCAR ESTE METODO PARA DAR SORT
     }
 
+    @Override
+    public void showInfoView(String fichName, IEstatisticas estatistica) {
+        StringBuilder sb = new StringBuilder("Ficheiro lido: ");
+        sb.append(fichName).append("\n");
+        sb.append("Número total de registos de venda errados: ").append(estatistica.getNumVendasInvalidas()).append("\n");
+        sb.append("Número total de produtos: ").append(estatistica.getTotalProdNum()).append("\n");
+        sb.append("Número total de produtos comprados: ").append(estatistica.getNumTotalProdutosComprados()).append("\n");
+        sb.append("Número total de produtos não comprados: ").append(estatistica.getProdNaoComprados()).append("\n");
+        sb.append("Número total de clientes: ").append(estatistica.getTotalClientNum()).append("\n");
+        sb.append("Número total de clientes que nada compraram: ").append(estatistica.getNumClientesNaoCompraram()).append("\n");
+        sb.append("Número de commpras de valor total igual a 0.0: ").append(estatistica.getNumTotalDeComprasValorNulo()).append("\n");
+        DecimalFormat df = new DecimalFormat("###.##");
+        sb.append("Faturação total: ").append(df.format(estatistica.getFacturacaoTotal()));
+        header();
+        out.println(sb.toString());
+        Input.lerString();
+
+    }
+
     /**
      * Construtor da class GereVendasView
      */
@@ -73,7 +97,10 @@ public class GereVendasView implements IGereVendasView {
      * Imprime sempre a informação que quisermos antes do menu
      */
     private void header() { //TODO: TEMPO DE CARREGAMENTO
-        System.out.println();
+        StringBuilder sb = new StringBuilder("Programa de Gestao de Vendas Realizado por Jose Santos, Pedro Queiros e Alexandre Costa             Tempo Decorrido:");
+        DecimalFormat df = new DecimalFormat("###.##");
+        sb.append(df.format(this.timeQueue)).append(" segundos\n");
+        out.println(sb.toString());
     }
 
 
@@ -83,12 +110,20 @@ public class GereVendasView implements IGereVendasView {
     }
 
     public void updateView () {
-        if(this.menu == Menu.STRINGBROWSER) navigate();
-        showMenuAsList(menu);
-        choice = Input.lerInt();
-        if(choice >= menu.getMenuOptions().length) {
-        this.menu = Menu.MAINMENU;
+        header();
+        switch(this.menu) {
+            case STRINGBROWSER:
+                navigate();
+                break;
+            default:
+                showMenuAsList(menu);
+                choice = Input.lerInt();
+                if(choice >= menu.getMenuOptions().length) {
+                    this.menu = Menu.MAINMENU;
+                }
+                break;
         }
+
     }
 
     private void showMenu(String[] menuOptions) {
@@ -108,6 +143,11 @@ public class GereVendasView implements IGereVendasView {
         }
         out.print(sb.toString());
     }
+
+    public void setTimeQueue(double timeQueue) {
+        this.timeQueue = timeQueue;
+    }
+
 
     public int getChoice() {return this.choice;}
 

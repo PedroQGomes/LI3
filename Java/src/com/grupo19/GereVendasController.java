@@ -57,6 +57,8 @@ public class GereVendasController implements IGereVendasController {
     }
 
 
+
+
     private void reactToInput(int choice) {
         switch (choice) {
             case 1:
@@ -92,10 +94,21 @@ public class GereVendasController implements IGereVendasController {
     }
 
     public void init ( ) {
+        //String tmp = constructStringToInit();
+        view.setTimeQueue(model.getTimeOfLoadData());
+        view.showInfoView(model.getFichVendas(),model.getEstatatistica());
         do {
             view.updateView();
             reactToInput(view.getChoice());
         }
         while(!view.exit());
     }
+
+   /* private String constructStringToInit() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Ficheiro: ").append(model.getFichVendas()).append("\n");
+        sb.append("Número total de registos de venda errados: ").append(model.getNumVendasInvalidas()).append("\n");
+        sb.append("Número total de produtos: ").append().append("\n");
+        sb.append("N")
+    } */
 }
