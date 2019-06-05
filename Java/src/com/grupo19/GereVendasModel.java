@@ -115,4 +115,5 @@ public class GereVendasModel implements IGereVendasModel {
         return this.estat;
     }
 
+
 }

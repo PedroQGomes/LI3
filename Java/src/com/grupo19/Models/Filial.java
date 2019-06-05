@@ -108,7 +108,6 @@ public class Filial implements IFilial {
                     res.add(sale);
                 }
             }
-
         }
         return res.size();
     }
@@ -197,14 +196,33 @@ public class Filial implements IFilial {
     }
 
     // comparador das entrys
-    private int comparaEntrySets(Map.Entry<String,Integer> fst,Map.Entry<String,Integer> snd){
-        if(fst.getValue().equals(snd.getValue())){
+    private int comparaEntrySets(Map.Entry<String,Integer> fst,Map.Entry<String,Integer> snd){        if(fst.getValue().equals(snd.getValue())){
             return fst.getKey().compareTo(snd.getKey());
         }
         if(fst.getValue() > snd.getValue()) return 1;
         return -1;
     }
-    
 
+    // queire 7 interativa
+    // determinar a lista de tres mairores compradores em termos de dinheiro faturado
+    public List<String> getListOfClientsWhoMostBought(){
+        Map<String,Double> mapa = new HashMap<>();
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+            for(int i = 0;i<12;i++){
+                for(ISale sale :lista.getValue().get(i)){
+                    if(mapa.containsKey(sale.getClient())){
+                        double tmp = mapa.get(sale.getClient());
+                        tmp += sale.getPrice();
+                        mapa.put(sale.getClient(),tmp);
+                    }else {
+                        mapa.put(sale.getClient(),sale.getPrice());
+
+                    }
+                }
+
+            }
+        }
+        return mapa.entrySet().stream().sorted((o1,o2)-> o1.getValue().compareTo(o2.getValue())).map(l-> l.getKey()).limit(3).collect(Collectors.toList());
+    }
 
 }

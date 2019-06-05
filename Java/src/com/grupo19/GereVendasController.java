@@ -2,6 +2,7 @@ package com.grupo19;
 
 import com.grupo19.Interfaces.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,7 +58,16 @@ public class GereVendasController implements IGereVendasController {
     }
 
 
+    private void querie5(){
+        String l = GereVendasView.getUserInputString();
+        List<String> lista = new ArrayList<>();
+        for(int i = 0; i < GereVendasModel.getNumFiliais();i++){
 
+        }
+
+
+
+    }
 
     private void reactToInput(int choice) {
         switch (choice) {
@@ -67,13 +77,12 @@ public class GereVendasController implements IGereVendasController {
             case 2:
                 break;
             case 3:
-                productsNoOneBought();
                 break;
             case 4:
                 clientsThatBoughtInAllFilials();
                 break;
             case 5:
-                showClientsThatDBoughtNorProd();
+                querie5();
                 break;
             case 6:
                 break;
