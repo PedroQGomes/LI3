@@ -20,11 +20,7 @@ public interface IGereVendasModel {
     List<IProduct> productsNoOneBoughtModel();
     List<IClient> listOfClientsThatBoughtInAllFilials();
     List<IClient> listOfClientsThatDBoughtInAllFilials();
-<<<<<<< HEAD
     List<Tuple<Integer,Integer>> totalPurchasesOfAClientPerYear(String client);
     double totalFaturadoPClientPMonth(String client,int month);
-=======
     List<String> getListOfProductsBoughtOfClient(String a);
->>>>>>> 8896ea9bb6ac4b399b42ea94d5020ba071d41321
-
 }

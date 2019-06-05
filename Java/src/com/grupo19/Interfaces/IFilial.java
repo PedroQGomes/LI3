@@ -14,6 +14,6 @@ public interface IFilial {
     double totalFaturadoPerClientPerMonth(String client,int month);
     Tuple<Integer, Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente, int mes);
     Tuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x);
-    Map<String,List<List<ISale>>> getFilial();
+    Map<String,List<List<ISale>>> getFilialData();
     Map<String,Integer> getListOfProductsBoughtOfClient(String client);
 }

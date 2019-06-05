@@ -3,10 +3,7 @@ package com.grupo19;
 import com.grupo19.Interfaces.*;
 import com.grupo19.Models.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GereVendasModel implements IGereVendasModel {
@@ -199,7 +196,7 @@ public class GereVendasModel implements IGereVendasModel {
 
     }
 
-    private List<String> sortIntoLista(Map<Integer,Map<String,Integer>> mapa){
+    private List<String> sortIntoLista(Map<Integer, Map<String,Integer>> mapa){
         Map<String,Integer> mapalist = new HashMap<>();
         List<String> lista;
         for(int i = 0; i < NUM_FILIAIS; i++){

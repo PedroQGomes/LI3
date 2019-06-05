@@ -78,10 +78,10 @@ public class GereVendasView implements IGereVendasView {
      * @param stringsList
      */
     public void addToStringBrowser (List<String> stringsList ) {
-        if(stringsList.size() == 0) return;
+        if(stringsList.isEmpty()) return;
         stringBrowser.clear();
         stringBrowser.addAll(stringsList);
-        stringBrowser.sort(String::compareTo); //TODO: SE FOR UMA ARVORE NAO DEVO PRECISAR DE INVOCAR ESTE METODO PARA DAR SORT
+        //stringBrowser.sort(String::compareTo); //TODO: SE FOR UMA ARVORE NAO DEVO PRECISAR DE INVOCAR ESTE METODO PARA DAR SORT
     }
 
     @Override
@@ -174,25 +174,25 @@ public class GereVendasView implements IGereVendasView {
     public int getChoice() {return this.choice;}
 
     public void showLine (String line) {
+        header();
         System.out.println(line);
         Input.lerString();
     }
 
     public void navigate ( ) {
-        if(this.stringBrowser.size() == 0){
+        if(this.stringBrowser.isEmpty()){
             out.println("Não existem resultados");
+            Input.lerString();
             return;
         }
         while(this.getCurrentMenu() == Menu.STRINGBROWSER) {
             this.printStringsBrowser();
             switch (Input.lerInt()) {
                 case 1:
-                    if(page>0)
-                    page--;
+                    if(page>0) page--;
                     break;
                 case 2:
-                    if(stringBrowser.size() > (cursor)+(row*col))
-                    page++;
+                    if(stringBrowser.size() > (cursor)+(row*col)) page++;
                     break;
                 default:
                     this.menu = Menu.MAINMENU;
