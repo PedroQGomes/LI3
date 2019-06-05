@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class GereVendasModel implements IGereVendasModel {
     private static int NUM_FILIAIS = 3;
@@ -189,4 +190,63 @@ public class GereVendasModel implements IGereVendasModel {
         }
         return tmp;
     }
+    public List<String> getListOfProductsBoughtOfClient(String a){
+        Map<Integer,Map<String,Integer>> res = new HashMap<>();
+        for(int i = 0; i< NUM_FILIAIS; i++) {
+            res.put(i,filiais[i].getListOfProductsBoughtOfClient(a));
+        }
+        return sortIntoLista(res);
+
+    }
+
+    private List<String> sortIntoLista(Map<Integer,Map<String,Integer>> mapa){
+        Map<String,Integer> mapalist = new HashMap<>();
+        List<String> lista;
+        for(int i = 0; i < NUM_FILIAIS; i++){
+            for(Map.Entry<String,Integer> fil : mapa.get(i).entrySet()){ // map com aritgo e numero de vezes que foi comprado
+                if(mapalist.containsKey(fil.getKey())){
+                    int tmp = mapalist.get(fil.getKey());
+                    tmp += fil.getValue();
+                    mapalist.put(fil.getKey(),tmp);
+                }else{
+                    mapalist.put(fil.getKey(),fil.getValue());
+                }
+            }
+        }
+        lista = mapalist.entrySet().stream().sorted((o1,o2)-> comparaEntrySets(o1,o2)).map(l-> l.getKey()).collect(Collectors.toList());
+        Collections.reverse(lista);
+        return lista;
+
+    }
+
+
+    private int comparaEntrySets(Map.Entry<String,Integer> fst,Map.Entry<String,Integer> snd){
+        if(fst.getValue().equals(snd.getValue())){
+            return fst.getKey().compareTo(snd.getKey());
+        }
+        if(fst.getValue() > snd.getValue()) return 1;
+        return -1;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

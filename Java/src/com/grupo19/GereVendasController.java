@@ -71,7 +71,23 @@ public class GereVendasController implements IGereVendasController {
         sb.append("Dá um total de ").append(totalSum).append(" vendas neste mês\n");
         view.showLine(sb.toString());
 
+<<<<<<< HEAD
     }
+=======
+    private void querie5(){
+        String l = GereVendasView.getUserInputString();
+        if(!model.getCatClient().contains(l))return;
+        List<String> tmp = model.getListOfProductsBoughtOfClient(l);
+        view.addToStringBrowser(tmp);
+        view.setRow(5);
+        view.setCol(10);
+        view.updateMenu(Menu.STRINGBROWSER);
+        view.updateView();
+    }
+
+
+
+>>>>>>> 8896ea9bb6ac4b399b42ea94d5020ba071d41321
 
     private void query3() { //TODO : Round GASTOU
         String client = GereVendasView.getUserInputString("Insira um código de cliente");
@@ -105,6 +121,7 @@ public class GereVendasController implements IGereVendasController {
             case 4:
                 break;
             case 5:
+                querie5();
                 break;
             case 6:
                 break;
@@ -139,4 +156,5 @@ public class GereVendasController implements IGereVendasController {
         sb.append("Número total de produtos: ").append().append("\n");
         sb.append("N")
     } */
+
 }

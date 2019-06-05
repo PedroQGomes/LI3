@@ -98,6 +98,34 @@ public class Filial implements IFilial {
         return res;
     }
 
+<<<<<<< HEAD
+=======
+    // queire 2 interativa e tb queire estatica
+    // numero de clientes distintos que compraram num certo mes
+    public int numberOfClientsBoughtInMonth(int x){
+        if(x > 12){return 0;}
+        List<ISale> res = new ArrayList<>();
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+            for(ISale sale : lista.getValue().get(x)) {
+                if(firstSale(res,sale)){
+                    res.add(sale);
+                }
+            }
+        }
+        return res.size();
+    }
+
+    // metodo aussiliar
+    private boolean firstSale(List<ISale> lista, ISale sale){
+        for(ISale s : lista){
+            if(s.getClient().equals(sale.getClient())){
+
+                return false;
+            }
+        }
+        return true;
+    }
+>>>>>>> 8896ea9bb6ac4b399b42ea94d5020ba071d41321
 
     // queries 2 interativa e tb querie estatica
     // numero total de vendas num mes
@@ -160,7 +188,7 @@ public class Filial implements IFilial {
     // lista de codigos dos produtos que comprou por ordem descrescente de quantidade
     // e para qnts iguais por ordem alfabetica
 
-    public List<String> getListOfProductsBoughtOfClient(String client) {
+    public Map<String,Integer> getListOfProductsBoughtOfClient(String client) {
         Map<String,Integer> mapa = new HashMap<>();
         List<String> lista;
         for(int i = 0; i < 12; i++){
@@ -174,20 +202,30 @@ public class Filial implements IFilial {
                 }
             }
         }
-        lista = mapa.entrySet().stream().sorted((o1,o2)-> comparaEntrySets(o1,o2)).map(l-> l.getKey()).collect(Collectors.toList());
-        Collections.reverse(lista);
-        return lista;
+
+        return mapa;
     }
 
-    // comparador das entrys
-    private int comparaEntrySets(Map.Entry<String,Integer> fst,Map.Entry<String,Integer> snd){
-        if(fst.getValue().equals(snd.getValue())){
-            return fst.getKey().compareTo(snd.getKey());
+    // queire 7 interativa
+    // determinar a lista de tres mairores compradores em termos de dinheiro faturado
+    public List<String> getListOfClientsWhoMostBought(){
+        Map<String,Double> mapa = new HashMap<>();
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filial.entrySet()){
+            for(int i = 0;i<12;i++){
+                for(ISale sale :lista.getValue().get(i)){
+                    if(mapa.containsKey(sale.getClient())){
+                        double tmp = mapa.get(sale.getClient());
+                        tmp += sale.getPrice();
+                        mapa.put(sale.getClient(),tmp);
+                    }else {
+                        mapa.put(sale.getClient(),sale.getPrice());
+
+                    }
+                }
+
+            }
         }
-        if(fst.getValue() > snd.getValue()) return 1;
-        return -1;
+        return mapa.entrySet().stream().sorted((o1,o2)-> o1.getValue().compareTo(o2.getValue())).map(l-> l.getKey()).limit(3).collect(Collectors.toList());
     }
-    
-
 
 }
