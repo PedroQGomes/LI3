@@ -3,10 +3,7 @@ package com.grupo19;
 import com.grupo19.Interfaces.*;
 import com.grupo19.Models.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GereVendasModel implements IGereVendasModel {
@@ -191,15 +188,15 @@ public class GereVendasModel implements IGereVendasModel {
         return tmp;
     }
     public List<String> getListOfProductsBoughtOfClient(String a){
-        Map<Integer,Map<String,Integer>> res = new HashMap<>();
+        List<Map<String,Integer>> res = new ArrayList<>();
         for(int i = 0; i< NUM_FILIAIS; i++) {
-            res.put(i,filiais[i].getListOfProductsBoughtOfClient(a));
+            res.add(i,filiais[i].getListOfProductsBoughtOfClient(a));
         }
         return sortIntoLista(res);
 
     }
 
-    private List<String> sortIntoLista(Map<Integer,Map<String,Integer>> mapa){
+    private List<String> sortIntoLista(List<Map<String,Integer>> mapa){
         Map<String,Integer> mapalist = new HashMap<>();
         List<String> lista;
         for(int i = 0; i < NUM_FILIAIS; i++){
@@ -228,7 +225,13 @@ public class GereVendasModel implements IGereVendasModel {
         return -1;
     }
 
-
+    public List<List<String>> getListOfClientsWhoMostBought(){
+        List<List<String>> res = new ArrayList<>();
+        for(int i = 0; i<NUM_FILIAIS; i++){
+            res.add(filiais[i].getListOfClientsWhoMostBought());
+        }
+        return res;
+    }
 
 
 

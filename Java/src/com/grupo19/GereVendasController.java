@@ -58,36 +58,20 @@ public class GereVendasController implements IGereVendasController {
     }
 
     private void query2() {
-        int month = GereVendasView.getMonthFromInput() -1;
+        int month = GereVendasView.getMonthFromInput() - 1;
         StringBuilder sb = new StringBuilder();
-        sb.append("Para o mês ").append(month+1).append(" :").append("\n");
+        sb.append("Para o mês ").append(month + 1).append(" :").append("\n");
         int totalSum = 0;
-        for(int i = 0; i<GereVendasModel.getNumFiliais() ; i++) {
-            Tuple<Integer,Integer> tmp = model.totalNumbOfSalesInMonthAndClientsBought(month,i);
-            if(tmp == null) continue;
+        for (int i = 0; i < GereVendasModel.getNumFiliais(); i++) {
+            Tuple<Integer, Integer> tmp = model.totalNumbOfSalesInMonthAndClientsBought(month, i);
+            if (tmp == null) continue;
             totalSum += tmp.getFirstElem();
-            sb.append("Na Filial ").append(i+1).append(" foram feitas ").append(tmp.getFirstElem()).append(" vendas por ").append(tmp.getSecondElem()).append(" clientes diferentes").append("\n");
+            sb.append("Na Filial ").append(i + 1).append(" foram feitas ").append(tmp.getFirstElem()).append(" vendas por ").append(tmp.getSecondElem()).append(" clientes diferentes").append("\n");
         }
         sb.append("Dá um total de ").append(totalSum).append(" vendas neste mês\n");
         view.showLine(sb.toString());
-
-<<<<<<< HEAD
-    }
-=======
-    private void querie5(){
-        String l = GereVendasView.getUserInputString();
-        if(!model.getCatClient().contains(l))return;
-        List<String> tmp = model.getListOfProductsBoughtOfClient(l);
-        view.addToStringBrowser(tmp);
-        view.setRow(5);
-        view.setCol(10);
-        view.updateMenu(Menu.STRINGBROWSER);
-        view.updateView();
     }
 
-
-
->>>>>>> 8896ea9bb6ac4b399b42ea94d5020ba071d41321
 
     private void query3() { //TODO : Round GASTOU
         String client = GereVendasView.getUserInputString("Insira um código de cliente");
@@ -107,6 +91,34 @@ public class GereVendasController implements IGereVendasController {
         view.showLine(sb.toString());
     }
 
+    private void query5(){
+        String l = GereVendasView.getUserInputString();
+        if(!model.getCatClient().contains(l))return;
+        List<String> tmp = model.getListOfProductsBoughtOfClient(l);
+        view.addToStringBrowser(tmp);
+        view.setRow(5);
+        view.setCol(10);
+        view.updateMenu(Menu.STRINGBROWSER);
+        view.updateView();
+    }
+
+
+    private void query7(){
+        List<List<String>> lista = model.getListOfClientsWhoMostBought();
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0 ; i < GereVendasModel.getNumFiliais(); i++) {
+            sb.append("Filial")
+                    .append(i+1)
+                    .append(" :")
+                    .append(lista.get(i))
+                    .append("\n");
+        }
+        view.showLine(sb.toString());
+
+    }
+
+
+
     private void reactToInput(int choice) {
         switch (choice) {
             case 1:
@@ -121,11 +133,12 @@ public class GereVendasController implements IGereVendasController {
             case 4:
                 break;
             case 5:
-                querie5();
+                query5();
                 break;
             case 6:
                 break;
             case 7:
+                query7();
                 break;
             case 8:
                 break;

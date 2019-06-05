@@ -16,4 +16,5 @@ public interface IFilial {
     Tuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x);
     Map<String,List<List<ISale>>> getFilial();
     Map<String,Integer> getListOfProductsBoughtOfClient(String client);
+    List<String> getListOfClientsWhoMostBought();
 }

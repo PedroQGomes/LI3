@@ -98,8 +98,6 @@ public class Filial implements IFilial {
         return res;
     }
 
-<<<<<<< HEAD
-=======
     // queire 2 interativa e tb queire estatica
     // numero de clientes distintos que compraram num certo mes
     public int numberOfClientsBoughtInMonth(int x){
@@ -125,7 +123,6 @@ public class Filial implements IFilial {
         }
         return true;
     }
->>>>>>> 8896ea9bb6ac4b399b42ea94d5020ba071d41321
 
     // queries 2 interativa e tb querie estatica
     // numero total de vendas num mes
