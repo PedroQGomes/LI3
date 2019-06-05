@@ -9,4 +9,5 @@ public interface IFilial {
     int getNumberOfSalesPerClientPerMonth(IClient client , int month);
     int getNumberOfSalesPerClientPerYear(IClient client);
     Map<String,List<List<ISale>>> getFilial();
+    Map<String,Integer> getListOfProductsBoughtOfClient(String client);
 }

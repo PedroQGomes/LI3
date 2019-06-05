@@ -60,14 +60,18 @@ public class GereVendasController implements IGereVendasController {
 
     private void querie5(){
         String l = GereVendasView.getUserInputString();
-        List<String> lista = new ArrayList<>();
-        for(int i = 0; i < GereVendasModel.getNumFiliais();i++){
-
-        }
-
-
-
+        if(!model.getCatClient().contains(l))return;
+        List<String> tmp = model.getListOfProductsBoughtOfClient(l);
+        view.addToStringBrowser(tmp);
+        view.setRow(5);
+        view.setCol(10);
+        view.updateMenu(Menu.STRINGBROWSER);
+        view.updateView();
     }
+
+
+
+
 
     private void reactToInput(int choice) {
         switch (choice) {
@@ -116,4 +120,5 @@ public class GereVendasController implements IGereVendasController {
         sb.append("Número total de produtos: ").append().append("\n");
         sb.append("N")
     } */
+
 }

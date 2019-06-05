@@ -176,7 +176,7 @@ public class Filial implements IFilial {
     // lista de codigos dos produtos que comprou por ordem descrescente de quantidade
     // e para qnts iguais por ordem alfabetica
 
-    public List<String> getListOfProductsBoughtOfClient(String client) {
+    public Map<String,Integer> getListOfProductsBoughtOfClient(String client) {
         Map<String,Integer> mapa = new HashMap<>();
         List<String> lista;
         for(int i = 0; i < 12; i++){
@@ -190,17 +190,8 @@ public class Filial implements IFilial {
                 }
             }
         }
-        lista = mapa.entrySet().stream().sorted((o1,o2)-> comparaEntrySets(o1,o2)).map(l-> l.getKey()).collect(Collectors.toList());
-        Collections.reverse(lista);
-        return lista;
-    }
 
-    // comparador das entrys
-    private int comparaEntrySets(Map.Entry<String,Integer> fst,Map.Entry<String,Integer> snd){        if(fst.getValue().equals(snd.getValue())){
-            return fst.getKey().compareTo(snd.getKey());
-        }
-        if(fst.getValue() > snd.getValue()) return 1;
-        return -1;
+        return mapa;
     }
 
     // queire 7 interativa

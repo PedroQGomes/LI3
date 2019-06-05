@@ -1,6 +1,7 @@
 package com.grupo19.Interfaces;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IGereVendasModel {
     ICatProd getCatProd();
@@ -16,5 +17,6 @@ public interface IGereVendasModel {
     List<IProduct> productsNoOneBoughtModel();
     List<IClient> listOfClientsThatBoughtInAllFilials();
     List<IClient> listOfClientsThatDBoughtInAllFilials();
+    List<String> getListOfProductsBoughtOfClient(String a);
 
 }
