@@ -30,5 +30,6 @@ public interface IGereVendasModel {
     List<Tuple<String,Integer>> productsMostSellAndNumberOfClients(int n);
     List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod);
     void saveState(String fichObject);
+    List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);
 
 }

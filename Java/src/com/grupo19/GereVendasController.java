@@ -2,6 +2,7 @@ package com.grupo19;
 
 import com.grupo19.Interfaces.*;
 
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -195,10 +196,23 @@ public class GereVendasController implements IGereVendasController {
         }
         view.showLine(sb.toString());
     }
-
+    //Dado o código de um produto que deve existir, determinar o conjunto dos X clientes
+    //que mais o compraram e, para cada um, qual o valor gasto
     private void query9() {
         Crono.start();
+        String l = GereVendasView.getUserInputString();
+        int tamanho = GereVendasView.getUserInputInt();
+        List<Map.Entry<String, Tuple<Integer,Double>>> lista = model.getXClientsWhoMostBoughtProduct(l,tamanho);
+        StringBuilder sb = new StringBuilder();
 
+        for(int i = 0 ; i < lista.size(); i++) {
+            sb.append("O clinte ").append(lista.get(i).getKey()).append(" comprou o produto ")
+                    .append(lista.get(i).getValue().getFirstElem())
+                    .append(" vez(es) e gastou um total de ")
+                    .append(lista.get(i).getValue().getSecondElem())
+                    .append(" \n");
+        }
+        view.showLine(sb.toString());
         view.setTimeQueue(Crono.stop());
 
     }

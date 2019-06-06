@@ -1,5 +1,7 @@
 package com.grupo19.Interfaces;
 
+import com.grupo19.Tuple;
+
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +19,7 @@ public interface IFacturacao {
     List<Map<String,IFacturacaoPorProd>> getArrayOfSales();
     List<Double> totalSalesPerProduct ( String codProd);
     List<List<Double>> getNumClientAndFacturacao(String client);
-
+    List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);
 
 
 }

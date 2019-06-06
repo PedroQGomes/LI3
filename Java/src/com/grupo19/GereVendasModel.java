@@ -326,6 +326,11 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
             System.out.println(e.getMessage());
         }
     }
+
+
+    public List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
+        return this.facturacao.getXClientsWhoMostBoughtProduct(produto,tamanho);
+    }
 }
 
 

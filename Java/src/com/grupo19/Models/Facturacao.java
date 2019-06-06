@@ -4,10 +4,12 @@ import com.grupo19.Interfaces.IFacturacao;
 import com.grupo19.Interfaces.IFacturacaoPorProd;
 import com.grupo19.Interfaces.IProduct;
 import com.grupo19.Interfaces.ISale;
+import com.grupo19.Tuple;
 
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Facturacao implements IFacturacao, Serializable {
@@ -71,7 +73,7 @@ public class Facturacao implements IFacturacao, Serializable {
      * setter da list de ISales
      * @param salesAll list de Maps
      *
-    */
+     */
     public void setSArrayOfSales(List<Map<String,IFacturacaoPorProd>> salesAll){
         this.arrayOfSales= new ArrayList<>(salesAll);
         for(int i=0;i<12;i++){
@@ -267,7 +269,7 @@ public class Facturacao implements IFacturacao, Serializable {
                     totalMonth += entry.getValue().totalSaleProd();
                 }
             }
-         res.add(i,totalMonth);
+            res.add(i,totalMonth);
         }
         return  res;
     }
@@ -309,5 +311,38 @@ public class Facturacao implements IFacturacao, Serializable {
         return res;
 
     }
+
+    //Dado o código de um produto que deve existir, determinar o conjunto dos X clientes
+    //que mais o compraram e, para cada um, qual o valor gasto (ordenação cf. 5);
+    //ordenada por ordem decrescente de quantidade e, para
+    //quantidades iguais, por ordem alfabética dos códigos;
+    public List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
+        Map<String, Tuple<Integer,Double>>  mapa = new HashMap<>();
+        List<Map.Entry<String, Tuple<Integer,Double>>> res;
+        int count = 0;
+        double facturacao = 0;
+        for(int i = 0; i< 12; i++){
+            IFacturacaoPorProd factProd = this.arrayOfSales.get(i).get(produto);
+            if(factProd == null)continue;
+            for(ISale sale : factProd.getSalesList()){
+                if(mapa.containsKey(sale.getClient())){
+                    count = mapa.get(sale.getClient()).getFirstElem();
+                    facturacao = mapa.get(sale.getClient()).getSecondElem();
+                    count++;
+                    facturacao += sale.totalPrice();
+                    mapa.put(sale.getClient(),new Tuple<>(count,facturacao));
+                }else {
+                    mapa.put(sale.getClient(),new Tuple<>(1,sale.totalPrice()));
+                }
+            }
+        }
+        res = mapa.entrySet().stream().sorted((o1,o2)-> o1.getValue().getFirstElem().compareTo(o2.getValue().getFirstElem())).collect(Collectors.toList());
+        Collections.reverse(res); // com isto fica do maior para o menor
+        res = res.stream().limit(tamanho).collect(Collectors.toList()); // limita a lista
+        Collections.reverse(res); // volta a por do menor para o maior como entendido
+        return res;
+
+    }
+
 
 }
