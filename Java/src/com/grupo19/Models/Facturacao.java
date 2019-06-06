@@ -86,21 +86,35 @@ public class Facturacao implements IFacturacao, Serializable {
 
 
     /**
-     * Equals
+     * Método Equals
      * @param obj
-     * @return
+     * @return Valor de verdade
      */
-    public boolean equals(Object obj){ // TODO: ESTE EQUALS , MELHORAR
+    public boolean equals(Object obj){
         if(obj == this) {
             return true;
         }
         if(obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        Facturacao fact=(Facturacao) obj;
-        return false;
-        //return fact.getArrayOfSales().equals(arrayOfSales);
+        IFacturacao fact=(IFacturacao) obj;
+        for(int i=0; i<12; i++) {
+            Map <String, IFacturacaoPorProd> tmp=arrayOfSales.get(i);
+            for (Map.Entry<String, IFacturacaoPorProd> entry : tmp.entrySet()){
+                for(Map.Entry<String, IFacturacaoPorProd> entry2 : arrayOfSales.get(i).entrySet()){
+                    String key = entry.getKey();
+                    String key2 = entry2.getKey();
+                    if(!key.equals(key2)) return false;
+                        else{
+                            if(!entry.getValue().equals(entry2.getValue())) return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
+
+
 
     /**
      *
@@ -149,6 +163,12 @@ public class Facturacao implements IFacturacao, Serializable {
         return total;
     }
 
+    /**
+     *
+     * Faturacao dos doze meses
+     * @return total faturado
+     *
+     */
     public double facturacaoTotal() {
         double total = 0.0;
         for(int i = 1; i<=12 ; i++) {
@@ -217,12 +237,10 @@ public class Facturacao implements IFacturacao, Serializable {
     /**
      *
      * Calcula a list por mes, de clientes que compraram o produto passado como parametro
-     *
-     * @param codProd
-     * @return resultados
+     * @param codProd string id do produto
+     * @return resultados list de clientes
      *
      */
-
     public List<Integer> numberOfClientsWhoBoughtPerMonth(String codProd) {
         List<Integer> resultados = new ArrayList<>();
 
@@ -240,6 +258,13 @@ public class Facturacao implements IFacturacao, Serializable {
         return resultados;
     }
 
+    /**
+     *
+     * Calcula o número de clientes total dos dozes meses
+     * @param codProd string id de produto
+     * @return devolve valor total
+     *
+     */
     public int numberOfClientsWhoBought(String codProd) {
         int total = 0;
         List<Integer> numberOfClientsPerMonth = numberOfClientsWhoBoughtPerMonth(codProd);
@@ -252,7 +277,6 @@ public class Facturacao implements IFacturacao, Serializable {
     /**
      *
      * valor total mensal, de um dado produto(price*units)
-     *
      * @param codProd
      * @return res
      *
@@ -274,10 +298,13 @@ public class Facturacao implements IFacturacao, Serializable {
         return  res;
     }
 
-
-    //query 4 interativa
-    //Dado o código de um produto existente, determinar, mês a mês, quantas vezes foi
-    //comprado, por quantos clientes diferentes e o total facturado
+    /**
+     *
+     * calcula quantas vezes o produto foi comprado, por quantos clientes diferentes e total facturado por mês
+     * @param product string do id do produto
+     * @return res
+     *
+     */
     public List<List<Double>> getNumClientAndFacturacao(String product){
         List<List<Double>> res = new ArrayList<>();
         for(int i=0; i < 12; i++) res.add(new ArrayList<>());
@@ -297,6 +324,12 @@ public class Facturacao implements IFacturacao, Serializable {
 
     }
 
+    /**
+     *
+     * Método que determina a facturacao por filial e por mês do produto prod
+     * @param prod
+     * @return res
+     */
     public List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod) {
         List<List<Double>> res = new ArrayList<>();
         for(int i = 0; i<12; i++) {
@@ -312,10 +345,14 @@ public class Facturacao implements IFacturacao, Serializable {
 
     }
 
-    //Dado o código de um produto que deve existir, determinar o conjunto dos X clientes
-    //que mais o compraram e, para cada um, qual o valor gasto (ordenação cf. 5);
-    //ordenada por ordem decrescente de quantidade e, para
-    //quantidades iguais, por ordem alfabética dos códigos;
+    /**
+     *
+     * Determina os clientes que mais compraram um produtoe quanto gastaram
+     * @param produto string id do produto
+     * @param tamanho número de clientes que mais compraram o produto
+     * @return res lista segundo os critérios de ordenação
+     *
+     */
     public List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
         Map<String, Tuple<Integer,Double>>  mapa = new HashMap<>();
         List<Map.Entry<String, Tuple<Integer,Double>>> res;
@@ -338,8 +375,8 @@ public class Facturacao implements IFacturacao, Serializable {
         }
         res = mapa.entrySet().stream().sorted((o1,o2)-> o1.getValue().getFirstElem().compareTo(o2.getValue().getFirstElem())).collect(Collectors.toList());
         Collections.reverse(res); // com isto fica do maior para o menor
-        res = res.stream().limit(tamanho).collect(Collectors.toList()); // limita a lista
-        Collections.reverse(res); // volta a por do menor para o maior como entendido
+        res = res.stream().limit(tamanho).collect(Collectors.toList());
+        Collections.reverse(res);
         return res;
 
     }
