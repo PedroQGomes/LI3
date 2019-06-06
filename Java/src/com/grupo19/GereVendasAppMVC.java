@@ -8,12 +8,15 @@ import static java.lang.System.out;
 public class GereVendasAppMVC {
 
     public static void main(String[] args) {
-    IGereVendasModel model = GereVendasModel.loadData();
+    IGereVendasModel model = GereVendasModel.recoverState("data.tmp");
     if(model == null) {
+        model = GereVendasModel.loadData();
+        if(model == null){
         out.println("ERRO INICIALIZACAO");
         System.exit(-1);
+        }
     }
-        IGereVendasController controller = new GereVendasController();
+    IGereVendasController controller = new GereVendasController();
     IGereVendasView view = new GereVendasView();
     controller.setModel(model);
     controller.setView(view);

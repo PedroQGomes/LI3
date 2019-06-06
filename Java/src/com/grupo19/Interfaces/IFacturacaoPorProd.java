@@ -11,4 +11,5 @@ public interface IFacturacaoPorProd {
     IFacturacaoPorProd clone();
     double totalSaleProd();
     double getDifClientsWhoBought();
+    List<Double> factPerFilial();
 }

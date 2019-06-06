@@ -3,7 +3,9 @@ package com.grupo19.Models;
 
 import com.grupo19.Interfaces.IEstatisticas;
 
-public class Estatistica implements IEstatisticas {
+import java.io.Serializable;
+
+public class Estatistica implements IEstatisticas, Serializable {
 
     private int numVendasValidas;
     private int numVendasTotal;

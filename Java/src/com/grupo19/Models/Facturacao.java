@@ -4,7 +4,7 @@ import com.grupo19.Interfaces.IFacturacao;
 import com.grupo19.Interfaces.IFacturacaoPorProd;
 import com.grupo19.Interfaces.IProduct;
 import com.grupo19.Interfaces.ISale;
-import com.grupo19.Tuple;
+
 
 import java.io.Serializable;
 import java.util.*;
@@ -27,7 +27,7 @@ public class Facturacao implements IFacturacao, Serializable {
     public Facturacao(){
         this.arrayOfSales= new ArrayList<>();
         for(int i = 0; i<12 ; i++){
-            Map <String, IFacturacaoPorProd> tmp = new TreeMap<>(String::compareTo);
+            Map <String, IFacturacaoPorProd> tmp = new TreeMap<>();
             arrayOfSales.add(tmp);
         }
 
@@ -37,7 +37,7 @@ public class Facturacao implements IFacturacao, Serializable {
      * Construtor de cópia
      * @param  umaFacturacao
      */
-    public Facturacao(Facturacao umaFacturacao){
+    public Facturacao(IFacturacao umaFacturacao){
 
         this.arrayOfSales=umaFacturacao.getArrayOfSales();
     }
@@ -124,7 +124,6 @@ public class Facturacao implements IFacturacao, Serializable {
      *
      */
     public IFacturacao clone() {
-
         return new Facturacao(this);
     }
 
@@ -143,9 +142,7 @@ public class Facturacao implements IFacturacao, Serializable {
         tmp=arrayOfSales.get(month-1);
         for(Map.Entry<String,IFacturacaoPorProd> entry : tmp.entrySet()) {
             IFacturacaoPorProd arrayMonth = entry.getValue();
-            for(ISale s: arrayMonth.getSalesList()){
-                total+=s.getPrice() * s.getUnits();
-            }
+            total += arrayMonth.totalSaleProd();
         }
         return total;
     }
@@ -224,12 +221,12 @@ public class Facturacao implements IFacturacao, Serializable {
      *
      */
 
-    public List<Integer> numberOfClientsWhoBought(String codProd) { //TODO: MELHORAR QUERY USAR HASHSET
+    public List<Integer> numberOfClientsWhoBoughtPerMonth(String codProd) {
         List<Integer> resultados = new ArrayList<>();
 
         for(int i=0;i<12;i++){
             int total=0;
-            HashSet<String> clients = new HashSet<String>();
+            HashSet<String> clients = new HashSet<>();
             Map <String, IFacturacaoPorProd> tmp;
             tmp=arrayOfSales.get(i);
             for(ISale s: tmp.get(codProd).getSalesList()){
@@ -241,6 +238,14 @@ public class Facturacao implements IFacturacao, Serializable {
         return resultados;
     }
 
+    public int numberOfClientsWhoBought(String codProd) {
+        int total = 0;
+        List<Integer> numberOfClientsPerMonth = numberOfClientsWhoBoughtPerMonth(codProd);
+        for(Integer i : numberOfClientsPerMonth) {
+            total += i;
+        }
+        return total;
+    }
 
     /**
      *
@@ -259,9 +264,7 @@ public class Facturacao implements IFacturacao, Serializable {
             for(Map.Entry<String,IFacturacaoPorProd> entry : tmp.entrySet()) {
                 String key = entry.getKey();
                 if(key.equals(codProd)){
-                    for(ISale s: entry.getValue().getSalesList()){
-                        totalMonth+=s.getPrice() * s.getUnits();
-                    }
+                    totalMonth += entry.getValue().totalSaleProd();
                 }
             }
          res.add(i,totalMonth);
@@ -273,18 +276,35 @@ public class Facturacao implements IFacturacao, Serializable {
     //query 4 interativa
     //Dado o código de um produto existente, determinar, mês a mês, quantas vezes foi
     //comprado, por quantos clientes diferentes e o total facturado
-    public List<List<Double>> getMumClientAndFacturacao(String client){
+    public List<List<Double>> getNumClientAndFacturacao(String product){
         List<List<Double>> res = new ArrayList<>();
+        for(int i=0; i < 12; i++) res.add(new ArrayList<>());
         double qnt=0,nclientes=0,facturado = 0;
-        for(int i = 0; i < 12 ;i++){
-            qnt = (double) this.arrayOfSales.get(i).get(client).getSalesList().size();
-            nclientes = this.arrayOfSales.get(i).get(client).getDifClientsWhoBought();
-            facturado = this.arrayOfSales.get(i).get(client).totalSaleProd();
-            res.add(new ArrayList<>());
+        for(int i = 0; i <12 ;i++){
+            IFacturacaoPorProd factProd = this.arrayOfSales.get(i).get(product);
+            if(factProd == null) continue;
+            qnt = (double) factProd.getSalesList().size();
+            nclientes = factProd.getDifClientsWhoBought();
+            facturado = factProd.totalSaleProd();
             res.get(i).add(qnt);
             res.get(i).add(nclientes);
             res.get(i).add(facturado);
 
+        }
+        return res;
+
+    }
+
+    public List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod) {
+        List<List<Double>> res = new ArrayList<>();
+        for(int i = 0; i<12; i++) {
+            Map<String,IFacturacaoPorProd> tmp = this.arrayOfSales.get(i);
+            IFacturacaoPorProd facProd = tmp.get(prod);
+            if(facProd == null) {
+                res.add(new ArrayList<>());
+                continue;
+            }
+            res.add(facProd.factPerFilial());
         }
         return res;
 

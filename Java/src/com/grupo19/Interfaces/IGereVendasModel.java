@@ -26,6 +26,9 @@ public interface IGereVendasModel {
     double totalFaturadoPClientPMonth(String a,int mes);
     List<List<String>> getListOfClientsWhoMostBought();
     List<Map.Entry<String, Set<String>>> getClientsHowBoughtMostOften(int x);
-    List<List<Double>> getMumClientAndFacturacao(String client);
+    List<List<Double>> getNumClientAndFacturacao(String client);
+    List<Tuple<String,Integer>> productsMostSellAndNumberOfClients(int n);
+    List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod);
+    void saveState(String fichObject);
 
 }

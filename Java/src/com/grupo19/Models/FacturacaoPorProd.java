@@ -1,5 +1,6 @@
 package com.grupo19.Models;
 
+import com.grupo19.GereVendasModel;
 import com.grupo19.Interfaces.IFacturacaoPorProd;
 import com.grupo19.Interfaces.ISale;
 
@@ -35,7 +36,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      *
      */
     public FacturacaoPorProd(){
-        this.salesList= new ArrayList<>();
+        this.salesList = new ArrayList<>();
     }
 
     /**
@@ -146,6 +147,17 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
             lista.add(a.getClient());
         }
         res = (double)lista.size();
+        return res;
+    }
+
+    public List<Double> factPerFilial() {
+        List<Double> res = new ArrayList<>();
+        for(int i = 0; i< GereVendasModel.getNumFiliais(); i++) {
+            res.add(0.0);
+        }
+        for(ISale s: this.salesList) {
+            res.add(s.getFilial()-1,s.totalPrice());
+        }
         return res;
     }
 }
