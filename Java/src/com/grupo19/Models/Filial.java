@@ -225,4 +225,27 @@ public class Filial implements IFilial {
         return mapa.entrySet().stream().sorted((o1,o2)-> o1.getValue().compareTo(o2.getValue())).map(l-> l.getKey()).limit(3).collect(Collectors.toList());
     }
 
+
+    //queiry8 interativa
+    //Determinar os códigos dos X clientes (sendo X dado pelo utilizador) que compraram
+    //mais produtos diferentes (não interessa a quantidade nem o valor), indicando
+    //quantos, sendo o critério de ordenação a ordem decrescente do número de produtos;
+    public Map<String,Set<String>> getClientsHowBoughtMostOften(){
+        Map<String,Set<String>> mapa = new HashMap<>();
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()) {
+            for(int i = 0; i< 12; i++){
+                for(ISale a : lista.getValue().get(i)){
+                    if(mapa.containsKey(a.getClient())){
+                        mapa.get(a.getClient()).add(a.getProduct());
+                    }else {
+                        mapa.put(a.getClient(),new HashSet<>());
+                        mapa.get(a.getClient()).add(a.getProduct());
+                    }
+                }
+            }
+        }
+        return mapa;
+
+    }
+
 }

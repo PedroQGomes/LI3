@@ -6,6 +6,8 @@ import com.grupo19.Models.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.lang.Integer.compare;
+
 public class GereVendasModel implements IGereVendasModel {
     private static int NUM_FILIAIS = 3;
     private String fichVendas;
@@ -234,7 +236,40 @@ public class GereVendasModel implements IGereVendasModel {
     }
 
 
+    // queiry 8 interativa
+    public List<Map.Entry<String,Set<String>>> getClientsHowBoughtMostOften(int x){
+        List<Map<String,Set<String>>> lista = new ArrayList<>();
+        for(int i = 0; i < NUM_FILIAIS; i++){
+            lista.add(filiais[i].getClientsHowBoughtMostOften());
+        }
+        return getWhoMostBought(lista,x);
+    }
 
+    // metodo aussiliar da queiry 8
+    private List<Map.Entry<String,Set<String>>> getWhoMostBought(List<Map<String,Set<String>>> lista ,int x){
+        Map<String,Set<String>> mapa = new HashMap<>();
+        List<Map.Entry<String,Set<String>>> res;
+        for(int i = 0 ; i<NUM_FILIAIS;i++){
+            for(Map.Entry<String,Set<String>> entry : lista.get(i).entrySet()){
+                if(mapa.containsKey(entry.getKey())){
+                    addLista(entry,mapa);
+                }else{
+                    mapa.put(entry.getKey(),entry.getValue());
+                }
+            }
+        }
+        res = mapa.entrySet().stream().sorted((o1, o2) -> compare(o1.getValue().size(),o2.getValue().size())).collect(Collectors.toList());
+        Collections.reverse(res);
+        return res.stream().limit(x).collect(Collectors.toList());
+
+    }
+
+    // metodo aussiliar da queiry 8
+    private void addLista(Map.Entry<String,Set<String>> entry,Map<String,Set<String>> mapa){
+        for(String a: entry.getValue()){
+            mapa.get(entry.getKey()).add(a);
+        }
+    }
 
 
 

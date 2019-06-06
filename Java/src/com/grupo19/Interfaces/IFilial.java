@@ -17,4 +17,5 @@ public interface IFilial {
     Map<String,List<List<ISale>>> getFilialData();
     Map<String,Integer> getListOfProductsBoughtOfClient(String client);
     List<String> getListOfClientsWhoMostBought();
+    Map<String,Set<String>> getClientsHowBoughtMostOften();
 }

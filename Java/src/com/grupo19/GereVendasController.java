@@ -2,7 +2,10 @@ package com.grupo19;
 
 import com.grupo19.Interfaces.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GereVendasController implements IGereVendasController {
@@ -125,6 +128,20 @@ public class GereVendasController implements IGereVendasController {
 
     }
 
+    private void query8(){
+        int x = GereVendasView.getUserInputInt();
+        StringBuilder sb = new StringBuilder();
+        List<Map.Entry<String, Set<String>>> lista = model.getClientsHowBoughtMostOften(x);
+        for(int i = 0; i < x ;i++){
+            sb.append("Cliente ")
+                    .append(lista.get(i).getKey())
+                    .append(" comprou:")
+                    .append(lista.get(i).getValue().size()).append(" vez(es)")
+                    .append("\n");
+
+        }
+        view.showLine(sb.toString());
+    }
 
 
     private void reactToInput(int choice) {
@@ -139,19 +156,20 @@ public class GereVendasController implements IGereVendasController {
                 query3();
                 break;
             case 4:
-                query4();
+                //query4();
                 break;
             case 5:
                 query5();
                 break;
-            case 6:
+            case 6: // faturacao
                 break;
             case 7:
                 query7();
                 break;
             case 8:
+                query8();
                 break;
-            case 9:
+            case 9: // faturacao
                 break;
             case 10:
                 break;

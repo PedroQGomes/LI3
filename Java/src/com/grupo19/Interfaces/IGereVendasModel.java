@@ -4,6 +4,7 @@ import com.grupo19.Tuple;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface IGereVendasModel {
     ICatProd getCatProd();
@@ -24,4 +25,6 @@ public interface IGereVendasModel {
     List<Tuple<Integer,Integer>> totalPurchasesOfAClientPerYear(String a );
     double totalFaturadoPClientPMonth(String a,int mes);
     List<List<String>> getListOfClientsWhoMostBought();
+    List<Map.Entry<String, Set<String>>> getClientsHowBoughtMostOften(int x);
+
 }
