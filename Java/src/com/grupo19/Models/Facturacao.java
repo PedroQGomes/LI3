@@ -276,7 +276,7 @@ public class Facturacao implements IFacturacao, Serializable {
     public List<List<Double>> getMumClientAndFacturacao(String client){
         List<List<Double>> res = new ArrayList<>();
         double qnt=0,nclientes=0,facturado = 0;
-        for(int i = 0; i <12 ;i++){
+        for(int i = 0; i < 12 ;i++){
             qnt = (double) this.arrayOfSales.get(i).get(client).getSalesList().size();
             nclientes = this.arrayOfSales.get(i).get(client).getDifClientsWhoBought();
             facturado = this.arrayOfSales.get(i).get(client).totalSaleProd();
