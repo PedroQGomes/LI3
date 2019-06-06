@@ -3,12 +3,13 @@ package com.grupo19;
 import com.grupo19.Interfaces.*;
 import com.grupo19.Models.*;
 
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.compare;
 
-public class GereVendasModel implements IGereVendasModel {
+public class GereVendasModel implements IGereVendasModel,Serializable {
     private static int NUM_FILIAIS = 3;
     private String fichVendas;
     private ICatProd catProd;
@@ -24,15 +25,15 @@ public class GereVendasModel implements IGereVendasModel {
         facturacao = new Facturacao();
         filiais = new IFilial[NUM_FILIAIS];
         fichVendas = "Vendas_1M.txt";
-        for(int  i = 0 ; i<NUM_FILIAIS ; i++) filiais[i] = new Filial();
+        for (int i = 0; i < NUM_FILIAIS; i++) filiais[i] = new Filial();
         estat = new Estatistica();
     }
 
-    public  static IGereVendasModel loadData ( ) {
+    public static IGereVendasModel loadData() {
         IGereVendasModel model = new GereVendasModel();
         Crono.start();
         List<String> config = Input.lerLinhasWithBuff("config.txt");
-        if(config.isEmpty()) return null;
+        if (config.isEmpty()) return null;
         List<String> produtos = Input.lerLinhasWithBuff(config.get(0));
         List<String> clientes = Input.lerLinhasWithBuff(config.get(1));
         model.setFichVendas(config.get(2));
@@ -43,8 +44,8 @@ public class GereVendasModel implements IGereVendasModel {
         } catch (NumberFormatException e) {
             GereVendasModel.NUM_FILIAIS = 3;
         }
-        produtos.forEach(p -> GereVendasModel.addToCatProdFromString(p,model));
-        clientes.forEach(c -> GereVendasModel.addToCatClientFromString(c,model));
+        produtos.forEach(p -> GereVendasModel.addToCatProdFromString(p, model));
+        clientes.forEach(c -> GereVendasModel.addToCatClientFromString(c, model));
         loadVendas(model);
         model.setTimeOfLoadData(Crono.stop());
         return model;
@@ -60,15 +61,15 @@ public class GereVendasModel implements IGereVendasModel {
         int vendasZero = 0;
         List<String> vendas = Input.lerLinhasWithBuff(model.getFichVendas());
         model.getEstatatistica().setNumVendasTotal(vendas.size());
-        for(String l : vendas) {
-            ISale tmp = processSale(l,model);
-            if(tmp != null) {
-                model.getCatClient().updateClientBought(tmp.getClient(),tmp.getFilial());
-                model.getCatProd().updateProductBought(tmp.getProduct(),tmp.getFilial(),tmp.getUnits());
+        for (String l : vendas) {
+            ISale tmp = processSale(l, model);
+            if (tmp != null) {
+                model.getCatClient().updateClientBought(tmp.getClient(), tmp.getFilial());
+                model.getCatProd().updateProductBought(tmp.getProduct(), tmp.getFilial(), tmp.getUnits());
                 numVendasValidas++;
-                model.getFiliais()[tmp.getFilial()-1].add(tmp);
+                model.getFiliais()[tmp.getFilial() - 1].add(tmp);
                 model.getFacturacao().add(tmp);
-                if(tmp.getPrice() == 0.0)  vendasZero++;
+                if (tmp.getPrice() == 0.0) vendasZero++;
             }
         }
         model.getEstatatistica().setNumVendasValidas(numVendasValidas);
@@ -81,18 +82,20 @@ public class GereVendasModel implements IGereVendasModel {
     public IFilial[] getFiliais() {
         return this.filiais;
     }
+
     public IFacturacao getFacturacao() {
         return this.facturacao;
     }
 
-    public  List<IClient> listOfClientsThatBoughtInAllFilials() {
+    public List<IClient> listOfClientsThatBoughtInAllFilials() {
         return getCatClient().listOfClientsThatBoughtInAllFilials();
     }
-    public  List<IClient> listOfClientsThatDBoughtInAllFilials() {
+
+    public List<IClient> listOfClientsThatDBoughtInAllFilials() {
         return getCatClient().listOfClientsThatDBoughtInAllFilials();
     }
 
-    public ICatProd getCatProd ( ) {
+    public ICatProd getCatProd() {
         return catProd;
     }
 
@@ -100,12 +103,12 @@ public class GereVendasModel implements IGereVendasModel {
         return this.catClient;
     }
 
-    private static ISale processSale(String l,IGereVendasModel model) {
-    ISale sale = Sale.readLineToSale(l);
-    if(sale == null) return null;
-    if(sale.isValid(model.getCatProd(),model.getCatClient()))
-        return sale;
-    else return null;
+    private static ISale processSale(String l, IGereVendasModel model) {
+        ISale sale = Sale.readLineToSale(l);
+        if (sale == null) return null;
+        if (sale.isValid(model.getCatProd(), model.getCatClient()))
+            return sale;
+        else return null;
     }
 
     public double getTimeOfLoadData() {
@@ -116,14 +119,15 @@ public class GereVendasModel implements IGereVendasModel {
         this.timeOfLoadData = time;
     }
 
-    private static void addToCatProdFromString(String l,IGereVendasModel model) {
+    private static void addToCatProdFromString(String l, IGereVendasModel model) {
         IProduct tmp = new Product(l);
-        if(!tmp.isValid()) return;
+        if (!tmp.isValid()) return;
         model.getCatProd().add(tmp);
     }
-    private static void addToCatClientFromString(String l,IGereVendasModel model) {
+
+    private static void addToCatClientFromString(String l, IGereVendasModel model) {
         IClient tmp = new Client(l);
-        if(!tmp.isValid()) return;
+        if (!tmp.isValid()) return;
         model.getCatClient().add(tmp);
     }
 
@@ -136,7 +140,7 @@ public class GereVendasModel implements IGereVendasModel {
     }
 
 
-    public static int getNumFiliais ( ) {
+    public static int getNumFiliais() {
         return NUM_FILIAIS;
     }
 
@@ -149,9 +153,9 @@ public class GereVendasModel implements IGereVendasModel {
     }
 
 
-
     /**
      * Metodo para dar resposta a query 2
+     *
      * @param x
      * @return
      */
@@ -162,74 +166,77 @@ public class GereVendasModel implements IGereVendasModel {
 
     /**
      * Query 3
+     *
      * @param client
      * @return
      */
-    public List<Tuple<Integer,Integer>> totalPurchasesOfAClientPerYear(String client) {
-        if(!this.getCatClient().contains(client)) return null;
-        List<Tuple<Integer,Integer>> tmp = new ArrayList<>(12);
-        for(int month = 0 ; month < 12; month++) {
+    public List<Tuple<Integer, Integer>> totalPurchasesOfAClientPerYear(String client) {
+        if (!this.getCatClient().contains(client)) return null;
+        List<Tuple<Integer, Integer>> tmp = new ArrayList<>(12);
+        for (int month = 0; month < 12; month++) {
             int total = 0;
             Set<String> stringSet = new HashSet<>();
-            for(int i = 0; i<GereVendasModel.getNumFiliais(); i++) {
-            Tuple<Integer, Set<String>> setTuple = this.getFiliais()[i].numOfDifferentProductsOfClientAndNumOfSales(client,month);
-            stringSet.addAll(setTuple.getSecondElem());
-            total += setTuple.getFirstElem();
+            for (int i = 0; i < GereVendasModel.getNumFiliais(); i++) {
+                Tuple<Integer, Set<String>> setTuple = this.getFiliais()[i].numOfDifferentProductsOfClientAndNumOfSales(client, month);
+                stringSet.addAll(setTuple.getSecondElem());
+                total += setTuple.getFirstElem();
             }
-            tmp.add(new Tuple<>(total,stringSet.size()));
+            tmp.add(new Tuple<>(total, stringSet.size()));
         }
         return tmp;
     }
 
-    public double totalFaturadoPClientPMonth(String client,int month) {
-        if(!this.getCatClient().contains(client)) return 0.0;
+    public double totalFaturadoPClientPMonth(String client, int month) {
+        if (!this.getCatClient().contains(client)) return 0.0;
         double tmp = 0.0;
-        for(int i = 0; i < GereVendasModel.getNumFiliais(); i++) {
+        for (int i = 0; i < GereVendasModel.getNumFiliais(); i++) {
             tmp += this.getFiliais()[i].totalFaturadoPerClientPerMonth(client, month);
         }
         return tmp;
     }
-    public List<String> getListOfProductsBoughtOfClient(String a){
-        List<Map<String,Integer>> res = new ArrayList<>();
-        for(int i = 0; i< NUM_FILIAIS; i++) {
-            res.add(i,filiais[i].getListOfProductsBoughtOfClient(a));
+
+    public List<String> getListOfProductsBoughtOfClient(String a) {
+        if (!this.getCatClient().contains(a)) return new ArrayList<>();
+        List<Map<String, Integer>> res = new ArrayList<>();
+        for (int i = 0; i < NUM_FILIAIS; i++) {
+            res.add(i, filiais[i].getListOfProductsBoughtOfClient(a));
         }
         return sortIntoLista(res);
 
     }
 
-    private List<String> sortIntoLista(List<Map<String,Integer>> mapa){
-        Map<String,Integer> mapalist = new HashMap<>();
+    private List<String> sortIntoLista(List<Map<String, Integer>> mapa) {
+        Map<String, Integer> mapalist = new HashMap<>();
         List<String> lista;
-        for(int i = 0; i < NUM_FILIAIS; i++){
-            for(Map.Entry<String,Integer> fil : mapa.get(i).entrySet()){ // map com aritgo e numero de vezes que foi comprado
-                if(mapalist.containsKey(fil.getKey())){
+        for (int i = 0; i < NUM_FILIAIS; i++) {
+            for (Map.Entry<String, Integer> fil : mapa.get(i).entrySet()) { // map com aritgo e numero de vezes que foi comprado
+                if (mapalist.containsKey(fil.getKey())) {
                     int tmp = mapalist.get(fil.getKey());
                     tmp += fil.getValue();
-                    mapalist.put(fil.getKey(),tmp);
-                }else{
-                    mapalist.put(fil.getKey(),fil.getValue());
+                    mapalist.put(fil.getKey(), tmp);
+                } else {
+                    mapalist.put(fil.getKey(), fil.getValue());
                 }
             }
         }
-        lista = mapalist.entrySet().stream().sorted((o1,o2)-> comparaEntrySets(o1,o2)).map(l-> l.getKey()).collect(Collectors.toList());
+        lista = mapalist.entrySet().stream().sorted((o1, o2) -> comparaEntrySets(o1, o2)).map(l -> l.getKey()).collect(Collectors.toList());
         Collections.reverse(lista);
         return lista;
 
     }
 
 
-    private int comparaEntrySets(Map.Entry<String,Integer> fst,Map.Entry<String,Integer> snd){
-        if(fst.getValue().equals(snd.getValue())){
+    private int comparaEntrySets(Map.Entry<String, Integer> fst, Map.Entry<String, Integer> snd) {
+        if (fst.getValue().equals(snd.getValue())) {
             return fst.getKey().compareTo(snd.getKey());
         }
-        if(fst.getValue() > snd.getValue()) return 1;
+        if (fst.getValue() > snd.getValue()) return 1;
         return -1;
     }
 
-    public List<List<String>> getListOfClientsWhoMostBought(){
+    public List<List<String>> getListOfClientsWhoMostBought() {
         List<List<String>> res = new ArrayList<>();
-        for(int i = 0; i<NUM_FILIAIS; i++){
+        for (int i = 0; i < NUM_FILIAIS; i++) {
             res.add(filiais[i].getListOfClientsWhoMostBought());
         }
         return res;
@@ -237,56 +244,101 @@ public class GereVendasModel implements IGereVendasModel {
 
 
     // queiry 8 interativa
-    public List<Map.Entry<String,Set<String>>> getClientsHowBoughtMostOften(int x){
-        List<Map<String,Set<String>>> lista = new ArrayList<>();
-        for(int i = 0; i < NUM_FILIAIS; i++){
+    public List<Map.Entry<String, Set<String>>> getClientsHowBoughtMostOften(int x) {
+        List<Map<String, Set<String>>> lista = new ArrayList<>();
+        for (int i = 0; i < NUM_FILIAIS; i++) {
             lista.add(filiais[i].getClientsHowBoughtMostOften());
         }
-        return getWhoMostBought(lista,x);
+        return getWhoMostBought(lista, x);
     }
 
     // metodo aussiliar da queiry 8
-    private List<Map.Entry<String,Set<String>>> getWhoMostBought(List<Map<String,Set<String>>> lista ,int x){
-        Map<String,Set<String>> mapa = new HashMap<>();
-        List<Map.Entry<String,Set<String>>> res;
-        for(int i = 0 ; i<NUM_FILIAIS;i++){
-            for(Map.Entry<String,Set<String>> entry : lista.get(i).entrySet()){
-                if(mapa.containsKey(entry.getKey())){
-                    addLista(entry,mapa);
-                }else{
-                    mapa.put(entry.getKey(),entry.getValue());
+    private List<Map.Entry<String, Set<String>>> getWhoMostBought(List<Map<String, Set<String>>> lista, int x) {
+        Map<String, Set<String>> mapa = new HashMap<>();
+        List<Map.Entry<String, Set<String>>> res;
+        for (int i = 0; i < NUM_FILIAIS; i++) {
+            for (Map.Entry<String, Set<String>> entry : lista.get(i).entrySet()) {
+                if (mapa.containsKey(entry.getKey())) {
+                    addLista(entry, mapa);
+                } else {
+                    mapa.put(entry.getKey(), entry.getValue());
                 }
             }
         }
-        res = mapa.entrySet().stream().sorted((o1, o2) -> compare(o1.getValue().size(),o2.getValue().size())).collect(Collectors.toList());
+        res = mapa.entrySet().stream().sorted((o1, o2) -> compare(o1.getValue().size(), o2.getValue().size())).collect(Collectors.toList());
         Collections.reverse(res);
         return res.stream().limit(x).collect(Collectors.toList());
 
     }
 
     // metodo aussiliar da queiry 8
-    private void addLista(Map.Entry<String,Set<String>> entry,Map<String,Set<String>> mapa){
-        for(String a: entry.getValue()){
+    private void addLista(Map.Entry<String, Set<String>> entry, Map<String, Set<String>> mapa) {
+        for (String a : entry.getValue()) {
             mapa.get(entry.getKey()).add(a);
         }
     }
 
 
-    public List<List<Double>> getMumClientAndFacturacao(String client){
-        return this.facturacao.getMumClientAndFacturacao(client);
+    public List<List<Double>> getNumClientAndFacturacao(String product) {
+        if (!this.getCatProd().contains(product)) return new ArrayList<>();
+        return this.facturacao.getNumClientAndFacturacao(product);
+    }
+
+    public List<Tuple<String, Integer>> productsMostSellAndNumberOfClients(int n) {
+        List<Tuple<String, Integer>> res = new ArrayList<>(n);
+        List<String> productsMostSellStrings = this.getCatProd().productsMostSell(n);
+        for (String l : productsMostSellStrings) {
+            res.add(new Tuple<>(l, this.getFacturacao().numberOfClientsWhoBought(l)));
+        }
+        return res;
+    }
+
+    public List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod) {
+        return this.getFacturacao().facturacaoPerProdPerFilialPerMonth(prod);
+    }
+
+    public static IGereVendasModel recoverState(String fichObject) {
+        IGereVendasModel model = null;
+        try {
+            Crono.start();
+            FileInputStream fis = new FileInputStream(fichObject);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            model = (GereVendasModel) ois.readObject();
+            model.setTimeOfLoadData(Crono.stop());
+            System.out.println("Dados Lidos");
+            fis.close();
+            ois.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return model;
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    public void saveState(String fichObject) {
+        try {
+            FileOutputStream fos = new FileOutputStream(fichObject);
+            try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                oos.writeObject(this);
+                fos.close();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

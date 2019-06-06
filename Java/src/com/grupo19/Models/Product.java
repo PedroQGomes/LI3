@@ -3,11 +3,12 @@ package com.grupo19.Models;
 import com.grupo19.GereVendasModel;
 import com.grupo19.Interfaces.IProduct;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Product implements IProduct {
+public class Product implements IProduct, Serializable {
     private String codigo;
     private int[] boughtPerFilial;
     private boolean[] boughtOnFilial;
@@ -76,6 +77,10 @@ public class Product implements IProduct {
         if(o == null || this.getClass() != o.getClass())return false;
         Product p = (Product) o;
         return (this.codigo.equals(p.getCodigo()) && Arrays.equals(p.boughtOnFilial,this.boughtOnFilial) && Arrays.equals(p.boughtPerFilial,this.boughtPerFilial));
+    }
+
+    public int totalOfUnitsBought() {
+        return Arrays.stream(this.boughtPerFilial).sum();
     }
 
 

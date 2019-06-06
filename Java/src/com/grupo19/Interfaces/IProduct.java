@@ -7,4 +7,5 @@ public interface IProduct {
     char firstLetter();
     void updateProductBought(int filial, int qnt);
     boolean isProductEverBought();
+    int totalOfUnitsBought();
 }

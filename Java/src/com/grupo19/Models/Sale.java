@@ -5,10 +5,11 @@ import com.grupo19.Interfaces.ICatClient;
 import com.grupo19.Interfaces.ICatProd;
 import com.grupo19.Interfaces.ISale;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
-public class Sale implements ISale {
+public class Sale implements ISale, Serializable {
 
     private String prod, client, saleType;
     private int month,filial,units;

@@ -5,10 +5,11 @@ import com.grupo19.Interfaces.IFilial;
 import com.grupo19.Interfaces.ISale;
 import com.grupo19.Tuple;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Filial implements IFilial {
+public class Filial implements IFilial, Serializable {
 
     private Map<String,List<List<ISale>>> filialData;
 
@@ -187,7 +188,6 @@ public class Filial implements IFilial {
 
     public Map<String,Integer> getListOfProductsBoughtOfClient(String client) {
         Map<String,Integer> mapa = new HashMap<>();
-        List<String> lista;
         for(int i = 0; i < 12; i++){
             for(ISale sale :this.filialData.get(client).get(i)){
                 if(!mapa.containsKey(sale.getProduct())){

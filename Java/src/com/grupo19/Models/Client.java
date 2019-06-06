@@ -4,11 +4,12 @@ import com.grupo19.GereVendasModel;
 import com.grupo19.GereVendasView;
 import com.grupo19.Interfaces.IClient;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Client implements IClient {
+public class Client implements IClient, Serializable {
     private String codigo;
     private boolean[] boughtOnFilial;
 
