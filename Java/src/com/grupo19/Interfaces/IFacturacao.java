@@ -21,6 +21,7 @@ public interface IFacturacao {
     public List<Integer> numberOfClientsWhoBought(String codProd);
 
     List<Double> totalSalesPerProduct ( String codProd);
+    List<List<Double>> getMumClientAndFacturacao(String client);
 
 
 

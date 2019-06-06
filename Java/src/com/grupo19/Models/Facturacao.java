@@ -4,6 +4,7 @@ import com.grupo19.Interfaces.IFacturacao;
 import com.grupo19.Interfaces.IFacturacaoPorProd;
 import com.grupo19.Interfaces.IProduct;
 import com.grupo19.Interfaces.ISale;
+import com.grupo19.Tuple;
 
 import java.io.Serializable;
 import java.util.*;
@@ -269,6 +270,24 @@ public class Facturacao implements IFacturacao, Serializable {
     }
 
 
+    //query 4 interativa
+    //Dado o código de um produto existente, determinar, mês a mês, quantas vezes foi
+    //comprado, por quantos clientes diferentes e o total facturado
+    public List<List<Double>> getMumClientAndFacturacao(String client){
+        List<List<Double>> res = new ArrayList<>();
+        double qnt=0,nclientes=0,facturado = 0;
+        for(int i = 0; i <12 ;i++){
+            qnt = (double) this.arrayOfSales.get(i).get(client).getSalesList().size();
+            nclientes = this.arrayOfSales.get(i).get(client).getDifClientsWhoBought();
+            facturado = this.arrayOfSales.get(i).get(client).totalSaleProd();
+            res.add(new ArrayList<>());
+            res.get(i).add(qnt);
+            res.get(i).add(nclientes);
+            res.get(i).add(facturado);
 
+        }
+        return res;
+
+    }
 
 }

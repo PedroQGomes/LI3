@@ -102,6 +102,29 @@ public class GereVendasController implements IGereVendasController {
         view.showLine(sb.toString());
     }
 
+
+    private void query4(){
+        String l = GereVendasView.getUserInputString();
+        if(!model.getCatProd().contains(l))return;
+        List<List<Double>> lista = model.getMumClientAndFacturacao(l);
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < 12 ;i++){
+            sb.append("Produto ")
+                    .append(l)
+                    .append(" no mes")
+                    .append(i).append("foi comprado ")
+                    .append(lista.get(i).get(0)).append(" vez(es),por ")
+                    .append(lista.get(i).get(1)).append("clientes diferentes")
+                    .append(" e facturou :").append(lista.get(i).get(2))
+                    .append("\n");
+
+        }
+        view.showLine(sb.toString());
+    }
+
+
+
+
     private void query5(){
         String l = GereVendasView.getUserInputString();
         if(!model.getCatClient().contains(l))return;
@@ -156,7 +179,7 @@ public class GereVendasController implements IGereVendasController {
                 query3();
                 break;
             case 4:
-                //query4();
+                query4();
                 break;
             case 5:
                 query5();

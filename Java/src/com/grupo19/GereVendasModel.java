@@ -272,7 +272,9 @@ public class GereVendasModel implements IGereVendasModel {
     }
 
 
-
+    public List<List<Double>> getMumClientAndFacturacao(String client){
+        return this.facturacao.getMumClientAndFacturacao(client);
+    }
 
 
 

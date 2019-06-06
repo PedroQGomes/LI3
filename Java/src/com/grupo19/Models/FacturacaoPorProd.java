@@ -5,6 +5,7 @@ import com.grupo19.Interfaces.ISale;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
@@ -138,4 +139,13 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
         return true;
     }
 
+    public double getDifClientsWhoBought(){
+        HashSet<String> lista = new HashSet<>();
+        double res = 0;
+        for(ISale a :this.salesList){
+            lista.add(a.getClient());
+        }
+        res = (double)lista.size();
+        return res;
+    }
 }

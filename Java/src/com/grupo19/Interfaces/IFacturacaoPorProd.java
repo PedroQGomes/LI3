@@ -10,4 +10,5 @@ public interface IFacturacaoPorProd {
     void removeSale(ISale s);
     IFacturacaoPorProd clone();
     double totalSaleProd();
+    double getDifClientsWhoBought();
 }
