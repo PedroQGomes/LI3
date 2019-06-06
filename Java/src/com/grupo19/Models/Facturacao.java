@@ -260,7 +260,7 @@ public class Facturacao implements IFacturacao, Serializable {
 
     /**
      *
-     * Calcula o número de clientes total dos dozes meses
+     * Calcula o número total de clientes dos dozes meses que compraram o produto
      * @param codProd string id de produto
      * @return devolve valor total
      *
@@ -302,7 +302,7 @@ public class Facturacao implements IFacturacao, Serializable {
      *
      * calcula quantas vezes o produto foi comprado, por quantos clientes diferentes e total facturado por mês
      * @param product string do id do produto
-     * @return res
+     * @return res list
      *
      */
     public List<List<Double>> getNumClientAndFacturacao(String product){
