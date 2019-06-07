@@ -48,7 +48,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         produtos.forEach(p -> GereVendasModel.addToCatProdFromString(p, model));
         clientes.forEach(c -> GereVendasModel.addToCatClientFromString(c, model));
         loadVendas(model,estat);
-        model.saveState("data.tmp");
+        //model.saveState("data.tmp"); //TODO ATIVAR ISTO
         model.setTimeOfLoadData(Crono.stop());
         return model;
     }

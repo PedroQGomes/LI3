@@ -148,7 +148,7 @@ public class GereVendasController implements IGereVendasController {
         Crono.start();
         List<List<String>> lista = model.getListOfClientsWhoMostBought();
         view.setTimeQueue(Crono.stop());
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(256);
         for(int i = 0 ; i < GereVendasModel.getNumFiliais(); i++) {
             sb.append("Filial")
                     .append(i+1)

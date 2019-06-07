@@ -253,7 +253,7 @@ public class Filial implements IFilial, Serializable {
      * (query 7)determinar a lista de tres maiores compradores em termos de dinheiro faturado
      * @return list<String>
      */
-    public List<String> getListOfClientsWhoMostBought(){
+    public List<String> getListOfClientsWhoMostBought(){ //TODO: MELHORAR TEMPOS
         Map<String,Double> mapa = new HashMap<>();
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
             for(int i = 0;i<12;i++){
@@ -270,7 +270,7 @@ public class Filial implements IFilial, Serializable {
 
             }
         }
-        return mapa.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue)).map(Map.Entry::getKey).limit(3).collect(Collectors.toList());
+        return mapa.entrySet().stream().sorted(((o1, o2) -> o2.getValue().compareTo(o1.getValue()))).map(Map.Entry::getKey).limit(3).collect(Collectors.toList());
     }
 
 
