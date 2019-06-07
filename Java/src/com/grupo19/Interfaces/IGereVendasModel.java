@@ -12,24 +12,24 @@ public interface IGereVendasModel {
     IFacturacao getFacturacao();
     void setFichVendas(String fichVendas);
     void setTimeOfLoadData(double time);
-    Tuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x, int filial);
+    ITuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x, int filial);
     String getFichVendas();
     IEstatisticas getEstatatistica();
     double getTimeOfLoadData();
     ICatClient getCatClient();
-    List<IProduct> listOfProductsWithLetter(char letter);
     List<IProduct> productsNoOneBoughtModel();
     List<IClient> listOfClientsThatBoughtInAllFilials();
     List<IClient> listOfClientsThatDBoughtInAllFilials();
     List<String> getListOfProductsBoughtOfClient(String a);
-    List<Tuple<Integer,Integer>> totalPurchasesOfAClientPerYear(String a );
+    List<ITuple<Integer,Integer>> totalPurchasesOfAClientPerYear(String a );
     double totalFaturadoPClientPMonth(String a,int mes);
     List<List<String>> getListOfClientsWhoMostBought();
     List<Map.Entry<String, Set<String>>> getClientsHowBoughtMostOften(int x);
     List<List<Double>> getNumClientAndFacturacao(String client);
-    List<Tuple<String,Integer>> productsMostSellAndNumberOfClients(int n);
+    List<ITuple<String,Integer>> productsMostSellAndNumberOfClients(int n);
     List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod);
     void saveState(String fichObject);
-    List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);
+    List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);
+    void updateStaticInfo();
 
 }

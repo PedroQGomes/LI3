@@ -3,6 +3,7 @@ package com.grupo19.Models;
 import com.grupo19.Interfaces.IClient;
 import com.grupo19.Interfaces.IFilial;
 import com.grupo19.Interfaces.ISale;
+import com.grupo19.Interfaces.ITuple;
 import com.grupo19.Tuple;
 
 import java.io.Serializable;
@@ -236,10 +237,10 @@ public class Filial implements IFilial, Serializable {
         for(int i = 0; i < 12; i++){
             for(ISale sale :this.filialData.get(client).get(i)){
                 if(!mapa.containsKey(sale.getProduct())){
-                    mapa.put(sale.getProduct(),1);
+                    mapa.put(sale.getProduct(),sale.getUnits());
                 }else {
                     int tmp = mapa.get(sale.getProduct());
-                    tmp++;
+                    tmp += sale.getUnits();
                     mapa.put(sale.getProduct(),tmp);
                 }
             }
@@ -271,6 +272,36 @@ public class Filial implements IFilial, Serializable {
         }
         return mapa.entrySet().stream().sorted((o1,o2)-> o1.getValue().compareTo(o2.getValue())).map(l-> l.getKey()).limit(3).collect(Collectors.toList());
     }
+
+    /*public List<String> getListOfClientsWhoMostBought(){
+        List<String> res = new ArrayList<>();
+        Map<String,Double> mapa = new HashMap<>();
+        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
+            for(int i = 0;i<12;i++){
+                for(ISale sale :lista.getValue().get(i)){
+                    if(mapa.containsKey(sale.getClient())){
+                        double tmp = mapa.get(sale.getClient());
+                        tmp += sale.getPrice();
+                        mapa.put(sale.getClient(),tmp);
+                    }else {
+                        mapa.put(sale.getClient(),sale.getPrice());
+
+                    }
+                }
+
+            }
+        }
+        TreeSet<ITuple<String,Double>> set = new TreeSet<>(((o1, o2) -> o2.getSecondElem().compareTo(o1.getSecondElem())));
+        for(Map.Entry entry : mapa.entrySet()) {
+            set.add(new Tuple<>(entry.getKey(),entry.getValue()));
+        }
+        for(int i = 0; i<3; i++) {
+            ITuple<String,Double> tuple = set.pollLast();
+            if(tuple != null)
+            res.add(tuple.getFirstElem());
+        }
+        return res;
+    } */
 
 
     /**

@@ -31,14 +31,15 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     public static IGereVendasModel loadData() {
         IGereVendasModel model = new GereVendasModel();
-        Crono.start();
+        IEstatisticas estat = model.getEstatatistica();
         List<String> config = Input.lerLinhasWithBuff("config.txt");
         if (config.isEmpty()) return null;
+        Crono.start();
         List<String> produtos = Input.lerLinhasWithBuff(config.get(0));
         List<String> clientes = Input.lerLinhasWithBuff(config.get(1));
         model.setFichVendas(config.get(2));
-        model.getEstatatistica().setNumProdutosTotal(produtos.size());
-        model.getEstatatistica().setNumClientesTotal(clientes.size());
+        estat.setNumProdutosTotal(produtos.size());
+        estat.setNumClientesTotal(clientes.size());
         try {
             GereVendasModel.NUM_FILIAIS = Integer.parseInt(config.get(3));
         } catch (NumberFormatException e) {
@@ -46,7 +47,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         }
         produtos.forEach(p -> GereVendasModel.addToCatProdFromString(p, model));
         clientes.forEach(c -> GereVendasModel.addToCatClientFromString(c, model));
-        loadVendas(model);
+        loadVendas(model,estat);
         model.setTimeOfLoadData(Crono.stop());
         return model;
     }
@@ -56,11 +57,17 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
 
-    private static void loadVendas(IGereVendasModel model) {
+    public void updateStaticInfo() {
+        this.estat.setFacturacaoTotal(this.facturacao.facturacaoTotal());
+        this.estat.setNumClientesNaoCompraram(this.catClient.clientsNeverBought().size());
+        this.estat.setNumTotalProdutosComprados(estat.getTotalProdNum() - this.catProd.productsNeverBought().size());
+    }
+
+    private static void loadVendas(IGereVendasModel model, IEstatisticas estat) {
         int numVendasValidas = 0;
         int vendasZero = 0;
         List<String> vendas = Input.lerLinhasWithBuff(model.getFichVendas());
-        model.getEstatatistica().setNumVendasTotal(vendas.size());
+        estat.setNumVendasTotal(vendas.size());
         for (String l : vendas) {
             ISale tmp = processSale(l, model);
             if (tmp != null) {
@@ -72,11 +79,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
                 if (tmp.getPrice() == 0.0) vendasZero++;
             }
         }
-        model.getEstatatistica().setNumVendasValidas(numVendasValidas);
-        model.getEstatatistica().setFacturacaoTotal(model.getFacturacao().facturacaoTotal());
-        model.getEstatatistica().setNumClientesNaoCompraram(model.getCatClient().clientsNeverBought().size());
-        model.getEstatatistica().setNumTotalProdutosComprados(model.getEstatatistica().getTotalProdNum() - model.getCatProd().productsNeverBought().size());
-        model.getEstatatistica().setNumTotalDeComprasValorNulo(vendasZero);
+        estat.setNumVendasValidas(numVendasValidas);
+        estat.setNumTotalDeComprasValorNulo(vendasZero);
     }
 
     public IFilial[] getFiliais() {
@@ -131,9 +135,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         model.getCatClient().add(tmp);
     }
 
-    public List<IProduct> listOfProductsWithLetter(char letter) {
-        return this.getCatProd().listOfProductsThatStartWithLetter(letter);
-    }
+
 
     public List<IProduct> productsNoOneBoughtModel() {
         return this.getCatProd().productsNeverBought();
@@ -160,7 +162,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
      * @return
      */
     @Override
-    public Tuple<Integer, Integer> totalNumbOfSalesInMonthAndClientsBought(int x, int filial) {
+    public ITuple<Integer, Integer> totalNumbOfSalesInMonthAndClientsBought(int x, int filial) {
         return this.getFiliais()[filial].totalNumbOfSalesInMonthAndClientsBought(x);
     }
 
@@ -170,14 +172,14 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
      * @param client
      * @return
      */
-    public List<Tuple<Integer, Integer>> totalPurchasesOfAClientPerYear(String client) {
+    public List<ITuple<Integer, Integer>> totalPurchasesOfAClientPerYear(String client) {
         if (!this.getCatClient().contains(client)) return null;
-        List<Tuple<Integer, Integer>> tmp = new ArrayList<>(12);
+        List<ITuple<Integer, Integer>> tmp = new ArrayList<>(12);
         for (int month = 0; month < 12; month++) {
             int total = 0;
             Set<String> stringSet = new HashSet<>();
             for (int i = 0; i < GereVendasModel.getNumFiliais(); i++) {
-                Tuple<Integer, Set<String>> setTuple = this.getFiliais()[i].numOfDifferentProductsOfClientAndNumOfSales(client, month);
+                ITuple<Integer, Set<String>> setTuple = this.getFiliais()[i].numOfDifferentProductsOfClientAndNumOfSales(client, month);
                 stringSet.addAll(setTuple.getSecondElem());
                 total += setTuple.getFirstElem();
             }
@@ -220,7 +222,6 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
             }
         }
         lista = mapalist.entrySet().stream().sorted((o1, o2) -> comparaEntrySets(o1, o2)).map(l -> l.getKey()).collect(Collectors.toList());
-        Collections.reverse(lista);
         return lista;
 
     }
@@ -230,7 +231,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         if (fst.getValue().equals(snd.getValue())) {
             return fst.getKey().compareTo(snd.getKey());
         }
-        if (fst.getValue() > snd.getValue()) return 1;
+        if (snd.getValue() > fst.getValue()) return 1;
         return -1;
     }
 
@@ -284,8 +285,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         return this.facturacao.getNumClientAndFacturacao(product);
     }
 
-    public List<Tuple<String, Integer>> productsMostSellAndNumberOfClients(int n) {
-        List<Tuple<String, Integer>> res = new ArrayList<>(n);
+    public List<ITuple<String, Integer>> productsMostSellAndNumberOfClients(int n) {
+        List<ITuple<String, Integer>> res = new ArrayList<>(n);
         List<String> productsMostSellStrings = this.getCatProd().productsMostSell(n);
         for (String l : productsMostSellStrings) {
             res.add(new Tuple<>(l, this.getFacturacao().numberOfClientsWhoBought(l)));
@@ -328,7 +329,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
 
-    public List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
+    public List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
         return this.facturacao.getXClientsWhoMostBoughtProduct(produto,tamanho);
     }
 }

@@ -4,14 +4,11 @@ import com.grupo19.Interfaces.ICatClient;
 import com.grupo19.Interfaces.IClient;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CatClient implements ICatClient, Serializable {
-    private Map<String,IClient> mapOfClients; //TODO : ORGANIZAR POR LETRA
+    private Map<String,IClient> mapOfClients;
 
     public CatClient() {
         mapOfClients = new HashMap<>();
