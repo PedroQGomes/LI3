@@ -117,7 +117,7 @@ public class Sale implements ISale, Serializable {
                 sale.getUnits() == this.getUnits());
     }
 
-    public ISale clone ( ) { //TODO : FAZER CLONE
+    public ISale clone ( ) {
        return  new Sale(this);
     }
 }

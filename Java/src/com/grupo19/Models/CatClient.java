@@ -40,7 +40,7 @@ public class CatClient implements ICatClient, Serializable {
 
     /**
      * Lista de clientes que não compraram em todas as filiais
-     * @return
+     * @return lista de clientes que não compraram em todas as filiais
      */
 
     public List<IClient> listOfClientsThatDBoughtInAllFilials ( ) {
@@ -49,7 +49,7 @@ public class CatClient implements ICatClient, Serializable {
 
     /**
      * Lista de clientes que compraram em todas as filiais
-     * @return
+     * @return lista de clientes que compraram em todas as filiais
      */
     public List<IClient> listOfClientsThatBoughtInAllFilials ( ) {
         return this.mapOfClients.values().stream().filter(IClient::hasClientEverBought).collect(Collectors.toList());

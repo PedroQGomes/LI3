@@ -2,7 +2,6 @@ package com.grupo19;
 
 import com.grupo19.Interfaces.*;
 
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +57,7 @@ public class GereVendasController implements IGereVendasController {
 
 
 
-    private void query3() { //TODO : Round GASTOU
+    private void query3() {
         String client = GereVendasView.getUserInputString("Insira um código de cliente");
         Crono.start();
         List<ITuple<Integer,Integer>> tmp = model.totalPurchasesOfAClientPerYear(client);
@@ -119,7 +118,7 @@ public class GereVendasController implements IGereVendasController {
 
 
 
-    private void query5(){ //TODO: testar implementaçao algo confusa
+    private void query5(){
         String l = GereVendasView.getUserInputString("Insira o código de Cliente:");
         Crono.start();
         List<String> tmp = model.getListOfProductsBoughtOfClient(l);
@@ -165,7 +164,7 @@ public class GereVendasController implements IGereVendasController {
         int x = GereVendasView.getUserInputInt("Insira o número de clientes pretendido:");
         Crono.start();
         StringBuilder sb = new StringBuilder();
-        List<Map.Entry<String, Set<String>>> lista = model.getClientsHowBoughtMostOften(x);
+        List<Map.Entry<String, Set<String>>> lista = model.getClientsWhoBoughtMostOften(x);
         view.setTimeQueue(Crono.stop());
         for(int i = 0; i < x ;i++){
             sb.append("Cliente ")
@@ -185,7 +184,7 @@ public class GereVendasController implements IGereVendasController {
         int tamanho = GereVendasView.getUserInputInt();
         List<Map.Entry<String, ITuple<Integer,Double>>> lista = model.getXClientsWhoMostBoughtProduct(l,tamanho);
         StringBuilder sb = new StringBuilder();
-
+        if(lista.isEmpty()) sb.append("Não existe esse produto");
         for(int i = 0 ; i < lista.size(); i++) {
             sb.append("O clinte ").append(lista.get(i).getKey()).append(" comprou o produto ")
                     .append(lista.get(i).getValue().getFirstElem())

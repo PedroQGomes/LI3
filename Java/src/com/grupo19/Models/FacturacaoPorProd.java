@@ -76,13 +76,12 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      *
      * setter da list de sales
      *
-     * @param list de sales
+     * @param salesAll lista  de sales
      *
      */
 
     public void setSalesList(List<ISale> salesAll){
         this.salesList = new ArrayList<> (salesAll);
-        salesAll.forEach(s -> {this.salesList.add(s);});
     }
 
     /**
@@ -99,7 +98,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      *
      * adiciona uma ISale a list
      *
-     * @param ISale a inserir
+     * @param s sale a inserir
      *
      */
     public void  addSale(ISale s){
@@ -112,7 +111,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
      *
      * remove uma ISale da list, passada como parametro
      *
-     * @param ISale a inserir
+     * @param s Sale a inserir
      *
      */
     public void  removeSale(ISale s){
@@ -142,7 +141,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     public double getDifClientsWhoBought(){
         HashSet<String> lista = new HashSet<>();
-        double res = 0;
+        double res;
         for(ISale a :this.salesList){
             lista.add(a.getClient());
         }

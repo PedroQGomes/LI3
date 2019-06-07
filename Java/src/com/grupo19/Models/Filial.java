@@ -102,7 +102,7 @@ public class Filial implements IFilial, Serializable {
         double res = 0;
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
             for(int i = 0; i<12;i++) {
-                res += lista.getValue().get(i).stream().mapToDouble(l-> l.getPrice()).sum();
+                res += lista.getValue().get(i).stream().mapToDouble(ISale::getPrice).sum();
             }
         }
         return res;
@@ -114,7 +114,7 @@ public class Filial implements IFilial, Serializable {
         if(x > 12){return 0;}
         double res = 0;
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
-            res += lista.getValue().get(x-1).stream().mapToDouble(l-> l.getPrice()).sum();
+            res += lista.getValue().get(x-1).stream().mapToDouble(ISale::getPrice).sum();
         }
         return res;
     }
@@ -222,7 +222,7 @@ public class Filial implements IFilial, Serializable {
      * @return double
      */
     public double clientSpentInAMonth(String cliente,int mes){
-        return this.filialData.get(cliente).get(mes).stream().mapToDouble(l->l.getPrice()).sum();
+        return this.filialData.get(cliente).get(mes).stream().mapToDouble(ISale::getPrice).sum();
     }
 
 
@@ -270,38 +270,9 @@ public class Filial implements IFilial, Serializable {
 
             }
         }
-        return mapa.entrySet().stream().sorted((o1,o2)-> o1.getValue().compareTo(o2.getValue())).map(l-> l.getKey()).limit(3).collect(Collectors.toList());
+        return mapa.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue)).map(Map.Entry::getKey).limit(3).collect(Collectors.toList());
     }
 
-    /*public List<String> getListOfClientsWhoMostBought(){
-        List<String> res = new ArrayList<>();
-        Map<String,Double> mapa = new HashMap<>();
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
-            for(int i = 0;i<12;i++){
-                for(ISale sale :lista.getValue().get(i)){
-                    if(mapa.containsKey(sale.getClient())){
-                        double tmp = mapa.get(sale.getClient());
-                        tmp += sale.getPrice();
-                        mapa.put(sale.getClient(),tmp);
-                    }else {
-                        mapa.put(sale.getClient(),sale.getPrice());
-
-                    }
-                }
-
-            }
-        }
-        TreeSet<ITuple<String,Double>> set = new TreeSet<>(((o1, o2) -> o2.getSecondElem().compareTo(o1.getSecondElem())));
-        for(Map.Entry entry : mapa.entrySet()) {
-            set.add(new Tuple<>(entry.getKey(),entry.getValue()));
-        }
-        for(int i = 0; i<3; i++) {
-            ITuple<String,Double> tuple = set.pollLast();
-            if(tuple != null)
-            res.add(tuple.getFirstElem());
-        }
-        return res;
-    } */
 
 
     /**
@@ -310,7 +281,7 @@ public class Filial implements IFilial, Serializable {
      * quantos,sendo o criterio de ordenaçao a ordem decrescente do numero de produtos
      * @return mapa
      */
-    public Map<String,Set<String>> getClientsHowBoughtMostOften(){
+    public Map<String,Set<String>> getClientsWhoBoughtMostOften(){
         Map<String,Set<String>> mapa = new HashMap<>();
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()) {
             for(int i = 0; i< 12; i++){

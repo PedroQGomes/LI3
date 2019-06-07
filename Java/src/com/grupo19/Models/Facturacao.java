@@ -242,7 +242,7 @@ public class Facturacao implements IFacturacao, Serializable {
         List<Integer> resultados = new ArrayList<>();
 
         for(int i=0;i<12;i++){
-            int total=0;
+            int total;
             HashSet<String> clients = new HashSet<>();
             Map <String, IFacturacaoPorProd> tmp;
             tmp=arrayOfSales.get(i);
@@ -310,7 +310,7 @@ public class Facturacao implements IFacturacao, Serializable {
     public List<List<Double>> getNumClientAndFacturacao(String product){
         List<List<Double>> res = new ArrayList<>();
         for(int i=0; i < 12; i++) res.add(new ArrayList<>());
-        double qnt=0,nclientes=0,facturado = 0;
+        double qnt,nclientes,facturado;
         for(int i = 0; i <12 ;i++){
             IFacturacaoPorProd factProd = this.arrayOfSales.get(i).get(product);
             if(factProd == null) continue;
@@ -358,8 +358,8 @@ public class Facturacao implements IFacturacao, Serializable {
     public List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
         Map<String, ITuple<Integer,Double>>  mapa = new HashMap<>();
         List<Map.Entry<String, ITuple<Integer,Double>>> res;
-        int count = 0;
-        double facturacao = 0;
+        int count;
+        double facturacao;
         for(int i = 0; i< 12; i++){
             IFacturacaoPorProd factProd = this.arrayOfSales.get(i).get(produto);
             if(factProd == null)continue;
@@ -375,7 +375,7 @@ public class Facturacao implements IFacturacao, Serializable {
                 }
             }
         }
-        res = mapa.entrySet().stream().sorted((o1,o2)-> o1.getValue().getFirstElem().compareTo(o2.getValue().getFirstElem())).collect(Collectors.toList());
+        res = mapa.entrySet().stream().sorted((o1,o2)-> o2.getValue().getFirstElem().compareTo(o1.getValue().getFirstElem())).collect(Collectors.toList());
         Collections.reverse(res); // com isto fica do maior para o menor
         res = res.stream().limit(tamanho).collect(Collectors.toList());
         Collections.reverse(res);

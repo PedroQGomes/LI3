@@ -48,6 +48,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         produtos.forEach(p -> GereVendasModel.addToCatProdFromString(p, model));
         clientes.forEach(c -> GereVendasModel.addToCatClientFromString(c, model));
         loadVendas(model,estat);
+        model.saveState("data.tmp");
         model.setTimeOfLoadData(Crono.stop());
         return model;
     }
@@ -221,7 +222,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
                 }
             }
         }
-        lista = mapalist.entrySet().stream().sorted((o1, o2) -> comparaEntrySets(o1, o2)).map(l -> l.getKey()).collect(Collectors.toList());
+        lista = mapalist.entrySet().stream().sorted(this::comparaEntrySets).map(Map.Entry::getKey).collect(Collectors.toList());
         return lista;
 
     }
@@ -245,15 +246,15 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
 
     // queiry 8 interativa
-    public List<Map.Entry<String, Set<String>>> getClientsHowBoughtMostOften(int x) {
+    public List<Map.Entry<String, Set<String>>> getClientsWhoBoughtMostOften(int x) {
         List<Map<String, Set<String>>> lista = new ArrayList<>();
         for (int i = 0; i < NUM_FILIAIS; i++) {
-            lista.add(filiais[i].getClientsHowBoughtMostOften());
+            lista.add(filiais[i].getClientsWhoBoughtMostOften());
         }
         return getWhoMostBought(lista, x);
     }
 
-    // metodo aussiliar da queiry 8
+    // metodo auxiliar da queiry 8
     private List<Map.Entry<String, Set<String>>> getWhoMostBought(List<Map<String, Set<String>>> lista, int x) {
         Map<String, Set<String>> mapa = new HashMap<>();
         List<Map.Entry<String, Set<String>>> res;
@@ -266,9 +267,13 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
                 }
             }
         }
-        res = mapa.entrySet().stream().sorted((o1, o2) -> compare(o1.getValue().size(), o2.getValue().size())).collect(Collectors.toList());
-        Collections.reverse(res);
-        return res.stream().limit(x).collect(Collectors.toList());
+        res = mapa.entrySet().stream().sorted((o1, o2) -> {
+            int size1 = o1.getValue().size();
+            int size2 = o2.getValue().size();
+            if(size1 == size2 ) return o1.getKey().compareTo(o2.getKey());
+            return compare(size2,size1);
+        }).limit(x).collect(Collectors.toList());
+        return res;
 
     }
 
@@ -302,13 +307,13 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         IGereVendasModel model = null;
         try {
             Crono.start();
-            FileInputStream fis = new FileInputStream(fichObject);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            model = (GereVendasModel) ois.readObject();
-            model.setTimeOfLoadData(Crono.stop());
-            System.out.println("Dados Lidos");
-            fis.close();
-            ois.close();
+            try(FileInputStream fis = new FileInputStream(fichObject)) {
+                BufferedInputStream bis = new BufferedInputStream(fis);
+                ObjectInputStream ois = new ObjectInputStream(bis);
+                model = (GereVendasModel) ois.readObject();
+                model.setTimeOfLoadData(Crono.stop());
+                System.out.println("Dados Lidos");
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -318,18 +323,22 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     public void saveState(String fichObject) {
         try {
-            FileOutputStream fos = new FileOutputStream(fichObject);
-            try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            try(FileOutputStream fos = new FileOutputStream(fichObject)){
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
+                ObjectOutputStream oos = new ObjectOutputStream(bos);
                 oos.writeObject(this);
-                fos.close();
+                oos.close();
             }
         } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
 
     public List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
+        if(!this.catProd.contains(produto)) return new ArrayList<>();
         return this.facturacao.getXClientsWhoMostBoughtProduct(produto,tamanho);
     }
 }
