@@ -17,7 +17,6 @@ public interface IGereVendasModel {
     IEstatisticas getEstatatistica();
     double getTimeOfLoadData();
     ICatClient getCatClient();
-    List<IProduct> listOfProductsWithLetter(char letter);
     List<IProduct> productsNoOneBoughtModel();
     List<IClient> listOfClientsThatBoughtInAllFilials();
     List<IClient> listOfClientsThatDBoughtInAllFilials();
@@ -31,5 +30,6 @@ public interface IGereVendasModel {
     List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod);
     void saveState(String fichObject);
     List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);
+    void updateStaticInfo();
 
 }

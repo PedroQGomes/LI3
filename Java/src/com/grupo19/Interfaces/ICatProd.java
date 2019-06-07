@@ -8,5 +8,4 @@ public interface ICatProd {
     boolean contains(String codProd);
     void updateProductBought(String codProd , int filial , int qnt);
     List<IProduct> productsNeverBought();
-    List<IProduct> listOfProductsThatStartWithLetter(char l);
 }

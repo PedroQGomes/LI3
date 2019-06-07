@@ -81,7 +81,6 @@ public class GereVendasView implements IGereVendasView {
         if(stringsList.isEmpty()) return;
         stringBrowser.clear();
         stringBrowser.addAll(stringsList);
-        //stringBrowser.sort(String::compareTo); //TODO: SE FOR UMA ARVORE NAO DEVO PRECISAR DE INVOCAR ESTE METODO PARA DAR SORT
     }
 
     @Override
@@ -183,6 +182,7 @@ public class GereVendasView implements IGereVendasView {
         if(this.stringBrowser.isEmpty()){
             out.println("Não existem resultados");
             Input.lerString();
+            updateMenu(Menu.MAINMENU);
             return;
         }
         while(this.getCurrentMenu() == Menu.STRINGBROWSER) {
@@ -195,6 +195,7 @@ public class GereVendasView implements IGereVendasView {
                     if(stringBrowser.size() > (cursor)+(row*col)) page++;
                     break;
                 default:
+                    stringBrowser.clear();
                     this.menu = Menu.MAINMENU;
                     break;
             }

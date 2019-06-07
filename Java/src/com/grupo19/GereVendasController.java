@@ -23,43 +23,19 @@ public class GereVendasController implements IGereVendasController {
 
     }
 
-    public void productsThatStartWithLetter() {
-        String l = GereVendasView.getUserInputString();
-        List<IProduct> tmp = model.listOfProductsWithLetter(l.charAt(0));
-        view.addToStringBrowser(tmp.stream().map(IProduct::toString).collect(Collectors.toList()));
-        view.setRow(5);
-        view.setCol(5);
-        view.updateMenu(Menu.STRINGBROWSER);
-        view.updateView();
-    }
 
     private void query1() {
         Crono.start();
         List <IProduct> tmp = model.productsNoOneBoughtModel();
         view.setTimeQueue(Crono.stop());
-        view.addToStringBrowser(tmp.stream().map(IProduct::getCodigo).collect(Collectors.toList()));
+        view.addToStringBrowser(tmp.stream().map(IProduct::getCodigo).sorted(String::compareTo).collect(Collectors.toList()));
         view.setRow(5);
         view.setCol(10);
         view.updateMenu(Menu.STRINGBROWSER);
         view.updateView();
     }
 
-    private void clientsThatBoughtInAllFilials() {
-        List<IClient> tmp = model.listOfClientsThatBoughtInAllFilials();
-        if(!tmp.isEmpty()) view.addToStringBrowser(tmp.stream().map(IClient::getCodigo).collect(Collectors.toList()));
-        view.setRow(5);
-        view.setCol(10);
-        view.updateMenu(Menu.STRINGBROWSER);
-        view.updateView();
-    }
 
-    private void showClientsThatDBoughtNorProd() {
-        int clientsDBought = model.listOfClientsThatDBoughtInAllFilials().size();
-        int productsDBought = model.productsNoOneBoughtModel().size();
-        StringBuilder sb = new StringBuilder("Número de clientes que não compraram: ");
-        sb.append(clientsDBought).append(" Número de produtos que nunca foram comprados: ").append(productsDBought);
-        view.showLine(sb.toString());
-    }
 
     private void query2() {
         int month = GereVendasView.getMonthFromInput() -1;
@@ -86,7 +62,11 @@ public class GereVendasController implements IGereVendasController {
         String client = GereVendasView.getUserInputString("Insira um código de cliente");
         Crono.start();
         List<ITuple<Integer,Integer>> tmp = model.totalPurchasesOfAClientPerYear(client);
-        if(tmp == null) view.showLine("Cliente não existe");
+        if(tmp == null) {
+            view.setTimeQueue(Crono.stop());
+            view.showLine("Cliente não existe");
+            return;
+        }
         StringBuilder sb = new StringBuilder();
         for(int i = 0 ; i < 12; i++) {
             ITuple<Integer,Integer> tmpTuple = null;
@@ -107,12 +87,13 @@ public class GereVendasController implements IGereVendasController {
 
 
     private void query4(){ //TODO: melhorar apresentação
-        String l = GereVendasView.getUserInputString();
+        String l = GereVendasView.getUserInputString("Insira o código do Produto:");
         Crono.start();
         List<List<Double>> lista = model.getNumClientAndFacturacao(l);
         view.setTimeQueue(Crono.stop());
         StringBuilder sb = new StringBuilder();
         if(lista.isEmpty()) {
+            view.setTimeQueue(Crono.stop());
             view.showLine("Não existe esse produto!");
             return;
         }
@@ -123,7 +104,7 @@ public class GereVendasController implements IGereVendasController {
             }
             sb.append("Produto ")
                     .append(l)
-                    .append(" no mes")
+                    .append(" no mes ")
                     .append(i+1).append(" foi comprado ")
                     .append(Math.round(lista.get(i).get(0))).append(" vez(es),por ")
                     .append(Math.round(lista.get(i).get(1))).append(" clientes diferentes")
@@ -139,7 +120,7 @@ public class GereVendasController implements IGereVendasController {
 
 
     private void query5(){ //TODO: testar implementaçao algo confusa
-        String l = GereVendasView.getUserInputString();
+        String l = GereVendasView.getUserInputString("Insira o código de Cliente:");
         Crono.start();
         List<String> tmp = model.getListOfProductsBoughtOfClient(l);
         view.setTimeQueue(Crono.stop());
@@ -262,7 +243,7 @@ public class GereVendasController implements IGereVendasController {
             case 5:
                 query5();
                 break;
-            case 6: // faturacao
+            case 6:
                 query6();
                 break;
             case 7:
@@ -271,7 +252,7 @@ public class GereVendasController implements IGereVendasController {
             case 8:
                 query8();
                 break;
-            case 9: // faturacao
+            case 9:
                 query9();
                 break;
             case 10:
@@ -286,9 +267,11 @@ public class GereVendasController implements IGereVendasController {
 
 
     public void init ( ) {
+        model.updateStaticInfo();
         view.setTimeQueue(model.getTimeOfLoadData());
         view.showInfoView(model.getFichVendas(),model.getEstatatistica());
         do {
+            if(view.getCurrentMenu() == Menu.MAINMENU) view.setTimeQueue(model.getTimeOfLoadData());
             view.updateView();
             reactToInput(view.getChoice());
         }

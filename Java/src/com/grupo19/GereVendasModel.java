@@ -31,14 +31,15 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     public static IGereVendasModel loadData() {
         IGereVendasModel model = new GereVendasModel();
-        Crono.start();
+        IEstatisticas estat = model.getEstatatistica();
         List<String> config = Input.lerLinhasWithBuff("config.txt");
         if (config.isEmpty()) return null;
+        Crono.start();
         List<String> produtos = Input.lerLinhasWithBuff(config.get(0));
         List<String> clientes = Input.lerLinhasWithBuff(config.get(1));
         model.setFichVendas(config.get(2));
-        model.getEstatatistica().setNumProdutosTotal(produtos.size());
-        model.getEstatatistica().setNumClientesTotal(clientes.size());
+        estat.setNumProdutosTotal(produtos.size());
+        estat.setNumClientesTotal(clientes.size());
         try {
             GereVendasModel.NUM_FILIAIS = Integer.parseInt(config.get(3));
         } catch (NumberFormatException e) {
@@ -46,7 +47,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         }
         produtos.forEach(p -> GereVendasModel.addToCatProdFromString(p, model));
         clientes.forEach(c -> GereVendasModel.addToCatClientFromString(c, model));
-        loadVendas(model);
+        loadVendas(model,estat);
         model.setTimeOfLoadData(Crono.stop());
         return model;
     }
@@ -56,11 +57,17 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
 
-    private static void loadVendas(IGereVendasModel model) {
+    public void updateStaticInfo() {
+        this.estat.setFacturacaoTotal(this.facturacao.facturacaoTotal());
+        this.estat.setNumClientesNaoCompraram(this.catClient.clientsNeverBought().size());
+        this.estat.setNumTotalProdutosComprados(estat.getTotalProdNum() - this.catProd.productsNeverBought().size());
+    }
+
+    private static void loadVendas(IGereVendasModel model, IEstatisticas estat) {
         int numVendasValidas = 0;
         int vendasZero = 0;
         List<String> vendas = Input.lerLinhasWithBuff(model.getFichVendas());
-        model.getEstatatistica().setNumVendasTotal(vendas.size());
+        estat.setNumVendasTotal(vendas.size());
         for (String l : vendas) {
             ISale tmp = processSale(l, model);
             if (tmp != null) {
@@ -72,11 +79,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
                 if (tmp.getPrice() == 0.0) vendasZero++;
             }
         }
-        model.getEstatatistica().setNumVendasValidas(numVendasValidas);
-        model.getEstatatistica().setFacturacaoTotal(model.getFacturacao().facturacaoTotal());
-        model.getEstatatistica().setNumClientesNaoCompraram(model.getCatClient().clientsNeverBought().size());
-        model.getEstatatistica().setNumTotalProdutosComprados(model.getEstatatistica().getTotalProdNum() - model.getCatProd().productsNeverBought().size());
-        model.getEstatatistica().setNumTotalDeComprasValorNulo(vendasZero);
+        estat.setNumVendasValidas(numVendasValidas);
+        estat.setNumTotalDeComprasValorNulo(vendasZero);
     }
 
     public IFilial[] getFiliais() {
@@ -131,9 +135,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         model.getCatClient().add(tmp);
     }
 
-    public List<IProduct> listOfProductsWithLetter(char letter) {
-        return this.getCatProd().listOfProductsThatStartWithLetter(letter);
-    }
+
 
     public List<IProduct> productsNoOneBoughtModel() {
         return this.getCatProd().productsNeverBought();
@@ -220,7 +222,6 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
             }
         }
         lista = mapalist.entrySet().stream().sorted((o1, o2) -> comparaEntrySets(o1, o2)).map(l -> l.getKey()).collect(Collectors.toList());
-        Collections.reverse(lista);
         return lista;
 
     }
@@ -230,7 +231,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         if (fst.getValue().equals(snd.getValue())) {
             return fst.getKey().compareTo(snd.getKey());
         }
-        if (fst.getValue() > snd.getValue()) return 1;
+        if (snd.getValue() > fst.getValue()) return 1;
         return -1;
     }
 

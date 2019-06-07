@@ -26,7 +26,7 @@ public class Facturacao implements IFacturacao, Serializable {
     public Facturacao(){
         this.arrayOfSales= new ArrayList<>();
         for(int i = 0; i<12 ; i++){
-            Map <String, IFacturacaoPorProd> tmp = new TreeMap<>();
+            Map <String, IFacturacaoPorProd> tmp = new HashMap<>(); // ERA UM TREEMAP
             arrayOfSales.add(tmp);
         }
 
