@@ -14,23 +14,36 @@ public class Filial implements IFilial, Serializable {
     private Map<String,List<List<ISale>>> filialData;
 
 
+    /**
+     * constrotor vazio da filial
+     */
     public Filial(){
 
         this.filialData = new HashMap<>();
 
     }
 
-
+    /**
+     * constrotor parametrizado da filial
+     * @param a
+     */
     public Filial(IFilial a){
         this.filialData = a.getFilialData();
     }
 
 
+    /**
+     * faz um clone da filial
+     * @return IFilial
+     */
     public IFilial clone() {
         return new Filial(this);
     }
 
-    // idk se está bem
+    /**
+     * metodo que faz o get da filial completamente clonado
+     * @return tmp
+     */
     public Map<String,List<List<ISale>>> getFilialData(){
         Map<String,List<List<ISale>>> tmp = new HashMap<>();
         for(Map.Entry<String,List<List<ISale>>> mapa : this.filialData.entrySet()){
@@ -38,6 +51,8 @@ public class Filial implements IFilial, Serializable {
         }
         return tmp;
     }
+
+
 
     private List<List<ISale>> cloneOfLists(List<List<ISale>> init){
         List<List<ISale>> res = new ArrayList<>();
@@ -47,6 +62,10 @@ public class Filial implements IFilial, Serializable {
         return res;
     }
 
+    /**
+     * metodo quee adiciona uma sala a filial
+     * @param a
+     */
     public void add(ISale a){
         if(!this.filialData.containsKey(a.getClient())) {
             List<List<ISale>> lista = new ArrayList<>(12);
@@ -99,8 +118,12 @@ public class Filial implements IFilial, Serializable {
         return res;
     }
 
-    // queire 2 interativa e tb queire estatica
-    // numero de clientes distintos que compraram num certo mes
+
+    /**
+     * (query2) numero de clintes distintos que compraram num certo mes
+     * @param x
+     * @return
+     */
     public int numberOfClientsBoughtInMonth(int x){
         if(x > 12){return 0;}
         List<ISale> res = new ArrayList<>();
@@ -125,8 +148,12 @@ public class Filial implements IFilial, Serializable {
         return true;
     }
 
-    // queries 2 interativa e tb querie estatica
-    // numero total de vendas num mes
+
+    /**
+     * (query 2) metodo que diz quantas vendas ouve num mes e quantos clintes distintos compraram
+     * @param x
+     * @return Tuple
+     */
     public Tuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x){
         if(x > 11 || x < 0){return null;}
         int res = 0;
@@ -142,6 +169,12 @@ public class Filial implements IFilial, Serializable {
         return new Tuple<>(res,client.size());
     }
 
+    /**
+     * metodo que da o total faturado por um cliente num dado mes
+     * @param client
+     * @param month
+     * @return sum
+     */
     public double totalFaturadoPerClientPerMonth(String client,int month) {
         double sum = 0.0;
         List<ISale> tmp = this.filialData.get(client).get(month);
@@ -151,8 +184,14 @@ public class Filial implements IFilial, Serializable {
         return sum;
     }
 
-    // querie 3 interativa
-    // retorna o numero de produtos distitnos comprados por um cliente num dado mes
+
+    /**
+     * (query 3)metodo que determina os produtos distintos comprados por um cliente num dado mes
+     *  e o numero de compras
+     * @param cliente
+     * @param mes
+     * @return Tuple
+     */
     public Tuple<Integer,Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente,int mes){
         if(mes > 11 || mes < 0){return null;}
         List<ISale> tmp = this.filialData.get(cliente).get(mes);
@@ -175,17 +214,23 @@ public class Filial implements IFilial, Serializable {
     }
 
 
-    //querie 3 interativa
-    // diz qnt gastou um cliente num dado mes
+    /**
+     * (query 3) metodo que diz quanto gastou um cliente num dado mes
+     * @param cliente
+     * @param mes
+     * @return double
+     */
     public double clientSpentInAMonth(String cliente,int mes){
         return this.filialData.get(cliente).get(mes).stream().mapToDouble(l->l.getPrice()).sum();
     }
 
 
-    // querie 5 interativa
-    // lista de codigos dos produtos que comprou por ordem descrescente de quantidade
-    // e para qnts iguais por ordem alfabetica
-
+    /**
+     * (query 5) lista de codigos dos produtos que comporu por ordem decrescente de quantidade
+     * e para quantos iguais por ordem alfabetica
+     * @param client
+     * @return mapa
+     */
     public Map<String,Integer> getListOfProductsBoughtOfClient(String client) {
         Map<String,Integer> mapa = new HashMap<>();
         for(int i = 0; i < 12; i++){
@@ -203,8 +248,10 @@ public class Filial implements IFilial, Serializable {
         return mapa;
     }
 
-    // queire 7 interativa
-    // determinar a lista de tres mairores compradores em termos de dinheiro faturado
+    /**
+     * (query 7)determinar a lista de tres maiores compradores em termos de dinheiro faturado
+     * @return list<String>
+     */
     public List<String> getListOfClientsWhoMostBought(){
         Map<String,Double> mapa = new HashMap<>();
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
@@ -226,10 +273,12 @@ public class Filial implements IFilial, Serializable {
     }
 
 
-    //queiry8 interativa
-    //Determinar os códigos dos X clientes (sendo X dado pelo utilizador) que compraram
-    //mais produtos diferentes (não interessa a quantidade nem o valor), indicando
-    //quantos, sendo o critério de ordenação a ordem decrescente do número de produtos;
+    /**
+     * (query 8)determinar os codigos dos X clientes(sendo X dado pelo utilizador) que compraram
+     * mais produtos diferentes(nao interessa a quantidade nem o valor),indicado
+     * quantos,sendo o criterio de ordenaçao a ordem decrescente do numero de produtos
+     * @return mapa
+     */
     public Map<String,Set<String>> getClientsHowBoughtMostOften(){
         Map<String,Set<String>> mapa = new HashMap<>();
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()) {

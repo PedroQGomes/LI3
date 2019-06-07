@@ -312,10 +312,13 @@ public class Facturacao implements IFacturacao, Serializable {
 
     }
 
-    //Dado o código de um produto que deve existir, determinar o conjunto dos X clientes
-    //que mais o compraram e, para cada um, qual o valor gasto (ordenação cf. 5);
-    //ordenada por ordem decrescente de quantidade e, para
-    //quantidades iguais, por ordem alfabética dos códigos;
+    /**
+     *  dado o codigo de um produto que deve existir,determinar o conjunto dos X clintes
+     *  qu mais compraram e par cada um,qual o valor gasto
+     * @param produto
+     * @param tamanho
+     * @return res
+     */
     public List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
         Map<String, Tuple<Integer,Double>>  mapa = new HashMap<>();
         List<Map.Entry<String, Tuple<Integer,Double>>> res;
