@@ -97,7 +97,7 @@ public interface IFacturacao {
      * @param prod string id do produto
      * @return res list ordenada segundo o critério(Ordem Decrescente)
      */
-    List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);
+    List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);
 
 }
 

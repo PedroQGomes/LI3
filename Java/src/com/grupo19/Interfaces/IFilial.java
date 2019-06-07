@@ -12,8 +12,8 @@ public interface IFilial {
     int getNumberOfSalesPerClientPerMonth(IClient client , int month);
     int getNumberOfSalesPerClientPerYear(IClient client);
     double totalFaturadoPerClientPerMonth(String client,int month);
-    Tuple<Integer, Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente, int mes);
-    Tuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x);
+    ITuple<Integer, Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente, int mes);
+    ITuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x);
     Map<String,List<List<ISale>>> getFilialData();
     Map<String,Integer> getListOfProductsBoughtOfClient(String client);
     List<String> getListOfClientsWhoMostBought();

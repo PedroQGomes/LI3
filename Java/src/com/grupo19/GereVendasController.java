@@ -68,7 +68,7 @@ public class GereVendasController implements IGereVendasController {
         sb.append("Para o mês ").append(month + 1).append(" :").append("\n");
         int totalSum = 0;
         for (int i = 0; i < GereVendasModel.getNumFiliais(); i++) {
-            Tuple<Integer, Integer> tmp = model.totalNumbOfSalesInMonthAndClientsBought(month, i);
+            ITuple<Integer, Integer> tmp = model.totalNumbOfSalesInMonthAndClientsBought(month, i);
             if (tmp == null) continue;
             totalSum += tmp.getFirstElem();
             sb.append("Na Filial ").append(i + 1).append(" foram feitas ").append(tmp.getFirstElem()).append(" vendas por ").append(tmp.getSecondElem()).append(" clientes diferentes").append("\n");
@@ -85,11 +85,11 @@ public class GereVendasController implements IGereVendasController {
     private void query3() { //TODO : Round GASTOU
         String client = GereVendasView.getUserInputString("Insira um código de cliente");
         Crono.start();
-        List<Tuple<Integer,Integer>> tmp = model.totalPurchasesOfAClientPerYear(client);
+        List<ITuple<Integer,Integer>> tmp = model.totalPurchasesOfAClientPerYear(client);
         if(tmp == null) view.showLine("Cliente não existe");
         StringBuilder sb = new StringBuilder();
         for(int i = 0 ; i < 12; i++) {
-            Tuple<Integer,Integer> tmpTuple = null;
+            ITuple<Integer,Integer> tmpTuple = null;
             if(tmp.size() > i) tmpTuple = tmp.get(i);
             if(tmpTuple == null) continue;
             sb.append("Mês ")
@@ -153,10 +153,10 @@ public class GereVendasController implements IGereVendasController {
     private void query6() {
         int n = GereVendasView.getUserInputInt("Insira o  número de vezes: ");
         Crono.start();
-        List<Tuple<String,Integer>> tmp = model.productsMostSellAndNumberOfClients(n);
+        List<ITuple<String,Integer>> tmp = model.productsMostSellAndNumberOfClients(n);
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i< n ; i++) {
-            Tuple<String,Integer> tuple = tmp.get(i);
+            ITuple<String,Integer> tuple = tmp.get(i);
             sb.append(i+1).append("º - Produto ").append(tuple.getFirstElem()).append(" foi comprado por ").append(tuple.getSecondElem()).append(" clientes\n");
         }
         view.setTimeQueue(Crono.stop());
@@ -181,7 +181,7 @@ public class GereVendasController implements IGereVendasController {
     }
 
     private void query8(){
-        int x = GereVendasView.getUserInputInt();
+        int x = GereVendasView.getUserInputInt("Insira o número de clientes pretendido:");
         Crono.start();
         StringBuilder sb = new StringBuilder();
         List<Map.Entry<String, Set<String>>> lista = model.getClientsHowBoughtMostOften(x);
@@ -202,7 +202,7 @@ public class GereVendasController implements IGereVendasController {
         Crono.start();
         String l = GereVendasView.getUserInputString();
         int tamanho = GereVendasView.getUserInputInt();
-        List<Map.Entry<String, Tuple<Integer,Double>>> lista = model.getXClientsWhoMostBoughtProduct(l,tamanho);
+        List<Map.Entry<String, ITuple<Integer,Double>>> lista = model.getXClientsWhoMostBoughtProduct(l,tamanho);
         StringBuilder sb = new StringBuilder();
 
         for(int i = 0 ; i < lista.size(); i++) {

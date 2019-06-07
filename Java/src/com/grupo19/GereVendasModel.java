@@ -160,7 +160,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
      * @return
      */
     @Override
-    public Tuple<Integer, Integer> totalNumbOfSalesInMonthAndClientsBought(int x, int filial) {
+    public ITuple<Integer, Integer> totalNumbOfSalesInMonthAndClientsBought(int x, int filial) {
         return this.getFiliais()[filial].totalNumbOfSalesInMonthAndClientsBought(x);
     }
 
@@ -170,14 +170,14 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
      * @param client
      * @return
      */
-    public List<Tuple<Integer, Integer>> totalPurchasesOfAClientPerYear(String client) {
+    public List<ITuple<Integer, Integer>> totalPurchasesOfAClientPerYear(String client) {
         if (!this.getCatClient().contains(client)) return null;
-        List<Tuple<Integer, Integer>> tmp = new ArrayList<>(12);
+        List<ITuple<Integer, Integer>> tmp = new ArrayList<>(12);
         for (int month = 0; month < 12; month++) {
             int total = 0;
             Set<String> stringSet = new HashSet<>();
             for (int i = 0; i < GereVendasModel.getNumFiliais(); i++) {
-                Tuple<Integer, Set<String>> setTuple = this.getFiliais()[i].numOfDifferentProductsOfClientAndNumOfSales(client, month);
+                ITuple<Integer, Set<String>> setTuple = this.getFiliais()[i].numOfDifferentProductsOfClientAndNumOfSales(client, month);
                 stringSet.addAll(setTuple.getSecondElem());
                 total += setTuple.getFirstElem();
             }
@@ -284,8 +284,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         return this.facturacao.getNumClientAndFacturacao(product);
     }
 
-    public List<Tuple<String, Integer>> productsMostSellAndNumberOfClients(int n) {
-        List<Tuple<String, Integer>> res = new ArrayList<>(n);
+    public List<ITuple<String, Integer>> productsMostSellAndNumberOfClients(int n) {
+        List<ITuple<String, Integer>> res = new ArrayList<>(n);
         List<String> productsMostSellStrings = this.getCatProd().productsMostSell(n);
         for (String l : productsMostSellStrings) {
             res.add(new Tuple<>(l, this.getFacturacao().numberOfClientsWhoBought(l)));
@@ -328,7 +328,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
 
-    public List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
+    public List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
         return this.facturacao.getXClientsWhoMostBoughtProduct(produto,tamanho);
     }
 }

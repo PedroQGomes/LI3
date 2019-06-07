@@ -1,9 +1,6 @@
 package com.grupo19.Models;
 
-import com.grupo19.Interfaces.IFacturacao;
-import com.grupo19.Interfaces.IFacturacaoPorProd;
-import com.grupo19.Interfaces.IProduct;
-import com.grupo19.Interfaces.ISale;
+import com.grupo19.Interfaces.*;
 import com.grupo19.Tuple;
 
 
@@ -101,7 +98,7 @@ public class Facturacao implements IFacturacao, Serializable {
         for(int i=0; i<12; i++) {
             Map <String, IFacturacaoPorProd> tmp=arrayOfSales.get(i);
             for (Map.Entry<String, IFacturacaoPorProd> entry : tmp.entrySet()){
-                for(Map.Entry<String, IFacturacaoPorProd> entry2 : arrayOfSales.get(i).entrySet()){
+                for(Map.Entry<String, IFacturacaoPorProd> entry2 : fact.getArrayOfSales().get(i).entrySet()){
                     String key = entry.getKey();
                     String key2 = entry2.getKey();
                     if(!key.equals(key2)) return false;
@@ -249,7 +246,12 @@ public class Facturacao implements IFacturacao, Serializable {
             HashSet<String> clients = new HashSet<>();
             Map <String, IFacturacaoPorProd> tmp;
             tmp=arrayOfSales.get(i);
-            for(ISale s: tmp.get(codProd).getSalesList()){
+            IFacturacaoPorProd tmpFact = tmp.get(codProd);
+            if(tmpFact == null ){
+                resultados.add(i,0);
+                continue;
+            }
+            for(ISale s: tmpFact.getSalesList()){
                 clients.add(s.getClient());
             }
             total=clients.size();
@@ -353,9 +355,9 @@ public class Facturacao implements IFacturacao, Serializable {
      * @return res lista segundo os critérios de ordenação
      *
      */
-    public List<Map.Entry<String, Tuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
-        Map<String, Tuple<Integer,Double>>  mapa = new HashMap<>();
-        List<Map.Entry<String, Tuple<Integer,Double>>> res;
+    public List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
+        Map<String, ITuple<Integer,Double>>  mapa = new HashMap<>();
+        List<Map.Entry<String, ITuple<Integer,Double>>> res;
         int count = 0;
         double facturacao = 0;
         for(int i = 0; i< 12; i++){

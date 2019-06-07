@@ -1,8 +1,10 @@
 package com.grupo19;
 
+import com.grupo19.Interfaces.ITuple;
+
 import java.io.Serializable;
 
-public class Tuple<A,B> implements Serializable { //TODO: INTERFACE ITUPLE
+public class Tuple<A,B> implements Serializable, ITuple {
     private final A a;
     private final B b;
 
