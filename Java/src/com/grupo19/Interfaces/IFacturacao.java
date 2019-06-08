@@ -85,7 +85,7 @@ public interface IFacturacao {
     /**
      *
      * calcula quantas vezes o produto foi comprado, por quantos clientes diferentes e total facturado por mês
-     * @param product string do id do produto
+     * @param client string do id do produto
      * @return res list
      *
      */
@@ -94,7 +94,7 @@ public interface IFacturacao {
     /**
      *
      * Método que determina a facturacao por filial e por mês do produto prod
-     * @param prod string id do produto
+     * @param produto string id do produto
      * @return res list ordenada segundo o critério(Ordem Decrescente)
      */
     List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);

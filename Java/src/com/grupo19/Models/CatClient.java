@@ -2,6 +2,8 @@ package com.grupo19.Models;
 
 import com.grupo19.Interfaces.ICatClient;
 import com.grupo19.Interfaces.IClient;
+import com.grupo19.Interfaces.ITuple;
+import com.grupo19.Tuple;
 
 import java.io.Serializable;
 import java.util.*;
@@ -23,9 +25,9 @@ public class CatClient implements ICatClient, Serializable {
     }
 
 
-    public void updateClientBought (String client, int filial) {
+    public void updateClientBought (String client, int filial,String product) {
         IClient clt = mapOfClients.get(client);
-        clt.updateClientBought(filial-1);
+        clt.updateClientBought(filial-1,product);
     }
 
     public List<IClient> clientsNeverBought ( ) {
@@ -40,7 +42,7 @@ public class CatClient implements ICatClient, Serializable {
 
     /**
      * Lista de clientes que não compraram em todas as filiais
-     * @return
+     * @return lista de clientes que não compraram em todas as filiais
      */
 
     public List<IClient> listOfClientsThatDBoughtInAllFilials ( ) {
@@ -49,10 +51,29 @@ public class CatClient implements ICatClient, Serializable {
 
     /**
      * Lista de clientes que compraram em todas as filiais
-     * @return
+     * @return lista de clientes que compraram em todas as filiais
      */
     public List<IClient> listOfClientsThatBoughtInAllFilials ( ) {
         return this.mapOfClients.values().stream().filter(IClient::hasClientEverBought).collect(Collectors.toList());
+    }
+
+    public List<ITuple<String,Integer>> listOfClientsWhoBoughtMost(int n) {
+        TreeSet<ITuple<String,Integer>> set = new TreeSet<>(new Comparator<ITuple<String, Integer>>() {
+            @Override
+            public int compare(ITuple<String, Integer> o1, ITuple<String, Integer> o2) {
+                if(o1.getSecondElem().equals(o2.getSecondElem())) return o2.getFirstElem().compareTo(o1.getFirstElem());
+                return o1.getSecondElem().compareTo(o2.getSecondElem());
+            }
+        });
+        for(Map.Entry<String,IClient> entry : this.mapOfClients.entrySet()) {
+            set.add(new Tuple<>(entry.getKey(),entry.getValue().NumDiffProductsBought()));
+        }
+        List<ITuple<String,Integer>> res = new ArrayList<>(n);
+        for(int i = 0 ; i<n; i++) {
+            ITuple<String,Integer> tuple = set.pollLast();
+            if(tuple != null) res.add(tuple);
+        }
+        return res;
     }
 
 }

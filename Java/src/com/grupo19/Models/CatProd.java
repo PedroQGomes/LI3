@@ -14,23 +14,13 @@ public class CatProd implements ICatProd, Serializable {
 
     public CatProd() {
         mapOfProds = new HashMap<>();
-       /*mapOfProds = new ArrayList<>(26);
-       for(int i = 0; i<26; i++) {
-           Map<String,IProduct> tmp = new HashMap<>();
-           mapOfProds.add(tmp);
-       } */
     }
 
     public void add (IProduct product)
     {
         mapOfProds.put(product.getCodigo(),product.clone());
-        //MapOfALetter(product.firstLetter()).put(product.getCodigo(),product.clone());
     }
 
-   /* private Map<String,IProduct> MapOfALetter(char letter) {
-        int index = letter - 'A';
-        return mapOfProds.get(index);
-    }*/
 
     public boolean contains (String product) {
         return mapOfProds.containsKey(product);
@@ -44,27 +34,29 @@ public class CatProd implements ICatProd, Serializable {
 
     public List<IProduct> productsNeverBought ( ) {
         List<IProduct> neverBought = new ArrayList<>();
-        //for(Map<String,IProduct> map : this.mapOfProds.entrySet()) {
            for(Map.Entry<String, IProduct> entry : this.mapOfProds.entrySet()) {
                IProduct prod = entry.getValue();
                if(!prod.isProductEverBought()) neverBought.add(prod);
            }
-        //}
         return neverBought;
     }
 
 
     public List<String> productsMostSell (int n) {
-        List<ITuple<String,Integer>> tupleList = new ArrayList<>();
+        TreeSet<ITuple<String,Integer>> tupleList = new TreeSet<>(new Comparator<ITuple<String, Integer>>() {
+            @Override
+            public int compare(ITuple<String, Integer> o1, ITuple<String, Integer> o2) {
+                return o1.getSecondElem().compareTo(o2.getSecondElem());
+            }
+        });
         List<String> res = new ArrayList<>(n);
             for(Map.Entry<String, IProduct> entry : this.mapOfProds.entrySet()) {
                 IProduct tmpProd = entry.getValue();
                 tupleList.add(new Tuple<>(tmpProd.getCodigo(),tmpProd.totalOfUnitsBought()));
             }
-
-        tupleList.sort((o1, o2) -> o2.getSecondElem().compareTo(o1.getSecondElem()));
         for(int i=0;i<n;i++) {
-            res.add(tupleList.get(i).getFirstElem());
+            ITuple<String,Integer> tmp = tupleList.pollLast();
+            if(tmp != null) res.add(tmp.getFirstElem());
         }
         return res;
     }

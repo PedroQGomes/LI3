@@ -1,5 +1,6 @@
 package com.grupo19.Models;
 
+import com.grupo19.Crono;
 import com.grupo19.Interfaces.IClient;
 import com.grupo19.Interfaces.IFilial;
 import com.grupo19.Interfaces.ISale;
@@ -102,7 +103,7 @@ public class Filial implements IFilial, Serializable {
         double res = 0;
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
             for(int i = 0; i<12;i++) {
-                res += lista.getValue().get(i).stream().mapToDouble(l-> l.getPrice()).sum();
+                res += lista.getValue().get(i).stream().mapToDouble(ISale::getPrice).sum();
             }
         }
         return res;
@@ -114,7 +115,7 @@ public class Filial implements IFilial, Serializable {
         if(x > 12){return 0;}
         double res = 0;
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
-            res += lista.getValue().get(x-1).stream().mapToDouble(l-> l.getPrice()).sum();
+            res += lista.getValue().get(x-1).stream().mapToDouble(ISale::getPrice).sum();
         }
         return res;
     }
@@ -155,7 +156,7 @@ public class Filial implements IFilial, Serializable {
      * @param x
      * @return Tuple
      */
-    public Tuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x){
+    public ITuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x){
         if(x > 11 || x < 0){return null;}
         int res = 0;
         Set<String> client = new HashSet<>();
@@ -193,7 +194,7 @@ public class Filial implements IFilial, Serializable {
      * @param mes
      * @return Tuple
      */
-    public Tuple<Integer,Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente,int mes){
+    public ITuple<Integer,Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente,int mes){
         if(mes > 11 || mes < 0){return null;}
         List<ISale> tmp = this.filialData.get(cliente).get(mes);
         Set<String> rep = new HashSet<>();
@@ -222,7 +223,7 @@ public class Filial implements IFilial, Serializable {
      * @return double
      */
     public double clientSpentInAMonth(String cliente,int mes){
-        return this.filialData.get(cliente).get(mes).stream().mapToDouble(l->l.getPrice()).sum();
+        return this.filialData.get(cliente).get(mes).stream().mapToDouble(ISale::getPrice).sum();
     }
 
 
@@ -255,22 +256,24 @@ public class Filial implements IFilial, Serializable {
      */
     // fazer uma lista com apenas 3 elementos e vou substituindo a medida que alguem aparece maior
     public List<String> getListOfClientsWhoMostBought(){
-        Map<String,Double> mapa = new HashMap<>();
+        TreeSet<ITuple<String,Double>> tmp = new TreeSet<>(((o1, o2) -> o2.getSecondElem().compareTo(o1.getSecondElem())));
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
+            double fact = 0.0;
             for(int i = 0;i<12;i++){
                 for(ISale sale :lista.getValue().get(i)){
-                    if(mapa.containsKey(sale.getClient())){
-                        double tmp = mapa.get(sale.getClient());
-                        tmp += sale.getPrice();
-                        mapa.put(sale.getClient(),tmp);
-                    }else {
-                        mapa.put(sale.getClient(),sale.getPrice());
-                    }
+                    fact += sale.totalPrice();
                 }
             }
+            tmp.add(new Tuple<>(lista.getKey(),fact));
         }
-        return mapa.entrySet().stream().sorted((o1,o2)-> o1.getValue().compareTo(o2.getValue())).map(l-> l.getKey()).limit(3).collect(Collectors.toList());
+        List<String> res = new ArrayList<>(3);
+        for(int i = 0; i<3;i++) {
+            ITuple<String,Double> tuple = tmp.pollFirst();
+            if(tuple != null) res.add(tuple.getFirstElem());
+        }
+        return res;
     }
+
 
 
     /**
@@ -279,7 +282,7 @@ public class Filial implements IFilial, Serializable {
      * quantos,sendo o criterio de ordenaçao a ordem decrescente do numero de produtos
      * @return mapa
      */
-    public Map<String,Set<String>> getClientsHowBoughtMostOften(){
+    public Map<String,Set<String>> getClientsWhoBoughtMostOften(){
         Map<String,Set<String>> mapa = new HashMap<>();
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()) {
             for(int i = 0; i< 12; i++){
