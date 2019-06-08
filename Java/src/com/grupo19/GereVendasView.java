@@ -34,13 +34,7 @@ public class GereVendasView implements IGereVendasView {
         this.col = col;
     }
 
-    /**
-     * Lê o input(String) do user
-     * @return
-     */
-    public static String getUserInputString() {
-        return Input.lerString();
-    }
+
 
     /**
      * Lê o input(String) do user
@@ -51,13 +45,7 @@ public class GereVendasView implements IGereVendasView {
         return Input.lerString();
     }
 
-    /**
-     * Lê o input(int) do user
-     * @return
-     */
-    public static int getUserInputInt() {
-        return Input.lerInt();
-    }
+
     /**
      * Lê o input(int) do user
      * @return
@@ -83,6 +71,11 @@ public class GereVendasView implements IGereVendasView {
         stringBrowser.addAll(stringsList);
     }
 
+    /**
+     * converte os dados para string para serem visualizados
+     * @param fichName
+     * @param estatistica
+     */
     @Override
     public void showInfoView(String fichName, IEstatisticas estatistica) {
         StringBuilder sb = new StringBuilder("Ficheiro lido: ");
@@ -125,11 +118,17 @@ public class GereVendasView implements IGereVendasView {
     }
 
 
-
+    /**
+     * Update menu
+     * @param menu
+     */
     public void updateMenu (Menu menu) {
         this.menu = menu;
     }
 
+    /**
+     * altera o modo do menu
+     */
     public void updateView () {
         header();
         switch(this.menu) {
@@ -147,6 +146,14 @@ public class GereVendasView implements IGereVendasView {
 
     }
 
+<<<<<<< HEAD
+=======
+
+    /**
+     * imprime o menu como uma lista
+     * @param menu
+     */
+>>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
     private void showMenuAsList(Menu menu) {
         String[] menuOptions = menu.getMenuOptions();
         StringBuilder sb = new StringBuilder();
@@ -158,19 +165,35 @@ public class GereVendasView implements IGereVendasView {
         out.print(sb.toString());
     }
 
+    /**
+     *setter para o timeQueue
+     * @param timeQueue
+     */
     public void setTimeQueue(double timeQueue) {
         this.timeQueue = timeQueue;
     }
 
-
+    /**
+     * getter da opcao do menu
+     * @return
+     */
     public int getChoice() {return this.choice;}
 
+
+    /**
+     * imprime a line no ecra
+     * @param line
+     */
     public void showLine (String line) {
         header();
         System.out.println(line);
         Input.lerString();
     }
 
+
+    /**
+     * permite percorrer os dados consultados
+     */
     public void navigate ( ) {
         if(this.stringBrowser.isEmpty()){
             out.println("Não existem resultados");
@@ -196,6 +219,9 @@ public class GereVendasView implements IGereVendasView {
 
     }
 
+    /**
+     * Define as dimensoes para a visualizacao das consultas
+     */
     private void printStringsBrowser() {
         cursor = page*(row*col);
 
@@ -216,12 +242,17 @@ public class GereVendasView implements IGereVendasView {
     }
 
 
-    public boolean choiceIsOutOfRange() {
-        return (choice > this.menu.getMenuOptions().length);
-    }
+    /**
+     * devolve o menu
+     * @return
+     */
     public Menu getCurrentMenu() { return this.menu;}
 
 
+    /**
+     * método para fechar o menu
+     * @return
+     */
     public boolean exit() {
         if(menu != Menu.MAINMENU) return false;
         return choice == 0 || choice > menu.getMenuOptions().length;

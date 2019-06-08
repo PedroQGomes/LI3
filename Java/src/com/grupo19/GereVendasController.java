@@ -11,17 +11,26 @@ public class GereVendasController implements IGereVendasController {
     private IGereVendasModel model;
     private IGereVendasView view;
 
+    /**
+     * define o modelo do controler
+     * @param model
+     */
     public void setModel (IGereVendasModel model) {
         this.model = model;
     }
 
-
+    /**
+     *  define o view do controler
+     * @param view
+     */
     public void setView (IGereVendasView view) {
         this.view = view;
 
     }
 
-
+    /**
+     * query 1
+     */
     private void query1() {
         Crono.start();
         List <IProduct> tmp = model.productsNoOneBoughtModel();
@@ -34,7 +43,9 @@ public class GereVendasController implements IGereVendasController {
     }
 
 
-
+    /**
+     * query 2
+     */
     private void query2() {
         int month = GereVendasView.getMonthFromInput() -1;
         Crono.start();
@@ -55,7 +66,9 @@ public class GereVendasController implements IGereVendasController {
     }
 
 
-
+    /**
+     * query 3
+     */
     private void query3() {
         String client = GereVendasView.getUserInputString("Insira um código de cliente");
         Crono.start();
@@ -83,8 +96,15 @@ public class GereVendasController implements IGereVendasController {
         view.showLine(sb.toString());
     }
 
+<<<<<<< HEAD
 
     private void query4(){
+=======
+    /**
+     * query 4
+     */
+    private void query4(){ //TODO: melhorar apresentação
+>>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
         String l = GereVendasView.getUserInputString("Insira o código do Produto:");
         Crono.start();
         List<List<Double>> lista = model.getNumClientAndFacturacao(l);
@@ -116,7 +136,9 @@ public class GereVendasController implements IGereVendasController {
 
 
 
-
+    /**
+     * query 5
+     */
     private void query5(){
         String l = GereVendasView.getUserInputString("Insira o código de Cliente:");
         Crono.start();
@@ -133,6 +155,9 @@ public class GereVendasController implements IGereVendasController {
         view.updateView();
     }
 
+    /**
+     * query 6
+     */
     private void query6() {
         int n = GereVendasView.getUserInputInt("Insira o  número de vezes: ");
         Crono.start();
@@ -147,6 +172,9 @@ public class GereVendasController implements IGereVendasController {
     }
 
 
+    /**
+     * query 7
+     */
     private void query7(){
         Crono.start();
         List<List<String>> lista = model.getListOfClientsWhoMostBought();
@@ -163,6 +191,10 @@ public class GereVendasController implements IGereVendasController {
 
     }
 
+
+    /**
+     * query 8
+     */
     private void query8(){
         int x = GereVendasView.getUserInputInt("Insira o número de clientes pretendido:");
         Crono.start();
@@ -179,8 +211,16 @@ public class GereVendasController implements IGereVendasController {
         }
         view.showLine(sb.toString());
     }
+<<<<<<< HEAD
     //Dado o código de um produto que deve existir, determinar o conjunto dos X clientes
     //que mais o compraram e, para cada um, qual o valor gasto
+=======
+
+
+    /**
+     * query 9
+     */
+>>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
     private void query9() {
         String l = GereVendasView.getUserInputString("Insira o código de Produto:");
         int tamanho = GereVendasView.getUserInputInt("Insira o número de clientes que deseja ver:");
@@ -200,6 +240,10 @@ public class GereVendasController implements IGereVendasController {
 
     }
 
+
+    /**
+     * query 10
+     */
     private void query10() { //TODO: Melhorar Apresentaçao
         String prod = GereVendasView.getUserInputString("Insira o código de Produto:");
         List<String> stringList = new ArrayList<>();
@@ -233,7 +277,9 @@ public class GereVendasController implements IGereVendasController {
     }
 
 
-
+    /**
+     * Metodo que reage ao imput dado pelo utilizador
+     */
     private void reactToInput(int choice) {
         switch (choice) {
             case 1:
@@ -279,7 +325,9 @@ public class GereVendasController implements IGereVendasController {
     }
 
 
-
+    /**
+     *  metodo que inicia o controller
+     */
     public void init ( ) {
         //model.updateStaticInfo();
         view.setTimeQueue(model.getTimeOfLoadData());

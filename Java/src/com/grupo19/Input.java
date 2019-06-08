@@ -11,6 +11,11 @@ import static java.lang.System.out;
 import static java.lang.System.in;
 
 public class Input {
+
+    /**
+     * le strings a partir do input
+     * @return
+     */
     public static String lerString() {
         Scanner input = new Scanner(in);
         boolean ok = false;
@@ -30,7 +35,10 @@ public class Input {
         return txt;
     }
 
-
+    /**
+     * le inteiros a partir do input
+     * @return
+     */
     public static int lerInt() {
         Scanner input = new Scanner(in);
         boolean ok = false;
@@ -50,6 +58,10 @@ public class Input {
         return i;
     }
 
+    /**
+     * le doubles a partir do input
+     * @return
+     */
     public static double lerDouble() {
         Scanner input = new Scanner(in);
         boolean ok = false;
@@ -69,6 +81,10 @@ public class Input {
         return d;
     }
 
+    /**
+     * le floats a partir do input
+     * @return
+     */
     public static float lerFloat() {
         Scanner input = new Scanner(in);
         boolean ok = false;
@@ -88,6 +104,10 @@ public class Input {
         return f;
     }
 
+    /**
+     * le boolean do input
+     * @return
+     */
     public static boolean lerBoolean() {
         Scanner input = new Scanner(in);
         boolean ok = false;
@@ -107,6 +127,10 @@ public class Input {
         return b;
     }
 
+    /**
+     * le um short do input
+     * @return
+     */
     public static short lerShort() {
         Scanner input = new Scanner(in);
         boolean ok = false;
@@ -126,6 +150,11 @@ public class Input {
         return s;
     }
 
+    /**
+     * le a partin de um ficheiro para uma lista de strings
+     * @param fichtxt
+     * @return
+     */
     public static List<String> lerLinhasWithBuff (String fichtxt) {
         List<String> linhas = new ArrayList<>(100000);
         BufferedReader inFile = null;

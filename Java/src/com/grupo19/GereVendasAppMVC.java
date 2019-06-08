@@ -7,6 +7,10 @@ import static java.lang.System.out;
 
 public class GereVendasAppMVC {
 
+    /**
+     * metodo main que inicia a aplicaçao
+     * @param args
+     */
     public static void main(String[] args) {
     IGereVendasModel model = GereVendasModel.recoverState("data.tmp");
     if(model == null) {
