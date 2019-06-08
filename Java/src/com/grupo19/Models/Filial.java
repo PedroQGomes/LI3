@@ -87,7 +87,12 @@ public class Filial implements IFilial, Serializable {
 
         }
 
-        public double FacturacaoTotal(){
+
+    /**
+     * total de faturacao
+     * @return double
+     */
+    public double FacturacaoTotal(){
             double facturacao = 0;
             for(Map.Entry<String,List<List<ISale>>> mapa : this.filialData.entrySet()){
             for(int i = 0; i<12 ; i++) {
@@ -100,7 +105,11 @@ public class Filial implements IFilial, Serializable {
     }
 
 
-
+    /**
+     * facturacao de um mes
+     * @param mes
+     * @return facturacao
+     */
     public double FaturacaoPorMes(int mes){
         double facturacao = 0;
         for(Map.Entry<String,List<List<ISale>>> mapa : this.filialData.entrySet()){
@@ -112,9 +121,10 @@ public class Filial implements IFilial, Serializable {
     }
 
 
-
-    //Número de distintos clientes que compraram em cada mês (não interessa
-    //quantas vezes o cliente comprou) filial a filial;
+    /**
+     * lista com os diferentes clientes que compraram mes a mes
+     * @return lista
+     */
     public List<Set<String>> DiferentClientsWhoBought(){
         List<Set<String>> lista = new ArrayList<>();
         for(int i = 0; i<12 ; i++) {
@@ -130,13 +140,12 @@ public class Filial implements IFilial, Serializable {
         return lista;
     }
 
-
+    /**
+     * numero de sales por mes
+     * @return arr
+     */
     public int[] numberOfSalesPerMonth(){
         int[] arr = new int[12];
-
-        for(int j = 0; j<12;j++){
-            arr[j] = 0;
-        }
 
         for(Map.Entry<String,List<List<ISale>>> mapa : this.filialData.entrySet()){
             for(int i = 0; i<12 ; i++) {
