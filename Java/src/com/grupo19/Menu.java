@@ -17,6 +17,7 @@ public enum Menu {
     Menu() {
 
     }
+
     Menu(String[] menuOptions) {
          this.menuOptions = menuOptions;
     }

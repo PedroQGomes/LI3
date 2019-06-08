@@ -1,10 +1,9 @@
 package com.grupo19.Interfaces;
 
-import com.grupo19.Tuple;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
 
 public interface IGereVendasModel {
     ICatProd getCatProd();
@@ -18,18 +17,17 @@ public interface IGereVendasModel {
     double getTimeOfLoadData();
     ICatClient getCatClient();
     List<IProduct> productsNoOneBoughtModel();
-    List<IClient> listOfClientsThatBoughtInAllFilials();
-    List<IClient> listOfClientsThatDBoughtInAllFilials();
+
     List<ITuple<String,Integer>> getListOfProductsBoughtOfClient(String a);
     List<ITuple<Integer,Integer>> totalPurchasesOfAClientPerYear(String a );
     double totalFaturadoPClientPMonth(String a,int mes);
     List<List<String>> getListOfClientsWhoMostBought();
-    List<Map.Entry<String, Set<String>>> getClientsWhoBoughtMostOften(int x);
+
     List<ITuple<String,Integer>> getClientsWhoBoughtMostOften2(int x);
     List<List<Double>> getNumClientAndFacturacao(String client);
     List<ITuple<String,Integer>> productsMostSellAndNumberOfClients(int n);
     List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod);
-    void saveState(String fichObject);
+
     List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);
     void updateStaticInfo();
 
