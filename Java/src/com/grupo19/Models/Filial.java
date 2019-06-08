@@ -17,7 +17,7 @@ public class Filial implements IFilial, Serializable {
 
 
     /**
-     * constrotor vazio da filial
+     * construtor vazio da filial
      */
     public Filial(){
 
@@ -26,7 +26,7 @@ public class Filial implements IFilial, Serializable {
     }
 
     /**
-     * constrotor parametrizado da filial
+     * construtor parametrizado da filial
      * @param a
      */
     public Filial(IFilial a){
@@ -55,7 +55,11 @@ public class Filial implements IFilial, Serializable {
     }
 
 
-
+    /**
+     * metodo para clonar a lista de listas de ISales
+     * @param init list a clonar
+     * @return nova lista
+     */
     private List<List<ISale>> cloneOfLists(List<List<ISale>> init){
         List<List<ISale>> res = new ArrayList<>();
         for(int i = 0; i <12; i++) {
@@ -65,7 +69,7 @@ public class Filial implements IFilial, Serializable {
     }
 
     /**
-     * metodo quee adiciona uma sala a filial
+     * metodo que adiciona uma sala a filial
      * @param a
      */
     public void add(ISale a){
@@ -81,73 +85,6 @@ public class Filial implements IFilial, Serializable {
         List<ISale> saleArr = monthArr.get(a.getMonth()-1);
         saleArr.add(a.clone());
 
-    }
-
-    // da o numero de sales de um cliente num certo mes
-    public int getNumberOfSalesPerClientPerMonth(IClient client , int month) {
-        return this.filialData.get(client.getCodigo()).get(month).size();
-    }
-
-    // da o numero de vendas de um cliente num ano
-    public int getNumberOfSalesPerClientPerYear(IClient client){
-        int sum = 0;
-        for(int i = 0; i<12; i++){
-            sum += this.filialData.get(client.getCodigo()).get(i).size();
-        }
-        return sum;
-    }
-
-    // queire estatica
-    // faturacao total da filialData
-    public double faturacaoTotal(){
-        double res = 0;
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
-            for(int i = 0; i<12;i++) {
-                res += lista.getValue().get(i).stream().mapToDouble(ISale::getPrice).sum();
-            }
-        }
-        return res;
-    }
-
-    // querie estatica
-    // faturacao total de um dado mes
-    public double faturacaoOfMonth(int x){
-        if(x > 12){return 0;}
-        double res = 0;
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
-            res += lista.getValue().get(x-1).stream().mapToDouble(ISale::getPrice).sum();
-        }
-        return res;
-    }
-
-
-    /**
-     * (query2) numero de clintes distintos que compraram num certo mes
-     * @param x
-     * @return
-     */
-    public int numberOfClientsBoughtInMonth(int x){
-        if(x > 12){return 0;}
-        List<ISale> res = new ArrayList<>();
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
-            for(ISale sale : lista.getValue().get(x)) {
-                if(firstSale(res,sale)){
-                    res.add(sale);
-                }
-            }
-        }
-        return res.size();
-    }
-
-    // metodo aussiliar
-    private boolean firstSale(List<ISale> lista, ISale sale){
-        for(ISale s : lista){
-            if(s.getClient().equals(sale.getClient())){
-
-                return false;
-            }
-        }
-        return true;
     }
 
 
@@ -170,6 +107,7 @@ public class Filial implements IFilial, Serializable {
         }
         return new Tuple<>(res,client.size());
     }
+
 
     /**
      * metodo que da o total faturado por um cliente num dado mes
@@ -205,28 +143,6 @@ public class Filial implements IFilial, Serializable {
     }
 
 
-    // metodo auxiliar
-    private boolean productExists(List<ISale> lista,ISale sale){
-        for(ISale a : lista){
-            if(a.getProduct().equals(sale.getProduct())){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
-     * (query 3) metodo que diz quanto gastou um cliente num dado mes
-     * @param cliente
-     * @param mes
-     * @return double
-     */
-    public double clientSpentInAMonth(String cliente,int mes){
-        return this.filialData.get(cliente).get(mes).stream().mapToDouble(ISale::getPrice).sum();
-    }
-
-
     /**
      * (query 5) lista de codigos dos produtos que comporu por ordem decrescente de quantidade
      * e para quantos iguais por ordem alfabetica
@@ -250,11 +166,11 @@ public class Filial implements IFilial, Serializable {
         return mapa;
     }
 
+
     /**
      * (query 7)determinar a lista de tres maiores compradores em termos de dinheiro faturado
      * @return list<String>
      */
-    // fazer uma lista com apenas 3 elementos e vou substituindo a medida que alguem aparece maior
     public List<String> getListOfClientsWhoMostBought(){
         TreeSet<ITuple<String,Double>> tmp = new TreeSet<>(((o1, o2) -> o2.getSecondElem().compareTo(o1.getSecondElem())));
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){

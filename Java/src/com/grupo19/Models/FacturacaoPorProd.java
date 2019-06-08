@@ -49,14 +49,7 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
         this.salesList=fact.getSalesList();
     }
 
-    /**
-     *
-     * construtor parametrizado
-     *
-     */
-    public  FacturacaoPorProd(List<ISale> list){
-       this.salesList = new ArrayList<>(list);
-    }
+
 
 
     /**
@@ -72,17 +65,6 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
     }
 
 
-    /**
-     *
-     * setter da list de sales
-     *
-     * @param salesAll lista  de sales
-     *
-     */
-
-    public void setSalesList(List<ISale> salesAll){
-        this.salesList = new ArrayList<> (salesAll);
-    }
 
     /**
      *
@@ -109,19 +91,6 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
     /**
      *
-     * remove uma ISale da list, passada como parametro
-     *
-     * @param s Sale a inserir
-     *
-     */
-    public void  removeSale(ISale s){
-        salesList.remove(s);
-    }
-
-
-
-    /**
-     *
      * metodo equals
      *
      * */
@@ -139,6 +108,13 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
         return true;
     }
 
+
+    /**
+     *
+     * Numero de diferentes clientes que realizaram compras
+     * @return double res
+     *
+     */
     public double getDifClientsWhoBought(){
         HashSet<String> lista = new HashSet<>();
         double res;
@@ -149,6 +125,13 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
         return res;
     }
 
+
+    /**
+     *
+     * Calcula a facturacao por filial
+     * @return  list por filial
+     *
+     */
     public List<Double> factPerFilial() {
         List<Double> res = new ArrayList<>();
         for(int i = 0; i< GereVendasModel.getNumFiliais(); i++) {
