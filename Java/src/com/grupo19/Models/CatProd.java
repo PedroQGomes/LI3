@@ -10,7 +10,7 @@ import java.util.*;
 
 
 public class CatProd implements ICatProd, Serializable {
-    private Map<String,IProduct> mapOfProds; //TODO: Tirar
+    private Map<String,IProduct> mapOfProds;
 
     public CatProd() {
         mapOfProds = new HashMap<>();

@@ -94,9 +94,9 @@ public class Facturacao implements IFacturacao, Serializable {
         if(obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        IFacturacao fact=(IFacturacao) obj;
+        IFacturacao fact = (IFacturacao) obj;
         for(int i=0; i<12; i++) {
-            Map <String, IFacturacaoPorProd> tmp=arrayOfSales.get(i);
+            Map <String, IFacturacaoPorProd> tmp = arrayOfSales.get(i);
             for (Map.Entry<String, IFacturacaoPorProd> entry : tmp.entrySet()){
                 for(Map.Entry<String, IFacturacaoPorProd> entry2 : fact.getArrayOfSales().get(i).entrySet()){
                     String key = entry.getKey();
@@ -132,7 +132,6 @@ public class Facturacao implements IFacturacao, Serializable {
 
     }
     /**
-     *
      * metodo de clone
      *
      */

@@ -119,7 +119,7 @@ public class GereVendasController implements IGereVendasController {
 
 
 
-    private void query5(){ //TODO: testar implementaçao algo confusa
+    private void query5(){
         String l = GereVendasView.getUserInputString("Insira o código de Cliente:");
         Crono.start();
         List<String> tmp = model.getListOfProductsBoughtOfClient(l);

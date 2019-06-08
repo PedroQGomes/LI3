@@ -253,6 +253,7 @@ public class Filial implements IFilial, Serializable {
      * (query 7)determinar a lista de tres maiores compradores em termos de dinheiro faturado
      * @return list<String>
      */
+    // fazer uma lista com apenas 3 elementos e vou substituindo a medida que alguem aparece maior
     public List<String> getListOfClientsWhoMostBought(){
         Map<String,Double> mapa = new HashMap<>();
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
@@ -264,44 +265,12 @@ public class Filial implements IFilial, Serializable {
                         mapa.put(sale.getClient(),tmp);
                     }else {
                         mapa.put(sale.getClient(),sale.getPrice());
-
                     }
                 }
-
             }
         }
         return mapa.entrySet().stream().sorted((o1,o2)-> o1.getValue().compareTo(o2.getValue())).map(l-> l.getKey()).limit(3).collect(Collectors.toList());
     }
-
-    /*public List<String> getListOfClientsWhoMostBought(){
-        List<String> res = new ArrayList<>();
-        Map<String,Double> mapa = new HashMap<>();
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
-            for(int i = 0;i<12;i++){
-                for(ISale sale :lista.getValue().get(i)){
-                    if(mapa.containsKey(sale.getClient())){
-                        double tmp = mapa.get(sale.getClient());
-                        tmp += sale.getPrice();
-                        mapa.put(sale.getClient(),tmp);
-                    }else {
-                        mapa.put(sale.getClient(),sale.getPrice());
-
-                    }
-                }
-
-            }
-        }
-        TreeSet<ITuple<String,Double>> set = new TreeSet<>(((o1, o2) -> o2.getSecondElem().compareTo(o1.getSecondElem())));
-        for(Map.Entry entry : mapa.entrySet()) {
-            set.add(new Tuple<>(entry.getKey(),entry.getValue()));
-        }
-        for(int i = 0; i<3; i++) {
-            ITuple<String,Double> tuple = set.pollLast();
-            if(tuple != null)
-            res.add(tuple.getFirstElem());
-        }
-        return res;
-    } */
 
 
     /**

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/com/grupo19/Models/Filial.java" line="103" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/grupo19/Models/Filial.java" line="126" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b213d7b-e72b-4d80-ad94-94d1477598cb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/grupo19/GereVendasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/GereVendasController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/GereVendasModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/GereVendasModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IFacturacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IFacturacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IFacturacaoPorProd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IFacturacaoPorProd.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Models/CatProd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Models/CatProd.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/grupo19/Models/Facturacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Models/Facturacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Models/FacturacaoPorProd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Models/FacturacaoPorProd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Models/Filial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Models/Filial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/grupo19/Models/Sale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/grupo19/Models/Sale.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,21 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Facturacao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="282" column="20" selection-start-line="282" selection-start-column="20" selection-end-line="282" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#5962#5970#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/FacturacaoPorProd.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="31" column="7" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+            <state relative-caret-position="-304">
+              <caret line="350" column="15" selection-start-line="350" selection-start-column="15" selection-end-line="350" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -54,15 +40,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Filial.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="57" column="61" lean-forward="true" selection-start-line="57" selection-start-column="61" selection-end-line="57" selection-end-column="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#428#429#0" expanded="true" />
-                <element signature="e#479#480#0" expanded="true" />
-                <element signature="e#510#511#0" expanded="true" />
-                <element signature="e#549#550#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="103">
+              <caret line="281" column="63" selection-start-line="281" selection-start-column="35" selection-end-line="281" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Client.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-49">
+              <caret line="53" column="29" lean-forward="true" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/FacturacaoPorProd.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="35" column="6" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -71,53 +68,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/grupo19/Tuple.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="275" selection-start-line="275" selection-end-line="275" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1971#1972#0" expanded="true" />
-                <element signature="e#2015#2016#0" expanded="true" />
-                <element signature="e#3371#3372#0" expanded="true" />
-                <element signature="e#3406#3407#0" expanded="true" />
-                <element signature="e#3447#3448#0" expanded="true" />
-                <element signature="e#3485#3486#0" expanded="true" />
-                <element signature="e#3808#3809#0" expanded="true" />
-                <element signature="e#3838#3839#0" expanded="true" />
-                <element signature="e#3878#3879#0" expanded="true" />
-                <element signature="e#3915#3916#0" expanded="true" />
-                <element signature="e#4215#4216#0" expanded="true" />
-                <element signature="e#4252#4253#0" expanded="true" />
-                <element signature="e#4302#4303#0" expanded="true" />
-                <element signature="e#4344#4345#0" expanded="true" />
-                <element signature="e#4950#4951#0" expanded="true" />
-                <element signature="e#5012#5013#0" expanded="true" />
-                <element signature="e#5056#5057#0" expanded="true" />
-                <element signature="e#5090#5091#0" expanded="true" />
-                <element signature="e#5127#5128#0" expanded="true" />
-                <element signature="e#5160#5161#0" expanded="true" />
-                <element signature="e#5207#5208#0" expanded="true" />
-                <element signature="e#5240#5241#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasAppMVC.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <caret line="4" column="28" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -125,12 +76,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="209" selection-start-line="209" selection-end-line="209" />
-              <folding>
-                <element signature="e#306#307#0" expanded="true" />
-                <element signature="e#340#341#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-1983">
+              <caret line="88" column="5" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-685">
+              <caret line="262" column="19" lean-forward="true" selection-start-line="259" selection-start-column="13" selection-end-line="262" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -138,13 +94,30 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/CatProd.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="102">
+              <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#631#632#0" expanded="true" />
-                <element signature="e#818#819#0" expanded="true" />
-                <element signature="e#893#894#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1156">
+              <caret line="83" column="5" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#625#626#0" expanded="true" />
+                <element signature="e#655#656#0" expanded="true" />
+                <element signature="e#786#787#0" expanded="true" />
+                <element signature="e#816#817#0" expanded="true" />
+                <element signature="e#930#931#0" expanded="true" />
+                <element signature="e#970#971#0" expanded="true" />
+                <element signature="e#1265#1266#0" expanded="true" />
+                <element signature="e#1302#1303#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -153,8 +126,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="28" column="64" selection-start-line="28" selection-start-column="64" selection-end-line="28" selection-end-column="64" />
+            <state relative-caret-position="459">
+              <caret line="31" selection-start-line="32" selection-start-column="26" selection-end-line="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -190,6 +163,8 @@
       <find>tuple</find>
       <find>totalSaleProd</find>
       <find>getListOfClientsWhoMostBought</find>
+      <find>query9</find>
+      <find>getClientsHowBoughtMostOften</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -208,7 +183,6 @@
         <option value="$PROJECT_DIR$/src/com/grupo19/Client.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/IGereVendasView.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Models/SGV.java" />
-        <option value="$PROJECT_DIR$/src/com/grupo19/Models/CatProd.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Models/GereVendasModel.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasController.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasView.java" />
@@ -222,21 +196,24 @@
         <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/ICatClient.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/CatClient.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Models/CatClient.java" />
-        <option value="$PROJECT_DIR$/src/com/grupo19/Models/Filial.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/IFilial.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Models/FacturacaoPorProd.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/IFacturacaoPorProd.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/IFacturacao.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/GereVendasModel.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasModel.java" />
-        <option value="$PROJECT_DIR$/src/com/grupo19/GereVendasController.java" />
+        <option value="$PROJECT_DIR$/src/com/grupo19/Models/Sale.java" />
+        <option value="$PROJECT_DIR$/src/com/grupo19/Models/CatProd.java" />
         <option value="$PROJECT_DIR$/src/com/grupo19/Models/Facturacao.java" />
+        <option value="$PROJECT_DIR$/src/com/grupo19/Models/Filial.java" />
+        <option value="$PROJECT_DIR$/src/com/grupo19/GereVendasController.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
-    <option name="width" value="977" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="886" />
+    <option name="y" value="2" />
+    <option name="width" value="980" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -245,30 +222,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Java" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Java" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="Java" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Java" type="616d4139:PackageViewModuleNode" />
-              <item name="com.grupo19" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="Java" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="grupo19" type="462c0819:PsiDirectoryNode" />
-              <item name="Models" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -305,15 +258,40 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Java" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Java" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="Java" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Java" type="616d4139:PackageViewModuleNode" />
+              <item name="com.grupo19" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="Java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="grupo19" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559785818008" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559785901714" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -366,7 +344,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e2fca4a5-1d61-41c6-a0b1-98f942e88e78" name="Default Changelist" comment="" />
+      <changelist id="5b213d7b-e72b-4d80-ad94-94d1477598cb" name="Default Changelist" comment="" />
       <created>1556291965702</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -385,37 +363,48 @@
       <workItem from="1559659821942" duration="7809000" />
       <workItem from="1559683268648" duration="388000" />
       <workItem from="1559701242016" duration="2926000" />
+      <workItem from="1559823817116" duration="9891000" />
+      <workItem from="1559926458436" duration="2504000" />
+      <workItem from="1559943902070" duration="5507000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58871000" />
+    <option name="totallyTimeSpent" value="77042000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.102684565" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18926175" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="SonarLint" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33144477" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.34560907" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33144477" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.34560907" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3286119" />
-      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.3295302" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -425,7 +414,40 @@
       <window_info anchor="right" id="Maven" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.3295302" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18657719" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33144477" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.34560907" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3286119" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.3295302" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -435,7 +457,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/grupo19/Models/Facturacao.java</url>
-          <line>285</line>
+          <line>13</line>
           <properties />
           <option name="timeStamp" value="33" />
         </line-breakpoint>
@@ -496,13 +518,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="8" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/grupo19/Menu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -514,24 +529,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1105">
           <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
-          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#655#656#0" expanded="true" />
-            <element signature="e#786#787#0" expanded="true" />
-            <element signature="e#816#817#0" expanded="true" />
-            <element signature="e#930#931#0" expanded="true" />
-            <element signature="e#970#971#0" expanded="true" />
-            <element signature="e#1265#1266#0" expanded="true" />
-            <element signature="e#1302#1303#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -569,28 +566,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Tuple.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/grupo19/Interfaces/ISale.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Sale.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="100" column="19" selection-start-line="100" selection-start-column="15" selection-end-line="100" selection-end-column="19" />
-          <folding>
-            <element signature="e#491#492#0" expanded="true" />
-            <element signature="e#520#521#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -601,118 +580,127 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasAppMVC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/util/Collection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="710" selection-start-line="710" selection-end-line="710" />
+          <folding>
+            <element signature="e#34766#34767#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/grupo19/Interfaces/IFacturacao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+        <state relative-caret-position="306">
+          <caret line="21" column="112" selection-start-line="21" selection-start-column="112" selection-end-line="21" selection-end-column="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Sale.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1632">
+          <caret line="119" column="28" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="28" />
+          <folding>
+            <element signature="e#3486#3487#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/FacturacaoPorProd.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="31" column="7" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+        <state relative-caret-position="476">
+          <caret line="35" column="6" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasModel.java">
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Tuple.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="28" column="64" selection-start-line="28" selection-start-column="64" selection-end-line="28" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="34">
+          <caret line="4" column="28" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/CatProd.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="102">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#631#632#0" expanded="true" />
-            <element signature="e#818#819#0" expanded="true" />
-            <element signature="e#893#894#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Filial.java">
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="57" column="61" lean-forward="true" selection-start-line="57" selection-start-column="61" selection-end-line="57" selection-end-column="61" />
+        <state relative-caret-position="1156">
+          <caret line="83" column="5" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#428#429#0" expanded="true" />
-            <element signature="e#479#480#0" expanded="true" />
-            <element signature="e#510#511#0" expanded="true" />
-            <element signature="e#549#550#0" expanded="true" />
+            <element signature="e#625#626#0" expanded="true" />
+            <element signature="e#655#656#0" expanded="true" />
+            <element signature="e#786#787#0" expanded="true" />
+            <element signature="e#816#817#0" expanded="true" />
+            <element signature="e#930#931#0" expanded="true" />
+            <element signature="e#970#971#0" expanded="true" />
+            <element signature="e#1265#1266#0" expanded="true" />
+            <element signature="e#1302#1303#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasModel.java">
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Interfaces/IGereVendasModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="275" selection-start-line="275" selection-end-line="275" />
+        <state relative-caret-position="459">
+          <caret line="31" selection-start-line="32" selection-start-column="26" selection-end-line="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1971#1972#0" expanded="true" />
-            <element signature="e#2015#2016#0" expanded="true" />
-            <element signature="e#3371#3372#0" expanded="true" />
-            <element signature="e#3406#3407#0" expanded="true" />
-            <element signature="e#3447#3448#0" expanded="true" />
-            <element signature="e#3485#3486#0" expanded="true" />
-            <element signature="e#3808#3809#0" expanded="true" />
-            <element signature="e#3838#3839#0" expanded="true" />
-            <element signature="e#3878#3879#0" expanded="true" />
-            <element signature="e#3915#3916#0" expanded="true" />
-            <element signature="e#4215#4216#0" expanded="true" />
-            <element signature="e#4252#4253#0" expanded="true" />
-            <element signature="e#4302#4303#0" expanded="true" />
-            <element signature="e#4344#4345#0" expanded="true" />
-            <element signature="e#4950#4951#0" expanded="true" />
-            <element signature="e#5012#5013#0" expanded="true" />
-            <element signature="e#5056#5057#0" expanded="true" />
-            <element signature="e#5090#5091#0" expanded="true" />
-            <element signature="e#5127#5128#0" expanded="true" />
-            <element signature="e#5160#5161#0" expanded="true" />
-            <element signature="e#5207#5208#0" expanded="true" />
-            <element signature="e#5240#5241#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-49">
+          <caret line="53" column="29" lean-forward="true" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="209" selection-start-line="209" selection-end-line="209" />
-          <folding>
-            <element signature="e#306#307#0" expanded="true" />
-            <element signature="e#340#341#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1983">
+          <caret line="88" column="5" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasAppMVC.java">
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/GereVendasModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-685">
+          <caret line="262" column="19" lean-forward="true" selection-start-line="259" selection-start-column="13" selection-end-line="262" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Filial.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="281" column="63" selection-start-line="281" selection-start-column="35" selection-end-line="281" selection-end-column="63" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/grupo19/Models/Facturacao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="282" column="20" selection-start-line="282" selection-start-column="20" selection-end-line="282" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5962#5970#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-304">
+          <caret line="350" column="15" selection-start-line="350" selection-start-column="15" selection-end-line="350" selection-end-column="15" />
         </state>
       </provider>
     </entry>
