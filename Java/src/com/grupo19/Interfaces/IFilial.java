@@ -1,7 +1,5 @@
 package com.grupo19.Interfaces;
 
-import com.grupo19.Tuple;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +35,7 @@ public interface IFilial {
      * e o numero de compras
      *
      * @param cliente codigo de cliente
-     * @param mes mes
+     * @param mes     mes
      * @return Tuple
      */
     ITuple<Integer, Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente, int mes);
@@ -93,10 +91,10 @@ public interface IFilial {
 
     /**
      * array com os diferentes clientes que compraram mes a mes
+     *
      * @return lista
      */
     int[] DiferentClientsWhoBought();
-
 
 
 }

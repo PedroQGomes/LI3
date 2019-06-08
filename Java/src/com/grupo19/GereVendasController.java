@@ -7,23 +7,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Controlador
+ */
 public class GereVendasController implements IGereVendasController {
     private IGereVendasModel model;
     private IGereVendasView view;
 
     /**
      * define o modelo do controler
+     *
      * @param model model
      */
-    public void setModel (IGereVendasModel model) {
+    public void setModel(IGereVendasModel model) {
         this.model = model;
     }
 
     /**
-     *  define o view do controler
+     * define o view do controler
+     *
      * @param view view
      */
-    public void setView (IGereVendasView view) {
+    public void setView(IGereVendasView view) {
         this.view = view;
 
     }
@@ -33,7 +38,7 @@ public class GereVendasController implements IGereVendasController {
      */
     private void query1() {
         Crono.start();
-        List <IProduct> tmp = model.productsNoOneBoughtModel();
+        List<IProduct> tmp = model.productsNoOneBoughtModel();
         view.setTimeQueue(Crono.stop());
         view.addToStringBrowser(tmp.stream().map(IProduct::getCodigo).sorted(String::compareTo).collect(Collectors.toList()));
         view.setRow(5);
@@ -47,7 +52,7 @@ public class GereVendasController implements IGereVendasController {
      * query 2
      */
     private void query2() {
-        int month = GereVendasView.getMonthFromInput() -1;
+        int month = GereVendasView.getMonthFromInput() - 1;
         Crono.start();
         StringBuilder sb = new StringBuilder();
         sb.append("Para o mês ").append(month + 1).append(" :").append("\n");
@@ -72,25 +77,25 @@ public class GereVendasController implements IGereVendasController {
     private void query3() {
         String client = GereVendasView.getUserInputString("Insira um código de cliente");
         Crono.start();
-        List<ITuple<Integer,Integer>> tmp = model.totalPurchasesOfAClientPerYear(client);
-        if(tmp == null) {
+        List<ITuple<Integer, Integer>> tmp = model.totalPurchasesOfAClientPerYear(client);
+        if (tmp == null) {
             view.setTimeQueue(Crono.stop());
             view.showLine("Cliente não existe");
             return;
         }
         StringBuilder sb = new StringBuilder();
-        for(int i = 0 ; i < 12; i++) {
-            ITuple<Integer,Integer> tmpTuple = null;
-            if(tmp.size() > i) tmpTuple = tmp.get(i);
-            if(tmpTuple == null) continue;
+        for (int i = 0; i < 12; i++) {
+            ITuple<Integer, Integer> tmpTuple = null;
+            if (tmp.size() > i) tmpTuple = tmp.get(i);
+            if (tmpTuple == null) continue;
             sb.append("Mês ")
-                    .append(i+1)
+                    .append(i + 1)
                     .append(" :")
                     .append("   Fez ").append(tmpTuple.getFirstElem())
                     .append(" compras de ")
                     .append(tmpTuple.getSecondElem())
                     .append(" produtos diferentes e gastou ")
-                    .append(model.totalFaturadoPClientPMonth(client,i)).append("\n");
+                    .append(model.totalFaturadoPClientPMonth(client, i)).append("\n");
         }
         view.setTimeQueue(Crono.stop());
         view.showLine(sb.toString());
@@ -99,24 +104,24 @@ public class GereVendasController implements IGereVendasController {
     /**
      * query 4
      */
-    private void query4(){
+    private void query4() {
         String l = GereVendasView.getUserInputString("Insira o código do Produto:");
         Crono.start();
         List<List<Double>> lista = model.getNumClientAndFacturacao(l);
         view.setTimeQueue(Crono.stop());
         StringBuilder sb = new StringBuilder();
-        if(lista.isEmpty()) {
+        if (lista.isEmpty()) {
             view.setTimeQueue(Crono.stop());
             view.showLine("Não existe esse produto!");
             return;
         }
-        for(int i = 0; i < 12 ;i++){
-            if(lista.get(i).isEmpty()) {
-                sb.append("Mês ").append(i+1).append(": O Produto ").append(l).append(" não foi comprado neste mês").append("\n");
+        for (int i = 0; i < 12; i++) {
+            if (lista.get(i).isEmpty()) {
+                sb.append("Mês ").append(i + 1).append(": O Produto ").append(l).append(" não foi comprado neste mês").append("\n");
                 continue;
             }
             sb.append("Mês ")
-                    .append(i+1)
+                    .append(i + 1)
                     .append(": O Produto ")
                     .append(l).append(" foi comprado ")
                     .append(Math.round(lista.get(i).get(0))).append(" vez(es),por ")
@@ -130,18 +135,17 @@ public class GereVendasController implements IGereVendasController {
     }
 
 
-
     /**
      * query 5
      */
-    private void query5(){
+    private void query5() {
         String l = GereVendasView.getUserInputString("Insira o código de Cliente:");
         Crono.start();
-        List<ITuple<String,Integer>> tmp = model.getListOfProductsBoughtOfClient(l);
+        List<ITuple<String, Integer>> tmp = model.getListOfProductsBoughtOfClient(l);
         view.setTimeQueue(Crono.stop());
         List<String> stringList = new ArrayList<>(20);
-        for(ITuple tuple : tmp) {
-            stringList.add(tuple.getFirstElem() + " " + String.format("%03d",(int)tuple.getSecondElem()));
+        for (ITuple tuple : tmp) {
+            stringList.add(tuple.getFirstElem() + " " + String.format("%03d", (int) tuple.getSecondElem()));
         }
         view.addToStringBrowser(stringList);
         view.setRow(5);
@@ -156,12 +160,12 @@ public class GereVendasController implements IGereVendasController {
     private void query6() {
         int n = GereVendasView.getUserInputInt("Insira o  número de vezes: ");
         Crono.start();
-        List<ITuple<String,Integer>> tmp = model.productsMostSellAndNumberOfClients(n);
+        List<ITuple<String, Integer>> tmp = model.productsMostSellAndNumberOfClients(n);
         view.setTimeQueue(Crono.stop());
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i< n ; i++) {
-            ITuple<String,Integer> tuple = tmp.get(i);
-            sb.append(i+1).append("º - Produto ").append(tuple.getFirstElem()).append(" foi comprado por ").append(tuple.getSecondElem()).append(" clientes\n");
+        for (int i = 0; i < n; i++) {
+            ITuple<String, Integer> tuple = tmp.get(i);
+            sb.append(i + 1).append("º - Produto ").append(tuple.getFirstElem()).append(" foi comprado por ").append(tuple.getSecondElem()).append(" clientes\n");
         }
         view.showLine(sb.toString());
     }
@@ -170,14 +174,14 @@ public class GereVendasController implements IGereVendasController {
     /**
      * query 7
      */
-    private void query7(){
+    private void query7() {
         Crono.start();
         List<List<String>> lista = model.getListOfClientsWhoMostBought();
         view.setTimeQueue(Crono.stop());
         StringBuilder sb = new StringBuilder(256);
-        for(int i = 0 ; i < GereVendasModel.getNumFiliais(); i++) {
+        for (int i = 0; i < GereVendasModel.getNumFiliais(); i++) {
             sb.append("Filial")
-                    .append(i+1)
+                    .append(i + 1)
                     .append(" :")
                     .append(lista.get(i))
                     .append("\n");
@@ -190,13 +194,13 @@ public class GereVendasController implements IGereVendasController {
     /**
      * query 8
      */
-    private void query8(){
+    private void query8() {
         int x = GereVendasView.getUserInputInt("Insira o número de clientes pretendido:");
         Crono.start();
         StringBuilder sb = new StringBuilder();
-        List<ITuple<String,Integer>> lista = model.getClientsWhoBoughtMostOften(x);
+        List<ITuple<String, Integer>> lista = model.getClientsWhoBoughtMostOften(x);
         view.setTimeQueue(Crono.stop());
-        for(int i = 0; i < x ;i++){
+        for (int i = 0; i < x; i++) {
             sb.append("Cliente ")
                     .append(lista.get(i).getFirstElem())
                     .append(" comprou:")
@@ -208,7 +212,6 @@ public class GereVendasController implements IGereVendasController {
     }
 
 
-
     /**
      * query 9
      */
@@ -216,11 +219,11 @@ public class GereVendasController implements IGereVendasController {
         String l = GereVendasView.getUserInputString("Insira o código de Produto:");
         int tamanho = GereVendasView.getUserInputInt("Insira o número de clientes que deseja ver:");
         Crono.start();
-        List<Map.Entry<String, ITuple<Integer,Double>>> lista = model.getXClientsWhoMostBoughtProduct(l,tamanho);
+        List<Map.Entry<String, ITuple<Integer, Double>>> lista = model.getXClientsWhoMostBoughtProduct(l, tamanho);
         view.setTimeQueue(Crono.stop());
         StringBuilder sb = new StringBuilder();
-        if(lista.isEmpty()) sb.append("Não existe esse produto");
-        for(int i = 0 ; i < lista.size(); i++) {
+        if (lista.isEmpty()) sb.append("Não existe esse produto");
+        for (int i = 0; i < lista.size(); i++) {
             sb.append("O clinte ").append(lista.get(i).getKey()).append(" comprou o produto ")
                     .append(lista.get(i).getValue().getFirstElem())
                     .append(" vez(es) e gastou um total de ")
@@ -239,29 +242,29 @@ public class GereVendasController implements IGereVendasController {
         String prod = GereVendasView.getUserInputString("Insira o código de Produto:");
         List<String> stringList = new ArrayList<>();
         stringList.add("Filiais");
-        for(int j = 1; j <= 12 ; j++) {
-            if(j>9) {
-                stringList.add("Mês "+j);
+        for (int j = 1; j <= 12; j++) {
+            if (j > 9) {
+                stringList.add("Mês " + j);
                 continue;
             }
-            stringList.add("Mês  "+j);
+            stringList.add("Mês  " + j);
         }
         Crono.start();
         List<List<Double>> tmp = model.facturacaoPerProdPerFilialPerMonth(prod);
         view.setTimeQueue(Crono.stop());
-        for(int i=0; i<GereVendasModel.getNumFiliais(); i++) {
-            stringList.add("Filial "+(i+1));
-            for(int j = 0 ; j<12; j++) {
+        for (int i = 0; i < GereVendasModel.getNumFiliais(); i++) {
+            stringList.add("Filial " + (i + 1));
+            for (int j = 0; j < 12; j++) {
                 List<Double> doubleList = tmp.get(j);
-                if(doubleList.isEmpty()) {
-                    stringList.add(String.format("%010.2f",((Double)0.0)));
+                if (doubleList.isEmpty()) {
+                    stringList.add(String.format("%010.2f", ((Double) 0.0)));
                     continue;
                 }
-                stringList.add(String.format("%010.2f",doubleList.get(i)));
+                stringList.add(String.format("%010.2f", doubleList.get(i)));
             }
         }
         view.addToStringBrowser(stringList);
-        view.setCol(GereVendasModel.getNumFiliais()+1);
+        view.setCol(GereVendasModel.getNumFiliais() + 1);
         view.setRow(13);
         view.updateMenu(Menu.STRINGBROWSER);
         view.updateView();
@@ -317,20 +320,19 @@ public class GereVendasController implements IGereVendasController {
 
 
     /**
-     *  metodo que inicia o controller
+     * metodo que inicia o controller
      */
-    public void init ( ) {
+    public void init() {
         model.updateStaticInfo();
         view.setTimeQueue(model.getTimeOfLoadData());
-        view.showInfoView(model.getFichVendas(),model.getEstatatistica());
+        view.showInfoView(model.getFichVendas(), model.getEstatatistica());
         do {
-            if(view.getCurrentMenu() == Menu.MAINMENU) view.setTimeQueue(model.getTimeOfLoadData());
+            if (view.getCurrentMenu() == Menu.MAINMENU) view.setTimeQueue(model.getTimeOfLoadData());
             view.updateView();
             reactToInput(view.getChoice());
         }
-        while(!view.exit());
+        while (!view.exit());
     }
-
 
 
 }

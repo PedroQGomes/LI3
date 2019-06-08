@@ -21,6 +21,7 @@ public class Estatistica implements IEstatisticas, Serializable {
     private List<double[]> factPerMonth;
     private List<int[]> numberOfSalesPerMonth;
     private List<int[]> diffClientsNumber;
+
     /**
      * Construtor da estatistica
      */
@@ -32,17 +33,20 @@ public class Estatistica implements IEstatisticas, Serializable {
     }
 
     public void updateFactPerMonth(double[] factPerMonth) {
-       this.factPerMonth.add(factPerMonth);
+        this.factPerMonth.add(factPerMonth);
     }
+
     public void updateNumberOfSalesPerMonth(int[] numberOfSalesPerMonth) {
         this.numberOfSalesPerMonth.add(numberOfSalesPerMonth);
     }
+
     public void updateDiffClientsNumber(int[] diffClientsNumber) {
         this.diffClientsNumber.add(diffClientsNumber);
     }
 
     /**
      * Get da faturacao por mes
+     *
      * @return list das filiais com a faturacao por mes
      */
     public List<double[]> getFactPerMonth() {
@@ -51,6 +55,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * Get Do numero de sales por mes
+     *
      * @return list das filiais com o numero de sales por mes
      */
     public List<int[]> getNumberOfSalesPerMonth() {
@@ -59,14 +64,16 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * Get do numero de clientes diferentes
+     *
      * @return list das filiais com o numero de sales por mes
      */
     public List<int[]> getDiffClientsNumber() {
-        return new ArrayList<> (diffClientsNumber);
+        return new ArrayList<>(diffClientsNumber);
     }
 
     /**
      * setter para o numero total de produtos
+     *
      * @param numProdutosTotal numero de produtos total
      */
     public void setNumProdutosTotal(int numProdutosTotal) {
@@ -75,6 +82,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de clientes
+     *
      * @param numClientesTotal numero de clientes total
      */
     public void setNumClientesTotal(int numClientesTotal) {
@@ -83,6 +91,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas
+     *
      * @param numVendasTotal numero de vendas total
      */
     public void setNumVendasTotal(int numVendasTotal) {
@@ -91,6 +100,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas
+     *
      * @param numVendasValidas numero de vendas validas
      */
     public void setNumVendasValidas(int numVendasValidas) {
@@ -99,14 +109,16 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * getter para o numero total de vendas invalidas
-     * @return  total de vendas invalidas
+     *
+     * @return total de vendas invalidas
      */
     public int getNumVendasInvalidas() {
-        return this.numVendasTotal-this.numVendasValidas;
+        return this.numVendasTotal - this.numVendasValidas;
     }
 
     /**
      * getter para o numero total de Produtos
+     *
      * @return total de produtos
      */
     public int getTotalProdNum() {
@@ -115,6 +127,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * getter para o numero total de produtos comprados
+     *
      * @return total de produtos comprados
      */
     public int getNumTotalProdutosComprados() {
@@ -124,6 +137,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de produtos comprados
+     *
      * @param numTotalProdutosComprados numero total de produtos comprados
      */
     public void setNumTotalProdutosComprados(int numTotalProdutosComprados) {
@@ -132,7 +146,8 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * getter para o numero total de clientes que nao realizaram compras
-     * @return  numero total de clientes
+     *
+     * @return numero total de clientes
      */
     public int getNumClientesNaoCompraram() {
         return numClientesNaoCompraram;
@@ -140,6 +155,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de clientes que nao realizaram compras
+     *
      * @param numClientesNaoCompraram numero de clientes que nunca compraram
      */
     public void setNumClientesNaoCompraram(int numClientesNaoCompraram) {
@@ -148,7 +164,8 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * getter para o numero total de vendas com valor nulo
-     * @return  numero total de vendas nulas
+     *
+     * @return numero total de vendas nulas
      */
     public int getNumTotalDeComprasValorNulo() {
         return numTotalDeComprasValorNulo;
@@ -156,6 +173,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas com valor nulo
+     *
      * @param numTotalDeComprasValorNulo numero total de compras valor nulo
      */
     public void setNumTotalDeComprasValorNulo(int numTotalDeComprasValorNulo) {
@@ -164,6 +182,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * getter para a faturacao total
+     *
      * @return faturacao total
      */
     public double getFacturacaoTotal() {
@@ -172,6 +191,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para a faturacao total
+     *
      * @param facturacaoTotal faturaçao total
      */
     public void setFacturacaoTotal(double facturacaoTotal) {
@@ -180,15 +200,17 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * getter para os produtos nao comprados
+     *
      * @return total de produtos nao comprados
      */
     public int getProdNaoComprados() {
-        return this.getTotalProdNum()-this.getNumTotalProdutosComprados();
+        return this.getTotalProdNum() - this.getNumTotalProdutosComprados();
     }
 
 
     /**
      * getter para o numero total de clientes
+     *
      * @return total de clientes
      */
     @Override

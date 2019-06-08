@@ -1,10 +1,14 @@
 package com.grupo19;
 
 
-
 /**
- *
  * @author asus
+ * <p>
+ * Crono = mede um tempo entre start() e stop()
+ * O tempo e medido em nanosegundos e convertido para
+ * um double que representa os segs na sua parte inteira.
+ * @author FMM
+ * @version (a version number or a date)
  */
 /**
  * Crono = mede um tempo entre start() e stop()
@@ -14,7 +18,9 @@ package com.grupo19;
  * @author FMM
  * @version (a version number or a date)
  */
+
 import static java.lang.System.nanoTime;
+
 public class Crono {
 
     private static long inicio = 0L;
@@ -24,7 +30,8 @@ public class Crono {
      * construtor vazio do crono
      */
     public static void start() {
-        fim = 0L; inicio = nanoTime();
+        fim = 0L;
+        inicio = nanoTime();
     }
 
     /**
