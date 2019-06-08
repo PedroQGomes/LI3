@@ -18,19 +18,29 @@ public class Client implements IClient, Serializable {
     private boolean[] boughtOnFilial;
 
 
-
+    /**
+     * construtor vazio de um cliente
+     */
     public Client(){
         this.codigo = "";
         productBought = new HashSet<>(70);
         boughtOnFilial = new boolean[GereVendasModel.getNumFiliais()];
     }
 
+    /**
+     * construtor parametrizado de um cliente
+     * @param s
+     */
     public Client(String s){
         this.codigo = s;
         productBought = new HashSet<>(70);
         boughtOnFilial = new boolean[GereVendasModel.getNumFiliais()];
     }
 
+    /**
+     * construtor copia de um cliente
+     * @param a
+     */
     public Client(Client a){
         this.codigo = a.getCodigo();
         productBought = new HashSet<>(70);
@@ -39,11 +49,20 @@ public class Client implements IClient, Serializable {
         System.arraycopy(a.boughtOnFilial,0,this.boughtOnFilial,0,a.boughtOnFilial.length);
     }
 
+    /**
+     * adiciona um cliente que comprou
+     * @param filial
+     * @param product
+     */
     public void updateClientBought (int filial,String product) {
         this.productBought.add(product);
         boughtOnFilial[filial] = true;
     }
 
+    /**
+     * verifica se um cliente alguma vez comprou
+     * @return boolean
+     */
     public boolean hasClientEverBought () {
         boolean tmp = true;
         for(boolean a : this.boughtOnFilial) {
@@ -53,26 +72,46 @@ public class Client implements IClient, Serializable {
         return tmp;
     }
 
+    /**
+     * dá o codigo do cliente
+     * @return string
+     */
     public String getCodigo(){
         return this.codigo;
     }
 
-
+    /**
+     * verifica se um codigo de produto é valido
+     * @return boolean
+     */
     public boolean isValid () {
         Pattern pattern = Pattern.compile("^[A-Z][1-9][0-9]{3}$");
         Matcher matcher = pattern.matcher(this.getCodigo());
         return matcher.matches();
     }
 
+    /**
+     * cria um clone de um cliente
+     * @return cliente
+     */
     public Client clone(){
         return new Client(this);
     }
 
+    /**
+     * retorna o hashCode de um cliente
+     * @return int
+     */
     @Override
     public int hashCode() {
         return Arrays.hashCode( new Object[] { this.boughtOnFilial ,this.codigo} );
     }
 
+    /**
+     * verifica se dois clientes sao iguais
+     * @param o
+     * @return boolean
+     */
     public boolean equals(Object o){
         if(this == o)return true;
         if(o == null || this.getClass() != o.getClass())return false;
@@ -81,6 +120,10 @@ public class Client implements IClient, Serializable {
 
     }
 
+    /**
+     * retorna o numero de filiais em que o cliente comprou
+     * @return int
+     */
     public int NumDiffProductsBought() {
         return this.productBought.size();
     }

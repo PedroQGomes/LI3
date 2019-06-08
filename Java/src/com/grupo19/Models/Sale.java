@@ -15,15 +15,37 @@ public class Sale implements ISale, Serializable {
     private int month,filial,units;
     private double price;
 
+
+    /**
+     *
+     * metdodo que devolve o codigo de produto
+     * @return String codigo de produto
+     *
+     */
     public String getProduct ( ) {
         return prod;
     }
 
+
+    /**
+     *
+     * metodo que devolve o codigo de cliente
+     * @return String codigo de cliente
+     *
+     */
     public String getClient ( ) {
         return client;
     }
 
 
+
+    /**
+     * metodo que verifica se uma venda é válida, comparando com os codigos de produto e clientes dos respetivos catálogos
+     * @param iCatProd instância de ICatProd
+     * @param iCatClient instância de ICatClient
+     * @return boolean
+     *
+     */
     public boolean isValid(ICatProd iCatProd , ICatClient iCatClient) {
         return (iCatProd.contains(getProduct()) &&
                 iCatClient.contains(getClient()) &&
@@ -34,6 +56,19 @@ public class Sale implements ISale, Serializable {
 
     }
 
+
+    /**
+     *
+     * construtor parametrizado
+     * @param _codProd String de codigo de produto
+     * @param _price Double preco
+     * @param _units Int número de unidades
+     * @param _saleType String identificadora do tipo de preco
+     * @param _codClient String codigo de cliente
+     * @param _month Int mes da venda
+     * @param _filial Int identificador de filial
+     *
+     */
     public Sale(String _codProd, double _price ,int _units, String _saleType, String _codClient, int _month, int _filial){
         prod = _codProd;
         price = _price;
@@ -44,6 +79,13 @@ public class Sale implements ISale, Serializable {
         filial = _filial;
     }
 
+
+    /**
+     *
+     * construtor de cópia
+     * @param s instancia de uma venda
+     *
+     */
     public Sale(ISale s){
         this.prod = s.getProduct();
         this.client = s.getClient();
@@ -55,7 +97,12 @@ public class Sale implements ISale, Serializable {
     }
 
 
-
+    /**
+     *
+     * metodo que devolve o codigo do tipo de preco(N ou P)
+     * @return String tipo de preço
+     *
+     */
     public String getSaleType() {
         return saleType;
     }
@@ -72,10 +119,24 @@ public class Sale implements ISale, Serializable {
         return units;
     }
 
+
+    /**
+     *
+     * metodo que determina o preco do produto
+     * @return Double preco do produto
+     */
     public double getPrice() {
         return price;
     }
 
+
+    /**
+     *
+     * método que produz uma Venda dada a String da linha do ficheiro vendas
+     * @param line String do ficheiro de vendas
+     * @return instância de venda nova
+     *
+     */
     public static ISale readLineToSale(String line) {
         String codProd, codClient, saleType;
         int month,filial,units;
@@ -93,16 +154,38 @@ public class Sale implements ISale, Serializable {
         return new Sale(codProd,price,units,saleType,codClient,month,filial);
     }
 
+
+    /**
+     *
+     * metodo que determina o valor total de venda(preco*unidades)
+     * @return Double  valor de venda
+     *
+     */
     @Override
     public double totalPrice() {
         return this.price * this.units;
     }
 
+
+    /**
+     *
+     * método de Hash para Vendas
+     * @return novo codigo de Hash
+     *
+     */
     @Override
     public int hashCode() {
         return Arrays.hashCode( new Object[] { this.client ,this.filial,this.month,this.price,this.prod,this.saleType,this.units} );
     }
 
+
+    /**
+     *
+     * método equals
+     * @param o
+     * @return valor de verdade
+     *
+     */
     @Override
     public boolean equals (Object o) {
         if(o == this) return true;
@@ -117,6 +200,14 @@ public class Sale implements ISale, Serializable {
                 sale.getUnits() == this.getUnits());
     }
 
+
+
+    /**
+     *
+     * método de clone de uma venda
+     * @return um clone de venda
+     * 
+     */
     public ISale clone ( ) {
        return  new Sale(this);
     }

@@ -12,26 +12,48 @@ import java.util.*;
 public class CatProd implements ICatProd, Serializable {
     private Map<String,IProduct> mapOfProds;
 
+    /**
+     * contrutor vazio do CatProd
+     */
     public CatProd() {
         mapOfProds = new HashMap<>();
     }
 
+    /**
+     * adiciona um produto ao catalogo de produtos
+     * @param product
+     */
     public void add (IProduct product)
     {
         mapOfProds.put(product.getCodigo(),product.clone());
     }
 
 
+    /**
+     * verifica se um dado produto existe no catalogo de produtos
+     * @param product
+     * @return boolean
+     */
     public boolean contains (String product) {
         return mapOfProds.containsKey(product);
     }
 
 
+    /**
+     * atualiza um produto que foi comprado numa dada filial numa certa quantidade
+     * @param product
+     * @param filial
+     * @param qnt
+     */
     public void updateProductBought (String product, int filial, int qnt) {
         IProduct prod = mapOfProds.get(product);
         prod.updateProductBought(filial-1,qnt);
     }
 
+    /**
+     * dá a lista de produtos que nunca foram comprados
+     * @return neverBought
+     */
     public List<IProduct> productsNeverBought ( ) {
         List<IProduct> neverBought = new ArrayList<>();
            for(Map.Entry<String, IProduct> entry : this.mapOfProds.entrySet()) {
@@ -42,6 +64,11 @@ public class CatProd implements ICatProd, Serializable {
     }
 
 
+    /**
+     * dá a lista de n tamanho com os produtos mais vendidos
+     * @param n
+     * @return
+     */
     public List<String> productsMostSell (int n) {
         TreeSet<ITuple<String,Integer>> tupleList = new TreeSet<>(new Comparator<ITuple<String, Integer>>() {
             @Override
