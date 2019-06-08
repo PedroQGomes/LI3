@@ -1,5 +1,4 @@
 package com.grupo19;
-import com.grupo19.Models.Product;
 
 import static java.lang.System.out;
 import java.io.BufferedReader;
@@ -13,22 +12,10 @@ import java.util.List;
 public class testeVendas {
     /**
      * metodo main
-     * @param args
+     * @param args argumentos
      */
     public static void main(String[] args) {
-        Product product = new Product("AB1034");
-        Product product1 = new Product("ABB103");
-        Product product2 = new Product("A11034");
-        Product product3 = new Product("A01034");
-        Product product4 = new Product("ABBBBB");
-        Product product5 = new Product("121034");
-        out.println(product.isValid());
-        out.println(product1.isValid());
-        out.println(product2.isValid());
-        out.println(product3.isValid());
-        out.println(product4.isValid());
-        out.println(product5.isValid());
-       /* List<String> lines;
+        List<String> lines;
         Crono.start();
         lines = lerLinhasWithBuff("Vendas_1M.txt");
         out.println(Crono.stop());
@@ -36,13 +23,13 @@ public class testeVendas {
         out.println("SEGUNDO TESTE:");
         Crono.start();
         lerAllLines("Vendas_1M.txt");
-        out.println(Crono.stop()); */
+        out.println(Crono.stop());
     }
 
     /**
      * le linha por linha de ficheiro para uma list de strings
-     * @param fichtxt
-     * @return
+     * @param fichtxt ficheiro de texto
+     * @return lista das linhas lidas do ficheiro
      */
     public static List<String> lerLinhasWithBuff (String fichtxt) {
         List<String> linhas = new ArrayList<>();
@@ -60,8 +47,8 @@ public class testeVendas {
 
     /**
      * le o ficheiro de uma vez
-     * @param fichtxt
-     * @return
+     * @param fichtxt ficheiro de texto
+     * @return lista das linhas lidas do ficheiro
      */
     public static List<String> lerAllLines(String fichtxt) {
         List<String> linhas = new ArrayList<>();

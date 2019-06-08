@@ -41,7 +41,7 @@ public class Crono {
 
     /**
      * da retorno do tempo que passou
-     * @return
+     * @return string
      */
     public static String print() {
         return "" + stop();

@@ -6,7 +6,6 @@ import com.grupo19.Interfaces.IEstatisticas;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Estatistica implements IEstatisticas, Serializable {
@@ -22,7 +21,6 @@ public class Estatistica implements IEstatisticas, Serializable {
     private List<double[]> factPerMonth;
     private List<int[]> numberOfSalesPerMonth;
     private List<int[]> diffClientsNumber;
-
     /**
      * Construtor da estatistica
      */
@@ -33,34 +31,43 @@ public class Estatistica implements IEstatisticas, Serializable {
         diffClientsNumber = new ArrayList<>(numFiliais);
     }
 
-    /**
-     * atualiza a facturacao mensal
-     * @param factPerMonth double lista de facturacao
-     */
     public void updateFactPerMonth(double[] factPerMonth) {
        this.factPerMonth.add(factPerMonth);
     }
-
-    /**
-     * atualiza o numero de vendas  por mes
-     * @param numberOfSalesPerMonth lista de numero de vendas mensais
-     */
     public void updateNumberOfSalesPerMonth(int[] numberOfSalesPerMonth) {
         this.numberOfSalesPerMonth.add(numberOfSalesPerMonth);
     }
-
-    /**
-     * atualiza lista dos clientes diferentes
-     * @param diffClientsNumber lista de clientes
-     */
     public void updateDiffClientsNumber(int[] diffClientsNumber) {
         this.diffClientsNumber.add(diffClientsNumber);
     }
 
+    /**
+     * Get da faturacao por mes
+     * @return list das filiais com a faturacao por mes
+     */
+    public List<double[]> getFactPerMonth() {
+        return new ArrayList<>(factPerMonth);
+    }
+
+    /**
+     * Get Do numero de sales por mes
+     * @return list das filiais com o numero de sales por mes
+     */
+    public List<int[]> getNumberOfSalesPerMonth() {
+        return new ArrayList<>(numberOfSalesPerMonth);
+    }
+
+    /**
+     * Get do numero de clientes diferentes
+     * @return list das filiais com o numero de sales por mes
+     */
+    public List<int[]> getDiffClientsNumber() {
+        return new ArrayList<> (diffClientsNumber);
+    }
 
     /**
      * setter para o numero total de produtos
-     * @param numProdutosTotal
+     * @param numProdutosTotal numero de produtos total
      */
     public void setNumProdutosTotal(int numProdutosTotal) {
         this.numProdutosTotal = numProdutosTotal;
@@ -68,7 +75,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de clientes
-     * @param numClientesTotal
+     * @param numClientesTotal numero de clientes total
      */
     public void setNumClientesTotal(int numClientesTotal) {
         this.numClientesTotal = numClientesTotal;
@@ -76,7 +83,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas
-     * @param numVendasTotal
+     * @param numVendasTotal numero de vendas total
      */
     public void setNumVendasTotal(int numVendasTotal) {
         this.numVendasTotal = numVendasTotal;
@@ -84,7 +91,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas
-     * @param numVendasValidas
+     * @param numVendasValidas numero de vendas validas
      */
     public void setNumVendasValidas(int numVendasValidas) {
         this.numVendasValidas = numVendasValidas;
@@ -117,7 +124,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de produtos comprados
-     * @param numTotalProdutosComprados
+     * @param numTotalProdutosComprados numero total de produtos comprados
      */
     public void setNumTotalProdutosComprados(int numTotalProdutosComprados) {
         this.numTotalProdutosComprados = numTotalProdutosComprados;
@@ -133,7 +140,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de clientes que nao realizaram compras
-     * @param numClientesNaoCompraram
+     * @param numClientesNaoCompraram numero de clientes que nunca compraram
      */
     public void setNumClientesNaoCompraram(int numClientesNaoCompraram) {
         this.numClientesNaoCompraram = numClientesNaoCompraram;
@@ -149,7 +156,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas com valor nulo
-     * @param numTotalDeComprasValorNulo
+     * @param numTotalDeComprasValorNulo numero total de compras valor nulo
      */
     public void setNumTotalDeComprasValorNulo(int numTotalDeComprasValorNulo) {
         this.numTotalDeComprasValorNulo = numTotalDeComprasValorNulo;
@@ -165,7 +172,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para a faturacao total
-     * @param facturacaoTotal
+     * @param facturacaoTotal faturaçao total
      */
     public void setFacturacaoTotal(double facturacaoTotal) {
         this.facturacaoTotal = facturacaoTotal;

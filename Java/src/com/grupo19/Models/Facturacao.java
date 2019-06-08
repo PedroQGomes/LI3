@@ -34,7 +34,7 @@ public class Facturacao implements IFacturacao, Serializable {
 
     /**
      * Construtor de cópia
-     * @param  umaFacturacao
+     * @param  umaFacturacao Instancia de facturacao
      */
     public Facturacao(IFacturacao umaFacturacao){
 
@@ -62,7 +62,7 @@ public class Facturacao implements IFacturacao, Serializable {
 
     /**
      * Método Equals
-     * @param obj
+     * @param obj objeto
      * @return Valor de verdade
      */
     public boolean equals(Object obj){
@@ -224,7 +224,7 @@ public class Facturacao implements IFacturacao, Serializable {
     /**
      *
      * Método que determina a facturacao por filial e por mês do produto prod
-     * @param prod
+     * @param prod codigo de produto
      * @return res
      */
     public List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod) {
@@ -246,7 +246,7 @@ public class Facturacao implements IFacturacao, Serializable {
     /**
      *
      * Determina os clientes que mais compraram um produtoe quanto gastaram
-     *      * @param produto string id do produto
+     * @param produto string id do produto
      * @param tamanho número de clientes que mais compraram o produto
      * @return res lista segundo os critérios de ordenação
      *

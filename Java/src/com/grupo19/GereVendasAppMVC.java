@@ -9,7 +9,7 @@ public class GereVendasAppMVC {
 
     /**
      * metodo main que inicia a aplicaçao
-     * @param args
+     * @param args argumentos
      */
     public static void main(String[] args) {
     IGereVendasModel model = GereVendasModel.recoverState("data.tmp");

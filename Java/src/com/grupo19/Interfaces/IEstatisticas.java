@@ -109,6 +109,24 @@ public interface IEstatisticas {
      */
     int getTotalClientNum();
 
+    /**
+     * Get da faturacao por mes
+     * @return list das filiais com a faturacao por mes
+     */
+    List<double[]> getFactPerMonth();
+
+    /**
+     * Get Do numero de sales por mes
+     * @return list das filiais com o numero de sales por mes
+     */
+    List<int[]> getNumberOfSalesPerMonth();
+
+    /**
+     * Get do numero de clientes diferentes
+     * @return list das filiais com o numero de sales por mes
+     */
+    List<int[]> getDiffClientsNumber();
+
 
     /**
      * calcula facturacao mensal

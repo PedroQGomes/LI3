@@ -1,6 +1,5 @@
 package com.grupo19.Interfaces;
 
-import com.grupo19.Tuple;
 
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,7 @@ public interface IFacturacao {
     /**
      *
      * Método de comparacao
-     * @param obj
+     * @param obj objeto a comparar
      * @return Valor de verdade
      */
     boolean equals(Object obj);
@@ -30,21 +29,15 @@ public interface IFacturacao {
     IFacturacao clone();
 
     /**
-     *
+     *facturacao total
      * @return  Valor total de todas as Sales
-     *
-     */
-
-    /**
-     *
-     * @return Valor mensal de todas as Sales
      *
      */
     double facturacaoTotal();
 
     /**
      * Calcula a facturacao do mês pretendido
-     * @param month
+     * @param month mes
      * @return valor faturado
      *
      */
@@ -95,6 +88,7 @@ public interface IFacturacao {
      *
      * Método que determina a facturacao por filial e por mês do produto prod
      * @param produto string id do produto
+     * @param tamanho tamanho dado pelo utilizador
      * @return res list ordenada segundo o critério(Ordem Decrescente)
      */
     List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);

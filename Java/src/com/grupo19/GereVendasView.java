@@ -38,6 +38,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * Lê o input(String) do user
+     * @param s mensagem para o user
      * @return input(string) user
      */
     public static String getUserInputString(String s) {
@@ -48,6 +49,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * Lê o input(int) do user
+     * @param s mensagem para o user
      * @return input(int) do user
      */
     public static int getUserInputInt(String s) {
@@ -56,7 +58,7 @@ public class GereVendasView implements IGereVendasView {
     }
 
     /**
-     * Get de um mês valido (>1 <12)
+     * Get de um mês valido (entre 1 e 12)
      * @return um mes valido
      */
     public static int getMonthFromInput() {
@@ -214,7 +216,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * getter da opcao do menu
-     * @return
+     * @return int
      */
     public int getChoice() {return this.choice;}
 
@@ -283,14 +285,14 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * devolve o menu
-     * @return
+     * @return Menu
      */
     public Menu getCurrentMenu() { return this.menu;}
 
 
     /**
      * método para fechar o menu
-     * @return
+     * @return boolean
      */
     public boolean exit() {
         if(menu != Menu.MAINMENU) return false;
