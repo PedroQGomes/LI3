@@ -5,14 +5,14 @@ import java.util.List;
 public interface ICatClient {
     /**
      * adiciona um cliente ao catalogo de clientes
-     * @param client
+     * @param client cliente a inserir
      */
     void add(IClient client);
 
 
     /**
      * verifica se um cliente existe no catalogo de clientes
-     * @param codClient
+     * @param codClient string codigo de cliente
      * @return boolean
      */
     boolean contains(String codClient);
@@ -21,9 +21,9 @@ public interface ICatClient {
 
     /**
      * atualiza o cliente que comprou um dado produto numa dada filial
-     * @param client
-     * @param filial
-     * @param product
+     * @param client string de cliente
+     * @param filial inteiro da filial
+     * @param product string de produto
      */
     void updateClientBought (String client, int filial,String product);
 
@@ -53,8 +53,8 @@ public interface ICatClient {
 
     /**
      * Lista de X(numero dado) clientes que mais compraram
-     * @param n
-     * @return res
+     * @param n numero de clientes a encontrar
+     * @return res lista de resultados
      */
     List<ITuple<String,Integer>> listOfClientsWhoBoughtMost(int n);
 }
