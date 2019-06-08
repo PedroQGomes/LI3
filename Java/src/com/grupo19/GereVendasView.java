@@ -146,14 +146,12 @@ public class GereVendasView implements IGereVendasView {
 
     }
 
-<<<<<<< HEAD
-=======
+
 
     /**
      * imprime o menu como uma lista
      * @param menu
      */
->>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
     private void showMenuAsList(Menu menu) {
         String[] menuOptions = menu.getMenuOptions();
         StringBuilder sb = new StringBuilder();

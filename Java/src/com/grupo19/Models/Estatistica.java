@@ -17,45 +17,14 @@ public class Estatistica implements IEstatisticas, Serializable {
     private int numClientesNaoCompraram;
     private int numTotalDeComprasValorNulo;
     private double facturacaoTotal;
-    List<Double> facPerMonth;
-    List<Integer> numberOfSalesPerMonth;
-    List<Integer> numberOfDistinctClientsPerMonthPerFilial;
 
     /**
      * Construtor da estatistica
      */
     public Estatistica() {
-        facPerMonth = new ArrayList<>(12);
-        numberOfDistinctClientsPerMonthPerFilial = new ArrayList<>(12);
-        numberOfSalesPerMonth = new ArrayList<>(12);
+
     }
 
-    /**
-     * Adiciona facturação total ao mes para depois ter a faturacao total por mes
-     * @param month
-     * @param facturacaoTotal
-     */
-    public void addToFacPerMonth (int month,double facturacaoTotal) {
-        this.facPerMonth.add(month,facturacaoTotal);
-    }
-
-    /**
-     * Adiciona por mês o numero de sales
-     * @param month
-     * @param nsales
-     */
-    public void addToNumberOfSalesPerMonth (int month,int nsales) {
-        this.numberOfSalesPerMonth.add(month,nsales);
-    }
-
-    /**
-     * Adiciona por mês o numero de clientes distintos que compraram
-     * @param month
-     * @param nclientes
-     */
-    public void addToNumberOfDistinctClientsPerMonthPerFilial (int month,int nclientes) {
-        this.numberOfDistinctClientsPerMonthPerFilial.add(month,nclientes);
-    }
 
     /**
      * setter para o numero total de produtos

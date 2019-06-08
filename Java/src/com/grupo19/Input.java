@@ -156,7 +156,7 @@ public class Input {
      * @return
      */
     public static List<String> lerLinhasWithBuff (String fichtxt) {
-        List<String> linhas = new ArrayList<>(100000);
+        List<String> linhas = new ArrayList<>(20000);
         BufferedReader inFile = null;
         String linha;
         try {
