@@ -1,5 +1,7 @@
 package com.grupo19.Interfaces;
 
+import java.util.List;
+
 public interface IEstatisticas {
 
     /**
@@ -107,5 +109,9 @@ public interface IEstatisticas {
      */
     int getTotalClientNum();
 
-    
+    void updateFactPerMonth(double[] factPerMonth);
+    void updateNumberOfSalesPerMonth(int[] numberOfSalesPerMonth);
+    void updateDiffClientsNumber(int[] diffClientsNumber);
+
+
 }

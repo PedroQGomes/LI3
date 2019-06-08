@@ -76,6 +76,16 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         this.estat.setFacturacaoTotal(this.facturacao.facturacaoTotal());
         this.estat.setNumClientesNaoCompraram(this.catClient.clientsNeverBought().size());
         this.estat.setNumTotalProdutosComprados(estat.getTotalProdNum() - this.catProd.productsNeverBought().size());
+        int num_filiais = GereVendasModel.getNumFiliais();
+        for(int j = 0; j<num_filiais; j++) {
+            double[] tmp = new double[12];
+            for(int i=0;i<12;i++){
+                tmp[i] = this.filiais[j].FaturacaoPorMes(i);
+            }
+            this.estat.updateFactPerMonth(tmp);
+            this.estat.updateNumberOfSalesPerMonth(this.filiais[j].numberOfSalesPerMonth());
+            this.estat.updateDiffClientsNumber(this.filiais[j].DiferentClientsWhoBought());
+        }
     }
 
 
@@ -146,7 +156,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
      * @return IcatProd
      */
     public ICatProd getCatProd() {
-        return catProd;
+        return this.catProd;
     }
 
     /**

@@ -115,7 +115,7 @@ public class Filial implements IFilial, Serializable {
 
     //Número de distintos clientes que compraram em cada mês (não interessa
     //quantas vezes o cliente comprou) filial a filial;
-    public List<Set<String>> DiferentClientsWhoBought(){
+    public int[] DiferentClientsWhoBought(){
         List<Set<String>> lista = new ArrayList<>();
         for(int i = 0; i<12 ; i++) {
             lista.add(new HashSet<>());
@@ -127,7 +127,11 @@ public class Filial implements IFilial, Serializable {
                 }
             }
         }
-        return lista;
+        int[] tmp = new int[12];
+        for(int i = 0; i < 12; i++) {
+            tmp[i] = lista.get(i).size();
+        }
+        return tmp;
     }
 
 
@@ -135,7 +139,7 @@ public class Filial implements IFilial, Serializable {
         int[] arr = new int[12];
         for(Map.Entry<String,List<List<ISale>>> mapa : this.filialData.entrySet()){
             for(int i = 0; i<12 ; i++) {
-                arr[i] = mapa.getValue().get(i).size();
+                arr[i] += mapa.getValue().get(i).size();
             }
         }
         return arr;
@@ -247,28 +251,6 @@ public class Filial implements IFilial, Serializable {
 
 
 
-    /**
-     * (query 8)determinar os codigos dos X clientes(sendo X dado pelo utilizador) que compraram
-     * mais produtos diferentes(nao interessa a quantidade nem o valor),indicado
-     * quantos,sendo o criterio de ordenaçao a ordem decrescente do numero de produtos
-     * @return mapa
-     */
-    public Map<String,Set<String>> getClientsWhoBoughtMostOften(){
-        Map<String,Set<String>> mapa = new HashMap<>();
-        for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()) {
-            for(int i = 0; i< 12; i++){
-                for(ISale a : lista.getValue().get(i)){
-                    if(mapa.containsKey(a.getClient())){
-                        mapa.get(a.getClient()).add(a.getProduct());
-                    }else {
-                        mapa.put(a.getClient(),new HashSet<>());
-                        mapa.get(a.getClient()).add(a.getProduct());
-                    }
-                }
-            }
-        }
-        return mapa;
 
-    }
 
 }

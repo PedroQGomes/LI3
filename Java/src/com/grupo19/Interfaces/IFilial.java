@@ -69,11 +69,8 @@ public interface IFilial {
     List<String> getListOfClientsWhoMostBought();
 
 
-    /**
-     * (query 8)determinar os codigos dos X clientes(sendo X dado pelo utilizador) que compraram
-     * mais produtos diferentes(nao interessa a quantidade nem o valor),indicado
-     * quantos,sendo o criterio de ordenaçao a ordem decrescente do numero de produtos
-     * @return mapa
-     */
-    Map<String,Set<String>> getClientsWhoBoughtMostOften();
+
+    double FaturacaoPorMes(int mes);
+    int[] numberOfSalesPerMonth();
+    int[] DiferentClientsWhoBought();
 }

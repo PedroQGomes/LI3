@@ -88,10 +88,27 @@ public class GereVendasView implements IGereVendasView {
         sb.append("Número total de clientes que nada compraram: ").append(estatistica.getNumClientesNaoCompraram()).append("\n");
         sb.append("Número de commpras de valor total igual a 0.0: ").append(estatistica.getNumTotalDeComprasValorNulo()).append("\n");
         DecimalFormat df = new DecimalFormat("###.##");
-        sb.append("Faturação total: ").append(df.format(estatistica.getFacturacaoTotal()));
+        sb.append("Faturação total: ").append(df.format(estatistica.getFacturacaoTotal())).append("\n");
+        sb.append("Prima 1 para mais informações\n");
+        sb.append("Prima 2 para continuar\n");
         header();
         out.println(sb.toString());
-        Input.lerString();
+        int choice = Input.lerInt();
+        switch(choice){
+            case 1:
+                showDetailedInfo(estatistica);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    /**
+     * Mostra mais informação detalhada
+     * @param estatistica
+     */
+    private void showDetailedInfo(IEstatisticas estatistica) {
 
     }
 

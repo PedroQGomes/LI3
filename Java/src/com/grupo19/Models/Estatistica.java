@@ -1,10 +1,12 @@
 package com.grupo19.Models;
 
 
+import com.grupo19.GereVendasModel;
 import com.grupo19.Interfaces.IEstatisticas;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Estatistica implements IEstatisticas, Serializable {
@@ -17,14 +19,41 @@ public class Estatistica implements IEstatisticas, Serializable {
     private int numClientesNaoCompraram;
     private int numTotalDeComprasValorNulo;
     private double facturacaoTotal;
-
+    private List<double[]> factPerMonth;
+    private List<int[]> numberOfSalesPerMonth;
+    private List<int[]> diffClientsNumber;
     /**
      * Construtor da estatistica
      */
     public Estatistica() {
-
+        int numFiliais = GereVendasModel.getNumFiliais();
+        factPerMonth = new ArrayList<>(numFiliais);
+        numberOfSalesPerMonth = new ArrayList<>(numFiliais);
+        diffClientsNumber = new ArrayList<>(numFiliais);
     }
 
+    public void updateFactPerMonth(double[] factPerMonth) {
+       this.factPerMonth.add(factPerMonth);
+    }
+    public void updateNumberOfSalesPerMonth(int[] numberOfSalesPerMonth) {
+        this.numberOfSalesPerMonth.add(numberOfSalesPerMonth);
+    }
+    public void updateDiffClientsNumber(int[] diffClientsNumber) {
+        this.diffClientsNumber.add(diffClientsNumber);
+    }
+
+
+    public List<double[]> getFactPerMonth() {
+        return new ArrayList<>(factPerMonth);
+    }
+
+    public List<int[]> getNumberOfSalesPerMonth() {
+        return new ArrayList<>(numberOfSalesPerMonth);
+    }
+
+    public List<int[]> getDiffClientsNumber() {
+        return new ArrayList<> (diffClientsNumber);
+    }
 
     /**
      * setter para o numero total de produtos
