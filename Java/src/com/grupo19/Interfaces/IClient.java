@@ -3,7 +3,7 @@ package com.grupo19.Interfaces;
 public interface IClient {
     /**
      * dá o codigo do cliente
-     * @return string
+     * @return string string de cliente
      */
     String getCodigo();
 
@@ -27,15 +27,15 @@ public interface IClient {
 
     /**
      * retorna o numero de filiais em que o cliente comprou
-     * @return int
+     * @return inteiro
      */
     int NumDiffProductsBought();
 
 
     /**
      * adiciona um cliente que comprou
-     * @param filial
-     * @param product
+     * @param filial inteiro de filial
+     * @param product string de produto
      */
     void updateClientBought (int filial,String product);
 
