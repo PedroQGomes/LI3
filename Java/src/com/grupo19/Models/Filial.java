@@ -121,18 +121,10 @@ public class Filial implements IFilial, Serializable {
     }
 
 
-<<<<<<< HEAD
 
     //Número de distintos clientes que compraram em cada mês (não interessa
     //quantas vezes o cliente comprou) filial a filial;
     public int[] DiferentClientsWhoBought(){
-=======
-    /**
-     * lista com os diferentes clientes que compraram mes a mes
-     * @return lista
-     */
-    public List<Set<String>> DiferentClientsWhoBought(){
->>>>>>> 7802b49afa266d43841ef75374a58a373ef45f84
         List<Set<String>> lista = new ArrayList<>();
         for(int i = 0; i<12 ; i++) {
             lista.add(new HashSet<>());
