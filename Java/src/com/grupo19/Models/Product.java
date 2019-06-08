@@ -116,7 +116,7 @@ public class Product implements IProduct, Serializable {
     /**
      *
      * método de equals
-     * @param o
+     * @param o object
      * @return valor de verdade
      *
      */

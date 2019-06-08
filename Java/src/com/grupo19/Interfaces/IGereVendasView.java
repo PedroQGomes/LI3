@@ -42,19 +42,19 @@ public interface IGereVendasView {
 
     /**
      * getter da opcao do menu
-     * @return
+     * @return int ( escolha do utilizador)
      */
     int getChoice();
 
     /**
      * método para fechar o menu
-     * @return
+     * @return bool
      */
     boolean exit();
 
     /**
      * getter do menu
-     * @return
+     * @return status do Menu
      */
     Menu getCurrentMenu();
 

@@ -182,7 +182,7 @@ public class Sale implements ISale, Serializable {
     /**
      *
      * método equals
-     * @param o
+     * @param o object
      * @return valor de verdade
      *
      */

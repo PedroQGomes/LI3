@@ -9,7 +9,7 @@ public interface IFacturacao {
     /**
      *
      * Método de comparacao
-     * @param obj
+     * @param obj obj
      * @return Valor de verdade
      */
     boolean equals(Object obj);
@@ -44,7 +44,7 @@ public interface IFacturacao {
 
     /**
      * Calcula a facturacao do mês pretendido
-     * @param month
+     * @param month mes
      * @return valor faturado
      *
      */
@@ -95,6 +95,7 @@ public interface IFacturacao {
      *
      * Método que determina a facturacao por filial e por mês do produto prod
      * @param produto string id do produto
+     * @param tamanho tamanho dado pelo utilizador
      * @return res list ordenada segundo o critério(Ordem Decrescente)
      */
     List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);

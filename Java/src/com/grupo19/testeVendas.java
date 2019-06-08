@@ -13,22 +13,10 @@ import java.util.List;
 public class testeVendas {
     /**
      * metodo main
-     * @param args
+     * @param args argumentos
      */
     public static void main(String[] args) {
-        Product product = new Product("AB1034");
-        Product product1 = new Product("ABB103");
-        Product product2 = new Product("A11034");
-        Product product3 = new Product("A01034");
-        Product product4 = new Product("ABBBBB");
-        Product product5 = new Product("121034");
-        out.println(product.isValid());
-        out.println(product1.isValid());
-        out.println(product2.isValid());
-        out.println(product3.isValid());
-        out.println(product4.isValid());
-        out.println(product5.isValid());
-       /* List<String> lines;
+        List<String> lines;
         Crono.start();
         lines = lerLinhasWithBuff("Vendas_1M.txt");
         out.println(Crono.stop());
@@ -36,12 +24,12 @@ public class testeVendas {
         out.println("SEGUNDO TESTE:");
         Crono.start();
         lerAllLines("Vendas_1M.txt");
-        out.println(Crono.stop()); */
+        out.println(Crono.stop());
     }
 
     /**
      * le linha por linha de ficheiro para uma list de strings
-     * @param fichtxt
+     * @param fichtxt ficheiro de texto
      * @return
      */
     public static List<String> lerLinhasWithBuff (String fichtxt) {
@@ -60,7 +48,7 @@ public class testeVendas {
 
     /**
      * le o ficheiro de uma vez
-     * @param fichtxt
+     * @param fichtxt ficheiro de texto
      * @return
      */
     public static List<String> lerAllLines(String fichtxt) {

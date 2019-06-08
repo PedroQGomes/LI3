@@ -109,6 +109,9 @@ public interface IEstatisticas {
      */
     int getTotalClientNum();
 
+    List<double[]> getFactPerMonth();
+    List<int[]> getNumberOfSalesPerMonth();
+    List<int[]> getDiffClientsNumber();
     void updateFactPerMonth(double[] factPerMonth);
     void updateNumberOfSalesPerMonth(int[] numberOfSalesPerMonth);
     void updateDiffClientsNumber(int[] diffClientsNumber);

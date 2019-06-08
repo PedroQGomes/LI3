@@ -4,7 +4,7 @@ public interface IGereVendasController {
 
     /**
      * define o modelo do controler
-     * @param model
+     * @param model model
      */
     void setModel(IGereVendasModel model);
 
@@ -12,7 +12,7 @@ public interface IGereVendasController {
 
     /**
      *  define o view do controler
-     * @param view
+     * @param view view
      */
     void setView(IGereVendasView view);
 

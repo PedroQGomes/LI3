@@ -126,7 +126,7 @@ public class Filial implements IFilial, Serializable {
 
     /**
      * Número de distintos clientes que compraram em cada mês
-     * @return
+     * @return lista de inteiros correspondente aos 12 meses
      */
     public int[] DiferentClientsWhoBought(){
         List<Set<String>> lista = new ArrayList<>();

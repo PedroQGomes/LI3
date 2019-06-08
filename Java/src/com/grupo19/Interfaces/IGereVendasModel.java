@@ -29,14 +29,14 @@ public interface IGereVendasModel {
 
     /**
      * define o nome do ficheiro de vendas
-     * @param fichVendas
+     * @param fichVendas ficheiro de vendas
      */
     void setFichVendas(String fichVendas);
 
 
     /**
      * define o tempo que demorou a carregar os dados
-     * @param time
+     * @param time tempo
      */
     void setTimeOfLoadData(double time);
 
@@ -44,7 +44,8 @@ public interface IGereVendasModel {
     /**
      * Metodo para dar resposta a query 2
      *
-     * @param x
+     * @param x numero de clientes
+     * @param filial numero da filial em questao
      * @return tuple de inteiro inteiro
      */
     ITuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x, int filial);
@@ -92,7 +93,7 @@ public interface IGereVendasModel {
 
     /**
      * dá a lista de produtos comprados por um cliente
-     * @param a
+     * @param a codigo de cliente
      * @return lista
      */
     List<ITuple<String,Integer>> getListOfProductsBoughtOfClient(String a);
@@ -100,7 +101,7 @@ public interface IGereVendasModel {
 
     /**
      * dá a lista de produtos comprados por um cliente
-     * @param a
+     * @param a codigo de cliente
      * @return lista
      */
     List<ITuple<Integer,Integer>> totalPurchasesOfAClientPerYear(String a );
@@ -108,8 +109,8 @@ public interface IGereVendasModel {
 
     /**
      * totol faturado por um cliente num dado month
-     * @param a
-     * @param mes
+     * @param a codigo de cliente
+     * @param mes mes
      * @return double
      */
     double totalFaturadoPClientPMonth(String a,int mes);
@@ -127,7 +128,7 @@ public interface IGereVendasModel {
 
     /**
      * dá os clientes que compraram mais
-     * @param x
+     * @param x x clientes
      * @return lista
      */
     List<ITuple<String,Integer>> getClientsWhoBoughtMostOften(int x);
@@ -135,7 +136,7 @@ public interface IGereVendasModel {
 
     /**
      * dá o numero de clientes e a facturaçao
-     * @param client
+     * @param client cod cliente
      * @return lista
      */
     List<List<Double>> getNumClientAndFacturacao(String client);
@@ -143,7 +144,7 @@ public interface IGereVendasModel {
 
     /**
      * produtos que mais venderam e o numero dos clientes distintos que o compraram
-     * @param n
+     * @param n n clientes
      * @return lista
      */
     List<ITuple<String,Integer>> productsMostSellAndNumberOfClients(int n);
@@ -151,7 +152,7 @@ public interface IGereVendasModel {
 
     /**
      * facturaçao por produto por filial e por mes
-     * @param prod
+     * @param prod cod produto
      * @return lista
      */
     List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod);
@@ -159,15 +160,15 @@ public interface IGereVendasModel {
 
     /**
      * salva o estado do programa na app
-     * @param fichObject
+     * @param fichObject nome do ficheiro
      */
     void saveState(String fichObject);
 
 
     /**
      * da os X clientes que mais compraram um dado produto
-     * @param produto
-     * @param tamanho
+     * @param produto codigo de produto
+     * @param tamanho tamanho definido pelo utilizador
      * @return lista
      */
     List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho);
