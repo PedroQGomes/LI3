@@ -21,7 +21,7 @@ public class CatClient implements ICatClient, Serializable {
 
     /**
      * adiciona um cliente ao catalogo de clientes
-     * @param client
+     * @param client cliente a inserir
      */
     public void add (IClient client) {
         mapOfClients.put(client.getCodigo(),client);
@@ -29,7 +29,7 @@ public class CatClient implements ICatClient, Serializable {
 
     /**
      * verifica se um cliente existe no catalogo de clientes
-     * @param codClient
+     * @param codClient string codigo de cliente
      * @return boolean
      */
     public boolean contains (String codClient) {
@@ -39,9 +39,9 @@ public class CatClient implements ICatClient, Serializable {
 
     /**
      * atualiza o cliente que comprou um dado produto numa dada filial
-     * @param client
-     * @param filial
-     * @param product
+     * @param client string de cliente
+     * @param filial inteiro de filial
+     * @param product string de produto
      */
     public void updateClientBought (String client, int filial,String product) {
         IClient clt = mapOfClients.get(client);
@@ -82,8 +82,8 @@ public class CatClient implements ICatClient, Serializable {
 
     /**
      * Lista de X(numero dado) clientes que mais compraram
-     * @param n
-     * @return res
+     * @param n numero de clientes a devolver
+     * @return res lista resultante
      */
     public List<ITuple<String,Integer>> listOfClientsWhoBoughtMost(int n) {
         TreeSet<ITuple<String,Integer>> set = new TreeSet<>(new Comparator<ITuple<String, Integer>>() {

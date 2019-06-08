@@ -29,7 +29,7 @@ public class Client implements IClient, Serializable {
 
     /**
      * construtor parametrizado de um cliente
-     * @param s
+     * @param s string de cliente
      */
     public Client(String s){
         this.codigo = s;
@@ -39,7 +39,7 @@ public class Client implements IClient, Serializable {
 
     /**
      * construtor copia de um cliente
-     * @param a
+     * @param a cliente a inserir
      */
     public Client(Client a){
         this.codigo = a.getCodigo();
@@ -51,8 +51,8 @@ public class Client implements IClient, Serializable {
 
     /**
      * adiciona um cliente que comprou
-     * @param filial
-     * @param product
+     * @param filial inteiro filial
+     * @param product string de produto
      */
     public void updateClientBought (int filial,String product) {
         this.productBought.add(product);
@@ -100,7 +100,7 @@ public class Client implements IClient, Serializable {
 
     /**
      * retorna o hashCode de um cliente
-     * @return int
+     * @return inteiro
      */
     @Override
     public int hashCode() {
@@ -109,7 +109,7 @@ public class Client implements IClient, Serializable {
 
     /**
      * verifica se dois clientes sao iguais
-     * @param o
+     * @param o objeto a comparar
      * @return boolean
      */
     public boolean equals(Object o){
@@ -122,7 +122,7 @@ public class Client implements IClient, Serializable {
 
     /**
      * retorna o numero de filiais em que o cliente comprou
-     * @return int
+     * @return numero de filiais
      */
     public int NumDiffProductsBought() {
         return this.productBought.size();

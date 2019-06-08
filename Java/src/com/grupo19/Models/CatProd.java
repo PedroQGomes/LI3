@@ -21,7 +21,7 @@ public class CatProd implements ICatProd, Serializable {
 
     /**
      * adiciona um produto ao catalogo de produtos
-     * @param product
+     * @param product produto a inserir
      */
     public void add (IProduct product)
     {
@@ -31,7 +31,7 @@ public class CatProd implements ICatProd, Serializable {
 
     /**
      * verifica se um dado produto existe no catalogo de produtos
-     * @param product
+     * @param product string de produto
      * @return boolean
      */
     public boolean contains (String product) {
@@ -41,9 +41,9 @@ public class CatProd implements ICatProd, Serializable {
 
     /**
      * atualiza um produto que foi comprado numa dada filial numa certa quantidade
-     * @param product
-     * @param filial
-     * @param qnt
+     * @param product string de produto
+     * @param filial inteiro de filial
+     * @param qnt inteiro quantidade a inserir
      */
     public void updateProductBought (String product, int filial, int qnt) {
         IProduct prod = mapOfProds.get(product);
@@ -66,8 +66,8 @@ public class CatProd implements ICatProd, Serializable {
 
     /**
      * dá a lista de n tamanho com os produtos mais vendidos
-     * @param n
-     * @return
+     * @param n numero de produtos
+     * @return lista dos produtos
      */
     public List<String> productsMostSell (int n) {
         TreeSet<ITuple<String,Integer>> tupleList = new TreeSet<>(new Comparator<ITuple<String, Integer>>() {
