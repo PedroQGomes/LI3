@@ -26,7 +26,7 @@ public class Facturacao implements IFacturacao, Serializable {
     public Facturacao(){
         this.arrayOfSales= new ArrayList<>();
         for(int i = 0; i<12 ; i++){
-            Map <String, IFacturacaoPorProd> tmp = new HashMap<>(); // ERA UM TREEMAP
+            Map <String, IFacturacaoPorProd> tmp = new HashMap<>();
             arrayOfSales.add(tmp);
         }
 
@@ -41,14 +41,6 @@ public class Facturacao implements IFacturacao, Serializable {
         this.arrayOfSales=umaFacturacao.getArrayOfSales();
     }
 
-    /**
-     * Construtor parametrizado
-     * @param arrayS
-     */
-    public  Facturacao (List<Map<String,IFacturacaoPorProd>> arrayS){
-
-        setSArrayOfSales(arrayS);
-    }
 
 
     /**
@@ -65,21 +57,7 @@ public class Facturacao implements IFacturacao, Serializable {
         return nova;
     }
 
-    /**
-     *
-     * setter da list de ISales
-     * @param salesAll list de Maps
-     *
-     */
-    public void setSArrayOfSales(List<Map<String,IFacturacaoPorProd>> salesAll){
-        this.arrayOfSales= new ArrayList<>(salesAll);
-        for(int i=0;i<12;i++){
-            Map <String, IFacturacaoPorProd> tmp;
-            tmp=salesAll.get(i);
-            arrayOfSales.add(i,tmp);
-        }
 
-    }
 
 
     /**
@@ -171,61 +149,6 @@ public class Facturacao implements IFacturacao, Serializable {
             total += this.valorTotalFactMensal(i);
         }
         return total;
-    }
-
-
-    /**
-     *
-     * @param month inteiro que presenta mes de consulta
-     * @param prod produto a consultar
-     * @return retorna faturacao mensal de um prod(price*units)
-     *
-     */
-    public double totalSalesPerProductPerMonth (int month, IProduct prod) {
-
-        double totalMonth=0;
-        Map <String, IFacturacaoPorProd> tmp;
-        tmp=arrayOfSales.get(month-1);
-        for(Map.Entry<String,IFacturacaoPorProd> entry : tmp.entrySet()) {
-            String key = entry.getKey();
-            String codProd = prod.getCodigo();
-            if(key.equals(codProd)){
-                for(ISale s: entry.getValue().getSalesList()){
-                    totalMonth += s.getPrice() * s.getUnits();
-                }
-            }
-        }
-        return  totalMonth;
-    }
-
-
-
-
-    /**
-     *
-     * Calcula o numero de unidades vendidas de um dado produto, devolvendo numa list o total por mes
-     * @param codProd
-     * @return resultados
-     *
-     */
-    public List<Integer> totalUnitsPerProductPerMonth (String codProd) {
-
-        List<Integer> resultados = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            int total = 0;
-            Map<String, IFacturacaoPorProd> tmp;
-            tmp = arrayOfSales.get(i);
-            for (Map.Entry<String, IFacturacaoPorProd> entry : tmp.entrySet()) {
-                String key = entry.getKey();
-                if (key.equals(codProd)) {
-                    for (ISale s : entry.getValue().getSalesList()) {
-                        total += s.getUnits();
-                    }
-                }
-            }
-            resultados.add(i, total);
-        }
-        return resultados;
     }
 
 
