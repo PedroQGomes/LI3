@@ -1,7 +1,7 @@
 package com.grupo19.Interfaces;
 
 public interface IEstatisticas {
-    int getNumVendasValidas();
+
     int getNumVendasInvalidas();
     int getTotalProdNum();
     void setNumVendasTotal(int numVendasTotal);

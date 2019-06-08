@@ -24,15 +24,9 @@ public class Estatistica implements IEstatisticas, Serializable {
         this.numProdutosTotal = numProdutosTotal;
     }
 
-
-    public int getNumClientesTotal() {
-        return numClientesTotal;
-    }
-
     public void setNumClientesTotal(int numClientesTotal) {
         this.numClientesTotal = numClientesTotal;
     }
-
 
     public void setNumVendasTotal(int numVendasTotal) {
         this.numVendasTotal = numVendasTotal;
@@ -40,11 +34,6 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     public void setNumVendasValidas(int numVendasValidas) {
         this.numVendasValidas = numVendasValidas;
-    }
-
-
-    public int getNumVendasValidas() {
-        return this.numVendasValidas;
     }
 
 
