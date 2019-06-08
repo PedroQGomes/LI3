@@ -130,7 +130,16 @@ public class Filial implements IFilial, Serializable {
         return lista;
     }
 
-    
+
+    public int[] numberOfSalesPerMonth(){
+        int[] arr = new int[12];
+        for(Map.Entry<String,List<List<ISale>>> mapa : this.filialData.entrySet()){
+            for(int i = 0; i<12 ; i++) {
+                arr[i] = mapa.getValue().get(i).size();
+            }
+        }
+        return arr;
+    }
 
 
 
