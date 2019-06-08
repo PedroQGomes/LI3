@@ -21,15 +21,15 @@ public class Crono {
     private static long fim = 0L;
 
     /**
-     * inicia o contador
+     * construtor vazio do crono
      */
     public static void start() {
         fim = 0L; inicio = nanoTime();
     }
 
     /**
-     * termina o contador e devolve tempo passado em segundos
-     * @return
+     * metodo que para o contador do tempo
+     * @return double
      */
     public static double stop() {
         fim = nanoTime();
@@ -38,8 +38,9 @@ public class Crono {
         return elapsedTime / 1.0E09;
     }
 
+
     /**
-     * imprime o stop()
+     * da retorno do tempo que passou
      * @return
      */
     public static String print() {
