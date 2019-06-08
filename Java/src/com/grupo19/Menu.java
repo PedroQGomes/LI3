@@ -17,10 +17,19 @@ public enum Menu {
     Menu() {
 
     }
+
+    /**
+     * construtor parametrizado
+     * @param menuOptions
+     */
     Menu(String[] menuOptions) {
          this.menuOptions = menuOptions;
     }
 
+    /**
+     * metodo getter da String de opcoes do menu
+     * @return
+     */
     public String[] getMenuOptions ( ) {
         return menuOptions;
     }

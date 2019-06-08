@@ -379,6 +379,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
 
+
     /**
      * dá o numero de clientes e a facturaçao
      * @param product
