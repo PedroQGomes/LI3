@@ -96,10 +96,15 @@ public class GereVendasController implements IGereVendasController {
         view.showLine(sb.toString());
     }
 
+<<<<<<< HEAD
+
+    private void query4(){
+=======
     /**
      * query 4
      */
     private void query4(){ //TODO: melhorar apresentação
+>>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
         String l = GereVendasView.getUserInputString("Insira o código do Produto:");
         Crono.start();
         List<List<Double>> lista = model.getNumClientAndFacturacao(l);
@@ -112,13 +117,13 @@ public class GereVendasController implements IGereVendasController {
         }
         for(int i = 0; i < 12 ;i++){
             if(lista.get(i).isEmpty()) {
-                sb.append("O Produto ").append(l).append(" não foi comprado no mês ").append(i+1).append("\n");
+                sb.append("Mês ").append(i+1).append(": O Produto ").append(l).append(" não foi comprado neste mês").append("\n");
                 continue;
             }
-            sb.append("Produto ")
-                    .append(l)
-                    .append(" no mes ")
-                    .append(i+1).append(" foi comprado ")
+            sb.append("Mês ")
+                    .append(i+1)
+                    .append(": O Produto ")
+                    .append(l).append(" foi comprado ")
                     .append(Math.round(lista.get(i).get(0))).append(" vez(es),por ")
                     .append(Math.round(lista.get(i).get(1))).append(" clientes diferentes")
                     .append(" e facturou :").append(lista.get(i).get(2))
@@ -206,11 +211,16 @@ public class GereVendasController implements IGereVendasController {
         }
         view.showLine(sb.toString());
     }
+<<<<<<< HEAD
+    //Dado o código de um produto que deve existir, determinar o conjunto dos X clientes
+    //que mais o compraram e, para cada um, qual o valor gasto
+=======
 
 
     /**
      * query 9
      */
+>>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
     private void query9() {
         String l = GereVendasView.getUserInputString("Insira o código de Produto:");
         int tamanho = GereVendasView.getUserInputInt("Insira o número de clientes que deseja ver:");
@@ -302,6 +312,12 @@ public class GereVendasController implements IGereVendasController {
             case 10:
                 query10();
                 break;
+            case 11:
+                Crono.start();
+                model.saveState("data.tmp");
+                view.setTimeQueue(Crono.stop());
+                view.showLine("Dados Guardados");
+                break;
             default:
                 break;
 
@@ -313,7 +329,7 @@ public class GereVendasController implements IGereVendasController {
      *  metodo que inicia o controller
      */
     public void init ( ) {
-        model.updateStaticInfo();
+        //model.updateStaticInfo();
         view.setTimeQueue(model.getTimeOfLoadData());
         view.showInfoView(model.getFichVendas(),model.getEstatatistica());
         do {

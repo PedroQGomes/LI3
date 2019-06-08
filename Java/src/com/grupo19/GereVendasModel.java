@@ -56,7 +56,6 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         produtos.forEach(p -> GereVendasModel.addToCatProdFromString(p, model));
         clientes.forEach(c -> GereVendasModel.addToCatClientFromString(c, model));
         loadVendas(model,estat);
-        //model.saveState("data.tmp"); //TODO ATIVAR ISTO
         model.setTimeOfLoadData(Crono.stop());
         return model;
     }
@@ -77,14 +76,22 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         this.estat.setFacturacaoTotal(this.facturacao.facturacaoTotal());
         this.estat.setNumClientesNaoCompraram(this.catClient.clientsNeverBought().size());
         this.estat.setNumTotalProdutosComprados(estat.getTotalProdNum() - this.catProd.productsNeverBought().size());
+        for(int i = 0;i<12;i++) {
+            this.estat.addToFacPerMonth(i,this.facturacao.valorTotalFactMensal(i));
+
+        }
     }
 
 
+<<<<<<< HEAD
+
+=======
     /**
      * carrega as vendas
      * @param model
      * @param estat
      */
+>>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
     private static void loadVendas(IGereVendasModel model, IEstatisticas estat) {
         int numVendasValidas = 0;
         int vendasZero = 0;
@@ -105,10 +112,14 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         estat.setNumTotalDeComprasValorNulo(vendasZero);
     }
 
+<<<<<<< HEAD
+
+=======
     /**
      * dá as filias
      * @return filiais
      */
+>>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
     public IFilial[] getFiliais() {
         return this.filiais;
     }
@@ -369,16 +380,23 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
 
+<<<<<<< HEAD
+    //Query 8 versao ze
+=======
     /**
      * dá os clientes que compraram mais
      * @param x
      * @return lista
      */
+>>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
     public List<ITuple<String,Integer>> getClientsWhoBoughtMostOften(int x) {
         return this.catClient.listOfClientsWhoBoughtMost(x);
     }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
 
     /**
      * dá o numero de clientes e a facturaçao

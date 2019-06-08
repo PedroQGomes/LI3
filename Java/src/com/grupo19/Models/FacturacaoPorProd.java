@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
 
@@ -141,5 +142,18 @@ public class FacturacaoPorProd implements  IFacturacaoPorProd, Serializable {
             res.add(s.getFilial()-1,s.totalPrice());
         }
         return res;
+    }
+
+
+    /**
+     *
+     * @return retorna o número de diferentes clientes que compraram neste mês
+     */
+    public int getDiffClients() {
+        Set<String> set = new HashSet<>();
+        for(ISale s:this.salesList) {
+            set.add(s.getClient());
+        }
+        return set.size();
     }
 }

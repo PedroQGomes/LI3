@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class testeVendas {
+    /**
+     * metodo main
+     * @param args
+     */
     public static void main(String[] args) {
         Product product = new Product("AB1034");
         Product product1 = new Product("ABB103");
@@ -34,6 +38,12 @@ public class testeVendas {
         lerAllLines("Vendas_1M.txt");
         out.println(Crono.stop()); */
     }
+
+    /**
+     * le linha por linha de ficheiro para uma list de strings
+     * @param fichtxt
+     * @return
+     */
     public static List<String> lerLinhasWithBuff (String fichtxt) {
         List<String> linhas = new ArrayList<>();
         BufferedReader inFile;
@@ -48,6 +58,11 @@ public class testeVendas {
         return linhas;
     }
 
+    /**
+     * le o ficheiro de uma vez
+     * @param fichtxt
+     * @return
+     */
     public static List<String> lerAllLines(String fichtxt) {
         List<String> linhas = new ArrayList<>();
         try {

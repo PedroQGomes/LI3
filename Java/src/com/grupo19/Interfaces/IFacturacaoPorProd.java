@@ -50,4 +50,10 @@ public interface IFacturacaoPorProd {
      *
      */
     List<Double> factPerFilial();
+
+    /**
+     *
+     * @return retorna o número de clientes diferentes neste mês
+     */
+    int getDiffClients();
 }
