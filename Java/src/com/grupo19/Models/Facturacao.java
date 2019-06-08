@@ -62,7 +62,11 @@ public class Facturacao implements IFacturacao, Serializable {
 
     /**
      * Método Equals
+<<<<<<< HEAD
      * @param obj objeto
+=======
+     * @param obj objeto a comparar
+>>>>>>> 5f6bc81fdbead5be15bedcd554efcb44b564d3e7
      * @return Valor de verdade
      */
     public boolean equals(Object obj){
@@ -224,7 +228,11 @@ public class Facturacao implements IFacturacao, Serializable {
     /**
      *
      * Método que determina a facturacao por filial e por mês do produto prod
+<<<<<<< HEAD
      * @param prod codigo de produto
+=======
+     * @param prod string de produto
+>>>>>>> 5f6bc81fdbead5be15bedcd554efcb44b564d3e7
      * @return res
      */
     public List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod) {

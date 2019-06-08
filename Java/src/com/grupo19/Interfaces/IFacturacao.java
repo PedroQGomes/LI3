@@ -8,7 +8,7 @@ public interface IFacturacao {
     /**
      *
      * Método de comparacao
-     * @param obj obj
+     * @param obj objeto a comparar
      * @return Valor de verdade
      */
     boolean equals(Object obj);
@@ -29,14 +29,8 @@ public interface IFacturacao {
     IFacturacao clone();
 
     /**
-     *
+     *facturacao total
      * @return  Valor total de todas as Sales
-     *
-     */
-
-    /**
-     *
-     * @return Valor mensal de todas as Sales
      *
      */
     double facturacaoTotal();
