@@ -27,7 +27,7 @@ public class Filial implements IFilial, Serializable {
 
     /**
      * construtor parametrizado da filial
-     * @param a
+     * @param a filial
      */
     public Filial(IFilial a){
         this.filialData = a.getFilialData();
@@ -70,7 +70,7 @@ public class Filial implements IFilial, Serializable {
 
     /**
      * metodo que adiciona uma sala a filial
-     * @param a
+     * @param a venda a adicionar
      */
         public void add(ISale a){
             if(!this.filialData.containsKey(a.getClient())) {
@@ -107,7 +107,7 @@ public class Filial implements IFilial, Serializable {
 
     /**
      * facturacao de um mes
-     * @param mes
+     * @param mes mes
      * @return facturacao
      */
     public double FaturacaoPorMes(int mes){
@@ -122,8 +122,12 @@ public class Filial implements IFilial, Serializable {
 
 
 
-    //Número de distintos clientes que compraram em cada mês (não interessa
-    //quantas vezes o cliente comprou) filial a filial;
+
+
+    /**
+     * Número de distintos clientes que compraram em cada mês
+     * @return
+     */
     public int[] DiferentClientsWhoBought(){
         List<Set<String>> lista = new ArrayList<>();
         for(int i = 0; i<12 ; i++) {
@@ -162,7 +166,7 @@ public class Filial implements IFilial, Serializable {
 
     /**
      * (query 2) metodo que diz quantas vendas ouve num mes e quantos clintes distintos compraram
-     * @param x
+     * @param x numero pedido pelo utilizador
      * @return Tuple
      */
     public ITuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x){
@@ -183,8 +187,8 @@ public class Filial implements IFilial, Serializable {
 
     /**
      * metodo que da o total faturado por um cliente num dado mes
-     * @param client
-     * @param month
+     * @param client cod cliente
+     * @param month mes
      * @return sum
      */
     public double totalFaturadoPerClientPerMonth(String client,int month) {
@@ -200,8 +204,8 @@ public class Filial implements IFilial, Serializable {
     /**
      * (query 3)metodo que determina os produtos distintos comprados por um cliente num dado mes
      *  e o numero de compras
-     * @param cliente
-     * @param mes
+     * @param cliente cod cliente
+     * @param mes mes
      * @return Tuple
      */
     public ITuple<Integer,Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente,int mes){
@@ -218,7 +222,7 @@ public class Filial implements IFilial, Serializable {
     /**
      * (query 5) lista de codigos dos produtos que comporu por ordem decrescente de quantidade
      * e para quantos iguais por ordem alfabetica
-     * @param client
+     * @param client cod cliente
      * @return mapa
      */
     public Map<String,Integer> getListOfProductsBoughtOfClient(String client) {

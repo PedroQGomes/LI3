@@ -62,7 +62,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * define o nome do ficheiro de vendas
-     * @param fichVendas
+     * @param fichVendas nome do ficheiro de vendas
      */
     public void setFichVendas(String fichVendas) {
         this.fichVendas = fichVendas;
@@ -92,8 +92,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * carrega as vendas
-     * @param model
-     * @param estat
+     * @param model model
+     * @param estat estatistica com dados
      */
 
     private static void loadVendas(IGereVendasModel model, IEstatisticas estat) {
@@ -170,8 +170,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * metodo que processa a sale
-     * @param l
-     * @param model
+     * @param l linha de venda
+     * @param model model
      * @return Isale
      */
     private static ISale processSale(String l, IGereVendasModel model) {
@@ -192,7 +192,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * define o tempo que demorou a carregar os dados
-     * @param time
+     * @param time tempo
      */
     public void setTimeOfLoadData(double time) {
         this.timeOfLoadData = time;
@@ -201,8 +201,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * adiciona ao catalogo de produtos um produto pela string
-     * @param l
-     * @param model
+     * @param l codigo de produto
+     * @param model model
      */
     private static void addToCatProdFromString(String l, IGereVendasModel model) {
         IProduct tmp = new Product(l);
@@ -212,8 +212,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * adiciona ao catalogo de clientes um cliente pela string
-     * @param l
-     * @param model
+     * @param l codigo de cliente
+     * @param model Model
      */
     private static void addToCatClientFromString(String l, IGereVendasModel model) {
         IClient tmp = new Client(l);
@@ -259,7 +259,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     /**
      * Metodo para dar resposta a query 2
      *
-     * @param x
+     * @param x mês
+     * @param filial numero da filial
      * @return tuple de inteiro inteiro
      */
     @Override
@@ -270,7 +271,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     /**
      * Query 3
      *
-     * @param client
+     * @param client codigo de cliente
      * @return lista
      */
     public List<ITuple<Integer, Integer>> totalPurchasesOfAClientPerYear(String client) {
@@ -291,8 +292,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * totol faturado por um cliente num dado month
-     * @param client
-     * @param month
+     * @param client codigo de cliente
+     * @param month mes
      * @return double
      */
     public double totalFaturadoPClientPMonth(String client, int month) {
@@ -307,7 +308,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * dá a lista de produtos comprados por um cliente
-     * @param a
+     * @param a codigo de cliente
      * @return lista
      */
     public List<ITuple<String,Integer>> getListOfProductsBoughtOfClient(String a) {
@@ -323,7 +324,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * ordena a lista
-     * @param mapa
+     * @param mapa mapa
      * @return lista
      */
     private List<ITuple<String,Integer>> sortIntoLista(List<Map<String, Integer>> mapa) {
@@ -346,7 +347,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * metodo que torna um mapa num tuple
-     * @param mapa
+     * @param mapa Map para auxiliar o sort
      * @return tuple
      */
     private ITuple<String, Integer> function (Map.Entry<String,Integer> mapa) {
@@ -356,8 +357,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * metodo que compara entrysets
-     * @param fst
-     * @param snd
+     * @param fst map entry para comparar
+     * @param snd map entry para comparar
      * @return int
      */
     private int comparaEntrySets(Map.Entry<String, Integer> fst, Map.Entry<String, Integer> snd) {
@@ -383,11 +384,10 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
 
 
-    //Query 8 versao ze
 
     /**
      * dá os clientes que compraram mais
-     * @param x
+     * @param x numero de clientes que a lista deve conter
      * @return lista
      */
     public List<ITuple<String,Integer>> getClientsWhoBoughtMostOften(int x) {
@@ -396,7 +396,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * dá o numero de clientes e a facturaçao
-     * @param product
+     * @param product codigo de produto
      * @return lista
      */
     public List<List<Double>> getNumClientAndFacturacao(String product) {
@@ -407,7 +407,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * produtos que mais venderam e o numero dos clientes distintos que o compraram
-     * @param n
+     * @param n numero que o utilizador pediu
      * @return lista
      */
     public List<ITuple<String, Integer>> productsMostSellAndNumberOfClients(int n) {
@@ -422,7 +422,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * facturaçao por produto por filial e por mes
-     * @param prod
+     * @param prod o codigo de produto
      * @return lista
      */
     public List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod) {
@@ -431,7 +431,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * recupera o estado da app
-     * @param fichObject
+     * @param fichObject o nome do ficheiro onde lê
      * @return model
      */
     public static IGereVendasModel recoverState(String fichObject) {
@@ -453,7 +453,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * salva o estado do programa na app
-     * @param fichObject
+     * @param fichObject o nome do ficheiro onde escreve
      */
     public void saveState(String fichObject) {
         try {
@@ -473,8 +473,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     /**
      * da os X clientes que mais compraram um dado produto
-     * @param produto
-     * @param tamanho
+     * @param produto produto
+     * @param tamanho tamanho de clientes que o utilizador da app quer ver
      * @return lista
      */
     public List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){

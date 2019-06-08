@@ -18,25 +18,25 @@ public interface IGereVendasView {
 
     /**
      * altera o menu
-     * @param menu
+     * @param menu menu
      */
     void updateMenu(Menu menu);
 
     /**
      * Define quantas linhas o navegador de strings vai ter
-     * @param row
+     * @param row numero de linhas
      */
     void setRow(int row);
 
     /**
      * Define quantas colunas o navegador de strings vai ter
-     * @param col
+     * @param col numero de colunas
      */
     void setCol(int col);
 
     /**
      * Adiciona uma lista de strings ao navegador de strings
-     * @param stringsList
+     * @param stringList lista com as strings a adicionar ao stirngsBrowser
      */
     void addToStringBrowser (List<String> stringList );
 
@@ -60,22 +60,22 @@ public interface IGereVendasView {
 
     /**
      * imprime a line no ecra
-     * @param line
+     * @param line linha a imprimir
      */
     void showLine(String line);
 
 
     /**
      *setter para o timeQueue
-     * @param timeQueue
+     * @param timeQueue tempo Da query
      */
     void setTimeQueue(double timeQueue);
 
 
     /**
      * converte os dados para string para serem visualizados
-     * @param fichName
-     * @param estatistica
+     * @param fichName nome do ficheiro
+     * @param estatistica classe wrapper das estatisticas
      */
     void showInfoView(String fichName,IEstatisticas estatistica);
 

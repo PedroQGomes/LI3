@@ -60,7 +60,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de produtos
-     * @param numProdutosTotal
+     * @param numProdutosTotal numero de produtos total
      */
     public void setNumProdutosTotal(int numProdutosTotal) {
         this.numProdutosTotal = numProdutosTotal;
@@ -68,7 +68,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de clientes
-     * @param numClientesTotal
+     * @param numClientesTotal numero de clientes total
      */
     public void setNumClientesTotal(int numClientesTotal) {
         this.numClientesTotal = numClientesTotal;
@@ -76,7 +76,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas
-     * @param numVendasTotal
+     * @param numVendasTotal numero de vendas total
      */
     public void setNumVendasTotal(int numVendasTotal) {
         this.numVendasTotal = numVendasTotal;
@@ -84,7 +84,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas
-     * @param numVendasValidas
+     * @param numVendasValidas numero de vendas validas
      */
     public void setNumVendasValidas(int numVendasValidas) {
         this.numVendasValidas = numVendasValidas;
@@ -117,7 +117,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de produtos comprados
-     * @param numTotalProdutosComprados
+     * @param numTotalProdutosComprados numero total de produtos comprados
      */
     public void setNumTotalProdutosComprados(int numTotalProdutosComprados) {
         this.numTotalProdutosComprados = numTotalProdutosComprados;
@@ -133,7 +133,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de clientes que nao realizaram compras
-     * @param numClientesNaoCompraram
+     * @param numClientesNaoCompraram numero de clientes que nunca compraram
      */
     public void setNumClientesNaoCompraram(int numClientesNaoCompraram) {
         this.numClientesNaoCompraram = numClientesNaoCompraram;
@@ -149,7 +149,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas com valor nulo
-     * @param numTotalDeComprasValorNulo
+     * @param numTotalDeComprasValorNulo numero total de compras valor nulo
      */
     public void setNumTotalDeComprasValorNulo(int numTotalDeComprasValorNulo) {
         this.numTotalDeComprasValorNulo = numTotalDeComprasValorNulo;
@@ -165,7 +165,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para a faturacao total
-     * @param facturacaoTotal
+     * @param facturacaoTotal faturaçao total
      */
     public void setFacturacaoTotal(double facturacaoTotal) {
         this.facturacaoTotal = facturacaoTotal;

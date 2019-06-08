@@ -18,25 +18,25 @@ public interface IEstatisticas {
 
     /**
      * setter para o numero total de vendas
-     * @param numVendasTotal
+     * @param numVendasTotal numero total de vendas
      */
     void setNumVendasTotal(int numVendasTotal);
 
     /**
      * setter para o numero total de produtos
-     * @param numProdutosTotal
+     * @param numProdutosTotal numero total de produtos
      */
     void setNumProdutosTotal(int numProdutosTotal);
 
     /**
      * setter para o numero total de clientes
-     * @param numClientesTotal
+     * @param numClientesTotal numero total de clientes
      */
     void setNumClientesTotal(int numClientesTotal);
 
     /**
      * setter para o numero total de vendas
-     * @param numVendasValidas
+     * @param numVendasValidas numero total de vendas validas
      */
     void setNumVendasValidas(int numVendasValidas);
 
@@ -48,7 +48,7 @@ public interface IEstatisticas {
 
     /**
      * setter para o numero total de produtos comprados
-     * @param numTotalProdutosComprados
+     * @param numTotalProdutosComprados numero total produtos comprados
      */
     void setNumTotalProdutosComprados(int numTotalProdutosComprados);
 
@@ -61,7 +61,7 @@ public interface IEstatisticas {
 
     /**
      * setter para o numero total de clientes que nao realizaram compras
-     * @param numClientesNaoCompraram
+     * @param numClientesNaoCompraram numero total de clientes que nao compraram
      */
     void setNumClientesNaoCompraram(int numClientesNaoCompraram);
 
@@ -74,7 +74,7 @@ public interface IEstatisticas {
 
     /**
      * setter para o numero total de vendas com valor nulo
-     * @param numTotalDeComprasValorNulo
+     * @param numTotalDeComprasValorNulo numero total de comppras de valor nulo
      */
     void setNumTotalDeComprasValorNulo(int numTotalDeComprasValorNulo);
 
@@ -87,7 +87,7 @@ public interface IEstatisticas {
 
     /**
      * setter para a faturacao total
-     * @param facturacaoTotal
+     * @param facturacaoTotal faturacao total da app para as x vendas
      */
     void setFacturacaoTotal(double facturacaoTotal);
 
