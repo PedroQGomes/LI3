@@ -15,7 +15,8 @@ public class Estatistica implements IEstatisticas, Serializable {
     private int numClientesNaoCompraram;
     private int numTotalDeComprasValorNulo;
     private double facturacaoTotal;
-    
+
+
     public int getNumProdutosTotal() {
         return numProdutosTotal;
     }
