@@ -19,6 +19,9 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     private IEstatisticas estat;
     private transient double timeOfLoadData;
 
+    /**
+     * construtor vazio do GereVendasModel
+     */
     public GereVendasModel() {
         catProd = new CatProd();
         catClient = new CatClient();
@@ -29,6 +32,11 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         estat = new Estatistica();
     }
 
+
+    /**
+     * metodo que carrega os dados dos ficheiros txt
+     * @return model
+     */
     public static IGereVendasModel loadData() {
         IGereVendasModel model = new GereVendasModel();
         IEstatisticas estat = model.getEstatatistica();
@@ -53,17 +61,30 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         return model;
     }
 
+    /**
+     * define o nome do ficheiro de vendas
+     * @param fichVendas
+     */
     public void setFichVendas(String fichVendas) {
         this.fichVendas = fichVendas;
     }
 
 
+    /**
+     * atualiza a info estatica
+     */
     public void updateStaticInfo() {
         this.estat.setFacturacaoTotal(this.facturacao.facturacaoTotal());
         this.estat.setNumClientesNaoCompraram(this.catClient.clientsNeverBought().size());
         this.estat.setNumTotalProdutosComprados(estat.getTotalProdNum() - this.catProd.productsNeverBought().size());
     }
 
+
+    /**
+     * carrega as vendas
+     * @param model
+     * @param estat
+     */
     private static void loadVendas(IGereVendasModel model, IEstatisticas estat) {
         int numVendasValidas = 0;
         int vendasZero = 0;
@@ -84,30 +105,62 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         estat.setNumTotalDeComprasValorNulo(vendasZero);
     }
 
+    /**
+     * dá as filias
+     * @return filiais
+     */
     public IFilial[] getFiliais() {
         return this.filiais;
     }
 
+
+    /**
+     * dá a facturacao
+     * @return facturacao
+     */
     public IFacturacao getFacturacao() {
         return this.facturacao;
     }
 
+    /**
+     * lista de clientes que compraram em todas as filiais
+     * @return lista
+     */
     public List<IClient> listOfClientsThatBoughtInAllFilials() {
         return getCatClient().listOfClientsThatBoughtInAllFilials();
     }
 
+    /**
+     * lista de clientes que nao compraram em todas as filiais
+     * @return lista
+     */
     public List<IClient> listOfClientsThatDBoughtInAllFilials() {
         return getCatClient().listOfClientsThatDBoughtInAllFilials();
     }
 
+    /**
+     * dá o catalogo de produtos
+     * @return IcatProd
+     */
     public ICatProd getCatProd() {
         return catProd;
     }
 
+    /**
+     * dá o catalogo de clientes
+     * @return ICatClient
+     */
     public ICatClient getCatClient() {
         return this.catClient;
     }
 
+
+    /**
+     * metodo que processa a sale
+     * @param l
+     * @param model
+     * @return Isale
+     */
     private static ISale processSale(String l, IGereVendasModel model) {
         ISale sale = Sale.readLineToSale(l);
         if (sale == null) return null;
@@ -116,20 +169,39 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         else return null;
     }
 
+    /**
+     * dá o tempo que demorou a carregar os dados
+     * @return double
+     */
     public double getTimeOfLoadData() {
         return timeOfLoadData;
     }
 
+    /**
+     * define o tempo que demorou a carregar os dados
+     * @param time
+     */
     public void setTimeOfLoadData(double time) {
         this.timeOfLoadData = time;
     }
 
+
+    /**
+     * adiciona ao catalogo de produtos um produto pela string
+     * @param l
+     * @param model
+     */
     private static void addToCatProdFromString(String l, IGereVendasModel model) {
         IProduct tmp = new Product(l);
         if (!tmp.isValid()) return;
         model.getCatProd().add(tmp);
     }
 
+    /**
+     * adiciona ao catalogo de clientes um cliente pela string
+     * @param l
+     * @param model
+     */
     private static void addToCatClientFromString(String l, IGereVendasModel model) {
         IClient tmp = new Client(l);
         if (!tmp.isValid()) return;
@@ -137,20 +209,35 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
 
-
+    /**
+     * lista de produtos que ninguem comprou
+     * @return lista
+     */
     public List<IProduct> productsNoOneBoughtModel() {
         return this.getCatProd().productsNeverBought();
     }
 
 
+    /**
+     * retorna o numero de filiais
+     * @return int
+     */
     public static int getNumFiliais() {
         return NUM_FILIAIS;
     }
 
+    /**
+     * dá o nome do ficheiro de vendas
+     * @return string
+     */
     public String getFichVendas() {
         return fichVendas;
     }
 
+    /**
+     * dá a informacao estatica
+     * @return estatisticas
+     */
     public IEstatisticas getEstatatistica() {
         return this.estat;
     }
@@ -160,7 +247,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
      * Metodo para dar resposta a query 2
      *
      * @param x
-     * @return
+     * @return tuple de inteiro inteiro
      */
     @Override
     public ITuple<Integer, Integer> totalNumbOfSalesInMonthAndClientsBought(int x, int filial) {
@@ -171,7 +258,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
      * Query 3
      *
      * @param client
-     * @return
+     * @return lista
      */
     public List<ITuple<Integer, Integer>> totalPurchasesOfAClientPerYear(String client) {
         if (!this.getCatClient().contains(client)) return null;
@@ -189,6 +276,12 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         return tmp;
     }
 
+    /**
+     * totol faturado por um cliente num dado month
+     * @param client
+     * @param month
+     * @return double
+     */
     public double totalFaturadoPClientPMonth(String client, int month) {
         if (!this.getCatClient().contains(client)) return 0.0;
         double tmp = 0.0;
@@ -198,6 +291,12 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         return tmp;
     }
 
+
+    /**
+     * dá a lista de produtos comprados por um cliente
+     * @param a
+     * @return lista
+     */
     public List<ITuple<String,Integer>> getListOfProductsBoughtOfClient(String a) {
         if (!this.getCatClient().contains(a)) return new ArrayList<>();
         List<Map<String, Integer>> res = new ArrayList<>();
@@ -208,6 +307,12 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     }
 
+
+    /**
+     * ordena a lista
+     * @param mapa
+     * @return lista
+     */
     private List<ITuple<String,Integer>> sortIntoLista(List<Map<String, Integer>> mapa) {
         Map<String, Integer> mapalist = new HashMap<>();
         for (int i = 0; i < NUM_FILIAIS; i++) {
@@ -225,11 +330,23 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     }
 
+
+    /**
+     * metodo que torna um mapa num tuple
+     * @param mapa
+     * @return tuple
+     */
     private ITuple<String, Integer> function (Map.Entry<String,Integer> mapa) {
         return new Tuple<>(mapa.getKey(),mapa.getValue());
     }
 
 
+    /**
+     * metodo que compara entrysets
+     * @param fst
+     * @param snd
+     * @return int
+     */
     private int comparaEntrySets(Map.Entry<String, Integer> fst, Map.Entry<String, Integer> snd) {
         if (fst.getValue().equals(snd.getValue())) {
             return fst.getKey().compareTo(snd.getKey());
@@ -238,6 +355,11 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         return -1;
     }
 
+
+    /**
+     * dá a lista de cliente que mais compraram
+     * @return lista
+     */
     public List<List<String>> getListOfClientsWhoMostBought() {
         List<List<String>> res = new ArrayList<>();
         for (int i = 0; i < NUM_FILIAIS; i++) {
@@ -247,57 +369,32 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
 
-    //Query 8 versao ze
-    public List<ITuple<String,Integer>> getClientsWhoBoughtMostOften2(int x) {
+    /**
+     * dá os clientes que compraram mais
+     * @param x
+     * @return lista
+     */
+    public List<ITuple<String,Integer>> getClientsWhoBoughtMostOften(int x) {
         return this.catClient.listOfClientsWhoBoughtMost(x);
     }
 
-    // queiry 8 interativa
-    public List<Map.Entry<String, Set<String>>> getClientsWhoBoughtMostOften(int x) {
-        List<Map<String, Set<String>>> lista = new ArrayList<>();
-        for (int i = 0; i < NUM_FILIAIS; i++) {
-            lista.add(filiais[i].getClientsWhoBoughtMostOften());
-        }
-        return getWhoMostBought(lista, x);
-    }
 
-    // metodo auxiliar da queiry 8
-    // por cliente calculo logo a diferença nos produtos em todas as filiais
-    private List<Map.Entry<String, Set<String>>> getWhoMostBought(List<Map<String, Set<String>>> lista, int x) {
-        Map<String, Set<String>> mapa = new HashMap<>();
-        List<Map.Entry<String, Set<String>>> res;
-        for (int i = 0; i < NUM_FILIAIS; i++) {
-            for (Map.Entry<String, Set<String>> entry : lista.get(i).entrySet()) {
-                if (mapa.containsKey(entry.getKey())) {
-                    addLista(entry, mapa);
-                } else {
-                    mapa.put(entry.getKey(), entry.getValue());
-                }
-            }
-        }
-        res = mapa.entrySet().stream().sorted((o1, o2) -> {
-            int size1 = o1.getValue().size();
-            int size2 = o2.getValue().size();
-            if(size1 == size2 ) return o1.getKey().compareTo(o2.getKey());
-            return compare(size2,size1);
-        }).limit(x).collect(Collectors.toList());
-        return res;
-
-    }
-
-    // metodo aussiliar da queiry 8
-    private void addLista(Map.Entry<String, Set<String>> entry, Map<String, Set<String>> mapa) {
-        for (String a : entry.getValue()) {
-            mapa.get(entry.getKey()).add(a);
-        }
-    }
-
-
+    /**
+     * dá o numero de clientes e a facturaçao
+     * @param product
+     * @return lista
+     */
     public List<List<Double>> getNumClientAndFacturacao(String product) {
         if (!this.getCatProd().contains(product)) return new ArrayList<>();
         return this.facturacao.getNumClientAndFacturacao(product);
     }
 
+
+    /**
+     * produtos que mais venderam e o numero dos clientes distintos que o compraram
+     * @param n
+     * @return lista
+     */
     public List<ITuple<String, Integer>> productsMostSellAndNumberOfClients(int n) {
         List<ITuple<String, Integer>> res = new ArrayList<>(n);
         List<String> productsMostSellStrings = this.getCatProd().productsMostSell(n);
@@ -307,10 +404,21 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         return res;
     }
 
+
+    /**
+     * facturaçao por produto por filial e por mes
+     * @param prod
+     * @return lista
+     */
     public List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod) {
         return this.getFacturacao().facturacaoPerProdPerFilialPerMonth(prod);
     }
 
+    /**
+     * recupera o estado da app
+     * @param fichObject
+     * @return model
+     */
     public static IGereVendasModel recoverState(String fichObject) {
         IGereVendasModel model = null;
         try {
@@ -328,7 +436,10 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         return model;
     }
 
-
+    /**
+     * salva o estado do programa na app
+     * @param fichObject
+     */
     public void saveState(String fichObject) {
         try {
             try(FileOutputStream fos = new FileOutputStream(fichObject)){
@@ -345,6 +456,12 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
 
+    /**
+     * da os X clientes que mais compraram um dado produto
+     * @param produto
+     * @param tamanho
+     * @return lista
+     */
     public List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
         if(!this.catProd.contains(produto)) return new ArrayList<>();
         return this.facturacao.getXClientsWhoMostBoughtProduct(produto,tamanho);
