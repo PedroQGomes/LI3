@@ -109,7 +109,24 @@ public class GereVendasView implements IGereVendasView {
      * @param estatistica
      */
     private void showDetailedInfo(IEstatisticas estatistica) {
+        StringBuilder sb = new StringBuilder("Facturaco por mes");
+        for(double[] arr :estatistica.getFactPerMonth()){
+            for(int i = 0; i<12;i++) {
+                sb.append("mes :").append(i+1).append("facturou ").append(arr[i]);
+            }
+        }
 
+        for(int[] arr :estatistica.getNumberOfSalesPerMonth()){
+            for(int i = 0; i<12;i++) {
+                sb.append("mes :").append(i+1).append("houve ").append(arr[i]).append("vendas ");
+            }
+        }
+
+        for(int[] arr :estatistica.getDiffClientsNumber()){
+            for(int i = 0; i<12;i++) {
+                sb.append("mes :").append(i+1).append("compraram ").append(arr[i]).append("clientes diferentes ");
+            }
+        }
     }
 
     /**

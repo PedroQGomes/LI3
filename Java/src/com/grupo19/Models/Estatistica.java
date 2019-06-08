@@ -22,6 +22,9 @@ public class Estatistica implements IEstatisticas, Serializable {
     private List<double[]> factPerMonth;
     private List<int[]> numberOfSalesPerMonth;
     private List<int[]> diffClientsNumber;
+
+
+
     /**
      * Construtor da estatistica
      */
