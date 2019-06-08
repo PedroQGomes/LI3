@@ -162,10 +162,8 @@ public class Facturacao implements IFacturacao, Serializable {
      */
     public List<Integer> numberOfClientsWhoBoughtPerMonth(String codProd) {
         List<Integer> resultados = new ArrayList<>();
-
         for(int i=0;i<12;i++){
             int total;
-            HashSet<String> clients = new HashSet<>();
             Map <String, IFacturacaoPorProd> tmp;
             tmp=arrayOfSales.get(i);
             IFacturacaoPorProd tmpFact = tmp.get(codProd);
@@ -173,10 +171,7 @@ public class Facturacao implements IFacturacao, Serializable {
                 resultados.add(i,0);
                 continue;
             }
-            for(ISale s: tmpFact.getSalesList()){
-                clients.add(s.getClient());
-            }
-            total=clients.size();
+            total=tmpFact.getDiffClients();
             resultados.add(i,total);
         }
         return resultados;
@@ -198,29 +193,7 @@ public class Facturacao implements IFacturacao, Serializable {
         return total;
     }
 
-    /**
-     *
-     * valor total mensal, de um dado produto(price*units)
-     * @param codProd
-     * @return res
-     *
-     */
-    public List<Double> totalSalesPerProduct ( String codProd){
-        List<Double> res= new ArrayList<>();
-        for(int i=0;i<12;i++){
-            double totalMonth=0;
-            Map <String, IFacturacaoPorProd> tmp;
-            tmp=arrayOfSales.get(i);
-            for(Map.Entry<String,IFacturacaoPorProd> entry : tmp.entrySet()) {
-                String key = entry.getKey();
-                if(key.equals(codProd)){
-                    totalMonth += entry.getValue().totalSaleProd();
-                }
-            }
-            res.add(i,totalMonth);
-        }
-        return  res;
-    }
+
 
     /**
      *
@@ -269,6 +242,7 @@ public class Facturacao implements IFacturacao, Serializable {
 
     }
 
+
     /**
      *
      * Determina os clientes que mais compraram um produtoe quanto gastaram
@@ -306,68 +280,7 @@ public class Facturacao implements IFacturacao, Serializable {
 
     }
 
-    // Para contar clientes distintos ja tenho funcao  numberOfClientsWhoBought
-    /**
-     *
-     *Dado o código de um produto que deve existir, determinar o conjunto dos X clientes
-     * que mais o compraram e, para cada um, qual o valor gasto (ordenação cf. 5);
-     * @param produto string id do produto
-     * @param tamanho
-     * @return
-     */
-   /* public List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
-        Map<String, ITuple<Integer,Double>>  mapa = new HashMap<>();
-        List<Map.Entry<String, ITuple<Integer,Double>>> res;
-        int count;
-        double facturacao;
-        for(int i = 0; i< 12; i++){
-            IFacturacaoPorProd factProd = this.arrayOfSales.get(i).get(produto);
-            if(factProd == null)continue;
-            for(ISale sale : factProd.getSalesList()){
-                if(mapa.containsKey(sale.getClient())){
-                    count = mapa.get(sale.getClient()).getFirstElem();
-                    facturacao = mapa.get(sale.getClient()).getSecondElem();
-                    count++;
-                    facturacao += sale.totalPrice();
-                    mapa.put(sale.getClient(),new Tuple<>(count,facturacao));
-                }else {
-                    mapa.put(sale.getClient(),new Tuple<>(1,sale.totalPrice()));
-                }
-            }
-        }
-        res = mapa.entrySet().stream().sorted((o1,o2)-> o2.getValue().getFirstElem().compareTo(o1.getValue().getFirstElem())).collect(Collectors.toList());
-        Collections.reverse(res); // com isto fica do maior para o menor
-        res = res.stream().limit(tamanho).collect(Collectors.toList());
-        Collections.reverse(res);
-        return res;
-
-    } */
 
 
-<<<<<<< HEAD
-=======
-    // implementar uma arvore com um tuple de string que é o cliente
-    // mais outro tuple que é a quantidade e o montante
-    // fazer tb o comparador adequado
-    /*
-    public Set<ITuple<String, ITuple<Integer,Double>>> experimento(String produto,int tamanho){
 
-        Set<ITuple<String, ITuple<Integer,Double>>> arvore = new TreeSet<ITuple<String, ITuple<Integer,Double>>>();
-        for(int i = 0; i<12;i++){
-            IFacturacaoPorProd factProd = this.arrayOfSales.get(i).get(produto);
-            if(factProd == null)continue;
-            for(ISale sale : factProd.getSalesList()){
-                if(arvore.contains(sale.getClient())){
-
-                }else{
-
-                }
-            }
-
-
-        }
-    }*/
-
-
->>>>>>> 9c22c7571f981edd03b9ce8fa46e91cb2ffef122
 }

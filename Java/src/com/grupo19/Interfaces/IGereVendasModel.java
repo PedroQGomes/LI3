@@ -24,8 +24,7 @@ public interface IGereVendasModel {
     List<ITuple<Integer,Integer>> totalPurchasesOfAClientPerYear(String a );
     double totalFaturadoPClientPMonth(String a,int mes);
     List<List<String>> getListOfClientsWhoMostBought();
-    List<Map.Entry<String, Set<String>>> getClientsWhoBoughtMostOften(int x);
-    List<ITuple<String,Integer>> getClientsWhoBoughtMostOften2(int x);
+    List<ITuple<String,Integer>> getClientsWhoBoughtMostOften(int x);
     List<List<Double>> getNumClientAndFacturacao(String client);
     List<ITuple<String,Integer>> productsMostSellAndNumberOfClients(int n);
     List<List<Double>> facturacaoPerProdPerFilialPerMonth(String prod);

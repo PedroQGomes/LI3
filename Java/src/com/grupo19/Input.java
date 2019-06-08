@@ -127,15 +127,20 @@ public class Input {
     }
 
     public static List<String> lerLinhasWithBuff (String fichtxt) {
-        List<String> linhas = new ArrayList<>();
-        BufferedReader inFile;
+        List<String> linhas = new ArrayList<>(100000);
+        BufferedReader inFile = null;
         String linha;
         try {
             inFile = new BufferedReader((new FileReader(fichtxt)));
             while((linha = inFile.readLine()) != null) linhas.add(linha);
         } catch(IOException exc) {
             out.println(exc);
-
+        } finally {
+            try {
+                if(inFile != null) inFile.close();
+            } catch (Exception e) {
+                out.println(e.getMessage());
+            }
         }
         return linhas;
     }

@@ -48,7 +48,6 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         produtos.forEach(p -> GereVendasModel.addToCatProdFromString(p, model));
         clientes.forEach(c -> GereVendasModel.addToCatClientFromString(c, model));
         loadVendas(model,estat);
-        //model.saveState("data.tmp"); //TODO ATIVAR ISTO
         model.setTimeOfLoadData(Crono.stop());
         return model;
     }
@@ -62,7 +61,13 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         this.estat.setFacturacaoTotal(this.facturacao.facturacaoTotal());
         this.estat.setNumClientesNaoCompraram(this.catClient.clientsNeverBought().size());
         this.estat.setNumTotalProdutosComprados(estat.getTotalProdNum() - this.catProd.productsNeverBought().size());
+        for(int i = 0;i<12;i++) {
+            this.estat.addToFacPerMonth(i,this.facturacao.valorTotalFactMensal(i));
+
+        }
     }
+
+
 
     private static void loadVendas(IGereVendasModel model, IEstatisticas estat) {
         int numVendasValidas = 0;
@@ -83,6 +88,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         estat.setNumVendasValidas(numVendasValidas);
         estat.setNumTotalDeComprasValorNulo(vendasZero);
     }
+
 
     public IFilial[] getFiliais() {
         return this.filiais;
@@ -248,48 +254,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
 
     //Query 8 versao ze
-    public List<ITuple<String,Integer>> getClientsWhoBoughtMostOften2(int x) {
+    public List<ITuple<String,Integer>> getClientsWhoBoughtMostOften(int x) {
         return this.catClient.listOfClientsWhoBoughtMost(x);
-    }
-
-    // queiry 8 interativa
-    public List<Map.Entry<String, Set<String>>> getClientsWhoBoughtMostOften(int x) {
-        List<Map<String, Set<String>>> lista = new ArrayList<>();
-        for (int i = 0; i < NUM_FILIAIS; i++) {
-            lista.add(filiais[i].getClientsWhoBoughtMostOften());
-        }
-        return getWhoMostBought(lista, x);
-    }
-
-    // metodo auxiliar da queiry 8
-    // por cliente calculo logo a diferença nos produtos em todas as filiais
-    private List<Map.Entry<String, Set<String>>> getWhoMostBought(List<Map<String, Set<String>>> lista, int x) {
-        Map<String, Set<String>> mapa = new HashMap<>();
-        List<Map.Entry<String, Set<String>>> res;
-        for (int i = 0; i < NUM_FILIAIS; i++) {
-            for (Map.Entry<String, Set<String>> entry : lista.get(i).entrySet()) {
-                if (mapa.containsKey(entry.getKey())) {
-                    addLista(entry, mapa);
-                } else {
-                    mapa.put(entry.getKey(), entry.getValue());
-                }
-            }
-        }
-        res = mapa.entrySet().stream().sorted((o1, o2) -> {
-            int size1 = o1.getValue().size();
-            int size2 = o2.getValue().size();
-            if(size1 == size2 ) return o1.getKey().compareTo(o2.getKey());
-            return compare(size2,size1);
-        }).limit(x).collect(Collectors.toList());
-        return res;
-
-    }
-
-    // metodo aussiliar da queiry 8
-    private void addLista(Map.Entry<String, Set<String>> entry, Map<String, Set<String>> mapa) {
-        for (String a : entry.getValue()) {
-            mapa.get(entry.getKey()).add(a);
-        }
     }
 
 

@@ -2,11 +2,9 @@ package com.grupo19;
 
 import com.grupo19.Interfaces.*;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GereVendasController implements IGereVendasController {
@@ -86,7 +84,7 @@ public class GereVendasController implements IGereVendasController {
     }
 
 
-    private void query4(){ //TODO: melhorar apresentação
+    private void query4(){
         String l = GereVendasView.getUserInputString("Insira o código do Produto:");
         Crono.start();
         List<List<Double>> lista = model.getNumClientAndFacturacao(l);
@@ -99,13 +97,13 @@ public class GereVendasController implements IGereVendasController {
         }
         for(int i = 0; i < 12 ;i++){
             if(lista.get(i).isEmpty()) {
-                sb.append("O Produto ").append(l).append(" não foi comprado no mês ").append(i+1).append("\n");
+                sb.append("Mês ").append(i+1).append(": O Produto ").append(l).append(" não foi comprado neste mês").append("\n");
                 continue;
             }
-            sb.append("Produto ")
-                    .append(l)
-                    .append(" no mes ")
-                    .append(i+1).append(" foi comprado ")
+            sb.append("Mês ")
+                    .append(i+1)
+                    .append(": O Produto ")
+                    .append(l).append(" foi comprado ")
                     .append(Math.round(lista.get(i).get(0))).append(" vez(es),por ")
                     .append(Math.round(lista.get(i).get(1))).append(" clientes diferentes")
                     .append(" e facturou :").append(lista.get(i).get(2))
@@ -169,7 +167,7 @@ public class GereVendasController implements IGereVendasController {
         int x = GereVendasView.getUserInputInt("Insira o número de clientes pretendido:");
         Crono.start();
         StringBuilder sb = new StringBuilder();
-        List<ITuple<String,Integer>> lista = model.getClientsWhoBoughtMostOften2(x);
+        List<ITuple<String,Integer>> lista = model.getClientsWhoBoughtMostOften(x);
         view.setTimeQueue(Crono.stop());
         for(int i = 0; i < x ;i++){
             sb.append("Cliente ")
@@ -183,7 +181,7 @@ public class GereVendasController implements IGereVendasController {
     }
     //Dado o código de um produto que deve existir, determinar o conjunto dos X clientes
     //que mais o compraram e, para cada um, qual o valor gasto
-    private void query9() { //TODO: ESTA MAL
+    private void query9() {
         String l = GereVendasView.getUserInputString("Insira o código de Produto:");
         int tamanho = GereVendasView.getUserInputInt("Insira o número de clientes que deseja ver:");
         Crono.start();
@@ -268,6 +266,12 @@ public class GereVendasController implements IGereVendasController {
             case 10:
                 query10();
                 break;
+            case 11:
+                Crono.start();
+                model.saveState("data.tmp");
+                view.setTimeQueue(Crono.stop());
+                view.showLine("Dados Guardados");
+                break;
             default:
                 break;
 
@@ -277,7 +281,7 @@ public class GereVendasController implements IGereVendasController {
 
 
     public void init ( ) {
-        model.updateStaticInfo();
+        //model.updateStaticInfo();
         view.setTimeQueue(model.getTimeOfLoadData());
         view.showInfoView(model.getFichVendas(),model.getEstatatistica());
         do {

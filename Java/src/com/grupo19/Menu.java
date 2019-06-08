@@ -1,5 +1,8 @@
 package com.grupo19;
 
+/**
+ * Menu
+ */
 public enum Menu {
     MAINMENU(new String[] {"Lista ordenada alfabeticamente com os códigos dos produtos nunca comprados e o seu respectivo total",
             "Dado um mês , determinar o número total global de vendas realizadas e o número total de clientes distintos que as fizeram.",
@@ -10,17 +13,31 @@ public enum Menu {
             "Determinar a lista dos três maiores compradores em termos de dinheiro facturado, por filial",
             "Determinar os códigos dos X clientes que compraram mais produtos diferentes",
             "Dado o código de um produto que deve existir, determinar o conjunto dos X clientes que mais o compraram  ",
-            "Determinar mês a mês, e para cada mês filial a filial, a facturação total do produto dado"}),
+            "Determinar mês a mês, e para cada mês filial a filial, a facturação total do produto dado",
+            "Guardar estado do programa em ficheiro objeto(Nome por defeito:data.tmp)"}),
     STRINGBROWSER;
 
     private String[] menuOptions;
+
+    /**
+     * Construtor do menu
+     */
     Menu() {
 
     }
+
+    /**
+     * Construtor do menu parametrizado para receber as opções do MainMenu
+     * @param menuOptions
+     */
     Menu(String[] menuOptions) {
          this.menuOptions = menuOptions;
     }
 
+    /**
+     * Getter das opções do menu
+     * @return
+     */
     public String[] getMenuOptions ( ) {
         return menuOptions;
     }

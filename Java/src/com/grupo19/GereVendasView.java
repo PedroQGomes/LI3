@@ -147,13 +147,6 @@ public class GereVendasView implements IGereVendasView {
 
     }
 
-    private void showMenu(String[] menuOptions) {
-        for(String s:menuOptions) {
-            out.println(s);
-        }
-        Input.lerString();
-    }
-
     private void showMenuAsList(Menu menu) {
         String[] menuOptions = menu.getMenuOptions();
         StringBuilder sb = new StringBuilder();
