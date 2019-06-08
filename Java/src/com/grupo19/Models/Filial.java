@@ -72,24 +72,24 @@ public class Filial implements IFilial, Serializable {
      * metodo que adiciona uma sala a filial
      * @param a
      */
-    public void add(ISale a){
-        if(!this.filialData.containsKey(a.getClient())) {
-            List<List<ISale>> lista = new ArrayList<>(12);
-            for(int i = 0; i<12;i++) {
-                List<ISale> s = new ArrayList<>(4);
-                lista.add(s);
+        public void add(ISale a){
+            if(!this.filialData.containsKey(a.getClient())) {
+                List<List<ISale>> lista = new ArrayList<>(12);
+                for(int i = 0; i<12;i++) {
+                    List<ISale> s = new ArrayList<>(4);
+                    lista.add(s);
+                }
+                this.filialData.put(a.getClient(),lista);
             }
-            this.filialData.put(a.getClient(),lista);
+            List<List<ISale>> monthArr = this.filialData.get(a.getClient());
+            List<ISale> saleArr = monthArr.get(a.getMonth()-1);
+            saleArr.add(a.clone());
+
         }
-        List<List<ISale>> monthArr = this.filialData.get(a.getClient());
-        List<ISale> saleArr = monthArr.get(a.getMonth()-1);
-        saleArr.add(a.clone());
 
-    }
-
-    public double FacturacaoTotal(){
-        double facturacao = 0;
-        for(Map.Entry<String,List<List<ISale>>> mapa : this.filialData.entrySet()){
+        public double FacturacaoTotal(){
+            double facturacao = 0;
+            for(Map.Entry<String,List<List<ISale>>> mapa : this.filialData.entrySet()){
             for(int i = 0; i<12 ; i++) {
                 for (ISale sale : mapa.getValue().get(i)) {
                     facturacao += sale.totalPrice();
@@ -133,9 +133,14 @@ public class Filial implements IFilial, Serializable {
 
     public int[] numberOfSalesPerMonth(){
         int[] arr = new int[12];
+
+        for(int j = 0; j<12;j++){
+            arr[j] = 0;
+        }
+
         for(Map.Entry<String,List<List<ISale>>> mapa : this.filialData.entrySet()){
             for(int i = 0; i<12 ; i++) {
-                arr[i] = mapa.getValue().get(i).size();
+                arr[i] += mapa.getValue().get(i).size();
             }
         }
         return arr;
