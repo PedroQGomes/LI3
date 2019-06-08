@@ -214,7 +214,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * getter da opcao do menu
-     * @return
+     * @return int
      */
     public int getChoice() {return this.choice;}
 
@@ -283,14 +283,14 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * devolve o menu
-     * @return
+     * @return Menu
      */
     public Menu getCurrentMenu() { return this.menu;}
 
 
     /**
      * método para fechar o menu
-     * @return
+     * @return boolean
      */
     public boolean exit() {
         if(menu != Menu.MAINMENU) return false;

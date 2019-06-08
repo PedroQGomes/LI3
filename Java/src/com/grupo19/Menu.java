@@ -38,7 +38,7 @@ public enum Menu {
     /**
      * Getter das opções do menu
      * metodo getter da String de opcoes do menu
-     * @return
+     * @return lista de strings do menu
      */
     public String[] getMenuOptions ( ) {
         return menuOptions;

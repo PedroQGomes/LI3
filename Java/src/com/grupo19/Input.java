@@ -14,7 +14,7 @@ public class Input {
 
     /**
      * le strings a partir do input
-     * @return
+     * @return String
      */
     public static String lerString() {
         Scanner input = new Scanner(in);

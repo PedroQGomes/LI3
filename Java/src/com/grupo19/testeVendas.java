@@ -29,7 +29,7 @@ public class testeVendas {
     /**
      * le linha por linha de ficheiro para uma list de strings
      * @param fichtxt ficheiro de texto
-     * @return
+     * @return lista das linhas lidas do ficheiro
      */
     public static List<String> lerLinhasWithBuff (String fichtxt) {
         List<String> linhas = new ArrayList<>();
@@ -48,7 +48,7 @@ public class testeVendas {
     /**
      * le o ficheiro de uma vez
      * @param fichtxt ficheiro de texto
-     * @return
+     * @return lista das linhas lidas do ficheiro
      */
     public static List<String> lerAllLines(String fichtxt) {
         List<String> linhas = new ArrayList<>();
