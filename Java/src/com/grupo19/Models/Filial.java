@@ -1,5 +1,6 @@
 package com.grupo19.Models;
 
+import com.grupo19.Crono;
 import com.grupo19.Interfaces.IClient;
 import com.grupo19.Interfaces.IFilial;
 import com.grupo19.Interfaces.ISale;
@@ -155,7 +156,7 @@ public class Filial implements IFilial, Serializable {
      * @param x
      * @return Tuple
      */
-    public Tuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x){
+    public ITuple<Integer,Integer> totalNumbOfSalesInMonthAndClientsBought(int x){
         if(x > 11 || x < 0){return null;}
         int res = 0;
         Set<String> client = new HashSet<>();
@@ -193,7 +194,7 @@ public class Filial implements IFilial, Serializable {
      * @param mes
      * @return Tuple
      */
-    public Tuple<Integer,Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente,int mes){
+    public ITuple<Integer,Set<String>> numOfDifferentProductsOfClientAndNumOfSales(String cliente,int mes){
         if(mes > 11 || mes < 0){return null;}
         List<ISale> tmp = this.filialData.get(cliente).get(mes);
         Set<String> rep = new HashSet<>();
@@ -253,24 +254,23 @@ public class Filial implements IFilial, Serializable {
      * (query 7)determinar a lista de tres maiores compradores em termos de dinheiro faturado
      * @return list<String>
      */
-    public List<String> getListOfClientsWhoMostBought(){ //TODO: MELHORAR TEMPOS
-        Map<String,Double> mapa = new HashMap<>();
+    public List<String> getListOfClientsWhoMostBought(){
+        TreeSet<ITuple<String,Double>> tmp = new TreeSet<>(((o1, o2) -> o2.getSecondElem().compareTo(o1.getSecondElem())));
         for(Map.Entry<String,List<List<ISale>>> lista : this.filialData.entrySet()){
+            double fact = 0.0;
             for(int i = 0;i<12;i++){
                 for(ISale sale :lista.getValue().get(i)){
-                    if(mapa.containsKey(sale.getClient())){
-                        double tmp = mapa.get(sale.getClient());
-                        tmp += sale.getPrice();
-                        mapa.put(sale.getClient(),tmp);
-                    }else {
-                        mapa.put(sale.getClient(),sale.getPrice());
-
-                    }
+                    fact += sale.totalPrice();
                 }
-
             }
+            tmp.add(new Tuple<>(lista.getKey(),fact));
         }
-        return mapa.entrySet().stream().sorted(((o1, o2) -> o2.getValue().compareTo(o1.getValue()))).map(Map.Entry::getKey).limit(3).collect(Collectors.toList());
+        List<String> res = new ArrayList<>(3);
+        for(int i = 0; i<3;i++) {
+            ITuple<String,Double> tuple = tmp.pollFirst();
+            if(tuple != null) res.add(tuple.getFirstElem());
+        }
+        return res;
     }
 
 

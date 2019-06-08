@@ -72,7 +72,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         for (String l : vendas) {
             ISale tmp = processSale(l, model);
             if (tmp != null) {
-                model.getCatClient().updateClientBought(tmp.getClient(), tmp.getFilial());
+                model.getCatClient().updateClientBought(tmp.getClient(), tmp.getFilial(),tmp.getProduct());
                 model.getCatProd().updateProductBought(tmp.getProduct(), tmp.getFilial(), tmp.getUnits());
                 numVendasValidas++;
                 model.getFiliais()[tmp.getFilial() - 1].add(tmp);
@@ -198,7 +198,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
         return tmp;
     }
 
-    public List<String> getListOfProductsBoughtOfClient(String a) {
+    public List<ITuple<String,Integer>> getListOfProductsBoughtOfClient(String a) {
         if (!this.getCatClient().contains(a)) return new ArrayList<>();
         List<Map<String, Integer>> res = new ArrayList<>();
         for (int i = 0; i < NUM_FILIAIS; i++) {
@@ -208,9 +208,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     }
 
-    private List<String> sortIntoLista(List<Map<String, Integer>> mapa) {
+    private List<ITuple<String,Integer>> sortIntoLista(List<Map<String, Integer>> mapa) {
         Map<String, Integer> mapalist = new HashMap<>();
-        List<String> lista;
         for (int i = 0; i < NUM_FILIAIS; i++) {
             for (Map.Entry<String, Integer> fil : mapa.get(i).entrySet()) { // map com aritgo e numero de vezes que foi comprado
                 if (mapalist.containsKey(fil.getKey())) {
@@ -222,9 +221,12 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
                 }
             }
         }
-        lista = mapalist.entrySet().stream().sorted(this::comparaEntrySets).map(Map.Entry::getKey).collect(Collectors.toList());
-        return lista;
+        return mapalist.entrySet().stream().sorted(this::comparaEntrySets).map(this::function).collect(Collectors.toList());
 
+    }
+
+    private ITuple<String, Integer> function (Map.Entry<String,Integer> mapa) {
+        return new Tuple<>(mapa.getKey(),mapa.getValue());
     }
 
 
@@ -245,6 +247,11 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
 
+    //Query 8 versao ze
+    public List<ITuple<String,Integer>> getClientsWhoBoughtMostOften2(int x) {
+        return this.catClient.listOfClientsWhoBoughtMost(x);
+    }
+
     // queiry 8 interativa
     public List<Map.Entry<String, Set<String>>> getClientsWhoBoughtMostOften(int x) {
         List<Map<String, Set<String>>> lista = new ArrayList<>();
@@ -255,6 +262,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
     }
 
     // metodo auxiliar da queiry 8
+    // por cliente calculo logo a diferença nos produtos em todas as filiais
     private List<Map.Entry<String, Set<String>>> getWhoMostBought(List<Map<String, Set<String>>> lista, int x) {
         Map<String, Set<String>> mapa = new HashMap<>();
         List<Map.Entry<String, Set<String>>> res;
