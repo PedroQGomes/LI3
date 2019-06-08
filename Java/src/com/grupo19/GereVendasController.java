@@ -13,7 +13,7 @@ public class GereVendasController implements IGereVendasController {
 
     /**
      * define o modelo do controler
-     * @param model
+     * @param model model
      */
     public void setModel (IGereVendasModel model) {
         this.model = model;
@@ -21,7 +21,7 @@ public class GereVendasController implements IGereVendasController {
 
     /**
      *  define o view do controler
-     * @param view
+     * @param view view
      */
     public void setView (IGereVendasView view) {
         this.view = view;

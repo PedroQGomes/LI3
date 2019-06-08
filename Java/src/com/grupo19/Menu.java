@@ -27,23 +27,17 @@ public enum Menu {
     }
 
     /**
-<<<<<<< HEAD
      * Construtor do menu parametrizado para receber as opções do MainMenu
-=======
      * construtor parametrizado
->>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
-     * @param menuOptions
+     * @param menuOptions opçao do menu
      */
     Menu(String[] menuOptions) {
          this.menuOptions = menuOptions;
     }
 
     /**
-<<<<<<< HEAD
      * Getter das opções do menu
-=======
      * metodo getter da String de opcoes do menu
->>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
      * @return
      */
     public String[] getMenuOptions ( ) {

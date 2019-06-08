@@ -71,7 +71,7 @@ public interface IFilial {
     /**
      * (query 7)determinar a lista de tres maiores compradores em termos de dinheiro faturado
      *
-     * @return list<String>
+     * @return list com o codigo dos clientes que mais compraram
      */
     List<String> getListOfClientsWhoMostBought();
 

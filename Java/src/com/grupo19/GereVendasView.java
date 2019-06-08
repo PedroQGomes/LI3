@@ -20,7 +20,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * Define quantas linhas o navegador de strings vai ter
-     * @param row
+     * @param row numero linha
      */
     public void setRow (int row) {
         this.row = row;
@@ -28,7 +28,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * Define quantas colunas o navegador de strings vai ter
-     * @param col
+     * @param col numero colunas
      */
     public void setCol (int col) {
         this.col = col;
@@ -38,7 +38,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * Lê o input(String) do user
-     * @return
+     * @return input(string) user
      */
     public static String getUserInputString(String s) {
         out.print(s + " ");
@@ -48,13 +48,17 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * Lê o input(int) do user
-     * @return
+     * @return input(int) do user
      */
     public static int getUserInputInt(String s) {
         out.print(s + " ");
         return Input.lerInt();
     }
 
+    /**
+     * Get de um mês valido (>1 <12)
+     * @return um mes valido
+     */
     public static int getMonthFromInput() {
         int month = getUserInputInt("Insira o mês:");
         while(month < 1 || month > 12) month = getUserInputInt("Insira um mês válido:");
@@ -63,7 +67,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * Adiciona uma lista de strings ao navegador de strings
-     * @param stringsList
+     * @param stringsList lista de strings a colocar no navegador
      */
     public void addToStringBrowser (List<String> stringsList ) {
         if(stringsList.isEmpty()) return;
@@ -73,8 +77,8 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * converte os dados para string para serem visualizados
-     * @param fichName
-     * @param estatistica
+     * @param fichName nome do ficheiro
+     * @param estatistica estatistica
      */
     @Override
     public void showInfoView(String fichName, IEstatisticas estatistica) {
@@ -106,9 +110,10 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * Mostra mais informação detalhada
-     * @param estatistica
+     * @param estatistica estatistica
      */
     private void showDetailedInfo(IEstatisticas estatistica) {
+
 
     }
 
@@ -137,7 +142,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * Update menu
-     * @param menu
+     * @param menu menu para onde vai mudar
      */
     public void updateMenu (Menu menu) {
         this.menu = menu;
@@ -167,7 +172,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * imprime o menu como uma lista
-     * @param menu
+     * @param menu menu a imprimir
      */
     private void showMenuAsList(Menu menu) {
         String[] menuOptions = menu.getMenuOptions();
@@ -182,7 +187,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      *setter para o timeQueue
-     * @param timeQueue
+     * @param timeQueue tempo de espera da query
      */
     public void setTimeQueue(double timeQueue) {
         this.timeQueue = timeQueue;
@@ -197,7 +202,7 @@ public class GereVendasView implements IGereVendasView {
 
     /**
      * imprime a line no ecra
-     * @param line
+     * @param line linha a imprimir
      */
     public void showLine (String line) {
         header();

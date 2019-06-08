@@ -37,7 +37,7 @@ public class Input {
 
     /**
      * le inteiros a partir do input
-     * @return
+     * @return o inteiro que lê
      */
     public static int lerInt() {
         Scanner input = new Scanner(in);
@@ -60,7 +60,7 @@ public class Input {
 
     /**
      * le doubles a partir do input
-     * @return
+     * @return o double que lê
      */
     public static double lerDouble() {
         Scanner input = new Scanner(in);
@@ -83,7 +83,7 @@ public class Input {
 
     /**
      * le floats a partir do input
-     * @return
+     * @return o float que lê
      */
     public static float lerFloat() {
         Scanner input = new Scanner(in);
@@ -106,7 +106,7 @@ public class Input {
 
     /**
      * le boolean do input
-     * @return
+     * @return o boolean que lê
      */
     public static boolean lerBoolean() {
         Scanner input = new Scanner(in);
@@ -129,7 +129,7 @@ public class Input {
 
     /**
      * le um short do input
-     * @return
+     * @return o short que lê
      */
     public static short lerShort() {
         Scanner input = new Scanner(in);
@@ -152,8 +152,8 @@ public class Input {
 
     /**
      * le a partin de um ficheiro para uma lista de strings
-     * @param fichtxt
-     * @return
+     * @param fichtxt nome do ficheiro
+     * @return lista com as linhas todas do ficheiro
      */
     public static List<String> lerLinhasWithBuff (String fichtxt) {
         List<String> linhas = new ArrayList<>(20000);
