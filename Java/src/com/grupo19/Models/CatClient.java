@@ -12,24 +12,46 @@ import java.util.stream.Collectors;
 public class CatClient implements ICatClient, Serializable {
     private Map<String,IClient> mapOfClients;
 
+    /**
+     * construtor vazio do CatClient
+     */
     public CatClient() {
         mapOfClients = new HashMap<>();
     }
+
+    /**
+     * adiciona um cliente ao catalogo de clientes
+     * @param client
+     */
     public void add (IClient client) {
         mapOfClients.put(client.getCodigo(),client);
     }
 
-
+    /**
+     * verifica se um cliente existe no catalogo de clientes
+     * @param codClient
+     * @return boolean
+     */
     public boolean contains (String codClient) {
         return mapOfClients.containsKey(codClient);
     }
 
 
+    /**
+     * atualiza o cliente que comprou um dado produto numa dada filial
+     * @param client
+     * @param filial
+     * @param product
+     */
     public void updateClientBought (String client, int filial,String product) {
         IClient clt = mapOfClients.get(client);
         clt.updateClientBought(filial-1,product);
     }
 
+    /**
+     * dá uma lista com todos os clientes que nunca compraram
+     * @return tmp
+     */
     public List<IClient> clientsNeverBought ( ) {
         List<IClient> tmp = new ArrayList<>();
         for(Map.Entry entry: mapOfClients.entrySet()) {
@@ -57,6 +79,12 @@ public class CatClient implements ICatClient, Serializable {
         return this.mapOfClients.values().stream().filter(IClient::hasClientEverBought).collect(Collectors.toList());
     }
 
+
+    /**
+     * Lista de X(numero dado) clientes que mais compraram
+     * @param n
+     * @return res
+     */
     public List<ITuple<String,Integer>> listOfClientsWhoBoughtMost(int n) {
         TreeSet<ITuple<String,Integer>> set = new TreeSet<>(new Comparator<ITuple<String, Integer>>() {
             @Override
