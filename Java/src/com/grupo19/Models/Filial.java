@@ -252,7 +252,7 @@ public class Filial implements IFilial, Serializable {
 
     /**
      * (query 7)determinar a lista de tres maiores compradores em termos de dinheiro faturado
-     * @return list<String>
+     * @return Lista com as strings correspondentes ao codigo do cliente
      */
     public List<String> getListOfClientsWhoMostBought(){
         TreeSet<ITuple<String,Double>> tmp = new TreeSet<>(((o1, o2) -> o2.getSecondElem().compareTo(o1.getSecondElem())));

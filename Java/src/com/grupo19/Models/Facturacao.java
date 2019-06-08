@@ -375,14 +375,51 @@ public class Facturacao implements IFacturacao, Serializable {
                 }
             }
         }
+        res = mapa.entrySet().stream().sorted((o1, o2) -> {
+            if(o1.getValue().getFirstElem().equals(o2.getValue().getFirstElem())) return o1.getKey().compareTo(o2.getKey());
+            return o2.getValue().getFirstElem().compareTo(o1.getValue().getFirstElem());
+        }).limit(tamanho).collect(Collectors.toList());
+
+        return res;
+
+    }
+
+    // Para contar clientes distintos ja tenho funcao  numberOfClientsWhoBought
+    /**
+     *
+     *Dado o código de um produto que deve existir, determinar o conjunto dos X clientes
+     * que mais o compraram e, para cada um, qual o valor gasto (ordenação cf. 5);
+     * @param produto string id do produto
+     * @param tamanho
+     * @return
+     */
+   /* public List<Map.Entry<String, ITuple<Integer,Double>>> getXClientsWhoMostBoughtProduct(String produto, int tamanho){
+        Map<String, ITuple<Integer,Double>>  mapa = new HashMap<>();
+        List<Map.Entry<String, ITuple<Integer,Double>>> res;
+        int count;
+        double facturacao;
+        for(int i = 0; i< 12; i++){
+            IFacturacaoPorProd factProd = this.arrayOfSales.get(i).get(produto);
+            if(factProd == null)continue;
+            for(ISale sale : factProd.getSalesList()){
+                if(mapa.containsKey(sale.getClient())){
+                    count = mapa.get(sale.getClient()).getFirstElem();
+                    facturacao = mapa.get(sale.getClient()).getSecondElem();
+                    count++;
+                    facturacao += sale.totalPrice();
+                    mapa.put(sale.getClient(),new Tuple<>(count,facturacao));
+                }else {
+                    mapa.put(sale.getClient(),new Tuple<>(1,sale.totalPrice()));
+                }
+            }
+        }
         res = mapa.entrySet().stream().sorted((o1,o2)-> o2.getValue().getFirstElem().compareTo(o1.getValue().getFirstElem())).collect(Collectors.toList());
         Collections.reverse(res); // com isto fica do maior para o menor
         res = res.stream().limit(tamanho).collect(Collectors.toList());
         Collections.reverse(res);
         return res;
 
-    }
+    } */
 
 
-   
 }
