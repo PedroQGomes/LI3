@@ -285,7 +285,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable {
 
     }
 
-    // metodo aussiliar da queiry 8
+    // metodo auxiliar da queiry 8
     private void addLista(Map.Entry<String, Set<String>> entry, Map<String, Set<String>> mapa) {
         for (String a : entry.getValue()) {
             mapa.get(entry.getKey()).add(a);
