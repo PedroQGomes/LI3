@@ -23,8 +23,6 @@ public class Estatistica implements IEstatisticas, Serializable {
     private List<int[]> numberOfSalesPerMonth;
     private List<int[]> diffClientsNumber;
 
-
-
     /**
      * Construtor da estatistica
      */
@@ -35,32 +33,34 @@ public class Estatistica implements IEstatisticas, Serializable {
         diffClientsNumber = new ArrayList<>(numFiliais);
     }
 
+    /**
+     * atualiza a facturacao mensal
+     * @param factPerMonth double lista de facturacao
+     */
     public void updateFactPerMonth(double[] factPerMonth) {
        this.factPerMonth.add(factPerMonth);
     }
+
+    /**
+     * atualiza o numero de vendas  por mes
+     * @param numberOfSalesPerMonth lista de numero de vendas mensais
+     */
     public void updateNumberOfSalesPerMonth(int[] numberOfSalesPerMonth) {
         this.numberOfSalesPerMonth.add(numberOfSalesPerMonth);
     }
+
+    /**
+     * atualiza lista dos clientes diferentes
+     * @param diffClientsNumber lista de clientes
+     */
     public void updateDiffClientsNumber(int[] diffClientsNumber) {
         this.diffClientsNumber.add(diffClientsNumber);
     }
 
 
-    public List<double[]> getFactPerMonth() {
-        return new ArrayList<>(factPerMonth);
-    }
-
-    public List<int[]> getNumberOfSalesPerMonth() {
-        return new ArrayList<>(numberOfSalesPerMonth);
-    }
-
-    public List<int[]> getDiffClientsNumber() {
-        return new ArrayList<> (diffClientsNumber);
-    }
-
     /**
      * setter para o numero total de produtos
-     * @param numProdutosTotal numero de produtos total
+     * @param numProdutosTotal
      */
     public void setNumProdutosTotal(int numProdutosTotal) {
         this.numProdutosTotal = numProdutosTotal;
@@ -68,7 +68,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de clientes
-     * @param numClientesTotal numero de clientes total
+     * @param numClientesTotal
      */
     public void setNumClientesTotal(int numClientesTotal) {
         this.numClientesTotal = numClientesTotal;
@@ -76,7 +76,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas
-     * @param numVendasTotal numero de vendas total
+     * @param numVendasTotal
      */
     public void setNumVendasTotal(int numVendasTotal) {
         this.numVendasTotal = numVendasTotal;
@@ -84,7 +84,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas
-     * @param numVendasValidas numero de vendas validas
+     * @param numVendasValidas
      */
     public void setNumVendasValidas(int numVendasValidas) {
         this.numVendasValidas = numVendasValidas;
@@ -117,7 +117,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de produtos comprados
-     * @param numTotalProdutosComprados numero total de produtos comprados
+     * @param numTotalProdutosComprados
      */
     public void setNumTotalProdutosComprados(int numTotalProdutosComprados) {
         this.numTotalProdutosComprados = numTotalProdutosComprados;
@@ -133,7 +133,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de clientes que nao realizaram compras
-     * @param numClientesNaoCompraram numero de clientes que nunca compraram
+     * @param numClientesNaoCompraram
      */
     public void setNumClientesNaoCompraram(int numClientesNaoCompraram) {
         this.numClientesNaoCompraram = numClientesNaoCompraram;
@@ -149,7 +149,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para o numero total de vendas com valor nulo
-     * @param numTotalDeComprasValorNulo numero total de compras valor nulo
+     * @param numTotalDeComprasValorNulo
      */
     public void setNumTotalDeComprasValorNulo(int numTotalDeComprasValorNulo) {
         this.numTotalDeComprasValorNulo = numTotalDeComprasValorNulo;
@@ -165,7 +165,7 @@ public class Estatistica implements IEstatisticas, Serializable {
 
     /**
      * setter para a faturacao total
-     * @param facturacaoTotal faturaçao total
+     * @param facturacaoTotal
      */
     public void setFacturacaoTotal(double facturacaoTotal) {
         this.facturacaoTotal = facturacaoTotal;
