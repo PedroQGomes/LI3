@@ -6,7 +6,6 @@ import com.grupo19.Interfaces.IEstatisticas;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Estatistica implements IEstatisticas, Serializable {
@@ -42,15 +41,26 @@ public class Estatistica implements IEstatisticas, Serializable {
         this.diffClientsNumber.add(diffClientsNumber);
     }
 
-
+    /**
+     * Get da faturacao por mes
+     * @return list das filiais com a faturacao por mes
+     */
     public List<double[]> getFactPerMonth() {
         return new ArrayList<>(factPerMonth);
     }
 
+    /**
+     * Get Do numero de sales por mes
+     * @return list das filiais com o numero de sales por mes
+     */
     public List<int[]> getNumberOfSalesPerMonth() {
         return new ArrayList<>(numberOfSalesPerMonth);
     }
 
+    /**
+     * Get do numero de clientes diferentes
+     * @return list das filiais com o numero de sales por mes
+     */
     public List<int[]> getDiffClientsNumber() {
         return new ArrayList<> (diffClientsNumber);
     }

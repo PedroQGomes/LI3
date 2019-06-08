@@ -1,6 +1,5 @@
 package com.grupo19.Interfaces;
 
-import com.grupo19.Tuple;
 
 import java.util.List;
 import java.util.Map;
