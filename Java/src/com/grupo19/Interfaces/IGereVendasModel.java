@@ -120,9 +120,9 @@ public interface IGereVendasModel {
      * @return lista
      */
     List<List<String>> getListOfClientsWhoMostBought();
-<<<<<<< HEAD
-    List<ITuple<String,Integer>> getClientsWhoBoughtMostOften(int x);
-=======
+
+
+
 
 
     /**
@@ -138,7 +138,6 @@ public interface IGereVendasModel {
      * @param client
      * @return lista
      */
->>>>>>> 6a8553a20c40b5c0a9fbd223fbdecb20e843e917
     List<List<Double>> getNumClientAndFacturacao(String client);
 
 

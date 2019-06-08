@@ -76,7 +76,7 @@ public class Filial implements IFilial, Serializable {
         if(!this.filialData.containsKey(a.getClient())) {
             List<List<ISale>> lista = new ArrayList<>(12);
             for(int i = 0; i<12;i++) {
-                List<ISale> s = new ArrayList<>();
+                List<ISale> s = new ArrayList<>(4);
                 lista.add(s);
             }
             this.filialData.put(a.getClient(),lista);

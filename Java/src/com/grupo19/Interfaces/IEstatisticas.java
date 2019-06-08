@@ -107,24 +107,5 @@ public interface IEstatisticas {
      */
     int getTotalClientNum();
 
-    /**
-     * Adiciona facturação total ao mes para depois ter a faturacao total por mes
-     * @param month
-     * @param facturacaoTotal
-     */
-    void addToFacPerMonth (int month,double facturacaoTotal);
     
-    /**
-     * Adiciona por mês o numero de sales
-     * @param month
-     * @param nsales
-     */
-    void addToNumberOfSalesPerMonth (int month,int nsales);
-
-    /**
-     * Adiciona por mês o numero de clientes distintos que compraram
-     * @param month
-     * @param nclientes
-     */
-    void addToNumberOfDistinctClientsPerMonthPerFilial (int month,int nclientes);
 }
