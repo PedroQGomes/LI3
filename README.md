@@ -4,7 +4,7 @@ O trabalho pratico proposto consiste em desenvolver um sistema de vendas de uma 
 
 ## Projeto C
 
-O projeto de C tinha o objetivo de desenvolver o sistema de vendas com os seguintes objetivos em mente:
+O projeto de C tem o objetivo de desenvolver o sistema de vendas com os seguintes objetivos em mente:
 
 * Modularidade e encapsulamento de dados usando construções da linguagem;
 * Criação de código reutilizável;
